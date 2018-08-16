@@ -16,6 +16,19 @@
 		DAA97B0221233715005AF50F /* WelcomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA97B0121233715005AF50F /* WelcomeModel.swift */; };
 		DAA97B042123396F005AF50F /* WelcomeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA97B032123396F005AF50F /* WelcomeTableCell.swift */; };
 		DAA97B0621233DAF005AF50F /* DescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA97B0521233DAF005AF50F /* DescriptionViewController.swift */; };
+		DAC124E32125E18C00378DA1 /* CabinetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124E22125E18C00378DA1 /* CabinetTableViewController.swift */; };
+		DAC124E52125E20500378DA1 /* CabinetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124E42125E20500378DA1 /* CabinetModel.swift */; };
+		DAC124E72125E83B00378DA1 /* CabinetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124E62125E83B00378DA1 /* CabinetCell.swift */; };
+		DAC124E92125ECC500378DA1 /* CabinetSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124E82125ECC500378DA1 /* CabinetSectionView.swift */; };
+		DAC124EB2125F88900378DA1 /* CompetenceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124EA2125F88900378DA1 /* CompetenceTableViewController.swift */; };
+		DAC124ED2125F90500378DA1 /* CompetenceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124EC2125F90500378DA1 /* CompetenceCell.swift */; };
+		DAC124F12125FDED00378DA1 /* AchievementsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124F02125FDED00378DA1 /* AchievementsTableViewController.swift */; };
+		DAC124F32125FED800378DA1 /* AchivementsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124F22125FED800378DA1 /* AchivementsCell.swift */; };
+		DAC124F62126074D00378DA1 /* DevelopmentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124F52126074D00378DA1 /* DevelopmentTableViewController.swift */; };
+		DAC124F82126086B00378DA1 /* DevelopmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124F72126086B00378DA1 /* DevelopmentCell.swift */; };
+		DAC124FB21260FA000378DA1 /* NotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124FA21260FA000378DA1 /* NotesTableViewController.swift */; };
+		DAC124FD212610CB00378DA1 /* NotesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124FC212610CB00378DA1 /* NotesCell.swift */; };
+		DAC124FF2126120A00378DA1 /* DetailedNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124FE2126120A00378DA1 /* DetailedNoteViewController.swift */; };
 		DADEAB2D212458AF0042B564 /* WelcomeFooterXIB.xib in Resources */ = {isa = PBXBuildFile; fileRef = DADEAB2C212458AF0042B564 /* WelcomeFooterXIB.xib */; };
 		DADEAB2F21246A860042B564 /* WelcomeFootterXIB.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADEAB2E21246A860042B564 /* WelcomeFootterXIB.swift */; };
 		DADEAB32212470220042B564 /* MainMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADEAB31212470220042B564 /* MainMenuTableViewController.swift */; };
@@ -37,6 +50,19 @@
 		DAA97B0121233715005AF50F /* WelcomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeModel.swift; sourceTree = "<group>"; };
 		DAA97B032123396F005AF50F /* WelcomeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeTableCell.swift; sourceTree = "<group>"; };
 		DAA97B0521233DAF005AF50F /* DescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionViewController.swift; sourceTree = "<group>"; };
+		DAC124E22125E18C00378DA1 /* CabinetTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CabinetTableViewController.swift; sourceTree = "<group>"; };
+		DAC124E42125E20500378DA1 /* CabinetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CabinetModel.swift; sourceTree = "<group>"; };
+		DAC124E62125E83B00378DA1 /* CabinetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CabinetCell.swift; sourceTree = "<group>"; };
+		DAC124E82125ECC500378DA1 /* CabinetSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CabinetSectionView.swift; sourceTree = "<group>"; };
+		DAC124EA2125F88900378DA1 /* CompetenceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetenceTableViewController.swift; sourceTree = "<group>"; };
+		DAC124EC2125F90500378DA1 /* CompetenceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetenceCell.swift; sourceTree = "<group>"; };
+		DAC124F02125FDED00378DA1 /* AchievementsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsTableViewController.swift; sourceTree = "<group>"; };
+		DAC124F22125FED800378DA1 /* AchivementsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchivementsCell.swift; sourceTree = "<group>"; };
+		DAC124F52126074D00378DA1 /* DevelopmentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentTableViewController.swift; sourceTree = "<group>"; };
+		DAC124F72126086B00378DA1 /* DevelopmentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentCell.swift; sourceTree = "<group>"; };
+		DAC124FA21260FA000378DA1 /* NotesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTableViewController.swift; sourceTree = "<group>"; };
+		DAC124FC212610CB00378DA1 /* NotesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesCell.swift; sourceTree = "<group>"; };
+		DAC124FE2126120A00378DA1 /* DetailedNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedNoteViewController.swift; sourceTree = "<group>"; };
 		DADEAB2C212458AF0042B564 /* WelcomeFooterXIB.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeFooterXIB.xib; sourceTree = "<group>"; };
 		DADEAB2E21246A860042B564 /* WelcomeFootterXIB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeFootterXIB.swift; sourceTree = "<group>"; };
 		DADEAB31212470220042B564 /* MainMenuTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuTableViewController.swift; sourceTree = "<group>"; };
@@ -85,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				DADEAB302124700C0042B564 /* Main menu */,
+				DAC124E12125E17100378DA1 /* Cabinet */,
 				DAA97AFE21233655005AF50F /* About */,
 				DA5A553A21243B3100B7153E /* SupportingFiles */,
 				DA68CD5F212312D000AE8515 /* AppDelegate.swift */,
@@ -107,6 +134,58 @@
 				DADEAB2E21246A860042B564 /* WelcomeFootterXIB.swift */,
 			);
 			path = About;
+			sourceTree = "<group>";
+		};
+		DAC124E12125E17100378DA1 /* Cabinet */ = {
+			isa = PBXGroup;
+			children = (
+				DAC124EF2125FDCD00378DA1 /* Achivements */,
+				DAC124F42126071D00378DA1 /* Development */,
+				DAC124EE2125FDBC00378DA1 /* Competence */,
+				DAC124F921260F8300378DA1 /* Notes */,
+				DAC124E22125E18C00378DA1 /* CabinetTableViewController.swift */,
+				DAC124E42125E20500378DA1 /* CabinetModel.swift */,
+				DAC124E62125E83B00378DA1 /* CabinetCell.swift */,
+				DAC124E82125ECC500378DA1 /* CabinetSectionView.swift */,
+			);
+			path = Cabinet;
+			sourceTree = "<group>";
+		};
+		DAC124EE2125FDBC00378DA1 /* Competence */ = {
+			isa = PBXGroup;
+			children = (
+				DAC124EA2125F88900378DA1 /* CompetenceTableViewController.swift */,
+				DAC124EC2125F90500378DA1 /* CompetenceCell.swift */,
+			);
+			path = Competence;
+			sourceTree = "<group>";
+		};
+		DAC124EF2125FDCD00378DA1 /* Achivements */ = {
+			isa = PBXGroup;
+			children = (
+				DAC124F02125FDED00378DA1 /* AchievementsTableViewController.swift */,
+				DAC124F22125FED800378DA1 /* AchivementsCell.swift */,
+			);
+			path = Achivements;
+			sourceTree = "<group>";
+		};
+		DAC124F42126071D00378DA1 /* Development */ = {
+			isa = PBXGroup;
+			children = (
+				DAC124F52126074D00378DA1 /* DevelopmentTableViewController.swift */,
+				DAC124F72126086B00378DA1 /* DevelopmentCell.swift */,
+			);
+			path = Development;
+			sourceTree = "<group>";
+		};
+		DAC124F921260F8300378DA1 /* Notes */ = {
+			isa = PBXGroup;
+			children = (
+				DAC124FA21260FA000378DA1 /* NotesTableViewController.swift */,
+				DAC124FE2126120A00378DA1 /* DetailedNoteViewController.swift */,
+				DAC124FC212610CB00378DA1 /* NotesCell.swift */,
+			);
+			path = Notes;
 			sourceTree = "<group>";
 		};
 		DADEAB302124700C0042B564 /* Main menu */ = {
@@ -193,18 +272,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAC124F62126074D00378DA1 /* DevelopmentTableViewController.swift in Sources */,
 				DADEAB36212475520042B564 /* MainMenuCellLevel0.swift in Sources */,
 				DADEAB382124C48E0042B564 /* MainMenuCellLevel1.swift in Sources */,
+				DAC124FD212610CB00378DA1 /* NotesCell.swift in Sources */,
+				DAC124F12125FDED00378DA1 /* AchievementsTableViewController.swift in Sources */,
 				DADEAB32212470220042B564 /* MainMenuTableViewController.swift in Sources */,
 				DADEAB3A2124C5170042B564 /* MainMenuCellLevel2.swift in Sources */,
 				DA5A553C21243B4D00B7153E /* CheckBoxButton.swift in Sources */,
 				DADEAB34212471950042B564 /* MainMenuModel.swift in Sources */,
+				DAC124E72125E83B00378DA1 /* CabinetCell.swift in Sources */,
+				DAC124FF2126120A00378DA1 /* DetailedNoteViewController.swift in Sources */,
+				DAC124E32125E18C00378DA1 /* CabinetTableViewController.swift in Sources */,
 				DAA97B042123396F005AF50F /* WelcomeTableCell.swift in Sources */,
+				DAC124E92125ECC500378DA1 /* CabinetSectionView.swift in Sources */,
+				DAC124E52125E20500378DA1 /* CabinetModel.swift in Sources */,
+				DAC124F82126086B00378DA1 /* DevelopmentCell.swift in Sources */,
 				DA68CD60212312D000AE8515 /* AppDelegate.swift in Sources */,
 				DADEAB2F21246A860042B564 /* WelcomeFootterXIB.swift in Sources */,
 				DAA97B0621233DAF005AF50F /* DescriptionViewController.swift in Sources */,
+				DAC124FB21260FA000378DA1 /* NotesTableViewController.swift in Sources */,
+				DAC124ED2125F90500378DA1 /* CompetenceCell.swift in Sources */,
 				DAA97B0221233715005AF50F /* WelcomeModel.swift in Sources */,
 				DAA97B00212336C0005AF50F /* WelcomeTableViewController.swift in Sources */,
+				DAC124EB2125F88900378DA1 /* CompetenceTableViewController.swift in Sources */,
+				DAC124F32125FED800378DA1 /* AchivementsCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
