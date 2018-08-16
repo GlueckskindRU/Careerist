@@ -7,21 +7,43 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA5A553C21243B4D00B7153E /* CheckBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5A553B21243B4D00B7153E /* CheckBoxButton.swift */; };
 		DA68CD60212312D000AE8515 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA68CD5F212312D000AE8515 /* AppDelegate.swift */; };
-		DA68CD62212312D000AE8515 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA68CD61212312D000AE8515 /* ViewController.swift */; };
 		DA68CD65212312D000AE8515 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA68CD63212312D000AE8515 /* Main.storyboard */; };
 		DA68CD67212312D000AE8515 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA68CD66212312D000AE8515 /* Assets.xcassets */; };
 		DA68CD6A212312D000AE8515 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA68CD68212312D000AE8515 /* LaunchScreen.storyboard */; };
+		DAA97B00212336C0005AF50F /* WelcomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA97AFF212336C0005AF50F /* WelcomeTableViewController.swift */; };
+		DAA97B0221233715005AF50F /* WelcomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA97B0121233715005AF50F /* WelcomeModel.swift */; };
+		DAA97B042123396F005AF50F /* WelcomeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA97B032123396F005AF50F /* WelcomeTableCell.swift */; };
+		DAA97B0621233DAF005AF50F /* DescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA97B0521233DAF005AF50F /* DescriptionViewController.swift */; };
+		DADEAB2D212458AF0042B564 /* WelcomeFooterXIB.xib in Resources */ = {isa = PBXBuildFile; fileRef = DADEAB2C212458AF0042B564 /* WelcomeFooterXIB.xib */; };
+		DADEAB2F21246A860042B564 /* WelcomeFootterXIB.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADEAB2E21246A860042B564 /* WelcomeFootterXIB.swift */; };
+		DADEAB32212470220042B564 /* MainMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADEAB31212470220042B564 /* MainMenuTableViewController.swift */; };
+		DADEAB34212471950042B564 /* MainMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADEAB33212471950042B564 /* MainMenuModel.swift */; };
+		DADEAB36212475520042B564 /* MainMenuCellLevel0.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADEAB35212475520042B564 /* MainMenuCellLevel0.swift */; };
+		DADEAB382124C48E0042B564 /* MainMenuCellLevel1.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADEAB372124C48E0042B564 /* MainMenuCellLevel1.swift */; };
+		DADEAB3A2124C5170042B564 /* MainMenuCellLevel2.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADEAB392124C5170042B564 /* MainMenuCellLevel2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DA5A553B21243B4D00B7153E /* CheckBoxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxButton.swift; sourceTree = "<group>"; };
 		DA68CD5C212312D000AE8515 /* BusarovaCoaching.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BusarovaCoaching.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA68CD5F212312D000AE8515 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		DA68CD61212312D000AE8515 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DA68CD64212312D000AE8515 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DA68CD66212312D000AE8515 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA68CD69212312D000AE8515 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DA68CD6B212312D000AE8515 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DAA97AFF212336C0005AF50F /* WelcomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeTableViewController.swift; sourceTree = "<group>"; };
+		DAA97B0121233715005AF50F /* WelcomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeModel.swift; sourceTree = "<group>"; };
+		DAA97B032123396F005AF50F /* WelcomeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeTableCell.swift; sourceTree = "<group>"; };
+		DAA97B0521233DAF005AF50F /* DescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionViewController.swift; sourceTree = "<group>"; };
+		DADEAB2C212458AF0042B564 /* WelcomeFooterXIB.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeFooterXIB.xib; sourceTree = "<group>"; };
+		DADEAB2E21246A860042B564 /* WelcomeFootterXIB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeFootterXIB.swift; sourceTree = "<group>"; };
+		DADEAB31212470220042B564 /* MainMenuTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuTableViewController.swift; sourceTree = "<group>"; };
+		DADEAB33212471950042B564 /* MainMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuModel.swift; sourceTree = "<group>"; };
+		DADEAB35212475520042B564 /* MainMenuCellLevel0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuCellLevel0.swift; sourceTree = "<group>"; };
+		DADEAB372124C48E0042B564 /* MainMenuCellLevel1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuCellLevel1.swift; sourceTree = "<group>"; };
+		DADEAB392124C5170042B564 /* MainMenuCellLevel2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuCellLevel2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +57,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DA5A553A21243B3100B7153E /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				DA5A553B21243B4D00B7153E /* CheckBoxButton.swift */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
 		DA68CD53212312CF00AE8515 = {
 			isa = PBXGroup;
 			children = (
@@ -54,14 +84,41 @@
 		DA68CD5E212312D000AE8515 /* BusarovaCoaching */ = {
 			isa = PBXGroup;
 			children = (
+				DADEAB302124700C0042B564 /* Main menu */,
+				DAA97AFE21233655005AF50F /* About */,
+				DA5A553A21243B3100B7153E /* SupportingFiles */,
 				DA68CD5F212312D000AE8515 /* AppDelegate.swift */,
-				DA68CD61212312D000AE8515 /* ViewController.swift */,
 				DA68CD63212312D000AE8515 /* Main.storyboard */,
 				DA68CD66212312D000AE8515 /* Assets.xcassets */,
 				DA68CD68212312D000AE8515 /* LaunchScreen.storyboard */,
 				DA68CD6B212312D000AE8515 /* Info.plist */,
 			);
 			path = BusarovaCoaching;
+			sourceTree = "<group>";
+		};
+		DAA97AFE21233655005AF50F /* About */ = {
+			isa = PBXGroup;
+			children = (
+				DAA97AFF212336C0005AF50F /* WelcomeTableViewController.swift */,
+				DAA97B0121233715005AF50F /* WelcomeModel.swift */,
+				DAA97B032123396F005AF50F /* WelcomeTableCell.swift */,
+				DAA97B0521233DAF005AF50F /* DescriptionViewController.swift */,
+				DADEAB2C212458AF0042B564 /* WelcomeFooterXIB.xib */,
+				DADEAB2E21246A860042B564 /* WelcomeFootterXIB.swift */,
+			);
+			path = About;
+			sourceTree = "<group>";
+		};
+		DADEAB302124700C0042B564 /* Main menu */ = {
+			isa = PBXGroup;
+			children = (
+				DADEAB31212470220042B564 /* MainMenuTableViewController.swift */,
+				DADEAB33212471950042B564 /* MainMenuModel.swift */,
+				DADEAB35212475520042B564 /* MainMenuCellLevel0.swift */,
+				DADEAB372124C48E0042B564 /* MainMenuCellLevel1.swift */,
+				DADEAB392124C5170042B564 /* MainMenuCellLevel2.swift */,
+			);
+			path = "Main menu";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,6 +182,7 @@
 				DA68CD6A212312D000AE8515 /* LaunchScreen.storyboard in Resources */,
 				DA68CD67212312D000AE8515 /* Assets.xcassets in Resources */,
 				DA68CD65212312D000AE8515 /* Main.storyboard in Resources */,
+				DADEAB2D212458AF0042B564 /* WelcomeFooterXIB.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,8 +193,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA68CD62212312D000AE8515 /* ViewController.swift in Sources */,
+				DADEAB36212475520042B564 /* MainMenuCellLevel0.swift in Sources */,
+				DADEAB382124C48E0042B564 /* MainMenuCellLevel1.swift in Sources */,
+				DADEAB32212470220042B564 /* MainMenuTableViewController.swift in Sources */,
+				DADEAB3A2124C5170042B564 /* MainMenuCellLevel2.swift in Sources */,
+				DA5A553C21243B4D00B7153E /* CheckBoxButton.swift in Sources */,
+				DADEAB34212471950042B564 /* MainMenuModel.swift in Sources */,
+				DAA97B042123396F005AF50F /* WelcomeTableCell.swift in Sources */,
 				DA68CD60212312D000AE8515 /* AppDelegate.swift in Sources */,
+				DADEAB2F21246A860042B564 /* WelcomeFootterXIB.swift in Sources */,
+				DAA97B0621233DAF005AF50F /* DescriptionViewController.swift in Sources */,
+				DAA97B0221233715005AF50F /* WelcomeModel.swift in Sources */,
+				DAA97B00212336C0005AF50F /* WelcomeTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,10 +355,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ru.homber.BusarovaCoaching;
+				PRODUCT_BUNDLE_IDENTIFIER = BusarovaCoaching;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -305,10 +373,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ru.homber.BusarovaCoaching;
+				PRODUCT_BUNDLE_IDENTIFIER = BusarovaCoaching;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
