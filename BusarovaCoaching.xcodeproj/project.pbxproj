@@ -7,15 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		557D3715C2EA4660FED5D13B /* Pods_BusarovaCoaching.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61BAA6AABAAC7B1CCC410EA2 /* Pods_BusarovaCoaching.framework */; };
+		DA167D0B2134300F001A9A84 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA167D0A2134300F001A9A84 /* DataController.swift */; };
 		DA5A553C21243B4D00B7153E /* CheckBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5A553B21243B4D00B7153E /* CheckBoxButton.swift */; };
 		DA68CD60212312D000AE8515 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA68CD5F212312D000AE8515 /* AppDelegate.swift */; };
 		DA68CD65212312D000AE8515 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA68CD63212312D000AE8515 /* Main.storyboard */; };
 		DA68CD67212312D000AE8515 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA68CD66212312D000AE8515 /* Assets.xcassets */; };
 		DA68CD6A212312D000AE8515 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA68CD68212312D000AE8515 /* LaunchScreen.storyboard */; };
+		DA9ED5FB2133EA4800FB54FB /* CharacteristicsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED5FA2133EA4800FB54FB /* CharacteristicsModel.swift */; };
+		DA9ED5FE2133F53C00FB54FB /* CharacteristicsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED5FD2133F53C00FB54FB /* CharacteristicsTableViewController.swift */; };
+		DA9ED6002133F69400FB54FB /* CellIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED5FF2133F69400FB54FB /* CellIdentifiers.swift */; };
+		DA9ED6022133F7D900FB54FB /* CharacteristicsCellLevel0.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED6012133F7D900FB54FB /* CharacteristicsCellLevel0.swift */; };
+		DA9ED6042133F92900FB54FB /* CharacteristicsCellLevel1.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED6032133F92900FB54FB /* CharacteristicsCellLevel1.swift */; };
+		DA9ED60A2133FCE800FB54FB /* CharacteristicsCellLevel2.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED6092133FCE800FB54FB /* CharacteristicsCellLevel2.swift */; };
+		DA9ED60C2134176000FB54FB /* DBTables.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED60B2134176000FB54FB /* DBTables.swift */; };
 		DAA97B00212336C0005AF50F /* WelcomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA97AFF212336C0005AF50F /* WelcomeTableViewController.swift */; };
 		DAA97B0221233715005AF50F /* WelcomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA97B0121233715005AF50F /* WelcomeModel.swift */; };
 		DAA97B042123396F005AF50F /* WelcomeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA97B032123396F005AF50F /* WelcomeTableCell.swift */; };
 		DAA97B0621233DAF005AF50F /* DescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA97B0521233DAF005AF50F /* DescriptionViewController.swift */; };
+		DAACF04821345C45006FA934 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DAACF04721345C45006FA934 /* GoogleService-Info.plist */; };
 		DAC124E32125E18C00378DA1 /* CabinetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124E22125E18C00378DA1 /* CabinetTableViewController.swift */; };
 		DAC124E52125E20500378DA1 /* CabinetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124E42125E20500378DA1 /* CabinetModel.swift */; };
 		DAC124E72125E83B00378DA1 /* CabinetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124E62125E83B00378DA1 /* CabinetCell.swift */; };
@@ -31,14 +41,13 @@
 		DAC124FF2126120A00378DA1 /* DetailedNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124FE2126120A00378DA1 /* DetailedNoteViewController.swift */; };
 		DADEAB2D212458AF0042B564 /* WelcomeFooterXIB.xib in Resources */ = {isa = PBXBuildFile; fileRef = DADEAB2C212458AF0042B564 /* WelcomeFooterXIB.xib */; };
 		DADEAB2F21246A860042B564 /* WelcomeFootterXIB.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADEAB2E21246A860042B564 /* WelcomeFootterXIB.swift */; };
-		DADEAB32212470220042B564 /* MainMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADEAB31212470220042B564 /* MainMenuTableViewController.swift */; };
-		DADEAB34212471950042B564 /* MainMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADEAB33212471950042B564 /* MainMenuModel.swift */; };
-		DADEAB36212475520042B564 /* MainMenuCellLevel0.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADEAB35212475520042B564 /* MainMenuCellLevel0.swift */; };
-		DADEAB382124C48E0042B564 /* MainMenuCellLevel1.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADEAB372124C48E0042B564 /* MainMenuCellLevel1.swift */; };
-		DADEAB3A2124C5170042B564 /* MainMenuCellLevel2.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADEAB392124C5170042B564 /* MainMenuCellLevel2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5868065F6968F58F8DEBB8E1 /* Pods-BusarovaCoaching.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BusarovaCoaching.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BusarovaCoaching/Pods-BusarovaCoaching.debug.xcconfig"; sourceTree = "<group>"; };
+		61BAA6AABAAC7B1CCC410EA2 /* Pods_BusarovaCoaching.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BusarovaCoaching.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D348FDAB9D9C3649F079096 /* Pods-BusarovaCoaching.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BusarovaCoaching.release.xcconfig"; path = "Pods/Target Support Files/Pods-BusarovaCoaching/Pods-BusarovaCoaching.release.xcconfig"; sourceTree = "<group>"; };
+		DA167D0A2134300F001A9A84 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		DA5A553B21243B4D00B7153E /* CheckBoxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxButton.swift; sourceTree = "<group>"; };
 		DA68CD5C212312D000AE8515 /* BusarovaCoaching.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BusarovaCoaching.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA68CD5F212312D000AE8515 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -46,10 +55,18 @@
 		DA68CD66212312D000AE8515 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA68CD69212312D000AE8515 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DA68CD6B212312D000AE8515 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA9ED5FA2133EA4800FB54FB /* CharacteristicsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicsModel.swift; sourceTree = "<group>"; };
+		DA9ED5FD2133F53C00FB54FB /* CharacteristicsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicsTableViewController.swift; sourceTree = "<group>"; };
+		DA9ED5FF2133F69400FB54FB /* CellIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellIdentifiers.swift; sourceTree = "<group>"; };
+		DA9ED6012133F7D900FB54FB /* CharacteristicsCellLevel0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicsCellLevel0.swift; sourceTree = "<group>"; };
+		DA9ED6032133F92900FB54FB /* CharacteristicsCellLevel1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicsCellLevel1.swift; sourceTree = "<group>"; };
+		DA9ED6092133FCE800FB54FB /* CharacteristicsCellLevel2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicsCellLevel2.swift; sourceTree = "<group>"; };
+		DA9ED60B2134176000FB54FB /* DBTables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBTables.swift; sourceTree = "<group>"; };
 		DAA97AFF212336C0005AF50F /* WelcomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeTableViewController.swift; sourceTree = "<group>"; };
 		DAA97B0121233715005AF50F /* WelcomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeModel.swift; sourceTree = "<group>"; };
 		DAA97B032123396F005AF50F /* WelcomeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeTableCell.swift; sourceTree = "<group>"; };
 		DAA97B0521233DAF005AF50F /* DescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionViewController.swift; sourceTree = "<group>"; };
+		DAACF04721345C45006FA934 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DAC124E22125E18C00378DA1 /* CabinetTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CabinetTableViewController.swift; sourceTree = "<group>"; };
 		DAC124E42125E20500378DA1 /* CabinetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CabinetModel.swift; sourceTree = "<group>"; };
 		DAC124E62125E83B00378DA1 /* CabinetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CabinetCell.swift; sourceTree = "<group>"; };
@@ -65,11 +82,6 @@
 		DAC124FE2126120A00378DA1 /* DetailedNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedNoteViewController.swift; sourceTree = "<group>"; };
 		DADEAB2C212458AF0042B564 /* WelcomeFooterXIB.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeFooterXIB.xib; sourceTree = "<group>"; };
 		DADEAB2E21246A860042B564 /* WelcomeFootterXIB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeFootterXIB.swift; sourceTree = "<group>"; };
-		DADEAB31212470220042B564 /* MainMenuTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuTableViewController.swift; sourceTree = "<group>"; };
-		DADEAB33212471950042B564 /* MainMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuModel.swift; sourceTree = "<group>"; };
-		DADEAB35212475520042B564 /* MainMenuCellLevel0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuCellLevel0.swift; sourceTree = "<group>"; };
-		DADEAB372124C48E0042B564 /* MainMenuCellLevel1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuCellLevel1.swift; sourceTree = "<group>"; };
-		DADEAB392124C5170042B564 /* MainMenuCellLevel2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuCellLevel2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,16 +89,44 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				557D3715C2EA4660FED5D13B /* Pods_BusarovaCoaching.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4E907D3CE40DD9E4C1032357 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5868065F6968F58F8DEBB8E1 /* Pods-BusarovaCoaching.debug.xcconfig */,
+				7D348FDAB9D9C3649F079096 /* Pods-BusarovaCoaching.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		55C22043A4CB8A121F3FAD9B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				61BAA6AABAAC7B1CCC410EA2 /* Pods_BusarovaCoaching.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DA167D0921342FF5001A9A84 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				DA167D0A2134300F001A9A84 /* DataController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		DA5A553A21243B3100B7153E /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
 				DA5A553B21243B4D00B7153E /* CheckBoxButton.swift */,
+				DA9ED5FF2133F69400FB54FB /* CellIdentifiers.swift */,
+				DA9ED60B2134176000FB54FB /* DBTables.swift */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -96,6 +136,8 @@
 			children = (
 				DA68CD5E212312D000AE8515 /* BusarovaCoaching */,
 				DA68CD5D212312D000AE8515 /* Products */,
+				4E907D3CE40DD9E4C1032357 /* Pods */,
+				55C22043A4CB8A121F3FAD9B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -110,7 +152,9 @@
 		DA68CD5E212312D000AE8515 /* BusarovaCoaching */ = {
 			isa = PBXGroup;
 			children = (
-				DADEAB302124700C0042B564 /* Main menu */,
+				DA167D0921342FF5001A9A84 /* Controllers */,
+				DA9ED5FC2133F51B00FB54FB /* Characteristics */,
+				DA9ED5F92133EA3000FB54FB /* Models */,
 				DAC124E12125E17100378DA1 /* Cabinet */,
 				DAA97AFE21233655005AF50F /* About */,
 				DA5A553A21243B3100B7153E /* SupportingFiles */,
@@ -119,8 +163,28 @@
 				DA68CD66212312D000AE8515 /* Assets.xcassets */,
 				DA68CD68212312D000AE8515 /* LaunchScreen.storyboard */,
 				DA68CD6B212312D000AE8515 /* Info.plist */,
+				DAACF04721345C45006FA934 /* GoogleService-Info.plist */,
 			);
 			path = BusarovaCoaching;
+			sourceTree = "<group>";
+		};
+		DA9ED5F92133EA3000FB54FB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DA9ED5FA2133EA4800FB54FB /* CharacteristicsModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		DA9ED5FC2133F51B00FB54FB /* Characteristics */ = {
+			isa = PBXGroup;
+			children = (
+				DA9ED5FD2133F53C00FB54FB /* CharacteristicsTableViewController.swift */,
+				DA9ED6012133F7D900FB54FB /* CharacteristicsCellLevel0.swift */,
+				DA9ED6032133F92900FB54FB /* CharacteristicsCellLevel1.swift */,
+				DA9ED6092133FCE800FB54FB /* CharacteristicsCellLevel2.swift */,
+			);
+			path = Characteristics;
 			sourceTree = "<group>";
 		};
 		DAA97AFE21233655005AF50F /* About */ = {
@@ -188,18 +252,6 @@
 			path = Notes;
 			sourceTree = "<group>";
 		};
-		DADEAB302124700C0042B564 /* Main menu */ = {
-			isa = PBXGroup;
-			children = (
-				DADEAB31212470220042B564 /* MainMenuTableViewController.swift */,
-				DADEAB33212471950042B564 /* MainMenuModel.swift */,
-				DADEAB35212475520042B564 /* MainMenuCellLevel0.swift */,
-				DADEAB372124C48E0042B564 /* MainMenuCellLevel1.swift */,
-				DADEAB392124C5170042B564 /* MainMenuCellLevel2.swift */,
-			);
-			path = "Main menu";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -207,9 +259,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DA68CD6E212312D000AE8515 /* Build configuration list for PBXNativeTarget "BusarovaCoaching" */;
 			buildPhases = (
+				AECD3B61C1BEAA2A242F2459 /* [CP] Check Pods Manifest.lock */,
 				DA68CD58212312D000AE8515 /* Sources */,
 				DA68CD59212312D000AE8515 /* Frameworks */,
 				DA68CD5A212312D000AE8515 /* Resources */,
+				899952C34D526051302AF97A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -260,6 +314,7 @@
 			files = (
 				DA68CD6A212312D000AE8515 /* LaunchScreen.storyboard in Resources */,
 				DA68CD67212312D000AE8515 /* Assets.xcassets in Resources */,
+				DAACF04821345C45006FA934 /* GoogleService-Info.plist in Resources */,
 				DA68CD65212312D000AE8515 /* Main.storyboard in Resources */,
 				DADEAB2D212458AF0042B564 /* WelcomeFooterXIB.xib in Resources */,
 			);
@@ -267,35 +322,93 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		899952C34D526051302AF97A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-BusarovaCoaching/Pods-BusarovaCoaching-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-RxLibrary/RxLibrary.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxLibrary.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BusarovaCoaching/Pods-BusarovaCoaching-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AECD3B61C1BEAA2A242F2459 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BusarovaCoaching-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		DA68CD58212312D000AE8515 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				DAC124F62126074D00378DA1 /* DevelopmentTableViewController.swift in Sources */,
-				DADEAB36212475520042B564 /* MainMenuCellLevel0.swift in Sources */,
-				DADEAB382124C48E0042B564 /* MainMenuCellLevel1.swift in Sources */,
 				DAC124FD212610CB00378DA1 /* NotesCell.swift in Sources */,
 				DAC124F12125FDED00378DA1 /* AchievementsTableViewController.swift in Sources */,
-				DADEAB32212470220042B564 /* MainMenuTableViewController.swift in Sources */,
-				DADEAB3A2124C5170042B564 /* MainMenuCellLevel2.swift in Sources */,
+				DA9ED6042133F92900FB54FB /* CharacteristicsCellLevel1.swift in Sources */,
 				DA5A553C21243B4D00B7153E /* CheckBoxButton.swift in Sources */,
-				DADEAB34212471950042B564 /* MainMenuModel.swift in Sources */,
+				DA9ED60C2134176000FB54FB /* DBTables.swift in Sources */,
 				DAC124E72125E83B00378DA1 /* CabinetCell.swift in Sources */,
+				DA9ED5FB2133EA4800FB54FB /* CharacteristicsModel.swift in Sources */,
 				DAC124FF2126120A00378DA1 /* DetailedNoteViewController.swift in Sources */,
 				DAC124E32125E18C00378DA1 /* CabinetTableViewController.swift in Sources */,
 				DAA97B042123396F005AF50F /* WelcomeTableCell.swift in Sources */,
+				DA167D0B2134300F001A9A84 /* DataController.swift in Sources */,
 				DAC124E92125ECC500378DA1 /* CabinetSectionView.swift in Sources */,
+				DA9ED6022133F7D900FB54FB /* CharacteristicsCellLevel0.swift in Sources */,
 				DAC124E52125E20500378DA1 /* CabinetModel.swift in Sources */,
 				DAC124F82126086B00378DA1 /* DevelopmentCell.swift in Sources */,
 				DA68CD60212312D000AE8515 /* AppDelegate.swift in Sources */,
 				DADEAB2F21246A860042B564 /* WelcomeFootterXIB.swift in Sources */,
+				DA9ED5FE2133F53C00FB54FB /* CharacteristicsTableViewController.swift in Sources */,
 				DAA97B0621233DAF005AF50F /* DescriptionViewController.swift in Sources */,
 				DAC124FB21260FA000378DA1 /* NotesTableViewController.swift in Sources */,
+				DA9ED60A2133FCE800FB54FB /* CharacteristicsCellLevel2.swift in Sources */,
 				DAC124ED2125F90500378DA1 /* CompetenceCell.swift in Sources */,
 				DAA97B0221233715005AF50F /* WelcomeModel.swift in Sources */,
 				DAA97B00212336C0005AF50F /* WelcomeTableViewController.swift in Sources */,
 				DAC124EB2125F88900378DA1 /* CompetenceTableViewController.swift in Sources */,
+				DA9ED6002133F69400FB54FB /* CellIdentifiers.swift in Sources */,
 				DAC124F32125FED800378DA1 /* AchivementsCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -438,16 +551,18 @@
 		};
 		DA68CD6F212312D000AE8515 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5868065F6968F58F8DEBB8E1 /* Pods-BusarovaCoaching.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3BEPD83256;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = BusarovaCoaching/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = BusarovaCoaching;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.homber.BusarovaCoaching;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -456,16 +571,18 @@
 		};
 		DA68CD70212312D000AE8515 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7D348FDAB9D9C3649F079096 /* Pods-BusarovaCoaching.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3BEPD83256;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = BusarovaCoaching/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = BusarovaCoaching;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.homber.BusarovaCoaching;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;

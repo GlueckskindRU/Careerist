@@ -7,15 +7,22 @@
 //
 
 import UIKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        let dataController = DataController()
+        
+        let initialTabBarController = window?.rootViewController as! UITabBarController
+        let characteristicsVC = initialTabBarController.viewControllers?[0] as! CharacteristicsTableViewController
+        
+        characteristicsVC.configure(with: dataController)
+        
         return true
     }
 
