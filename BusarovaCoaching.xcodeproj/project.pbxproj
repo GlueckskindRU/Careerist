@@ -26,6 +26,10 @@
 		DAA97B042123396F005AF50F /* WelcomeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA97B032123396F005AF50F /* WelcomeTableCell.swift */; };
 		DAA97B0621233DAF005AF50F /* DescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA97B0521233DAF005AF50F /* DescriptionViewController.swift */; };
 		DAACF04821345C45006FA934 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DAACF04721345C45006FA934 /* GoogleService-Info.plist */; };
+		DAB5CB152135A5A000B436C2 /* AchievementsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB5CB142135A5A000B436C2 /* AchievementsModel.swift */; };
+		DAB5CB172135B2D100B436C2 /* DataControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB5CB162135B2D100B436C2 /* DataControllerProtocol.swift */; };
+		DAB5CB192135BA3300B436C2 /* NotesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB5CB182135BA3300B436C2 /* NotesModel.swift */; };
+		DAB5CB1B21369A9F00B436C2 /* AboutArticlesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB5CB1A21369A9F00B436C2 /* AboutArticlesModel.swift */; };
 		DAC124E32125E18C00378DA1 /* CabinetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124E22125E18C00378DA1 /* CabinetTableViewController.swift */; };
 		DAC124E52125E20500378DA1 /* CabinetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124E42125E20500378DA1 /* CabinetModel.swift */; };
 		DAC124E72125E83B00378DA1 /* CabinetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124E62125E83B00378DA1 /* CabinetCell.swift */; };
@@ -67,6 +71,10 @@
 		DAA97B032123396F005AF50F /* WelcomeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeTableCell.swift; sourceTree = "<group>"; };
 		DAA97B0521233DAF005AF50F /* DescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionViewController.swift; sourceTree = "<group>"; };
 		DAACF04721345C45006FA934 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DAB5CB142135A5A000B436C2 /* AchievementsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsModel.swift; sourceTree = "<group>"; };
+		DAB5CB162135B2D100B436C2 /* DataControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataControllerProtocol.swift; sourceTree = "<group>"; };
+		DAB5CB182135BA3300B436C2 /* NotesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesModel.swift; sourceTree = "<group>"; };
+		DAB5CB1A21369A9F00B436C2 /* AboutArticlesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutArticlesModel.swift; sourceTree = "<group>"; };
 		DAC124E22125E18C00378DA1 /* CabinetTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CabinetTableViewController.swift; sourceTree = "<group>"; };
 		DAC124E42125E20500378DA1 /* CabinetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CabinetModel.swift; sourceTree = "<group>"; };
 		DAC124E62125E83B00378DA1 /* CabinetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CabinetCell.swift; sourceTree = "<group>"; };
@@ -117,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				DA167D0A2134300F001A9A84 /* DataController.swift */,
+				DAB5CB162135B2D100B436C2 /* DataControllerProtocol.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -172,6 +181,9 @@
 			isa = PBXGroup;
 			children = (
 				DA9ED5FA2133EA4800FB54FB /* CharacteristicsModel.swift */,
+				DAB5CB142135A5A000B436C2 /* AchievementsModel.swift */,
+				DAB5CB182135BA3300B436C2 /* NotesModel.swift */,
+				DAB5CB1A21369A9F00B436C2 /* AboutArticlesModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -332,6 +344,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-BusarovaCoaching/Pods-BusarovaCoaching-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
@@ -344,6 +357,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
@@ -385,6 +399,7 @@
 				DAC124F62126074D00378DA1 /* DevelopmentTableViewController.swift in Sources */,
 				DAC124FD212610CB00378DA1 /* NotesCell.swift in Sources */,
 				DAC124F12125FDED00378DA1 /* AchievementsTableViewController.swift in Sources */,
+				DAB5CB192135BA3300B436C2 /* NotesModel.swift in Sources */,
 				DA9ED6042133F92900FB54FB /* CharacteristicsCellLevel1.swift in Sources */,
 				DA5A553C21243B4D00B7153E /* CheckBoxButton.swift in Sources */,
 				DA9ED60C2134176000FB54FB /* DBTables.swift in Sources */,
@@ -392,6 +407,7 @@
 				DA9ED5FB2133EA4800FB54FB /* CharacteristicsModel.swift in Sources */,
 				DAC124FF2126120A00378DA1 /* DetailedNoteViewController.swift in Sources */,
 				DAC124E32125E18C00378DA1 /* CabinetTableViewController.swift in Sources */,
+				DAB5CB152135A5A000B436C2 /* AchievementsModel.swift in Sources */,
 				DAA97B042123396F005AF50F /* WelcomeTableCell.swift in Sources */,
 				DA167D0B2134300F001A9A84 /* DataController.swift in Sources */,
 				DAC124E92125ECC500378DA1 /* CabinetSectionView.swift in Sources */,
@@ -402,10 +418,12 @@
 				DADEAB2F21246A860042B564 /* WelcomeFootterXIB.swift in Sources */,
 				DA9ED5FE2133F53C00FB54FB /* CharacteristicsTableViewController.swift in Sources */,
 				DAA97B0621233DAF005AF50F /* DescriptionViewController.swift in Sources */,
+				DAB5CB1B21369A9F00B436C2 /* AboutArticlesModel.swift in Sources */,
 				DAC124FB21260FA000378DA1 /* NotesTableViewController.swift in Sources */,
 				DA9ED60A2133FCE800FB54FB /* CharacteristicsCellLevel2.swift in Sources */,
 				DAC124ED2125F90500378DA1 /* CompetenceCell.swift in Sources */,
 				DAA97B0221233715005AF50F /* WelcomeModel.swift in Sources */,
+				DAB5CB172135B2D100B436C2 /* DataControllerProtocol.swift in Sources */,
 				DAA97B00212336C0005AF50F /* WelcomeTableViewController.swift in Sources */,
 				DAC124EB2125F88900378DA1 /* CompetenceTableViewController.swift in Sources */,
 				DA9ED6002133F69400FB54FB /* CellIdentifiers.swift in Sources */,

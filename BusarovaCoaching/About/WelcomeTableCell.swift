@@ -19,8 +19,8 @@ class WelcomeTableCell: UITableViewCell {
         return label
     }()
     
-    func configure(with text: String) {
-        menuCaption.text = text
+    func configure(with article: AboutArticlesModel) {
+        menuCaption.text = article.name
         
         addSubview(menuCaption)
     }

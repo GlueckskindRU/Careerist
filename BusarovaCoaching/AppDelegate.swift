@@ -20,8 +20,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let initialTabBarController = window?.rootViewController as! UITabBarController
         let characteristicsVC = initialTabBarController.viewControllers?[0] as! CharacteristicsTableViewController
+        let cabinetNavigationController = initialTabBarController.viewControllers?[1] as! UINavigationController
+        let cabinetVC = cabinetNavigationController.viewControllers.first as! CabinetTableViewController
+        
+        let aboutNavigationController = initialTabBarController.viewControllers?.last as! UINavigationController
+        let aboutVC = aboutNavigationController.viewControllers.first as! WelcomeTableViewController
         
         characteristicsVC.configure(with: dataController)
+        cabinetVC.configure(with: dataController)
+        aboutVC.configure(with: dataController)
         
         return true
     }

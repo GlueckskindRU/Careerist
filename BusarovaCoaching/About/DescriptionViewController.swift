@@ -42,10 +42,10 @@ class DescriptionViewController: UIViewController {
         return textView
     }()
     
-    func configure(with menuCaption: String) {
+    func configure(with article: AboutArticlesModel) {
         titleView.text = WelcomeModel.headerText
-        captionLabel.text = menuCaption
-        text.text = WelcomeModel.articleText
+        captionLabel.text = article.name
+        text.text = article.text
         
         view.addSubview(titleView)
         view.addSubview(captionLabel)

@@ -8,13 +8,12 @@
 
 import UIKit
 
-class NotesTableViewController: UITableViewController {
-    private var notesData: [String] = []
+class NotesTableViewController: UITableViewController, DataControllerProtocol {
+    private var notesData: [NotesModel] = []
+    internal var dataController: DataController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        notesData = CabinetModel.fetchNotes()
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -22,7 +21,22 @@ class NotesTableViewController: UITableViewController {
         tableView.register(NotesCell.self, forCellReuseIdentifier: "Notes Cell")
         tableView.tableFooterView = UIView()
         
+//        tableView.rowHeight = 44
+//        tableView.estimatedRowHeight = UITableViewAutomaticDimension
+        
         navigationItem.title = "Мои записи"
+        
+        dataController.fetchData(.notes) {
+            (documents) in
+            for document in documents {
+                let data = document.data()
+                self.notesData.append(NotesModel(id: document.documentID,
+                                                 name: data["name"] as! String,
+                                                 text: data["text"] as! String
+                                                ))
+            }
+            self.tableView.reloadData()
+        }
     }
 }
 
@@ -42,9 +56,13 @@ extension NotesTableViewController {
 
 extension NotesTableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return UITableViewAutomaticDimension
     }
-    
+
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let destination = DetailedNoteViewController()
         

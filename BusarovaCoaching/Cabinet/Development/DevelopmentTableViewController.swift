@@ -8,8 +8,9 @@
 
 import UIKit
 
-class DevelopmentTableViewController: UITableViewController {
+class DevelopmentTableViewController: UITableViewController, DataControllerProtocol {
     private var developmentData: [String] = []
+    internal var dataController: DataController!
     
     override func viewDidLoad() {
         super.viewDidLoad()

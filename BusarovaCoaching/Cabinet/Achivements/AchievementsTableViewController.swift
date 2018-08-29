@@ -8,13 +8,12 @@
 
 import UIKit
 
-class AchievementsTableViewController: UITableViewController {
-    private var achivementsData: [String] = []
+class AchievementsTableViewController: UITableViewController, DataControllerProtocol {
+    private var achivementsData: [AchievementsModel] = []
+    internal var dataController: DataController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        achivementsData = CabinetModel.fetchAchivements()
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -23,6 +22,18 @@ class AchievementsTableViewController: UITableViewController {
         tableView.tableFooterView = UIView()
         
         navigationItem.title = "Мои достижения"
+        
+        dataController.fetchData(.achivements) {
+            (documents) in
+            for document in documents {
+                let data = document.data()
+                self.achivementsData.append(AchievementsModel(id: document.documentID,
+                                                              name: data["name"] as! String,
+                                                              imageURL: data["imageURL"] as! String
+                                                            ))
+            }
+            self.tableView.reloadData()
+        }
     }
 }
 

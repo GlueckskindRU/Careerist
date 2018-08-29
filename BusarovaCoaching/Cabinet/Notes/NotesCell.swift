@@ -15,12 +15,13 @@ class NotesCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.medium)
         label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         
         return label
     }()
     
-    func configure(with caption: String) {
-        cellCaption.text = caption
+    func configure(with note: NotesModel) {
+        cellCaption.text = note.name
         
         contentView.addSubview(cellCaption)
     }
@@ -31,10 +32,12 @@ class NotesCell: UITableViewCell {
         NSLayoutConstraint.activate([
             cellCaption.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             cellCaption.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            contentView.trailingAnchor.constraint(equalTo: cellCaption.trailingAnchor, constant: 8),
-            contentView.bottomAnchor.constraint(equalTo: cellCaption.bottomAnchor, constant: 8)
+            cellCaption.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+//            cellCaption.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            cellCaption.bottomAnchor.constraint(greaterThanOrEqualTo: contentView.bottomAnchor, constant: -8)
             ])
         
-        cellCaption.sizeToFit()
+//        cellCaption.sizeToFit()
+//        cellCaption.layoutIfNeeded()
     }
 }

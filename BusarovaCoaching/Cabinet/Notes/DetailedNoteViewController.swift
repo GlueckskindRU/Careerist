@@ -20,10 +20,10 @@ class DetailedNoteViewController: UIViewController {
         return textView
     }()
     
-    func configure(with noteCaption: String) {
-        navigationItem.title = noteCaption
+    func configure(with note: NotesModel) {
+        navigationItem.title = note.name
         
-        text.text = CabinetModel.articleText
+        text.text = note.text
         
         view.addSubview(text)
         

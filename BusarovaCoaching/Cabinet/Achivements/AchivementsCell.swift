@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class AchivementsCell: UITableViewCell {
     lazy private var achiveCaption: UILabel = {
@@ -28,9 +29,10 @@ class AchivementsCell: UITableViewCell {
         return imageView
     }()
     
-    func configure(with achieve: String) {
-        self.achiveCaption.text = achieve
-        self.pictureView.image = UIImage(named: "About")
+    func configure(with achievement: AchievementsModel) {
+        let pictureURL = URL(string: achievement.imageURL)
+        pictureView.kf.setImage(with: pictureURL)
+        achiveCaption.text = achievement.name
         
         contentView.addSubview(achiveCaption)
         contentView.addSubview(pictureView)
@@ -40,8 +42,8 @@ class AchivementsCell: UITableViewCell {
         super.layoutSubviews()
         
         NSLayoutConstraint.activate([
-            pictureView.widthAnchor.constraint(equalToConstant: 40),
-            pictureView.heightAnchor.constraint(equalToConstant: 40),
+            pictureView.widthAnchor.constraint(equalToConstant: 60),
+            pictureView.heightAnchor.constraint(equalToConstant: 60),
             pictureView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
             pictureView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             

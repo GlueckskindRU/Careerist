@@ -10,4 +10,7 @@ import Foundation
 
 enum DBTables: String {
     case characteristics = "characteristics"
+    case achivements = "achievements"
+    case notes = "notes"
+    case aboutArticles = "aboutArticles"
 }

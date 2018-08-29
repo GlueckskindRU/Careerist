@@ -8,10 +8,11 @@
 
 import UIKit
 
-class CabinetTableViewController: UITableViewController {
+class CabinetTableViewController: UITableViewController, DataControllerProtocol {
     private var sectionsItems: [CabinetModel] = []
     private var rowItems: [CabinetModel] = []
     private var initialData: [CabinetModel] = []
+    internal var dataController: DataController!
     
     override func viewDidLoad() {
         initialData = CabinetModel.fetchInitialData()
@@ -68,7 +69,6 @@ extension CabinetTableViewController {
 
 extension CabinetTableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let view = CabinetSectionView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 100))
         let view = CabinetSectionView()
         view.configure(with: sectionsItems[section].name, as: self)
         
@@ -86,7 +86,7 @@ extension CabinetTableViewController: CabinetSectionDelegateProtocol {
         guard let selectedSection = activeSection else {
             return
         }
-        let viewController: UIViewController
+        let viewController: DataControllerProtocol
         
         switch selectedSection.name {
         case "Мои достижения":
@@ -99,7 +99,8 @@ extension CabinetTableViewController: CabinetSectionDelegateProtocol {
             return
         }
         
-        navigationController?.pushViewController(viewController, animated: true)
+        viewController.configure(with: dataController)
+        navigationController?.pushViewController(viewController as! UIViewController, animated: true)
     }
     
     

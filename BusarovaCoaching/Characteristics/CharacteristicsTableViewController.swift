@@ -17,13 +17,9 @@ protocol CharacteristicsCellProtocol {
     func configure(with characteristics: CharacteristicsModel, as delegate: CharacteristicsProtocol, at index: Int)
 }
 
-class CharacteristicsTableViewController: UITableViewController {
+class CharacteristicsTableViewController: UITableViewController, DataControllerProtocol {
     private var characteristics: [CharacteristicsModel] = []
-    private var dataController: DataController!
-    
-    func configure(with dataController: DataController) {
-        self.dataController = dataController
-    }
+    internal var dataController: DataController!
     
     override func viewDidLoad() {
         super.viewDidLoad()

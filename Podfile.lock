@@ -86,6 +86,7 @@ PODS:
   - gRPC/Main (1.14.1):
     - gRPC-Core (= 1.14.1)
     - gRPC-RxLibrary (= 1.14.1)
+  - Kingfisher (4.8.1)
   - leveldb-library (1.20)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
@@ -97,6 +98,7 @@ PODS:
 DEPENDENCIES:
   - Firebase/Core
   - Firebase/Firestore
+  - Kingfisher (~> 4.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -113,6 +115,7 @@ SPEC REPOS:
     - gRPC-Core
     - gRPC-ProtoRPC
     - gRPC-RxLibrary
+    - Kingfisher
     - leveldb-library
     - nanopb
     - Protobuf
@@ -131,10 +134,11 @@ SPEC CHECKSUMS:
   gRPC-Core: e3ace1e1161e75903135de8d8231bb69c9d35721
   gRPC-ProtoRPC: 78f976fc6a1eafc0e1f4965c255c313aa0859b1e
   gRPC-RxLibrary: c4c826507ad3c8c8fab6887f153938eb04b86d59
+  Kingfisher: 868c1149679a7ab6869be118faa9b5aed154aaf0
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
 
-PODFILE CHECKSUM: 7952040ba85b88eadd9e09bc07ac4d466e221079
+PODFILE CHECKSUM: ebc17b323b30950f347485eedaa71cd3be858c31
 
 COCOAPODS: 1.5.3
