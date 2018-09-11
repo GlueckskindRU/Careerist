@@ -19,7 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let dataController = DataController()
         
         let initialTabBarController = window?.rootViewController as! UITabBarController
-        let characteristicsVC = initialTabBarController.viewControllers?[0] as! CharacteristicsTableViewController
+        let characteristicsNavigationController = initialTabBarController.viewControllers?.first as! UINavigationController
+        let characteristicsVC = characteristicsNavigationController.viewControllers.first as! CharacteristicsTableViewController
         let cabinetNavigationController = initialTabBarController.viewControllers?[1] as! UINavigationController
         let cabinetVC = cabinetNavigationController.viewControllers.first as! CabinetTableViewController
         

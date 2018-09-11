@@ -30,6 +30,7 @@
 		DAB5CB172135B2D100B436C2 /* DataControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB5CB162135B2D100B436C2 /* DataControllerProtocol.swift */; };
 		DAB5CB192135BA3300B436C2 /* NotesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB5CB182135BA3300B436C2 /* NotesModel.swift */; };
 		DAB5CB1B21369A9F00B436C2 /* AboutArticlesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB5CB1A21369A9F00B436C2 /* AboutArticlesModel.swift */; };
+		DAC0AE3421484A4B00FF9D82 /* SegueIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC0AE3321484A4B00FF9D82 /* SegueIdentifiers.swift */; };
 		DAC124E32125E18C00378DA1 /* CabinetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124E22125E18C00378DA1 /* CabinetTableViewController.swift */; };
 		DAC124E52125E20500378DA1 /* CabinetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124E42125E20500378DA1 /* CabinetModel.swift */; };
 		DAC124E72125E83B00378DA1 /* CabinetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124E62125E83B00378DA1 /* CabinetCell.swift */; };
@@ -75,6 +76,7 @@
 		DAB5CB162135B2D100B436C2 /* DataControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataControllerProtocol.swift; sourceTree = "<group>"; };
 		DAB5CB182135BA3300B436C2 /* NotesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesModel.swift; sourceTree = "<group>"; };
 		DAB5CB1A21369A9F00B436C2 /* AboutArticlesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutArticlesModel.swift; sourceTree = "<group>"; };
+		DAC0AE3321484A4B00FF9D82 /* SegueIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueIdentifiers.swift; sourceTree = "<group>"; };
 		DAC124E22125E18C00378DA1 /* CabinetTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CabinetTableViewController.swift; sourceTree = "<group>"; };
 		DAC124E42125E20500378DA1 /* CabinetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CabinetModel.swift; sourceTree = "<group>"; };
 		DAC124E62125E83B00378DA1 /* CabinetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CabinetCell.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				DA5A553B21243B4D00B7153E /* CheckBoxButton.swift */,
 				DA9ED5FF2133F69400FB54FB /* CellIdentifiers.swift */,
 				DA9ED60B2134176000FB54FB /* DBTables.swift */,
+				DAC0AE3321484A4B00FF9D82 /* SegueIdentifiers.swift */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -420,6 +423,7 @@
 				DAA97B0621233DAF005AF50F /* DescriptionViewController.swift in Sources */,
 				DAB5CB1B21369A9F00B436C2 /* AboutArticlesModel.swift in Sources */,
 				DAC124FB21260FA000378DA1 /* NotesTableViewController.swift in Sources */,
+				DAC0AE3421484A4B00FF9D82 /* SegueIdentifiers.swift in Sources */,
 				DA9ED60A2133FCE800FB54FB /* CharacteristicsCellLevel2.swift in Sources */,
 				DAC124ED2125F90500378DA1 /* CompetenceCell.swift in Sources */,
 				DAA97B0221233715005AF50F /* WelcomeModel.swift in Sources */,

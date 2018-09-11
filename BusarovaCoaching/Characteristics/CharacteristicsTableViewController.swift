@@ -9,12 +9,8 @@
 import UIKit
 import FirebaseFirestore
 
-protocol CharacteristicsProtocol {
-    func menuCaptionTapped(on characterictic: CharacteristicsModel, at index: Int)
-}
-
 protocol CharacteristicsCellProtocol {
-    func configure(with characteristics: CharacteristicsModel, as delegate: CharacteristicsProtocol, at index: Int)
+    func configure(with characteristics: CharacteristicsModel)
 }
 
 class CharacteristicsTableViewController: UITableViewController, DataControllerProtocol {
@@ -30,11 +26,16 @@ class CharacteristicsTableViewController: UITableViewController, DataControllerP
         tableView.allowsSelection = false
         
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 52
+        tableView.estimatedRowHeight = 44
         
         tableView.tableFooterView = UIView()
         
         tableView.insetsContentViewsToSafeArea = true
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapRecognizer(recognizer:)))
+        tapGestureRecognizer.numberOfTapsRequired = 1
+        tableView.addGestureRecognizer(tapGestureRecognizer)
+        tapGestureRecognizer.delegate = self
     }
 }
 
@@ -45,61 +46,56 @@ extension CharacteristicsTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let characteristicToPass = characteristics[indexPath.row]
-        let cell: CharacteristicsCellProtocol
+        let cellIdentifier: String
         
         switch characteristicToPass.level {
         case 2:
-            cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.characteristicCellLevel2.rawValue, for: indexPath) as! CharacteristicsCellProtocol
+            cellIdentifier = CellIdentifiers.characteristicCellLevel2.rawValue
         case 1:
-            cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.characteristicCellLevel1.rawValue, for: indexPath) as! CharacteristicsCellProtocol
+            cellIdentifier = CellIdentifiers.characteristicCellLevel1.rawValue
         default:
-            cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.characteristicCellLevel0.rawValue, for: indexPath) as! CharacteristicsCellProtocol
+            cellIdentifier = CellIdentifiers.characteristicCellLevel0.rawValue
         }
         
-        cell.configure(with: characteristicToPass, as: self, at: indexPath.row)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! CharacteristicsCellProtocol
+        cell.configure(with: characteristicToPass)
         
         return cell as! UITableViewCell
     }
 }
 
-//extension CharacteristicsTableViewController {
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        let tabBarHeight = (tabBarController?.tabBar.frame.height)!
-//        let totalHeight = tableView.bounds.height - tabBarHeight
-//
-//        let rowHeight = totalHeight / CGFloat(characteristics.count)
-//
-//        let minimumRowHeight: CGFloat = 36.0
-//
-//        if rowHeight < minimumRowHeight {
-//            return minimumRowHeight
-//        } else {
-//            return rowHeight
-//        }
-//    }
-//
-//}
-
-extension CharacteristicsTableViewController: CharacteristicsProtocol {
-    func menuCaptionTapped(on characterictic: CharacteristicsModel, at index: Int) {
-        if characterictic.collapsed {
-            if characterictic.level < 2 {
-                expandMenu(with: characterictic.id, at: index)
+extension CharacteristicsTableViewController: UIGestureRecognizerDelegate {
+    @objc
+    private func tapRecognizer(recognizer: UITapGestureRecognizer) {
+        if recognizer.state == .ended {
+            guard let indexPath = tableView.indexPathForRow(at: recognizer.location(in: tableView)) else {
+                return
             }
-        } else {
-            if characterictic.level == 1 {
-                collapseMenu(with: characterictic.id, at: index)
-            }
-            if characterictic.level == 0 {
-                let levelOneItems = characteristics.filter { $0.parentID == characterictic.id }
-                
-                for item in levelOneItems {
-                    if let itemIndex = characteristics.index(where: { $0.id == item.id }) {
-                        collapseMenu(with: item.id, at: itemIndex)
-                    }
+            
+            let characterictic = characteristics[indexPath.row]
+            let index = indexPath.row
+            
+            if characterictic.collapsed {
+                if characterictic.level < 2 {
+                    expandMenu(with: characterictic.id, at: index)
+                } else {
+                    performSegue(withIdentifier: SegueIdentifiers.characteristicsArticle.rawValue, sender: self)
                 }
-                
-                collapseMenu(with: characterictic.id, at: index)
+            } else {
+                if characterictic.level == 1 {
+                    collapseMenu(with: characterictic.id, at: index)
+                }
+                if characterictic.level == 0 {
+                    let levelOneItems = characteristics.filter { $0.parentID == characterictic.id }
+                    
+                    for item in levelOneItems {
+                        if let itemIndex = characteristics.index(where: { $0.id == item.id }) {
+                            collapseMenu(with: item.id, at: itemIndex)
+                        }
+                    }
+                    
+                    collapseMenu(with: characterictic.id, at: index)
+                }
             }
         }
     }
