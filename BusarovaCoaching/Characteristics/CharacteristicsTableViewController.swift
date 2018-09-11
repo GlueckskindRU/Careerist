@@ -13,9 +13,8 @@ protocol CharacteristicsCellProtocol {
     func configure(with characteristics: CharacteristicsModel)
 }
 
-class CharacteristicsTableViewController: UITableViewController, DataControllerProtocol {
+class CharacteristicsTableViewController: UITableViewController {
     private var characteristics: [CharacteristicsModel] = []
-    internal var dataController: DataController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,7 +102,7 @@ extension CharacteristicsTableViewController: UIGestureRecognizerDelegate {
 
 extension CharacteristicsTableViewController {
     private func fetchLevelZero() {
-        dataController.fetchInitialCharacteristics() {
+        FirebaseController.shared.getDataController().fetchInitialCharacteristics() {
             (documents) in
             for document in documents {
                 let data = document.data()
@@ -119,7 +118,7 @@ extension CharacteristicsTableViewController {
     }
     
     private func expandMenu(with parentId: String, at index: Int) {
-        dataController.fetchChildernCharacteristicsOf(parentId) {
+        FirebaseController.shared.getDataController().fetchChildernCharacteristicsOf(parentId) {
             (documents) in
             
             self.characteristics[index].collapsed = false

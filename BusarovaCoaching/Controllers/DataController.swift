@@ -16,7 +16,6 @@ class DataController {
     private var db: Firestore
     
     init() {
-        FirebaseApp.configure()
         db = Firestore.firestore()
     }
     
@@ -34,30 +33,6 @@ class DataController {
     
     func fetchChildernCharacteristicsOf(_ parentID: String, completion: @escaping DataBaseClosure) {
         db.collection(DBTables.characteristics.rawValue).whereField("parentID", isEqualTo: parentID).order(by: "name").getDocuments() {
-            (snap, error) in
-            if let error = error {
-                print("Error getting documents: \(error)")
-            } else {
-                completion(snap!.documents)
-            }
-        }
-    }
-    
-// MARK: - Achievements
-    func fetchAchievements(completion: @escaping DataBaseClosure) {
-        db.collection(DBTables.achivements.rawValue).order(by: "name").getDocuments() {
-            (snap, error) in
-            if let error = error {
-                print("Error getting documents: \(error)")
-            } else {
-                completion(snap!.documents)
-            }
-        }
-    }
-    
-// MARK: - Notes
-    func fetchNotes(completion: @escaping DataBaseClosure) {
-        db.collection(DBTables.notes.rawValue).order(by: "name").getDocuments() {
             (snap, error) in
             if let error = error {
                 print("Error getting documents: \(error)")

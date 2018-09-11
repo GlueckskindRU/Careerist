@@ -16,20 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        let dataController = DataController()
+        FirebaseApp.configure()
+        FirebaseController.shared.setDataController(DataController())
+        FirebaseController.shared.setStorageController(StorageController())
         
-        let initialTabBarController = window?.rootViewController as! UITabBarController
-        let characteristicsNavigationController = initialTabBarController.viewControllers?.first as! UINavigationController
-        let characteristicsVC = characteristicsNavigationController.viewControllers.first as! CharacteristicsTableViewController
-        let cabinetNavigationController = initialTabBarController.viewControllers?[1] as! UINavigationController
-        let cabinetVC = cabinetNavigationController.viewControllers.first as! CabinetTableViewController
-        
-        let aboutNavigationController = initialTabBarController.viewControllers?.last as! UINavigationController
-        let aboutVC = aboutNavigationController.viewControllers.first as! WelcomeTableViewController
-        
-        characteristicsVC.configure(with: dataController)
-        cabinetVC.configure(with: dataController)
-        aboutVC.configure(with: dataController)
         
         return true
     }

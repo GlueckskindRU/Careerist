@@ -8,9 +8,8 @@
 
 import UIKit
 
-class NotesTableViewController: UITableViewController, DataControllerProtocol {
+class NotesTableViewController: UITableViewController {
     private var notesData: [NotesModel] = []
-    internal var dataController: DataController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +25,7 @@ class NotesTableViewController: UITableViewController, DataControllerProtocol {
         
         navigationItem.title = "Мои записи"
         
-        dataController.fetchData(.notes) {
+        FirebaseController.shared.getDataController().fetchData(.notes) {
             (documents) in
             for document in documents {
                 let data = document.data()

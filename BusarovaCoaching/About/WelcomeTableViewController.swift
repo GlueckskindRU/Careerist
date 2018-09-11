@@ -8,9 +8,8 @@
 
 import UIKit
 
-class WelcomeTableViewController: UITableViewController, DataControllerProtocol {
+class WelcomeTableViewController: UITableViewController {
     private var articles: [AboutArticlesModel] = []
-    internal var dataController: DataController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +24,7 @@ class WelcomeTableViewController: UITableViewController, DataControllerProtocol 
         
         tableView.tableFooterView = UINib(nibName: "WelcomeFooterXIB", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
         
-        dataController.fetchData(.aboutArticles) {
+        FirebaseController.shared.getDataController().fetchData(.aboutArticles) {
             (documents) in
             for document in documents {
                 let data = document.data()

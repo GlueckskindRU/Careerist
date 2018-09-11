@@ -8,9 +8,8 @@
 
 import UIKit
 
-class AchievementsTableViewController: UITableViewController, DataControllerProtocol {
+class AchievementsTableViewController: UITableViewController {
     private var achivementsData: [AchievementsModel] = []
-    internal var dataController: DataController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +22,7 @@ class AchievementsTableViewController: UITableViewController, DataControllerProt
         
         navigationItem.title = "Мои достижения"
         
-        dataController.fetchData(.achivements) {
+        FirebaseController.shared.getDataController().fetchData(.achivements) {
             (documents) in
             for document in documents {
                 let data = document.data()
