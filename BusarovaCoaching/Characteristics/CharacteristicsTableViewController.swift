@@ -29,6 +29,9 @@ class CharacteristicsTableViewController: UITableViewController, DataControllerP
         tableView.delegate = self
         tableView.allowsSelection = false
         
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 52
+        
         tableView.tableFooterView = UIView()
         
         tableView.insetsContentViewsToSafeArea = true
@@ -59,23 +62,23 @@ extension CharacteristicsTableViewController {
     }
 }
 
-extension CharacteristicsTableViewController {
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let tabBarHeight = (tabBarController?.tabBar.frame.height)!
-        let totalHeight = tableView.bounds.height - tabBarHeight
-        
-        let rowHeight = totalHeight / CGFloat(characteristics.count)
-        
-        let minimumRowHeight: CGFloat = 36.0
-        
-        if rowHeight < minimumRowHeight {
-            return minimumRowHeight
-        } else {
-            return rowHeight
-        }
-    }
-    
-}
+//extension CharacteristicsTableViewController {
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        let tabBarHeight = (tabBarController?.tabBar.frame.height)!
+//        let totalHeight = tableView.bounds.height - tabBarHeight
+//
+//        let rowHeight = totalHeight / CGFloat(characteristics.count)
+//
+//        let minimumRowHeight: CGFloat = 36.0
+//
+//        if rowHeight < minimumRowHeight {
+//            return minimumRowHeight
+//        } else {
+//            return rowHeight
+//        }
+//    }
+//
+//}
 
 extension CharacteristicsTableViewController: CharacteristicsProtocol {
     func menuCaptionTapped(on characterictic: CharacteristicsModel, at index: Int) {

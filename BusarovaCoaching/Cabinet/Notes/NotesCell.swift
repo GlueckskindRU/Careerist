@@ -22,22 +22,26 @@ class NotesCell: UITableViewCell {
     
     func configure(with note: NotesModel) {
         cellCaption.text = note.name
-        
-        contentView.addSubview(cellCaption)
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        layoutInit()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        layoutInit()
+    }
+    
+    private func layoutInit() {
+        contentView.addSubview(cellCaption)
         
         NSLayoutConstraint.activate([
             cellCaption.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             cellCaption.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
             cellCaption.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-//            cellCaption.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
-            cellCaption.bottomAnchor.constraint(greaterThanOrEqualTo: contentView.bottomAnchor, constant: -8)
+            cellCaption.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
             ])
-        
-//        cellCaption.sizeToFit()
-//        cellCaption.layoutIfNeeded()
     }
 }

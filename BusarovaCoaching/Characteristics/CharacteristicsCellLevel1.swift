@@ -17,7 +17,8 @@ class CharacteristicsCellLevel1: UITableViewCell, CharacteristicsCellProtocol {
         let button = UIButton()
         
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 24, weight: UIFont.Weight.medium)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 22, weight: UIFont.Weight.medium)
+        button.titleLabel?.numberOfLines = 0
         button.setTitleColor(UIColor.black, for: .normal)
         button.contentHorizontalAlignment = .leading
         button.contentVerticalAlignment = .center
@@ -33,11 +34,23 @@ class CharacteristicsCellLevel1: UITableViewCell, CharacteristicsCellProtocol {
         
         menuCaption.setTitle(characteristics.name, for: .normal)
         
-        contentView.addSubview(menuCaption)
+//        contentView.addSubview(menuCaption)
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        setupLayout()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        setupLayout()
+    }
+    
+    private func setupLayout() {
+        contentView.addSubview(menuCaption)
         
         NSLayoutConstraint.activate([
             menuCaption.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
@@ -47,6 +60,18 @@ class CharacteristicsCellLevel1: UITableViewCell, CharacteristicsCellProtocol {
             menuCaption.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
             ])
     }
+    
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//
+//        NSLayoutConstraint.activate([
+//            menuCaption.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
+//            menuCaption.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
+//            contentView.trailingAnchor.constraint(equalTo: menuCaption.trailingAnchor, constant: 12),
+//            contentView.bottomAnchor.constraint(equalTo: menuCaption.bottomAnchor, constant: 4),
+//            menuCaption.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+//            ])
+//    }
     
     @objc
     func menuCaptionTappped(sender: Any) {

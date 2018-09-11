@@ -18,6 +18,7 @@ class CharacteristicsCellLevel2: UITableViewCell, CharacteristicsCellProtocol {
         
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.regular)
+        label.numberOfLines = 0
         label.textAlignment = .left
         
         return label
@@ -30,11 +31,23 @@ class CharacteristicsCellLevel2: UITableViewCell, CharacteristicsCellProtocol {
         
         menuCaption.text = characteristics.name
         
-        contentView.addSubview(menuCaption)
+//        contentView.addSubview(menuCaption)
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        setupLayout()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        setupLayout()
+    }
+    
+    private func setupLayout() {
+        contentView.addSubview(menuCaption)
         
         NSLayoutConstraint.activate([
             menuCaption.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
@@ -44,6 +57,18 @@ class CharacteristicsCellLevel2: UITableViewCell, CharacteristicsCellProtocol {
             menuCaption.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
             ])
     }
+    
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//
+//        NSLayoutConstraint.activate([
+//            menuCaption.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
+//            menuCaption.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32),
+//            contentView.trailingAnchor.constraint(equalTo: menuCaption.trailingAnchor, constant: 12),
+//            contentView.bottomAnchor.constraint(equalTo: menuCaption.bottomAnchor, constant: 4),
+//            menuCaption.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+//            ])
+//    }
     
     @objc
     func menuCaptionTappped(sender: Any) {
