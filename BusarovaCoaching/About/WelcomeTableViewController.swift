@@ -24,16 +24,20 @@ class WelcomeTableViewController: UITableViewController {
         
         tableView.tableFooterView = UINib(nibName: "WelcomeFooterXIB", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
         
-        FirebaseController.shared.getDataController().fetchData(.aboutArticles) {
-            (documents) in
-            for document in documents {
-                let data = document.data()
-                self.articles.append(AboutArticlesModel(id: document.documentID,
-                                                        name: data["name"] as! String,
-                                                        text: data["text"] as! String
-                                                        ))
+        let activityIndicator = ActivityIndicator()
+        activityIndicator.start()
+        FirebaseController.shared.getDataController().fetchData(DBTables.aboutArticles) {
+            (result: Result<[AboutArticlesModel]>) in
+            
+            activityIndicator.stop()
+            switch result {
+            case .success(let articles):
+                self.articles = articles
+                self.tableView.reloadData()
+            case .failure(let error):
+                let alertDialog = AlertDialog(title: nil, message: error.getError())
+                alertDialog.showAlert(in: self, completion: nil)
             }
-            self.tableView.reloadData()
         }
     }
     

@@ -22,16 +22,20 @@ class AchievementsTableViewController: UITableViewController {
         
         navigationItem.title = "Мои достижения"
         
-        FirebaseController.shared.getDataController().fetchData(.achivements) {
-            (documents) in
-            for document in documents {
-                let data = document.data()
-                self.achivementsData.append(AchievementsModel(id: document.documentID,
-                                                              name: data["name"] as! String,
-                                                              imageURL: data["imageURL"] as! String
-                                                            ))
+        let activityIndicator = ActivityIndicator()
+        activityIndicator.start()
+        FirebaseController.shared.getDataController().fetchData(DBTables.achivements) {
+            (result: Result<[AchievementsModel]>) in
+            
+            activityIndicator.stop()
+            switch result {
+            case .success(let achivements):
+                self.achivementsData = achivements
+                self.tableView.reloadData()
+            case .failure(let error):
+                let alertDialog = AlertDialog(title: nil, message: error.getError())
+                alertDialog.showAlert(in: self, completion: nil)
             }
-            self.tableView.reloadData()
         }
     }
 }

@@ -15,6 +15,7 @@ protocol CharacteristicsCellProtocol {
 
 class CharacteristicsTableViewController: UITableViewController {
     private var characteristics: [CharacteristicsModel] = []
+    private var indexPath: IndexPath?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +36,16 @@ class CharacteristicsTableViewController: UITableViewController {
         tapGestureRecognizer.numberOfTapsRequired = 1
         tableView.addGestureRecognizer(tapGestureRecognizer)
         tapGestureRecognizer.delegate = self
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard
+            let destination = segue.destination as? CharacteristicsArticlesTableViewController,
+            let indexPath = self.indexPath else {
+                return
+        }
+        
+        destination.configure(with: characteristics[indexPath.row].id)
     }
 }
 
@@ -78,6 +89,7 @@ extension CharacteristicsTableViewController: UIGestureRecognizerDelegate {
                 if characterictic.level < 2 {
                     expandMenu(with: characterictic.id, at: index)
                 } else {
+                    self.indexPath = indexPath
                     performSegue(withIdentifier: SegueIdentifiers.characteristicsArticle.rawValue, sender: self)
                 }
             } else {
@@ -102,43 +114,52 @@ extension CharacteristicsTableViewController: UIGestureRecognizerDelegate {
 
 extension CharacteristicsTableViewController {
     private func fetchLevelZero() {
+        let actitivityIndicator = ActivityIndicator()
+        actitivityIndicator.start()
         FirebaseController.shared.getDataController().fetchInitialCharacteristics() {
-            (documents) in
-            for document in documents {
-                let data = document.data()
-                self.characteristics.append(CharacteristicsModel(
-                    id: document.documentID,
-                    name: data["name"] as! String,
-                    parentID: data["parentID"] as! String,
-                    level: data["level"] as! Int
-                ))
+            (result: Result<[CharacteristicsModel]>) in
+            
+            actitivityIndicator.stop()
+            switch result {
+            case .success(let data):
+                self.characteristics = data
+                self.tableView.reloadData()
+            case .failure(let error):
+                let alertDialog = AlertDialog(title: nil, message: error.getError())
+                alertDialog.showAlert(in: self, completion: nil)
             }
-            self.tableView.reloadData()
         }
     }
     
     private func expandMenu(with parentId: String, at index: Int) {
+        let actitivityIndicator = ActivityIndicator()
+        actitivityIndicator.start()
         FirebaseController.shared.getDataController().fetchChildernCharacteristicsOf(parentId) {
-            (documents) in
+            (result: Result<[CharacteristicsModel]>) in
             
-            self.characteristics[index].collapsed = false
-            self.tableView.beginUpdates()
-            for i in index+1..<index+documents.count+1 {
-                let data = documents[i-index-1].data()
-                let newCharacteristic = CharacteristicsModel(id: documents[i-index-1].documentID,
-                                                             name: data["name"] as! String,
-                                                             parentID: data["parentID"] as! String,
-                                                             level: data["level"] as! Int
-                )
-                self.characteristics.insert(newCharacteristic, at: i)
-                self.tableView.insertRows(at: [IndexPath(row: i, section: 0)], with: .automatic)
+            switch result {
+            case .success(let data):
+                self.characteristics[index].collapsed = false
+                self.tableView.beginUpdates()
+                for i in index+1..<index+data.count+1 {
+                    self.characteristics.insert(data[i-index-1], at: i)
+                    self.tableView.insertRows(at: [IndexPath(row: i, section: 0)], with: .automatic)
+                }
+                self.tableView.endUpdates()
+                self.tableView.reloadData()
+                actitivityIndicator.stop()
+            case .failure(let error):
+                actitivityIndicator.stop()
+                let alertDialog = AlertDialog(title: nil, message: error.getError())
+                alertDialog.showAlert(in: self, completion: nil)
             }
-            self.tableView.endUpdates()
-            self.tableView.reloadData()
         }
     }
     
     private func collapseMenu(with parentID: String, at index: Int) {
+        let actitivityIndicator = ActivityIndicator()
+        actitivityIndicator.start()
+        
         tableView.beginUpdates()
         
         for (i, _) in characteristics.enumerated().reversed() {
@@ -151,5 +172,6 @@ extension CharacteristicsTableViewController {
         characteristics[index].collapsed = true
         tableView.endUpdates()
         tableView.reloadData()
+        actitivityIndicator.stop()
     }
 }

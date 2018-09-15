@@ -25,16 +25,21 @@ class NotesTableViewController: UITableViewController {
         
         navigationItem.title = "Мои записи"
         
-        FirebaseController.shared.getDataController().fetchData(.notes) {
-            (documents) in
-            for document in documents {
-                let data = document.data()
-                self.notesData.append(NotesModel(id: document.documentID,
-                                                 name: data["name"] as! String,
-                                                 text: data["text"] as! String
-                                                ))
+        let activityIndicator = ActivityIndicator()
+        activityIndicator.start()
+        FirebaseController.shared.getDataController().fetchData(DBTables.notes) {
+            (result: Result<[NotesModel]>) in
+            
+            
+            activityIndicator.stop()
+            switch result {
+            case .success(let notes):
+                self.notesData = notes
+                self.tableView.reloadData()
+            case .failure(let error):
+                let alertDialog = AlertDialog(title: nil, message: error.getError())
+                alertDialog.showAlert(in: self, completion: nil)
             }
-            self.tableView.reloadData()
         }
     }
 }

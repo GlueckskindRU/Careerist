@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct AboutArticlesModel {
+struct AboutArticlesModel: Codable {
     let id: String
     let name: String
     let text: String
