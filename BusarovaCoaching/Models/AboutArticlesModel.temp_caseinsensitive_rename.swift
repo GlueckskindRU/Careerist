@@ -1,14 +1,14 @@
 //
-//  NotesModel.swift
+//  AboutArticlesModel.swift
 //  BusarovaCoaching
 //
-//  Created by Yuri Ivashin on 28/08/2018.
+//  Created by Yuri Ivashin on 29/08/2018.
 //  Copyright © 2018 The Homber Team. All rights reserved.
 //
 
 import Foundation
 
-struct NotesModel: Codable {
+struct AboutArticlesModel {
     let id: String
     let name: String
     let text: String

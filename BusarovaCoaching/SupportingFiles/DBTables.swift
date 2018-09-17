@@ -13,4 +13,6 @@ enum DBTables: String {
     case achivements = "achievements"
     case notes = "notes"
     case aboutArticles = "aboutArticles"
+    case articles = "articles"
+    case articlesInside = "articlesInside"
 }

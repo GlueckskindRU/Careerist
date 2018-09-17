@@ -12,4 +12,8 @@ enum CellIdentifiers: String {
     case characteristicCellLevel0 = "Characteristic Cell Level 0"
     case characteristicCellLevel1 = "Characteristic Cell Level 1"
     case characteristicCellLevel2 = "Characteristic Cell Level 2"
+    case characteristicArticleCell = "Characteristics Article Cell"
+    //articles inside
+    case insideCell = "Element Inside Cell"
+    case listElementCell = "List Element Cell"
 }

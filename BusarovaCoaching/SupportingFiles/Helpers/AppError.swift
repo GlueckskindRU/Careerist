@@ -12,6 +12,7 @@ enum AppError: Error {
     case fetchDocument(Error)
     case documentNotFound(String)
     case saveDocument(Error)
+    case downloadURLWrong(URL?)
     case otherError(Error)
     
     func getError() -> String {
@@ -22,6 +23,8 @@ enum AppError: Error {
             return "Документ с идентификатором <\(id)> не найден"
         case .saveDocument(let error):
             return "Ошибка сохранения документа: \(error)"
+        case .downloadURLWrong(let url):
+            return "Ошбка получения ссылки на закаченное изображение: \(String(describing: url))"
         case .otherError(let error):
             return error.localizedDescription
         }

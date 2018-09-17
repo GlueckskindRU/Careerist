@@ -1,0 +1,209 @@
+//
+//  NewListInsideTableViewController.swift
+//  BusarovaCoaching
+//
+//  Created by Yuri Ivashin on 14/09/2018.
+//  Copyright © 2018 The Homber Team. All rights reserved.
+//
+
+import UIKit
+
+protocol SaveListElementsProtocol {
+    func saveListElements(_ elements: [String])
+}
+
+class NewListInsideTableViewController: UITableViewController, ArticleInsideElementsProtocol {
+    private var articleInside: ArticleInside?
+    private var sequence: Int?
+    private var articleSaveDelegate: ArticleSaveDelegateProtocol?
+    
+    private var articleInsideID: String?
+    
+    lazy private var setupBarButtonItem: UIBarButtonItem = {
+        return UIBarButtonItem(title: "Настроить", style: .plain, target: self, action: #selector(setupList(sender:)))
+    }()
+    
+    lazy private var editBarButtonItem: UIBarButtonItem = {
+        return UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editList(sender:)))
+    }()
+    
+    lazy private var saveBarButtonItem: UIBarButtonItem = {
+        return UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveList(sender:)))
+    }()
+    
+    private var isSaved: Bool = true {
+        didSet {
+            saveBarButtonItem.isEnabled = !isSaved
+        }
+    }
+    
+    func configure(with articleInside: ArticleInside?, as sequence: Int, delegate: ArticleSaveDelegateProtocol) {
+        self.articleInside = articleInside
+        self.sequence = sequence
+        self.articleSaveDelegate = delegate
+        
+        self.articleInsideID = articleInside?.id
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 44
+        tableView.separatorStyle = .none
+        
+        tableView.register(ListElementsCell.self, forCellReuseIdentifier: CellIdentifiers.listElementCell.rawValue)
+        
+        navigationItem.rightBarButtonItems = [editBarButtonItem, setupBarButtonItem, saveBarButtonItem]
+        saveBarButtonItem.isEnabled = !isSaved
+    }
+}
+
+// MARK: - TableView DataSource
+extension NewListInsideTableViewController {
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if articleInside == nil {
+            return 0
+        } else {
+            return articleInside!.listElements!.count
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.listElementCell.rawValue, for: indexPath) as! ListElementsCell
+        
+        guard let elementToPass = articleInside else {
+            return cell
+        }
+        
+        let bulletSign = elementToPass.numericList! ? "\(indexPath.row + 1)" : LiteralConsts.nonNumericListBullet.rawValue
+        
+        cell.configure(with: elementToPass.listElements![indexPath.row], bullet: bulletSign)
+        
+        return cell
+    }
+}
+
+// MARK: - TableView Delegate
+extension NewListInsideTableViewController {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+        
+        view.backgroundColor = UIColor.white
+        
+        let listTypeControl: UISegmentedControl = {
+            let control = UISegmentedControl()
+    
+            control.translatesAutoresizingMaskIntoConstraints = false
+            control.insertSegment(withTitle: "Нумерованный", at: 0, animated: false)
+            control.insertSegment(withTitle: "Обычный", at: 1, animated: false)
+            control.addTarget(self, action: #selector(segmentedControlDidChanged(sender:)), for: UIControlEvents.valueChanged)
+    
+            return control
+        }()
+        
+        view.addSubview(listTypeControl)
+
+        NSLayoutConstraint.activate([
+            listTypeControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            listTypeControl.topAnchor.constraint(equalTo: view.topAnchor, constant: 16),
+            view.bottomAnchor.constraint(equalTo: listTypeControl.bottomAnchor, constant: 8)
+            ])
+        
+        if articleInside == nil {
+            listTypeControl.selectedSegmentIndex = 0
+        } else {
+            listTypeControl.selectedSegmentIndex = articleInside!.numericList! ? 0 : 1
+        }
+        
+        return view
+    }
+}
+
+extension NewListInsideTableViewController {
+    @objc
+    private func segmentedControlDidChanged(sender: UISegmentedControl) {
+        isSaved = false
+        let numericList = sender.selectedSegmentIndex == 0 ? true : false
+        
+        articleInside = create(as: numericList, elements: nil)
+        
+        refreshUI()
+    }
+    
+    @objc
+    private func setupList(sender: UIBarButtonItem) {
+        print("setup button was tapped")
+    }
+    
+    @objc
+    private func editList(sender: UIBarButtonItem) {
+        if articleInside == nil {
+            articleInside = create(as: true, elements: nil)
+        }
+        
+        let editVC = EditListInsideViewController()
+        editVC.configure(with: articleInside!, delegate: self)
+        navigationController?.pushViewController(editVC, animated: true)
+    }
+    
+    @objc
+    private func saveList(sender: UIBarButtonItem) {
+        saveList(withLeaving: true)
+    }
+    
+    private func refreshUI() {
+        tableView.reloadData()
+    }
+    
+    private func create(as numeric: Bool?, elements: [String]?) -> ArticleInside? {
+        guard let sequence = sequence else {
+            return nil
+        }
+        
+        let listElements = elements ?? articleInside?.listElements ?? []
+        
+        let result = ArticleInside(id: articleInside?.id ?? "",
+                                   parentID: articleInside?.parentID ?? "",
+                                   sequence: sequence,
+                                   type: .list,
+                                   caption: nil,
+                                   text: nil,
+                                   imageURL: nil,
+                                   imageName: nil,
+                                   numericList: numeric ?? articleInside?.numericList,
+                                   listElements: listElements
+                                    )
+        
+        return result
+    }
+    
+    private func saveList(withLeaving: Bool) {
+        guard let elementToSave = create(as: nil, elements: nil) else {
+            return
+        }
+        
+        articleSaveDelegate?.saveArticle(articleInside: elementToSave, with: articleInsideID)
+        if withLeaving {
+            navigationController?.popViewController(animated: true)
+        } else {
+            isSaved = true
+        }
+    }
+}
+
+// MARK: - SaveListElementsProtocol
+extension NewListInsideTableViewController: SaveListElementsProtocol {
+    func saveListElements(_ elements: [String]) {
+        articleInside = create(as: nil, elements: elements)
+        refreshUI()
+        saveList(withLeaving: false)
+    }
+}

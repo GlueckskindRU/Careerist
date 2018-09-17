@@ -194,16 +194,16 @@
             </objects>
             <point key="canvasLocation" x="3103" y="561"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Characteristics Articles Table View Controller-->
         <scene sceneID="yrX-zb-igD">
             <objects>
-                <tableViewController id="TIe-jx-Isi" sceneMemberID="viewController">
+                <tableViewController id="TIe-jx-Isi" customClass="CharacteristicsArticlesTableViewController" customModule="BusarovaCoaching" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="1JX-bn-uXU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="5rl-Dw-4Gt">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Characteristics Article Cell" id="5rl-Dw-4Gt" customClass="CharacteristicsArticlesCell" customModule="BusarovaCoaching" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5rl-Dw-4Gt" id="FVU-Ga-7Hy">
@@ -248,7 +248,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9tL-Qg-KVM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3102" y="-224"/>
+            <point key="canvasLocation" x="4788" y="561"/>
         </scene>
         <!--Detailed Note View Controller-->
         <scene sceneID="tSF-aX-4pY">
@@ -263,7 +263,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BYy-4f-jmE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3950" y="-224"/>
+            <point key="canvasLocation" x="5582" y="561"/>
         </scene>
         <!--Основное меню-->
         <scene sceneID="OJw-x7-nki">

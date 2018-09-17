@@ -155,39 +155,6 @@ class DataController {
         }
     }
     
-    func fetchArticlesInside<T: Codable>(with id: String, as type: ArticleInsideType, completion: @escaping (Result<T>) -> Void) {
-        let collection: String
-        switch type {
-        case .image:
-            collection = DBTables.articlesImage.rawValue
-        case .list:
-            collection = DBTables.articlesList.rawValue
-        case .text:
-            collection = DBTables.articlesText.rawValue
-        }
-        
-        db.collection(collection).document(id).getDocument() {
-            (snap, error) in
-            
-            guard let snap = snap, snap.exists else {
-                if let error = error {
-                    completion(Result.failure(.otherError(error)))
-                } else {
-                    completion(Result.failure(.documentNotFound(id)))
-                }
-                return
-            }
-            
-            do {
-                let result = try snap.toDocument(T.self)
-                
-                completion(Result.success(result))
-            } catch {
-                completion(Result.failure(.otherError(error)))
-            }
-        }
-    }
-    
     func fetchArticle<T: Codable>(with parentID: String, completion: @escaping (Result<[T]>) -> Void) {
         db.collection(DBTables.articlesInside.rawValue).whereField("parentID", isEqualTo: parentID).order(by: "sequence").getDocuments() {
             (snap, error) in
