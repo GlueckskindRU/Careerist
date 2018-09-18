@@ -20,7 +20,7 @@ class NotesTableViewController: UITableViewController {
         tableView.register(NotesCell.self, forCellReuseIdentifier: "Notes Cell")
         tableView.tableFooterView = UIView()
         
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
         
         navigationItem.title = "Мои записи"

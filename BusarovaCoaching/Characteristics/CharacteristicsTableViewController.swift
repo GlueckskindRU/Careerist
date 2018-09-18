@@ -25,7 +25,7 @@ class CharacteristicsTableViewController: UITableViewController {
         tableView.delegate = self
         tableView.allowsSelection = false
         
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
         
         tableView.tableFooterView = UIView()

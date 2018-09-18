@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y0i-ap-jJQ">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y0i-ap-jJQ">
+    <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,25 +15,25 @@
             <objects>
                 <viewController id="Y0i-ap-jJQ" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pgb-dV-W0n">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cSG-cy-JL3">
-                                <rect key="frame" x="0.0" y="618" width="375" height="49"/>
+                            <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nzO-dv-T1U">
+                                <rect key="frame" x="0.0" y="863" width="453" height="83"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
-                                    <tabBarItem title="Основное меню" image="mainMenu" id="XpC-Fp-ceh"/>
-                                    <tabBarItem title="Личный кабинет" image="cabinet" id="DpZ-dj-qja"/>
-                                    <tabBarItem title="Заметки" image="notes" id="aGP-AP-xPp"/>
-                                    <tabBarItem title="О приложении" image="About" id="TYI-kl-Uv9"/>
+                                    <tabBarItem title="Основное меню" image="mainMenu" id="yJj-Rc-y17"/>
+                                    <tabBarItem title="Личный кабинет" image="cabinet" id="WUk-DG-LOF"/>
+                                    <tabBarItem title="Заметки" image="notes" id="H5C-8P-jK2"/>
+                                    <tabBarItem title="О приложении" image="About" id="Pvu-d7-bx5"/>
                                 </items>
                             </tabBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="cSG-cy-JL3" firstAttribute="leading" secondItem="gIP-KW-kaM" secondAttribute="leading" id="RbR-sW-JsP"/>
-                            <constraint firstItem="cSG-cy-JL3" firstAttribute="bottom" secondItem="gIP-KW-kaM" secondAttribute="bottom" id="SLL-Xk-TyM"/>
-                            <constraint firstItem="cSG-cy-JL3" firstAttribute="trailing" secondItem="gIP-KW-kaM" secondAttribute="trailing" id="prM-M2-Lzk"/>
+                            <constraint firstItem="nzO-dv-T1U" firstAttribute="leading" secondItem="gIP-KW-kaM" secondAttribute="leading" id="6rg-2M-26P"/>
+                            <constraint firstItem="nzO-dv-T1U" firstAttribute="trailing" secondItem="gIP-KW-kaM" secondAttribute="trailing" id="Vq8-ZW-hEw"/>
+                            <constraint firstItem="nzO-dv-T1U" firstAttribute="bottom" secondItem="gIP-KW-kaM" secondAttribute="bottom" id="fis-EL-6p0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gIP-KW-kaM"/>
                     </view>

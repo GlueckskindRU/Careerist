@@ -10,7 +10,7 @@ import UIKit
 
 class ActivityIndicator: UIView {
     lazy private var activityIndicator: UIActivityIndicatorView = {
-        $0.activityIndicatorViewStyle = .whiteLarge
+        $0.style = .whiteLarge
         $0.translatesAutoresizingMaskIntoConstraints = false
         
         return $0

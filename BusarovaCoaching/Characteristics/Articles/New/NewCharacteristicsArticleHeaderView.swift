@@ -19,7 +19,7 @@ class NewCharacteristicsArticleHeaderView: UITableViewHeaderFooterView {
         textField.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
         textField.layer.borderWidth = 1
         textField.layer.cornerRadius = 5
-        textField.addTarget(self, action: #selector(textFieldDidChange(sender:)), for: UIControlEvents.allEditingEvents)
+        textField.addTarget(self, action: #selector(textFieldDidChange(sender:)), for: UIControl.Event.allEditingEvents)
         
         return textField
     }()

@@ -24,7 +24,7 @@ class CharacteristicsCellLevel1: UITableViewCell, CharacteristicsCellProtocol {
         menuCaption.text = characteristics.name
     }
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupLayout()

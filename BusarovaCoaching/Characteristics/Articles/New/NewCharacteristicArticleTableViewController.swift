@@ -43,7 +43,7 @@ class NewCharacteristicArticleTableViewController: UITableViewController {
         
         tableView.register(InsideCell.self, forCellReuseIdentifier: CellIdentifiers.insideCell.rawValue)
         
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
         tableView.separatorStyle = .none
         
@@ -196,7 +196,7 @@ extension NewCharacteristicArticleTableViewController {
             sequenceToPass = articleInsideElements.count + 1
         }
         
-        let menuController = UIAlertController(title: nil, message: "Выберите тип добавляемого элемента статьи:", preferredStyle: UIAlertControllerStyle.actionSheet)
+        let menuController = UIAlertController(title: nil, message: "Выберите тип добавляемого элемента статьи:", preferredStyle: UIAlertController.Style.actionSheet)
         
         let textElement = UIAlertAction(title: "Абзац текста", style: .default) {
             _ in

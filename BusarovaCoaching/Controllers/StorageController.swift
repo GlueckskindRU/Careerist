@@ -17,9 +17,9 @@ class StorageController {
     }
     
     private func image2data(_ image: UIImage) -> Data? {
-        if let result = UIImageJPEGRepresentation(image, 1.0)  {
+        if let result = image.jpegData(compressionQuality: 1.0)  {
             return result
-        } else if let result = UIImagePNGRepresentation(image) {
+        } else if let result = image.pngData() {
             return result
         } else {
             return nil

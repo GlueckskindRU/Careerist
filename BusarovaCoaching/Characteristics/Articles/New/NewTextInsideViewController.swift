@@ -22,8 +22,8 @@ class NewTextInsideViewController: UIViewController, ArticleInsideElementsProtoc
         textField.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
         textField.layer.borderWidth = 1
         textField.layer.cornerRadius = 5
-        textField.clearButtonMode = UITextFieldViewMode.whileEditing
-        textField.leftViewMode = UITextFieldViewMode.always
+        textField.clearButtonMode = UITextField.ViewMode.whileEditing
+        textField.leftViewMode = UITextField.ViewMode.always
         
         return textField
     }()

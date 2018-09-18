@@ -51,7 +51,7 @@ class NewListInsideTableViewController: UITableViewController, ArticleInsideElem
         tableView.dataSource = self
         tableView.delegate = self
         
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
         tableView.separatorStyle = .none
         
@@ -104,7 +104,7 @@ extension NewListInsideTableViewController {
             control.translatesAutoresizingMaskIntoConstraints = false
             control.insertSegment(withTitle: "Нумерованный", at: 0, animated: false)
             control.insertSegment(withTitle: "Обычный", at: 1, animated: false)
-            control.addTarget(self, action: #selector(segmentedControlDidChanged(sender:)), for: UIControlEvents.valueChanged)
+            control.addTarget(self, action: #selector(segmentedControlDidChanged(sender:)), for: UIControl.Event.valueChanged)
     
             return control
         }()
