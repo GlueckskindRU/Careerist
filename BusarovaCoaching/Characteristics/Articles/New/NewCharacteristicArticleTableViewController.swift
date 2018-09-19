@@ -154,7 +154,6 @@ extension NewCharacteristicArticleTableViewController {
             actitivityIndicator.stop()
             switch result {
             case .success(let articleInsideArray):
-                print("\(articleInsideArray)")
                 self.articleInsideElements = articleInsideArray
                 self.tableView.reloadData()
                 let headerView = NewCharacteristicsArticleHeaderView()
@@ -174,7 +173,13 @@ extension NewCharacteristicArticleTableViewController {
 extension NewCharacteristicArticleTableViewController {
     @objc
     private func previewArticle(sender: UIBarButtonItem) {
-        print("preview button was tapped")
+        guard let article = article else {
+            return
+        }
+        
+        let previewVC = ArticlesPreviewTableViewController()
+        previewVC.configure(with: article)
+        navigationController?.pushViewController(previewVC, animated: true)
     }
     
     @objc
@@ -191,9 +196,9 @@ extension NewCharacteristicArticleTableViewController {
     private func addElement(sender: UIBarButtonItem) {
         let sequenceToPass: Int
         if articleInsideElements.isEmpty {
-            sequenceToPass = 1
+            sequenceToPass = 0
         } else {
-            sequenceToPass = articleInsideElements.count + 1
+            sequenceToPass = articleInsideElements.count
         }
         
         let menuController = UIAlertController(title: nil, message: "Выберите тип добавляемого элемента статьи:", preferredStyle: UIAlertController.Style.actionSheet)

@@ -18,6 +18,7 @@ class NewListInsideTableViewController: UITableViewController, ArticleInsideElem
     private var articleSaveDelegate: ArticleSaveDelegateProtocol?
     
     private var articleInsideID: String?
+    private var editingModeEnabled: Bool = false
     
     lazy private var setupBarButtonItem: UIBarButtonItem = {
         return UIBarButtonItem(title: "Настроить", style: .plain, target: self, action: #selector(setupList(sender:)))
@@ -54,6 +55,10 @@ class NewListInsideTableViewController: UITableViewController, ArticleInsideElem
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
         tableView.separatorStyle = .none
+        tableView.allowsSelection = false
+        tableView.allowsSelectionDuringEditing = true
+        
+        tableView.isEditing = editingModeEnabled
         
         tableView.register(ListElementsCell.self, forCellReuseIdentifier: CellIdentifiers.listElementCell.rawValue)
         
@@ -140,7 +145,8 @@ extension NewListInsideTableViewController {
     
     @objc
     private func setupList(sender: UIBarButtonItem) {
-        print("setup button was tapped")
+        editingModeEnabled = !tableView.isEditing
+        tableView.setEditing(editingModeEnabled, animated: true)
     }
     
     @objc

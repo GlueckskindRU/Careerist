@@ -26,10 +26,11 @@ class StorageController {
         }
     }
     
-    func uploadImage(_ image: UIImage, with name: String, to address: StoragePath, completion: @escaping (Result<URL>) -> Void) {
+    func uploadImage(_ image: UIImage, with name: String, to address: StoragePath, completion: @escaping (Result<String>) -> Void) {
         guard
             let data = image2data(image),
-            let extention = data.imageFormat else {
+            let extention = data.imageFormat,
+            let imageMetadata = data.imageMetadata else {
             return
         }
         
@@ -37,7 +38,10 @@ class StorageController {
         
         let imageReference = storage.reference().child(pathToUpload)
         
-        let uploadTask = imageReference.putData(data, metadata: nil) {
+        let metadata = StorageMetadata()
+        metadata.contentType = imageMetadata
+        
+        let uploadTask = imageReference.putData(data, metadata: metadata) {
             (metadata, error) in
             
             guard let _ = metadata else {
@@ -49,22 +53,52 @@ class StorageController {
                 return
             }
             
-            imageReference.downloadURL {
-                (url, error) in
-                
-                if let error = error {
-                    completion(Result.failure(.otherError(error)))
-                    return
-                }
-                
-                guard let downloadURL = url else {
-                    completion(Result.failure(.downloadURLWrong(url)))
-                    return
-                }
-                
-                completion(Result.success(downloadURL))
-            }
+            let resultURL = "gs://\(imageReference.bucket)/\(imageReference.fullPath)"
+            
+            completion(Result.success(resultURL))
         }
         uploadTask.resume()
+    }
+    
+    func downloadImage(with gsURL: String, completion: @escaping (Result<UIImage>) -> Void) {
+        let imageReference = storage.reference(forURL: gsURL)
+        
+//      The size should be decreased!!!!
+        imageReference.getData(maxSize: 10 * 1024 * 1024) {
+            (data, error) in
+            
+            guard
+                let data = data,
+                let image = UIImage(data: data) else {
+                    if let error = error {
+                        completion(Result.failure(.otherError(error)))
+                    } else {
+                        completion(Result.failure(.downloadedImageCreation(error)))
+                    }
+                    return
+            }
+            
+            completion(Result.success(image))
+        }
+    }
+    
+    func getDownloadURL(for gsURL: String, completion: @escaping (Result<URL>) -> Void) {
+        let imageReference = storage.reference(forURL: gsURL)
+        
+        imageReference.downloadURL {
+            (url, error) in
+
+            if let error = error {
+                completion(Result.failure(.otherError(error)))
+                return
+            }
+
+            guard let downloadURL = url else {
+                completion(Result.failure(.downloadURLWrong(url)))
+                return
+            }
+
+            completion(Result.success(downloadURL))
+        }
     }
 }

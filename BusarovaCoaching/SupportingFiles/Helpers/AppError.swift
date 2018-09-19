@@ -13,6 +13,7 @@ enum AppError: Error {
     case documentNotFound(String)
     case saveDocument(Error)
     case downloadURLWrong(URL?)
+    case downloadedImageCreation(Error?)
     case otherError(Error)
     
     func getError() -> String {
@@ -25,6 +26,8 @@ enum AppError: Error {
             return "Ошибка сохранения документа: \(error)"
         case .downloadURLWrong(let url):
             return "Ошбка получения ссылки на закаченное изображение: \(String(describing: url))"
+        case .downloadedImageCreation(let error):
+            return "Ошибка формирования скаченного изображения: \(String(describing: error))"
         case .otherError(let error):
             return error.localizedDescription
         }

@@ -68,6 +68,15 @@
 		DAC61EEE214C255700FB78C6 /* AlertDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC61EED214C255700FB78C6 /* AlertDialog.swift */; };
 		DADEAB2D212458AF0042B564 /* WelcomeFooterXIB.xib in Resources */ = {isa = PBXBuildFile; fileRef = DADEAB2C212458AF0042B564 /* WelcomeFooterXIB.xib */; };
 		DADEAB2F21246A860042B564 /* WelcomeFootterXIB.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADEAB2E21246A860042B564 /* WelcomeFootterXIB.swift */; };
+		DAE6DF7521527BB8009C9CC3 /* ArticleListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE6DF7421527BB8009C9CC3 /* ArticleListCell.swift */; };
+		DAE6DF7721527C14009C9CC3 /* ArticleInsideUnwrapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE6DF7621527C14009C9CC3 /* ArticleInsideUnwrapped.swift */; };
+		DAE6DF7921527DD9009C9CC3 /* ArticleTextWithCaptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE6DF7821527DD9009C9CC3 /* ArticleTextWithCaptionCell.swift */; };
+		DAE6DF7B21527E6E009C9CC3 /* ArticleTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE6DF7A21527E6E009C9CC3 /* ArticleTextCell.swift */; };
+		DAE6DF7D21527F25009C9CC3 /* ArticleImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE6DF7C21527F25009C9CC3 /* ArticleImageCell.swift */; };
+		DAE6DF7F21527FAF009C9CC3 /* ArticleImageWithCaptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE6DF7E21527FAF009C9CC3 /* ArticleImageWithCaptionCell.swift */; };
+		DAE6DF8121528EC3009C9CC3 /* ArticlesPreviewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE6DF8021528EC3009C9CC3 /* ArticlesPreviewTableViewController.swift */; };
+		DAE6DF832152DC33009C9CC3 /* ArticlesPreviewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE6DF822152DC33009C9CC3 /* ArticlesPreviewHeaderView.swift */; };
+		DAE6DF852152DFAB009C9CC3 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE6DF842152DFAB009C9CC3 /* UITableView.swift */; };
 		DAEE517A214D857500449FEE /* UITapGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE5179214D857500449FEE /* UITapGestureRecognizer.swift */; };
 		DAEE517C214FAAA100449FEE /* StoragePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE517B214FAAA100449FEE /* StoragePath.swift */; };
 		DAEE517E214FAD9B00449FEE /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE517D214FAD9B00449FEE /* Data.swift */; };
@@ -142,6 +151,15 @@
 		DAC61EED214C255700FB78C6 /* AlertDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDialog.swift; sourceTree = "<group>"; };
 		DADEAB2C212458AF0042B564 /* WelcomeFooterXIB.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeFooterXIB.xib; sourceTree = "<group>"; };
 		DADEAB2E21246A860042B564 /* WelcomeFootterXIB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeFootterXIB.swift; sourceTree = "<group>"; };
+		DAE6DF7421527BB8009C9CC3 /* ArticleListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListCell.swift; sourceTree = "<group>"; };
+		DAE6DF7621527C14009C9CC3 /* ArticleInsideUnwrapped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleInsideUnwrapped.swift; sourceTree = "<group>"; };
+		DAE6DF7821527DD9009C9CC3 /* ArticleTextWithCaptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTextWithCaptionCell.swift; sourceTree = "<group>"; };
+		DAE6DF7A21527E6E009C9CC3 /* ArticleTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTextCell.swift; sourceTree = "<group>"; };
+		DAE6DF7C21527F25009C9CC3 /* ArticleImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleImageCell.swift; sourceTree = "<group>"; };
+		DAE6DF7E21527FAF009C9CC3 /* ArticleImageWithCaptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleImageWithCaptionCell.swift; sourceTree = "<group>"; };
+		DAE6DF8021528EC3009C9CC3 /* ArticlesPreviewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesPreviewTableViewController.swift; sourceTree = "<group>"; };
+		DAE6DF822152DC33009C9CC3 /* ArticlesPreviewHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesPreviewHeaderView.swift; sourceTree = "<group>"; };
+		DAE6DF842152DFAB009C9CC3 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
 		DAEE5179214D857500449FEE /* UITapGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITapGestureRecognizer.swift; sourceTree = "<group>"; };
 		DAEE517B214FAAA100449FEE /* StoragePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoragePath.swift; sourceTree = "<group>"; };
 		DAEE517D214FAD9B00449FEE /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
@@ -189,6 +207,20 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		DA4E7323215121BA00CBA453 /* Articles */ = {
+			isa = PBXGroup;
+			children = (
+				DAE6DF8021528EC3009C9CC3 /* ArticlesPreviewTableViewController.swift */,
+				DAE6DF7C21527F25009C9CC3 /* ArticleImageCell.swift */,
+				DAE6DF7E21527FAF009C9CC3 /* ArticleImageWithCaptionCell.swift */,
+				DAE6DF7421527BB8009C9CC3 /* ArticleListCell.swift */,
+				DAE6DF7821527DD9009C9CC3 /* ArticleTextWithCaptionCell.swift */,
+				DAE6DF7A21527E6E009C9CC3 /* ArticleTextCell.swift */,
+				DAE6DF822152DC33009C9CC3 /* ArticlesPreviewHeaderView.swift */,
+			);
+			path = Articles;
+			sourceTree = "<group>";
+		};
 		DA5A553A21243B3100B7153E /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
@@ -226,6 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				DA167D0921342FF5001A9A84 /* Controllers */,
+				DA4E7323215121BA00CBA453 /* Articles */,
 				DA9ED5FC2133F51B00FB54FB /* Characteristics */,
 				DA9ED5F92133EA3000FB54FB /* Models */,
 				DAC124E12125E17100378DA1 /* Cabinet */,
@@ -250,6 +283,7 @@
 				DAB5CB1A21369A9F00B436C2 /* AboutArticlesModel.swift */,
 				DAC61EB72149299800FB78C6 /* Article.swift */,
 				DAC61EB921492A6000FB78C6 /* ArticleInside.swift */,
+				DAE6DF7621527C14009C9CC3 /* ArticleInsideUnwrapped.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -374,6 +408,7 @@
 				DAC61EEB214C215700FB78C6 /* QuerySnapshot.swift */,
 				DAEE5179214D857500449FEE /* UITapGestureRecognizer.swift */,
 				DAEE517D214FAD9B00449FEE /* Data.swift */,
+				DAE6DF842152DFAB009C9CC3 /* UITableView.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -532,6 +567,7 @@
 				DAC124F12125FDED00378DA1 /* AchievementsTableViewController.swift in Sources */,
 				DAC61EE6214C1F9100FB78C6 /* DocumentSnapshot.swift in Sources */,
 				DAB5CB192135BA3300B436C2 /* NotesModel.swift in Sources */,
+				DAE6DF7D21527F25009C9CC3 /* ArticleImageCell.swift in Sources */,
 				DAC61EBC21492AF500FB78C6 /* ArticleInsideType.swift in Sources */,
 				DA9ED6042133F92900FB54FB /* CharacteristicsCellLevel1.swift in Sources */,
 				DA5A553C21243B4D00B7153E /* CheckBoxButton.swift in Sources */,
@@ -545,14 +581,17 @@
 				DAC61EE2214C1AD500FB78C6 /* Result.swift in Sources */,
 				DAC61EEE214C255700FB78C6 /* AlertDialog.swift in Sources */,
 				DAC124E32125E18C00378DA1 /* CabinetTableViewController.swift in Sources */,
+				DAE6DF7B21527E6E009C9CC3 /* ArticleTextCell.swift in Sources */,
 				DAC61ECA214981C900FB78C6 /* NewCharacteristicArticleTableViewController.swift in Sources */,
 				DAC61EEC214C215700FB78C6 /* QuerySnapshot.swift in Sources */,
 				DAEE5182215025AE00449FEE /* LiteralConsts.swift in Sources */,
 				DAB5CB152135A5A000B436C2 /* AchievementsModel.swift in Sources */,
 				DAC61ECD21498AB300FB78C6 /* InsideCell.swift in Sources */,
 				DAC61ECF214A84D300FB78C6 /* NewCharacteristicsArticleHeaderView.swift in Sources */,
+				DAE6DF852152DFAB009C9CC3 /* UITableView.swift in Sources */,
 				DAC61EEA214C209B00FB78C6 /* Dictionary.swift in Sources */,
 				DAA97B042123396F005AF50F /* WelcomeTableCell.swift in Sources */,
+				DAE6DF7F21527FAF009C9CC3 /* ArticleImageWithCaptionCell.swift in Sources */,
 				DAC61ED8214BB69000FB78C6 /* ActivityIndicator.swift in Sources */,
 				DAC61EE8214C1FFF00FB78C6 /* JSONDecoder.swift in Sources */,
 				DAEE517C214FAAA100449FEE /* StoragePath.swift in Sources */,
@@ -568,21 +607,26 @@
 				DA68CD60212312D000AE8515 /* AppDelegate.swift in Sources */,
 				DADEAB2F21246A860042B564 /* WelcomeFootterXIB.swift in Sources */,
 				DAC61EBA21492A6000FB78C6 /* ArticleInside.swift in Sources */,
+				DAE6DF832152DC33009C9CC3 /* ArticlesPreviewHeaderView.swift in Sources */,
 				DA9ED5FE2133F53C00FB54FB /* CharacteristicsTableViewController.swift in Sources */,
 				DAC61EDE214BD6B700FB78C6 /* NewListInsideTableViewController.swift in Sources */,
 				DAA97B0621233DAF005AF50F /* DescriptionViewController.swift in Sources */,
 				DAB5CB1B21369A9F00B436C2 /* AboutArticlesModel.swift in Sources */,
 				DAEE5180214FD4D800449FEE /* ListElementsCell.swift in Sources */,
 				DAC124FB21260FA000378DA1 /* NotesTableViewController.swift in Sources */,
+				DAE6DF7521527BB8009C9CC3 /* ArticleListCell.swift in Sources */,
 				DAC0AE3421484A4B00FF9D82 /* SegueIdentifiers.swift in Sources */,
 				DAEE517E214FAD9B00449FEE /* Data.swift in Sources */,
 				DAC0AE3621484D1D00FF9D82 /* StorageController.swift in Sources */,
+				DAE6DF7921527DD9009C9CC3 /* ArticleTextWithCaptionCell.swift in Sources */,
 				DAC61EC82149604500FB78C6 /* CharacteristicsArticlesCell.swift in Sources */,
 				DA9ED60A2133FCE800FB54FB /* CharacteristicsCellLevel2.swift in Sources */,
 				DAEE5184215027FF00449FEE /* EditListInsideViewController.swift in Sources */,
+				DAE6DF7721527C14009C9CC3 /* ArticleInsideUnwrapped.swift in Sources */,
 				DAC124ED2125F90500378DA1 /* CompetenceCell.swift in Sources */,
 				DAA97B0221233715005AF50F /* WelcomeModel.swift in Sources */,
 				DAA97B00212336C0005AF50F /* WelcomeTableViewController.swift in Sources */,
+				DAE6DF8121528EC3009C9CC3 /* ArticlesPreviewTableViewController.swift in Sources */,
 				DAC61EC621495FC800FB78C6 /* CharacteristicsArticlesTableViewController.swift in Sources */,
 				DAC124EB2125F88900378DA1 /* CompetenceTableViewController.swift in Sources */,
 				DA9ED6002133F69400FB54FB /* CellIdentifiers.swift in Sources */,

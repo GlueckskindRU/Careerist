@@ -15,7 +15,7 @@ struct ArticleInside: Codable {
     let type: ArticleInsideType
     let caption: String?
     let text: String?
-    let imageURL: URL?
+    let imageURL: String?
     let imageName: String?
     var numericList: Bool?
     let listElements: [String]?
@@ -33,7 +33,7 @@ struct ArticleInside: Codable {
         case listElements
     }
     
-    init?(id: String, parentID: String, sequence: Int, type: Int, caption: String?, text: String?, imageURL: URL?, imageName: String?, numericList: Bool?, listElements: [String]?) {
+    init?(id: String, parentID: String, sequence: Int, type: Int, caption: String?, text: String?, imageURL: String?, imageName: String?, numericList: Bool?, listElements: [String]?) {
         self.id = id
         self.parentID = parentID
         self.sequence = sequence
@@ -49,7 +49,7 @@ struct ArticleInside: Codable {
         self.listElements = listElements
     }
     
-    init(id: String, parentID: String, sequence: Int, type: ArticleInsideType, caption: String?, text: String?, imageURL: URL?, imageName: String?, numericList: Bool?, listElements: [String]?) {
+    init(id: String, parentID: String, sequence: Int, type: ArticleInsideType, caption: String?, text: String?, imageURL: String?, imageName: String?, numericList: Bool?, listElements: [String]?) {
         self.id = id
         self.parentID = parentID
         self.sequence = sequence
@@ -72,7 +72,7 @@ struct ArticleInside: Codable {
         self.type = ArticleInsideType(rawValue: typeInt)!
         self.caption = try? values.decode(String.self, forKey: .caption)
         self.text = try? values.decode(String.self, forKey: .text)
-        self.imageURL = try? values.decode(URL.self, forKey: .imageURL)
+        self.imageURL = try? values.decode(String.self, forKey: .imageURL)
         self.imageName = try? values.decode(String.self, forKey: .imageName)
         self.numericList = try? values.decode(Bool.self, forKey: .numericList)
         self.listElements = try? values.decode([String].self, forKey: .listElements)

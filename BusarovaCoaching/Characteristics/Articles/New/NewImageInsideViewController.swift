@@ -48,14 +48,28 @@ class NewImageInsideViewController: UIViewController, ArticleInsideElementsProto
         
         self.captionTextField.text = articleInside?.caption
         
+        let activityIndicator = ActivityIndicator()
+        activityIndicator.start()
         guard
             let articleInside = articleInside,
-            let imageURL = articleInside.imageURL else {
+            let imageGSURL = articleInside.imageURL else {
             return
         }
         
-        imageView.backgroundColor = UIColor.white
-        imageView.kf.setImage(with: imageURL)
+        FirebaseController.shared.getStorageController().getDownloadURL(for: imageGSURL) {
+            (result: Result<URL>) in
+            
+            switch result {
+            case .success(let url):
+                self.imageView.backgroundColor = UIColor.white
+                self.imageView.kf.setImage(with: url)
+                activityIndicator.stop()
+            case .failure(let error):
+                activityIndicator.stop()
+                let alertDialog = AlertDialog(title: nil, message: "\(error.getError())")
+                alertDialog.showAlert(in: self, completion: nil)
+            }
+        }
     }
     
     override func viewDidLoad() {

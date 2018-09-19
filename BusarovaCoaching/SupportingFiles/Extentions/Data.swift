@@ -28,4 +28,24 @@ extension Data {
         
         return ext
     }
+    
+    var imageMetadata: String? {
+        let array = [UInt8](self)
+        let ext: String?
+        
+        switch (array[0]) {
+        case 0xFF:
+            ext = "image/jpeg"
+        case 0x89:
+            ext = "image/png"
+        case 0x47:
+            ext = "image/gif"
+        case 0x49, 0x4D:
+            ext = "image/tiff"
+        default:
+            ext = nil
+        }
+        
+        return ext
+    }
 }

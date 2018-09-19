@@ -16,4 +16,10 @@ enum CellIdentifiers: String {
     //articles inside
     case insideCell = "Element Inside Cell"
     case listElementCell = "List Element Cell"
+    //article preview
+    case articleTextCell = "Article Text Cell"
+    case articleTextWithCaptionCell = "Article Text With Caption Cell"
+    case articleImageCell = "Article Image Cell"
+    case articleImageWithCaptionCell = "Article Image With Caption Cell"
+    case articleListCell = "Article List Cell"
 }
