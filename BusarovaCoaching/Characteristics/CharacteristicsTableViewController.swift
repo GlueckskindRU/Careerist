@@ -36,6 +36,8 @@ class CharacteristicsTableViewController: UITableViewController {
         tapGestureRecognizer.numberOfTapsRequired = 1
         tableView.addGestureRecognizer(tapGestureRecognizer)
         tapGestureRecognizer.delegate = self
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

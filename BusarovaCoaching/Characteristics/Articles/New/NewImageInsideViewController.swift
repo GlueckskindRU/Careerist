@@ -48,13 +48,14 @@ class NewImageInsideViewController: UIViewController, ArticleInsideElementsProto
         
         self.captionTextField.text = articleInside?.caption
         
-        let activityIndicator = ActivityIndicator()
-        activityIndicator.start()
         guard
             let articleInside = articleInside,
             let imageGSURL = articleInside.imageURL else {
             return
         }
+        
+        let activityIndicator = ActivityIndicator()
+        activityIndicator.start()
         
         FirebaseController.shared.getStorageController().getDownloadURL(for: imageGSURL) {
             (result: Result<URL>) in
@@ -90,7 +91,7 @@ class NewImageInsideViewController: UIViewController, ArticleInsideElementsProto
         view.backgroundColor = UIColor.white
         navigationItem.title = "Изображение"
         
-        let saveBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveImage(sender:)))
+        let saveBarButtonItem = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(saveImage(sender:)))
         saveBarButtonItem.isEnabled = !isSaved
         navigationItem.rightBarButtonItem = saveBarButtonItem
         

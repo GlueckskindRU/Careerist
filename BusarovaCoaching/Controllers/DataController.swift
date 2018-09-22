@@ -132,6 +132,18 @@ class DataController {
         }
     }
     
+    func deleteData(with identifier: String, from table: DBTables, completion: @escaping (Result<Bool>) -> Void) {
+        db.collection(table.rawValue).document(identifier).delete() {
+            error in
+            
+            if let error = error {
+                completion(Result.failure(.otherError(error)))
+            } else {
+                completion(Result.success(true))
+            }
+        }
+    }
+    
 // MARK: - articles
     func fetchArticles<T: Codable>(from: DBTables, by parentID: String, completion: @escaping (Result<[T]>) -> Void) {
         db.collection(DBTables.articles.rawValue).whereField("parentType", isEqualTo: from.rawValue).whereField("parentID", isEqualTo: parentID).order(by: "sequence").getDocuments() {

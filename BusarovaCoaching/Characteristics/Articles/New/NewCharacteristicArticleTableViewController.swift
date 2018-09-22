@@ -20,12 +20,40 @@ protocol ArticleInsideElementsProtocol {
     func configure(with articleInside: ArticleInside?, as sequence: Int, delegate: ArticleSaveDelegateProtocol)
 }
 
+// MARK: - class definition
 class NewCharacteristicArticleTableViewController: UITableViewController {
     private var articleInsideElements: [ArticleInside] = []
     private var article: Article? = nil
     private var sequence: Int? = nil
     private var articleTitle = ""
     private var parentID: String?
+    private var deletedElements: Set<ArticleInside> = []
+    
+    lazy private var saveBarButtonItem: UIBarButtonItem = {
+        return UIBarButtonItem(title: "Сохранить", style: UIBarButtonItem.Style.plain, target: self, action: #selector(saveArticle(sender:)))
+    }()
+    
+    lazy private var previewBarButtonItem: UIBarButtonItem = {
+        return UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(previewArticle(sender:)))
+    }()
+    
+    lazy private var addBarButtonItem: UIBarButtonItem = {
+        return UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addElement(sender:)))
+    }()
+    
+    private var isSaved: Bool = true {
+        didSet {
+            if isSaved {
+                saveBarButtonItem.isEnabled = false
+            } else {
+                if self.isEditing {
+                    saveBarButtonItem.isEnabled = false
+                } else {
+                    saveBarButtonItem.isEnabled = true
+                }
+            }
+        }
+    }
     
     func configure(with article: Article?, as sequence: Int, parentID: String?) {
         self.article = article
@@ -56,14 +84,26 @@ class NewCharacteristicArticleTableViewController: UITableViewController {
                                                   height: 62
                                                     )
         
-        let previewBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(previewArticle(sender:)))
-        
         previewBarButtonItem.isEnabled = self.article != nil
+        saveBarButtonItem.isEnabled = !isSaved
         
-        let saveBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveArticle(sender:)))
-        let addBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addElement(sender:)))
+        editButtonItem.title = "Настроить"
+        navigationItem.rightBarButtonItems = [editButtonItem, addBarButtonItem, saveBarButtonItem, previewBarButtonItem]
         
-        navigationItem.rightBarButtonItems = [addBarButtonItem, saveBarButtonItem, previewBarButtonItem]
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: nil)
+    }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        
+        if editing {
+            editButtonItem.title = "Завершить"
+        } else {
+            editButtonItem.title = "Настроить"
+            if !isSaved {
+                saveBarButtonItem.isEnabled = true
+            }
+        }
     }
 }
 
@@ -132,6 +172,34 @@ extension NewCharacteristicArticleTableViewController {
         viewController.configure(with: elementToPass, as: indexPath.row, delegate: self)
         navigationController?.pushViewController(viewController as! UIViewController, animated: true)
     }
+    
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        guard !articleInsideElements.isEmpty else {
+            return
+        }
+            
+        let elementToMove = articleInsideElements[sourceIndexPath.row]
+        
+        articleInsideElements.remove(at: sourceIndexPath.row)
+        articleInsideElements.insert(elementToMove, at: destinationIndexPath.row)
+        reorderSequences()
+        isSaved = false
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            guard !articleInsideElements.isEmpty else {
+                return
+            }
+            
+            deletedElements.insert(articleInsideElements[indexPath.row])
+            
+            articleInsideElements.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            reorderSequences()
+            isSaved = false
+        }
+    }
 }
 
 //MARK: - UI creation and refreshing
@@ -144,6 +212,7 @@ extension NewCharacteristicArticleTableViewController {
         guard let article = self.article else {
             articleInsideElements = []
             tableView.tableFooterView = TableFooterView.shared.create(with: footerText, in: self.view, empty: true)
+            self.editButtonItem.isEnabled = !self.articleInsideElements.isEmpty
             actitivityIndicator.stop()
             return
         }
@@ -160,8 +229,8 @@ extension NewCharacteristicArticleTableViewController {
                 headerView.configure(with: article, as: self)
                 self.articleTitle = article.title
                 self.tableView.tableFooterView = TableFooterView.shared.create(with: footerText, in: self.view, empty: self.articleInsideElements.isEmpty)
+                self.editButtonItem.isEnabled = !self.articleInsideElements.isEmpty
             case .failure(let error):
-                print("\(error.getError())")
                 let alertDialog = AlertDialog(title: nil, message: error.getError())
                 alertDialog.showAlert(in: self, completion: nil)
             }
@@ -184,12 +253,11 @@ extension NewCharacteristicArticleTableViewController {
     
     @objc
     private func saveArticle(sender: UIBarButtonItem) {
-        saveArticle(completion: nil)
-    }
-    
-    @objc
-    private func editSequence(sender: UIBarButtonItem) {
-        print("edit sequence button was tapped")
+        deleteArtileInsides()
+        saveArticleInsides()
+        if tableView.isEditing {
+            tableView.setEditing(false, animated: true)
+        }
     }
     
     @objc
@@ -284,6 +352,37 @@ extension NewCharacteristicArticleTableViewController: ArticleSaveDelegateProtoc
             }
         }
     }
+}
+
+// MARK: - auxiliaries functions
+extension NewCharacteristicArticleTableViewController {
+    private func saveArticleInsides() {
+        guard !articleInsideElements.isEmpty else {
+            return
+        }
+        
+        saveArticle {
+            (article: Article) in
+            
+            let activityIndicator = ActivityIndicator()
+            for element in self.articleInsideElements {
+                activityIndicator.start()
+                
+                FirebaseController.shared.getDataController().saveData(element, with: element.id, in: DBTables.articlesInside) {
+                    result in
+                    
+                    activityIndicator.stop()
+                    switch result {
+                    case .success(_):
+                        self.isSaved = true
+                    case .failure(let error):
+                        let alertDialog = AlertDialog(title: nil, message: error.getError())
+                        alertDialog.showAlert(in: self, completion: nil)
+                    }
+                }
+            }
+        }
+    }
     
     private func saveArticle(completion: ((Article) -> Void)?) {
         let activityIndicator = ActivityIndicator()
@@ -332,6 +431,7 @@ extension NewCharacteristicArticleTableViewController: ArticleSaveDelegateProtoc
             case .success(let article):
                 self.article = article
                 guard let completion = completion else {
+                    self.isSaved = true
                     self.refreshUI()
                     return
                 }
@@ -341,6 +441,45 @@ extension NewCharacteristicArticleTableViewController: ArticleSaveDelegateProtoc
                 let alertDialog = AlertDialog(title: nil, message: error.getError())
                 alertDialog.showAlert(in: self, completion: nil)
             }
+        }
+    }
+    
+    private func deleteArtileInsides() {
+        guard !deletedElements.isEmpty else {
+            return
+        }
+        
+        let activityIndicator = ActivityIndicator()
+        for element in deletedElements {
+            activityIndicator.start()
+            FirebaseController.shared.getDataController().deleteData(with: element.id, from: DBTables.articlesInside) {
+                result in
+                
+                activityIndicator.stop()
+                switch result {
+                case .success(_):
+                    guard
+                        self.deletedElements.contains(element),
+                        let _ = self.deletedElements.remove(element) else {
+                            return
+                    }
+                    
+                    self.isSaved = true
+                case .failure(let error):
+                    let alertDialog = AlertDialog(title: nil, message: error.getError())
+                    alertDialog.showAlert(in: self, completion: nil)
+                }
+            }
+        }
+    }
+
+    private func reorderSequences() {
+        guard !articleInsideElements.isEmpty else {
+            return
+        }
+        
+        for index in articleInsideElements.indices {
+            articleInsideElements[index].sequence = index
         }
     }
 }

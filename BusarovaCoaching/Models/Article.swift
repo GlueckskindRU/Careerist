@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct Article: Codable {
+struct Article: Codable, Hashable {
     let id: String
     let title: String
     let parentID: String
     let parentType: String
-    let sequence: Int
+    var sequence: Int
     let grants: Int
     let authorID: String
     let rating: Int

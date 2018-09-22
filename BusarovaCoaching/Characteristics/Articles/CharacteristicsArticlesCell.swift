@@ -21,11 +21,16 @@ class CharacteristicsArticlesCell: UITableViewCell {
     }()
     
     func configure(with article: Article) {
-        articleTitle.text = article.title
+        if article.title == "" {
+            articleTitle.text = "Статья без названия!"
+        } else {
+            articleTitle.text = article.title
+        }
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.showsReorderControl = true
         
         setupLayout()
     }

@@ -20,21 +20,25 @@ class NewListInsideTableViewController: UITableViewController, ArticleInsideElem
     private var articleInsideID: String?
     private var editingModeEnabled: Bool = false
     
-    lazy private var setupBarButtonItem: UIBarButtonItem = {
-        return UIBarButtonItem(title: "Настроить", style: .plain, target: self, action: #selector(setupList(sender:)))
-    }()
-    
-    lazy private var editBarButtonItem: UIBarButtonItem = {
-        return UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editList(sender:)))
+    lazy private var editTextElementsBarButtonItem: UIBarButtonItem = {
+        return UIBarButtonItem(title: "Изменить", style: UIBarButtonItem.Style.plain, target: self, action: #selector(editList(sender:)))
     }()
     
     lazy private var saveBarButtonItem: UIBarButtonItem = {
-        return UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveList(sender:)))
+        return UIBarButtonItem(title: "Сохранить", style: UIBarButtonItem.Style.plain, target: self, action: #selector(saveList(sender:)))
     }()
     
     private var isSaved: Bool = true {
         didSet {
-            saveBarButtonItem.isEnabled = !isSaved
+            if isSaved {
+                saveBarButtonItem.isEnabled = false
+            } else {
+                if self.isEditing {
+                    saveBarButtonItem.isEnabled = false
+                } else {
+                    saveBarButtonItem.isEnabled = true
+                }
+            }
         }
     }
     
@@ -62,8 +66,27 @@ class NewListInsideTableViewController: UITableViewController, ArticleInsideElem
         
         tableView.register(ListElementsCell.self, forCellReuseIdentifier: CellIdentifiers.listElementCell.rawValue)
         
-        navigationItem.rightBarButtonItems = [editBarButtonItem, setupBarButtonItem, saveBarButtonItem]
+        editButtonItem.title = "Настроить"
+        
+        navigationItem.rightBarButtonItems = [editButtonItem, saveBarButtonItem, editTextElementsBarButtonItem]
         saveBarButtonItem.isEnabled = !isSaved
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: nil)
+        
+        refreshUI()
+    }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        
+        if editing {
+            editButtonItem.title = "Завершить"
+        } else {
+            editButtonItem.title = "Настроить"
+            if !isSaved {
+                saveBarButtonItem.isEnabled = true
+            }
+        }
     }
 }
 
@@ -130,6 +153,36 @@ extension NewListInsideTableViewController {
         
         return view
     }
+    
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        guard
+            let articleInside = articleInside,
+            var listElements = articleInside.listElements else {
+                return
+        }
+        
+        let elementToMove = listElements[sourceIndexPath.row]
+        
+        listElements.remove(at: sourceIndexPath.row)
+        listElements.insert(elementToMove, at: destinationIndexPath.row)
+        self.articleInside = create(as: nil, elements: listElements)
+        isSaved = false
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            guard
+                let articleInside = articleInside,
+                var listElements = articleInside.listElements else {
+                return
+            }
+            
+            listElements.remove(at: indexPath.row)
+            self.articleInside = create(as: nil, elements: listElements)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            isSaved = false
+        }
+    }
 }
 
 extension NewListInsideTableViewController {
@@ -141,12 +194,6 @@ extension NewListInsideTableViewController {
         articleInside = create(as: numericList, elements: nil)
         
         refreshUI()
-    }
-    
-    @objc
-    private func setupList(sender: UIBarButtonItem) {
-        editingModeEnabled = !tableView.isEditing
-        tableView.setEditing(editingModeEnabled, animated: true)
     }
     
     @objc
@@ -163,10 +210,18 @@ extension NewListInsideTableViewController {
     @objc
     private func saveList(sender: UIBarButtonItem) {
         saveList(withLeaving: true)
+        if tableView.isEditing {
+            tableView.setEditing(false, animated: true)
+        }
     }
     
     private func refreshUI() {
         tableView.reloadData()
+        if let listElements = articleInside?.listElements {
+            editButtonItem.isEnabled = !listElements.isEmpty
+        } else {
+            editButtonItem.isEnabled = false
+        }
     }
     
     private func create(as numeric: Bool?, elements: [String]?) -> ArticleInside? {

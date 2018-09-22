@@ -91,7 +91,7 @@
 		7D348FDAB9D9C3649F079096 /* Pods-BusarovaCoaching.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BusarovaCoaching.release.xcconfig"; path = "Pods/Target Support Files/Pods-BusarovaCoaching/Pods-BusarovaCoaching.release.xcconfig"; sourceTree = "<group>"; };
 		DA167D0A2134300F001A9A84 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		DA5A553B21243B4D00B7153E /* CheckBoxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxButton.swift; sourceTree = "<group>"; };
-		DA68CD5C212312D000AE8515 /* BusarovaCoaching.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BusarovaCoaching.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA68CD5C212312D000AE8515 /* ru.homber.Karierist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ru.homber.Karierist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA68CD5F212312D000AE8515 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA68CD64212312D000AE8515 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DA68CD66212312D000AE8515 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -249,7 +249,7 @@
 		DA68CD5D212312D000AE8515 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DA68CD5C212312D000AE8515 /* BusarovaCoaching.app */,
+				DA68CD5C212312D000AE8515 /* ru.homber.Karierist.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -445,7 +445,7 @@
 			);
 			name = BusarovaCoaching;
 			productName = BusarovaCoaching;
-			productReference = DA68CD5C212312D000AE8515 /* BusarovaCoaching.app */;
+			productReference = DA68CD5C212312D000AE8515 /* ru.homber.Karierist.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -783,8 +783,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ru.homber.BusarovaCoaching;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = ru.homber.Karierist;
+				PRODUCT_NAME = ru.homber.Karierist;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -803,8 +803,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ru.homber.BusarovaCoaching;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = ru.homber.Karierist;
+				PRODUCT_NAME = ru.homber.Karierist;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

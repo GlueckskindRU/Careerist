@@ -61,7 +61,7 @@ class NewTextInsideViewController: UIViewController, ArticleInsideElementsProtoc
         view.backgroundColor = UIColor.white
         navigationItem.title = "Абзац текста"
         
-        let saveBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveText(sender:)))
+        let saveBarButtonItem = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(saveText(sender:)))
         saveBarButtonItem.isEnabled = !isSaved
         navigationItem.rightBarButtonItem = saveBarButtonItem
         

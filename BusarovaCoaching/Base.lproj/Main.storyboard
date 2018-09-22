@@ -81,13 +81,13 @@
         <!--Cabinet Table View Controller-->
         <scene sceneID="oZ9-ON-WbR">
             <objects>
-                <tableViewController id="cZN-zB-nME" customClass="CabinetTableViewController" customModule="BusarovaCoaching" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="cZN-zB-nME" customClass="CabinetTableViewController" customModule="ru_homber_Karierist" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Xgr-5Z-a2b">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cabinet Cell" id="koj-ze-Eqk" customClass="CabinetCell" customModule="BusarovaCoaching" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cabinet Cell" id="koj-ze-Eqk" customClass="CabinetCell" customModule="ru_homber_Karierist" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="koj-ze-Eqk" id="9Vs-IG-ZmE">
@@ -113,13 +113,13 @@
         <!--Achievements Table View Controller-->
         <scene sceneID="zft-7O-COg">
             <objects>
-                <tableViewController id="mSb-T2-0i2" customClass="AchievementsTableViewController" customModule="BusarovaCoaching" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="mSb-T2-0i2" customClass="AchievementsTableViewController" customModule="ru_homber_Karierist" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="43V-ac-MPG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Achievement Cell" id="ftb-ab-htB" customClass="AchivementsCell" customModule="BusarovaCoaching" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Achievement Cell" id="ftb-ab-htB" customClass="AchivementsCell" customModule="ru_homber_Karierist" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ftb-ab-htB" id="0e7-in-9Oa">
@@ -141,13 +141,13 @@
         <!--Competence Table View Controller-->
         <scene sceneID="Fte-IO-oQH">
             <objects>
-                <tableViewController id="onJ-Q5-Xew" customClass="CompetenceTableViewController" customModule="BusarovaCoaching" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="onJ-Q5-Xew" customClass="CompetenceTableViewController" customModule="ru_homber_Karierist" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Qag-uU-5a8">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Competence Cell" id="1pe-GE-YB8" customClass="CompetenceCell" customModule="BusarovaCoaching" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Competence Cell" id="1pe-GE-YB8" customClass="CompetenceCell" customModule="ru_homber_Karierist" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1pe-GE-YB8" id="y8f-t7-eF7">
@@ -169,13 +169,13 @@
         <!--Development Table View Controller-->
         <scene sceneID="O6M-Ig-nTZ">
             <objects>
-                <tableViewController id="dR5-Bs-tAk" customClass="DevelopmentTableViewController" customModule="BusarovaCoaching" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="dR5-Bs-tAk" customClass="DevelopmentTableViewController" customModule="ru_homber_Karierist" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="aeK-eq-lLe">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Development Cell" id="6ji-uv-rpN" customClass="DevelopmentCell" customModule="BusarovaCoaching" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Development Cell" id="6ji-uv-rpN" customClass="DevelopmentCell" customModule="ru_homber_Karierist" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6ji-uv-rpN" id="koC-6s-9JQ">
@@ -197,13 +197,13 @@
         <!--Characteristics Articles Table View Controller-->
         <scene sceneID="yrX-zb-igD">
             <objects>
-                <tableViewController id="TIe-jx-Isi" customClass="CharacteristicsArticlesTableViewController" customModule="BusarovaCoaching" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="TIe-jx-Isi" customClass="CharacteristicsArticlesTableViewController" customModule="ru_homber_Karierist" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="1JX-bn-uXU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Characteristics Article Cell" id="5rl-Dw-4Gt" customClass="CharacteristicsArticlesCell" customModule="BusarovaCoaching" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Characteristics Article Cell" id="5rl-Dw-4Gt" customClass="CharacteristicsArticlesCell" customModule="ru_homber_Karierist" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5rl-Dw-4Gt" id="FVU-Ga-7Hy">
@@ -225,13 +225,13 @@
         <!--Notes Table View Controller-->
         <scene sceneID="euS-Zb-oYh">
             <objects>
-                <tableViewController id="XE4-bi-5xq" customClass="NotesTableViewController" customModule="BusarovaCoaching" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="XE4-bi-5xq" customClass="NotesTableViewController" customModule="ru_homber_Karierist" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="n0F-q8-DDS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Notes Cell" id="Hwf-yn-GfN" customClass="NotesCell" customModule="BusarovaCoaching" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Notes Cell" id="Hwf-yn-GfN" customClass="NotesCell" customModule="ru_homber_Karierist" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hwf-yn-GfN" id="FNr-U5-Fho">
@@ -253,7 +253,7 @@
         <!--Detailed Note View Controller-->
         <scene sceneID="tSF-aX-4pY">
             <objects>
-                <viewController id="zFf-xY-WHo" customClass="DetailedNoteViewController" customModule="BusarovaCoaching" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="zFf-xY-WHo" customClass="DetailedNoteViewController" customModule="ru_homber_Karierist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="N7b-vB-H8j">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -285,13 +285,13 @@
         <!--Characteristics Table View Controller-->
         <scene sceneID="lwg-uC-BBe">
             <objects>
-                <tableViewController id="p6o-Gr-YfE" customClass="CharacteristicsTableViewController" customModule="BusarovaCoaching" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="p6o-Gr-YfE" customClass="CharacteristicsTableViewController" customModule="ru_homber_Karierist" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="cZd-o8-1Lh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Characteristic Cell Level 0" id="rDr-Xw-klW" customClass="CharacteristicsCellLevel0" customModule="BusarovaCoaching" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Characteristic Cell Level 0" id="rDr-Xw-klW" customClass="CharacteristicsCellLevel0" customModule="ru_homber_Karierist" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rDr-Xw-klW" id="53h-ve-83P">
@@ -302,7 +302,7 @@
                                     <segue destination="TIe-jx-Isi" kind="show" identifier="Characteristics Article" trigger="accessoryAction" id="2is-vn-J89"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Characteristic Cell Level 1" id="asE-GJ-o9i" customClass="CharacteristicsCellLevel1" customModule="BusarovaCoaching" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Characteristic Cell Level 1" id="asE-GJ-o9i" customClass="CharacteristicsCellLevel1" customModule="ru_homber_Karierist" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="72" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="asE-GJ-o9i" id="PAl-Ek-ky6">
@@ -310,7 +310,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Characteristic Cell Level 2" id="gke-tS-YaK" customClass="CharacteristicsCellLevel2" customModule="BusarovaCoaching" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Characteristic Cell Level 2" id="gke-tS-YaK" customClass="CharacteristicsCellLevel2" customModule="ru_homber_Karierist" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="116" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gke-tS-YaK" id="2kM-A4-o7g">
@@ -333,7 +333,7 @@
         <!--Welcome Table View Controller-->
         <scene sceneID="GFx-MX-fK4">
             <objects>
-                <tableViewController id="uWA-PT-RCR" customClass="WelcomeTableViewController" customModule="BusarovaCoaching" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="uWA-PT-RCR" customClass="WelcomeTableViewController" customModule="ru_homber_Karierist" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="13t-0x-u5I">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -358,7 +358,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MenuItem Cell" id="SJ9-Jj-fK1" customClass="WelcomeTableCell" customModule="BusarovaCoaching" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MenuItem Cell" id="SJ9-Jj-fK1" customClass="WelcomeTableCell" customModule="ru_homber_Karierist" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="170" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SJ9-Jj-fK1" id="dUU-aU-HFk">
@@ -384,7 +384,7 @@
         <!--Description View Controller-->
         <scene sceneID="kJP-Ip-1zR">
             <objects>
-                <viewController id="aLg-NB-Ihv" customClass="DescriptionViewController" customModule="BusarovaCoaching" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="aLg-NB-Ihv" customClass="DescriptionViewController" customModule="ru_homber_Karierist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Iqt-xO-mb0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

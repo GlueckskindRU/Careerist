@@ -38,7 +38,7 @@ class EditListInsideViewController: UIViewController {
         
         view.backgroundColor = UIColor.white
         
-        let saveBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveList(sender:)))
+        let saveBarButtonItem = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(saveList(sender:)))
         navigationItem.rightBarButtonItem = saveBarButtonItem
         
         setupLayout()

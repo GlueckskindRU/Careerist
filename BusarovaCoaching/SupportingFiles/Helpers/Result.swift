@@ -12,3 +12,36 @@ enum Result<T> {
     case success(T)
     case failure(AppError)
 }
+
+extension Result {
+    var isSuccess: Bool {
+        switch self {
+        case .success:
+            return true
+        case .failure:
+            return false
+        }
+    }
+    
+    var isFailure: Bool {
+        return !isSuccess
+    }
+    
+    var value: T? {
+        switch self {
+        case .success(let value):
+            return value
+        case .failure:
+            return nil
+        }
+    }
+    
+    var error: AppError? {
+        switch self {
+        case .failure(let error):
+            return error
+        case .success:
+            return nil
+        }
+    }
+}

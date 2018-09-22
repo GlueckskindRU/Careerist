@@ -8,17 +8,17 @@
 
 import Foundation
 
-struct ArticleInside: Codable {
+struct ArticleInside: Codable, Hashable {
     let id: String
     let parentID: String
-    let sequence: Int
+    var sequence: Int
     let type: ArticleInsideType
     let caption: String?
     let text: String?
     let imageURL: String?
     let imageName: String?
     var numericList: Bool?
-    let listElements: [String]?
+    var listElements: [String]?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -90,5 +90,20 @@ struct ArticleInside: Codable {
         try container.encode(imageName, forKey: .imageName)
         try container.encode(numericList, forKey: .numericList)
         try container.encode(listElements, forKey: .listElements)
+    }
+}
+
+extension ArticleInside: Equatable {
+    static func == (lhs: ArticleInside, rhs: ArticleInside) -> Bool {
+        return  lhs.id == rhs.id &&
+                lhs.parentID == rhs.parentID &&
+                lhs.sequence == rhs.sequence &&
+                lhs.type == rhs.type &&
+                lhs.caption == rhs.caption &&
+                lhs.text == rhs.text &&
+                lhs.imageURL == rhs.imageURL &&
+                lhs.imageName == rhs.imageName &&
+                lhs.numericList == rhs.numericList &&
+                lhs.listElements == rhs.listElements
     }
 }
