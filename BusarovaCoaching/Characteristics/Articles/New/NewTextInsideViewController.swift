@@ -97,11 +97,13 @@ extension NewTextInsideViewController {
             articleInsideID = articleInside!.id
         }
         
+        let caption = captionTextField.text!.isEmpty ? nil : captionTextField.text!
+        
         let elementToSave = ArticleInside(id: articleInside?.id ?? "",
                                           parentID: articleInside?.parentID ?? "",
                                           sequence: sequence,
                                           type: .text,
-                                          caption: captionTextField.text,
+                                          caption: caption,
                                           text: textView.text,
                                           imageURL: nil,
                                           imageName: nil,

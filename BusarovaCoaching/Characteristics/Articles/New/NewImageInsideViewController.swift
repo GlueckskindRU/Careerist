@@ -137,11 +137,13 @@ extension NewImageInsideViewController {
             
             switch result {
             case .success(let url):
+                let caption = self.captionTextField.text!.isEmpty ? nil : self.captionTextField.text!
+                
                 let elementToSave = ArticleInside(id: self.articleInside?.id ?? "",
                                                   parentID: self.articleInside?.parentID ?? "",
                                                   sequence: sequence,
                                                   type: ArticleInsideType.image,
-                                                  caption: self.captionTextField.text,
+                                                  caption: caption,
                                                   text: nil,
                                                   imageURL: url,
                                                   imageName: imageName,
