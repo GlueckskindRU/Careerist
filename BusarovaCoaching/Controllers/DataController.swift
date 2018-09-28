@@ -18,8 +18,8 @@ class DataController {
     }
     
 // MARK: - Characteristics
-    func fetchInitialCharacteristics<T: Codable>(completion: @escaping (Result<[T]>) -> Void) {
-        db.collection(DBTables.characteristics.rawValue).whereField("level", isEqualTo: 0).order(by: "name").getDocuments() {
+    func fetchCharacteristics<T: Codable>(of level: CharacteristicsLevel, completion: @escaping (Result<[T]>) -> Void) {
+        db.collection(DBTables.characteristics.rawValue).whereField("level", isEqualTo: level.rawValue).order(by: "name").getDocuments() {
             (snap, error) in
             guard let snap = snap, !snap.isEmpty else {
                 if let error = error {

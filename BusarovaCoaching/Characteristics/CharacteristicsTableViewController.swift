@@ -20,7 +20,7 @@ class CharacteristicsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchLevelZero()
+        fetchGroupsOfCompetentions()
         tableView.dataSource = self
         tableView.delegate = self
         tableView.allowsSelection = false
@@ -61,11 +61,11 @@ extension CharacteristicsTableViewController {
         let cellIdentifier: String
         
         switch characteristicToPass.level {
-        case 2:
+        case .indicatorsOfCompetentions:
             cellIdentifier = CellIdentifiers.characteristicCellLevel2.rawValue
-        case 1:
+        case .competentions:
             cellIdentifier = CellIdentifiers.characteristicCellLevel1.rawValue
-        default:
+        case .groupOfCompetentions:
             cellIdentifier = CellIdentifiers.characteristicCellLevel0.rawValue
         }
         
@@ -88,17 +88,17 @@ extension CharacteristicsTableViewController: UIGestureRecognizerDelegate {
             let index = indexPath.row
             
             if characterictic.collapsed {
-                if characterictic.level < 2 {
+                if characterictic.level != CharacteristicsLevel.indicatorsOfCompetentions {
                     expandMenu(with: characterictic.id, at: index)
                 } else {
                     self.indexPath = indexPath
                     performSegue(withIdentifier: SegueIdentifiers.characteristicsArticle.rawValue, sender: self)
                 }
             } else {
-                if characterictic.level == 1 {
+                if characterictic.level == .competentions {
                     collapseMenu(with: characterictic.id, at: index)
                 }
-                if characterictic.level == 0 {
+                if characterictic.level == .groupOfCompetentions {
                     let levelOneItems = characteristics.filter { $0.parentID == characterictic.id }
                     
                     for item in levelOneItems {
@@ -115,10 +115,10 @@ extension CharacteristicsTableViewController: UIGestureRecognizerDelegate {
 }
 
 extension CharacteristicsTableViewController {
-    private func fetchLevelZero() {
+    private func fetchGroupsOfCompetentions() {
         let actitivityIndicator = ActivityIndicator()
         actitivityIndicator.start()
-        FirebaseController.shared.getDataController().fetchInitialCharacteristics() {
+        FirebaseController.shared.getDataController().fetchCharacteristics(of: CharacteristicsLevel.groupOfCompetentions) {
             (result: Result<[CharacteristicsModel]>) in
             
             actitivityIndicator.stop()

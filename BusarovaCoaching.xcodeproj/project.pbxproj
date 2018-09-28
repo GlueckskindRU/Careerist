@@ -25,6 +25,7 @@
 		DAA97B0221233715005AF50F /* WelcomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA97B0121233715005AF50F /* WelcomeModel.swift */; };
 		DAA97B042123396F005AF50F /* WelcomeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA97B032123396F005AF50F /* WelcomeTableCell.swift */; };
 		DAA97B0621233DAF005AF50F /* DescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA97B0521233DAF005AF50F /* DescriptionViewController.swift */; };
+		DAA9D748215EA02D009697E8 /* CharacteristicsLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA9D747215EA02D009697E8 /* CharacteristicsLevel.swift */; };
 		DAACF04821345C45006FA934 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DAACF04721345C45006FA934 /* GoogleService-Info.plist */; };
 		DAB5CB152135A5A000B436C2 /* AchievementsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB5CB142135A5A000B436C2 /* AchievementsModel.swift */; };
 		DAB5CB192135BA3300B436C2 /* NotesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB5CB182135BA3300B436C2 /* NotesModel.swift */; };
@@ -108,6 +109,7 @@
 		DAA97B0121233715005AF50F /* WelcomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeModel.swift; sourceTree = "<group>"; };
 		DAA97B032123396F005AF50F /* WelcomeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeTableCell.swift; sourceTree = "<group>"; };
 		DAA97B0521233DAF005AF50F /* DescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionViewController.swift; sourceTree = "<group>"; };
+		DAA9D747215EA02D009697E8 /* CharacteristicsLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicsLevel.swift; sourceTree = "<group>"; };
 		DAACF04721345C45006FA934 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DAB5CB142135A5A000B436C2 /* AchievementsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsModel.swift; sourceTree = "<group>"; };
 		DAB5CB182135BA3300B436C2 /* NotesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesModel.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 				DAC0AE3321484A4B00FF9D82 /* SegueIdentifiers.swift */,
 				DAEE517B214FAAA100449FEE /* StoragePath.swift */,
 				DAEE5181215025AE00449FEE /* LiteralConsts.swift */,
+				DAA9D747215EA02D009697E8 /* CharacteristicsLevel.swift */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -596,6 +599,7 @@
 				DAC61EE8214C1FFF00FB78C6 /* JSONDecoder.swift in Sources */,
 				DAEE517C214FAAA100449FEE /* StoragePath.swift in Sources */,
 				DA167D0B2134300F001A9A84 /* DataController.swift in Sources */,
+				DAA9D748215EA02D009697E8 /* CharacteristicsLevel.swift in Sources */,
 				DAC61EB82149299800FB78C6 /* Article.swift in Sources */,
 				DAC124E92125ECC500378DA1 /* CabinetSectionView.swift in Sources */,
 				DAC0AE38214850BC00FF9D82 /* FirebaseController.swift in Sources */,
