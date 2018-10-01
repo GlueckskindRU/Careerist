@@ -26,6 +26,7 @@
 		DAA97B042123396F005AF50F /* WelcomeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA97B032123396F005AF50F /* WelcomeTableCell.swift */; };
 		DAA97B0621233DAF005AF50F /* DescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA97B0521233DAF005AF50F /* DescriptionViewController.swift */; };
 		DAA9D748215EA02D009697E8 /* CharacteristicsLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA9D747215EA02D009697E8 /* CharacteristicsLevel.swift */; };
+		DAA9D74B21621DA3009697E8 /* ArticleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA9D74A21621DA3009697E8 /* ArticleType.swift */; };
 		DAACF04821345C45006FA934 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DAACF04721345C45006FA934 /* GoogleService-Info.plist */; };
 		DAB5CB152135A5A000B436C2 /* AchievementsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB5CB142135A5A000B436C2 /* AchievementsModel.swift */; };
 		DAB5CB192135BA3300B436C2 /* NotesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB5CB182135BA3300B436C2 /* NotesModel.swift */; };
@@ -110,6 +111,7 @@
 		DAA97B032123396F005AF50F /* WelcomeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeTableCell.swift; sourceTree = "<group>"; };
 		DAA97B0521233DAF005AF50F /* DescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionViewController.swift; sourceTree = "<group>"; };
 		DAA9D747215EA02D009697E8 /* CharacteristicsLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicsLevel.swift; sourceTree = "<group>"; };
+		DAA9D74A21621DA3009697E8 /* ArticleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleType.swift; sourceTree = "<group>"; };
 		DAACF04721345C45006FA934 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DAB5CB142135A5A000B436C2 /* AchievementsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsModel.swift; sourceTree = "<group>"; };
 		DAB5CB182135BA3300B436C2 /* NotesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesModel.swift; sourceTree = "<group>"; };
@@ -226,15 +228,10 @@
 		DA5A553A21243B3100B7153E /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				DAA9D74921621D83009697E8 /* Identifiers */,
 				DAC61EEF214C3AC100FB78C6 /* Helpers */,
 				DAC61ED2214A953000FB78C6 /* Extentions */,
 				DAC61EBD21492B2000FB78C6 /* Auxiliary */,
-				DA9ED5FF2133F69400FB54FB /* CellIdentifiers.swift */,
-				DA9ED60B2134176000FB54FB /* DBTables.swift */,
-				DAC0AE3321484A4B00FF9D82 /* SegueIdentifiers.swift */,
-				DAEE517B214FAAA100449FEE /* StoragePath.swift */,
-				DAEE5181215025AE00449FEE /* LiteralConsts.swift */,
-				DAA9D747215EA02D009697E8 /* CharacteristicsLevel.swift */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -316,6 +313,17 @@
 			path = About;
 			sourceTree = "<group>";
 		};
+		DAA9D74921621D83009697E8 /* Identifiers */ = {
+			isa = PBXGroup;
+			children = (
+				DA9ED5FF2133F69400FB54FB /* CellIdentifiers.swift */,
+				DA9ED60B2134176000FB54FB /* DBTables.swift */,
+				DAC0AE3321484A4B00FF9D82 /* SegueIdentifiers.swift */,
+				DAEE517B214FAAA100449FEE /* StoragePath.swift */,
+			);
+			path = Identifiers;
+			sourceTree = "<group>";
+		};
 		DAC124E12125E17100378DA1 /* Cabinet */ = {
 			isa = PBXGroup;
 			children = (
@@ -371,7 +379,10 @@
 		DAC61EBD21492B2000FB78C6 /* Auxiliary */ = {
 			isa = PBXGroup;
 			children = (
+				DAEE5181215025AE00449FEE /* LiteralConsts.swift */,
+				DAA9D747215EA02D009697E8 /* CharacteristicsLevel.swift */,
 				DAC61EBB21492AF500FB78C6 /* ArticleInsideType.swift */,
+				DAA9D74A21621DA3009697E8 /* ArticleType.swift */,
 			);
 			path = Auxiliary;
 			sourceTree = "<group>";
@@ -574,6 +585,7 @@
 				DAC61EBC21492AF500FB78C6 /* ArticleInsideType.swift in Sources */,
 				DA9ED6042133F92900FB54FB /* CharacteristicsCellLevel1.swift in Sources */,
 				DA5A553C21243B4D00B7153E /* CheckBoxButton.swift in Sources */,
+				DAA9D74B21621DA3009697E8 /* ArticleType.swift in Sources */,
 				DA9ED60C2134176000FB54FB /* DBTables.swift in Sources */,
 				DAC61EE4214C1B4600FB78C6 /* AppError.swift in Sources */,
 				DAC61ED6214A969700FB78C6 /* TableFooterView.swift in Sources */,

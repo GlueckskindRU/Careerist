@@ -407,7 +407,8 @@ extension NewCharacteristicArticleTableViewController {
                                     grants: 0, // To be amended
                                     authorID: "1", // To be amended
                                     rating: 0,
-                                    verified: false
+                                    verified: false,
+                                    type: ArticleType.article
                                     )
         } else {
             id = article!.id
@@ -419,7 +420,8 @@ extension NewCharacteristicArticleTableViewController {
                                     grants: article!.grants,
                                     authorID: article!.authorID,
                                     rating: article!.rating,
-                                    verified: article!.verified
+                                    verified: article!.verified,
+                                    type: ArticleType.article
                                     )
         }
         
