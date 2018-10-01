@@ -63,7 +63,7 @@ extension CharacteristicsTableViewController {
         switch characteristicToPass.level {
         case .indicatorsOfCompetentions:
             cellIdentifier = CellIdentifiers.characteristicCellLevel2.rawValue
-        case .competentions:
+        case .competences:
             cellIdentifier = CellIdentifiers.characteristicCellLevel1.rawValue
         case .groupOfCompetentions:
             cellIdentifier = CellIdentifiers.characteristicCellLevel0.rawValue
@@ -95,7 +95,7 @@ extension CharacteristicsTableViewController: UIGestureRecognizerDelegate {
                     performSegue(withIdentifier: SegueIdentifiers.characteristicsArticle.rawValue, sender: self)
                 }
             } else {
-                if characterictic.level == .competentions {
+                if characterictic.level == .competences {
                     collapseMenu(with: characterictic.id, at: index)
                 }
                 if characterictic.level == .groupOfCompetentions {

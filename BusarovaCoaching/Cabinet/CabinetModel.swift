@@ -29,11 +29,11 @@ struct CabinetModel {
             CabinetModel(level: .zero, name: "Мои достижения", hasChildern: false),
             CabinetModel(level: .zero, name: "График развития", hasChildern: false),
             CabinetModel(level: .zero, name: "Мои компетенции", hasChildern: true),
-            CabinetModel(level: .one, name: "Компетенция 1", hasChildern: false),
-            CabinetModel(level: .one, name: "Компетенция 2", hasChildern: false),
-            CabinetModel(level: .one, name: "Компетенция 3", hasChildern: false),
-            CabinetModel(level: .one, name: "Компетенция 4", hasChildern: false),
-            CabinetModel(level: .one, name: "Компетенция 5", hasChildern: false),
+//            CabinetModel(level: .one, name: "Компетенция 1", hasChildern: false),
+//            CabinetModel(level: .one, name: "Компетенция 2", hasChildern: false),
+//            CabinetModel(level: .one, name: "Компетенция 3", hasChildern: false),
+//            CabinetModel(level: .one, name: "Компетенция 4", hasChildern: false),
+//            CabinetModel(level: .one, name: "Компетенция 5", hasChildern: false),
             CabinetModel(level: .zero, name: "Мои записи", hasChildern: false)
         ]
         

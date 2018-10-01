@@ -10,6 +10,6 @@ import Foundation
 
 enum CharacteristicsLevel: Int {
     case groupOfCompetentions = 0
-    case competentions = 1
+    case competences = 1
     case indicatorsOfCompetentions = 2
 }

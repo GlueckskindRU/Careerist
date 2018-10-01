@@ -14,18 +14,29 @@ class CabinetCell: UITableViewCell {
         
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.thin)
+        label.numberOfLines = 0
         
         return label
     }()
     
     func configure(with menuCaption: String) {
         self.menuCaption.text = menuCaption
-        
-        contentView.addSubview(self.menuCaption)
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        setupLayout()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        setupLayout()
+    }
+    
+    private func setupLayout() {
+        contentView.addSubview(self.menuCaption)
         
         NSLayoutConstraint.activate([
             menuCaption.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),

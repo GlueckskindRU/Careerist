@@ -10,14 +10,14 @@ import UIKit
 
 class CabinetTableViewController: UITableViewController {
     private var sectionsItems: [CabinetModel] = []
-    private var rowItems: [CabinetModel] = []
+    private var rowItems: [CharacteristicsModel] = []
     private var initialData: [CabinetModel] = []
     
     override func viewDidLoad() {
-        initialData = CabinetModel.fetchInitialData()
+        refreshUI()
         
-        sectionsItems = initialData.filter { $0.level == .zero }
-        rowItems = initialData.filter { $0.level == .one }
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 44
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -38,6 +38,7 @@ class CabinetTableViewController: UITableViewController {
     }
 }
 
+// MARK: - TableView DataSource
 extension CabinetTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return sectionsItems.count
@@ -66,6 +67,7 @@ extension CabinetTableViewController {
     }
 }
 
+// MARK: - TableView Delegate
 extension CabinetTableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = CabinetSectionView()
@@ -73,12 +75,9 @@ extension CabinetTableViewController {
         
         return view
     }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 30
-    }
 }
 
+// MARK: - CabinetSection Delegate Protocol
 extension CabinetTableViewController: CabinetSectionDelegateProtocol {
     func pushViewController(with title: String) {
         let activeSection = sectionsItems.first { $0.name == title }
@@ -100,6 +99,25 @@ extension CabinetTableViewController: CabinetSectionDelegateProtocol {
         
         navigationController?.pushViewController(viewController, animated: true)
     }
-    
-    
+}
+
+extension CabinetTableViewController {
+    private func refreshUI() {
+        initialData = CabinetModel.fetchInitialData()
+        
+        sectionsItems = initialData.filter { $0.level == .zero }
+        
+        FirebaseController.shared.getDataController().fetchCharacteristics(of: CharacteristicsLevel.competences) {
+            (result: Result<[CharacteristicsModel]>) in
+            
+            switch result {
+            case .success(let competences):
+                self.rowItems = competences
+                self.tableView.reloadData()
+            case .failure(let error):
+                let alertDialog = AlertDialog(title: nil, message: error.getError())
+                alertDialog.showAlert(in: self, completion: nil)
+            }
+        }
+    }
 }
