@@ -10,4 +10,5 @@ import Foundation
 
 enum LiteralConsts: String {
     case nonNumericListBullet = "•"
+    case dots = "…"
 }

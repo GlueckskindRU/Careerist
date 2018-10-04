@@ -29,6 +29,7 @@ class ArticlesPreviewTableViewController: UITableViewController {
         tableView.register(ArticleImageCell.self, forCellReuseIdentifier: CellIdentifiers.articleImageCell.rawValue)
         tableView.register(ArticleImageWithCaptionCell.self, forCellReuseIdentifier: CellIdentifiers.articleImageWithCaptionCell.rawValue)
         tableView.register(ArticleListCell.self, forCellReuseIdentifier: CellIdentifiers.articleListCell.rawValue)
+        tableView.register(ArticleListWithCaptionCell.self, forCellReuseIdentifier: CellIdentifiers.articleListWithCaptionCell.rawValue)
         
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
@@ -70,9 +71,15 @@ extension ArticlesPreviewTableViewController {
                 cell = originalCell as UITableViewCell
             }
         case .list:
-            let originalCell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.articleListCell.rawValue, for: indexPath) as! ArticleListCell
-            originalCell.configure(with: elementToPass.listElements!)
-            cell = originalCell as UITableViewCell
+            if elementToPass.caption == nil {
+                let originalCell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.articleListCell.rawValue, for: indexPath) as! ArticleListCell
+                originalCell.configure(with: elementToPass.listElements!)
+                cell = originalCell as UITableViewCell
+            } else {
+                let originalCell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.articleListWithCaptionCell.rawValue, for: indexPath) as! ArticleListWithCaptionCell
+                originalCell.configure(with: elementToPass.caption!, listText: elementToPass.listElements!)
+                cell = originalCell as UITableViewCell
+            }
         case .text:
             if elementToPass.caption == nil {
                 let originalCell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.articleTextCell.rawValue, for: indexPath) as! ArticleTextCell
@@ -83,6 +90,9 @@ extension ArticlesPreviewTableViewController {
                 originalCell.configure(with: elementToPass.caption!, text: elementToPass.text!)
                 cell = originalCell as UITableViewCell
             }
+        case .testQuestion:
+            //should never been happend
+            cell = UITableViewCell()
         }
         
         return cell
@@ -99,7 +109,7 @@ extension ArticlesPreviewTableViewController {
         let activityIndicator = ActivityIndicator()
         activityIndicator.start()
         
-        FirebaseController.shared.getDataController().fetchArticle(with: article.id) {
+        FirebaseController.shared.getDataController().fetchArticle(with: article.id, forPreview: true) {
             (result: Result<[ArticleInside]>) in
             
             activityIndicator.stop()
@@ -112,15 +122,15 @@ extension ArticlesPreviewTableViewController {
                                                             listElements: nil
                                                             )
                 self.articlesElements = Array(repeating: defaultElement, count: articleInsideArray.count)
-                for element in articleInsideArray {
-                    switch element.type {
+                for index in articleInsideArray.indices {
+                    switch articleInsideArray[index].type {
                     case .image:
-                        self.unwrapImage(element) {
+                        self.unwrapImage(articleInsideArray[index]) {
                             (result: Result<ArticleInsideUnwrapped>) in
                             
                             switch result {
                             case .success(let imageElementUnwrapped):
-                                self.articlesElements[element.sequence] = imageElementUnwrapped
+                                self.articlesElements[index] = imageElementUnwrapped
                                 self.tableView.reloadData()
                             case .failure(let error):
                                 let alertDialog = AlertDialog(title: nil, message: error.getError())
@@ -128,13 +138,15 @@ extension ArticlesPreviewTableViewController {
                             }
                         }
                     case .list:
-                        if let elementUnwrapped = self.unwrapList(element) {
-                            self.articlesElements[element.sequence] = elementUnwrapped
+                        if let elementUnwrapped = self.unwrapList(articleInsideArray[index]) {
+                            self.articlesElements[index] = elementUnwrapped
                         }
                     case .text:
-                        if let elementUnwrapped = self.unwrapText(element) {
-                            self.articlesElements[element.sequence] = elementUnwrapped
+                        if let elementUnwrapped = self.unwrapText(articleInsideArray[index]) {
+                            self.articlesElements[index] = elementUnwrapped
                         }
+                    case .testQuestion:
+                        continue
                     }
                 }
                 self.tableView.reloadData()
@@ -209,6 +221,13 @@ extension ArticlesPreviewTableViewController {
                 return nil
         }
         
+        let caption: String?
+        if articleInside.caption == nil {
+            caption = nil
+        } else {
+            caption = articleInside.caption!
+        }
+        
         var text: String = ""
         
         func getString(_ index: Int) -> String {
@@ -225,7 +244,7 @@ extension ArticlesPreviewTableViewController {
         }
         
         let result = ArticleInsideUnwrapped(type: ArticleInsideType.list,
-                                            caption: nil,
+                                            caption: caption,
                                             text: nil,
                                             image: nil,
                                             listElements: text

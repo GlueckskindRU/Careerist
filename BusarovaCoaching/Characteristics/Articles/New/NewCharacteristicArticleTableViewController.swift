@@ -124,27 +124,38 @@ extension NewCharacteristicArticleTableViewController {
         case .image:
             typeText = "Изображение"
             if let _caption = element.caption, _caption != "" {
-                caption = "\(_caption.prefix(40))…"
+                caption = "\(_caption.prefix(40))\(LiteralConsts.dots.rawValue)"
             } else {
-                caption = "…"
+                caption = "\(LiteralConsts.dots.rawValue)"
             }
         case .list:
             typeText = "Список"
-            if let listElements = element.listElements, !listElements.isEmpty {
-                caption = "\(listElements[0].prefix(40))…"
+            if let _caption = element.caption, _caption != "" {
+                caption = "\(_caption.prefix(40))\(LiteralConsts.dots.rawValue)"
             } else {
-                caption = "…"
+                if let listElements = element.listElements, !listElements.isEmpty {
+                    caption = "\(listElements[0].prefix(40))\(LiteralConsts.dots.rawValue)"
+                } else {
+                    caption = "\(LiteralConsts.dots.rawValue)"
+                }
             }
         case .text:
             typeText = "Текст"
             if let _caption = element.caption, _caption != "" {
-                caption = "\(_caption.prefix(40))…"
+                caption = "\(_caption.prefix(40))\(LiteralConsts.dots.rawValue)"
             } else {
                 if let _text = element.text, _text != "" {
-                    caption = "\(_text.prefix(40))…"
+                    caption = "\(_text.prefix(40))\(LiteralConsts.dots.rawValue)"
                 } else {
-                    caption = "…"
+                    caption = "\(LiteralConsts.dots.rawValue)"
                 }
+            }
+        case .testQuestion:
+            typeText = "Тестовый вопрос"
+            if let _text = element.text, _text != "" {
+                caption = "\(_text.prefix(40))\(LiteralConsts.dots.rawValue)"
+            } else {
+                caption = "\(LiteralConsts.dots.rawValue)"
             }
         }
         
@@ -167,6 +178,8 @@ extension NewCharacteristicArticleTableViewController {
             viewController = NewListInsideTableViewController()
         case .text:
             viewController = NewTextInsideViewController()
+        case .testQuestion:
+            viewController = NewTestQuestionTableViewController()
         }
         
         viewController.configure(with: elementToPass, as: indexPath.row, delegate: self)
@@ -217,7 +230,7 @@ extension NewCharacteristicArticleTableViewController {
             return
         }
         
-        FirebaseController.shared.getDataController().fetchArticle(with: article.id) {
+        FirebaseController.shared.getDataController().fetchArticle(with: article.id, forPreview: false) {
             (result: Result<[ArticleInside]>) in
             
             actitivityIndicator.stop()
@@ -292,6 +305,13 @@ extension NewCharacteristicArticleTableViewController {
             self.navigationController?.pushViewController(listVC, animated: true)
         }
         
+        let testQuestionElement = UIAlertAction(title: "Тестовый вопрос", style: .default) {
+            _ in
+            let testQuestionVC = NewTestQuestionTableViewController()
+            testQuestionVC.configure(with: nil, as: sequenceToPass, delegate: self)
+            self.navigationController?.pushViewController(testQuestionVC, animated: true)
+        }
+        
         let cancel = UIAlertAction(title: "Отменить", style: .cancel) {
             _ in
             print("No new element. Action is canceled")
@@ -300,6 +320,7 @@ extension NewCharacteristicArticleTableViewController {
         menuController.addAction(textElement)
         menuController.addAction(imageElement)
         menuController.addAction(listElement)
+        menuController.addAction(testQuestionElement)
         menuController.addAction(cancel)
         
         if let popoverController = menuController.popoverPresentationController {

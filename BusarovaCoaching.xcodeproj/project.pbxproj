@@ -27,6 +27,12 @@
 		DAA97B0621233DAF005AF50F /* DescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA97B0521233DAF005AF50F /* DescriptionViewController.swift */; };
 		DAA9D748215EA02D009697E8 /* CharacteristicsLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA9D747215EA02D009697E8 /* CharacteristicsLevel.swift */; };
 		DAA9D74B21621DA3009697E8 /* ArticleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA9D74A21621DA3009697E8 /* ArticleType.swift */; };
+		DAA9D74D21628BDE009697E8 /* NewTestQuestionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA9D74C21628BDE009697E8 /* NewTestQuestionTableViewController.swift */; };
+		DAA9D74F21629411009697E8 /* NewTestQuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA9D74E21629411009697E8 /* NewTestQuestionCell.swift */; };
+		DAA9D75221652E1B009697E8 /* SaveListElementsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA9D75121652E1B009697E8 /* SaveListElementsProtocol.swift */; };
+		DAA9D754216552F9009697E8 /* NewTestQuestionHederView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA9D753216552F9009697E8 /* NewTestQuestionHederView.swift */; };
+		DAA9D7562166419C009697E8 /* NewListInsideHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA9D7552166419C009697E8 /* NewListInsideHeaderView.swift */; };
+		DAA9D7582166501A009697E8 /* ArticleListWithCaptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA9D7572166501A009697E8 /* ArticleListWithCaptionCell.swift */; };
 		DAACF04821345C45006FA934 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DAACF04721345C45006FA934 /* GoogleService-Info.plist */; };
 		DAB5CB152135A5A000B436C2 /* AchievementsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB5CB142135A5A000B436C2 /* AchievementsModel.swift */; };
 		DAB5CB192135BA3300B436C2 /* NotesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB5CB182135BA3300B436C2 /* NotesModel.swift */; };
@@ -112,6 +118,12 @@
 		DAA97B0521233DAF005AF50F /* DescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionViewController.swift; sourceTree = "<group>"; };
 		DAA9D747215EA02D009697E8 /* CharacteristicsLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicsLevel.swift; sourceTree = "<group>"; };
 		DAA9D74A21621DA3009697E8 /* ArticleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleType.swift; sourceTree = "<group>"; };
+		DAA9D74C21628BDE009697E8 /* NewTestQuestionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTestQuestionTableViewController.swift; sourceTree = "<group>"; };
+		DAA9D74E21629411009697E8 /* NewTestQuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTestQuestionCell.swift; sourceTree = "<group>"; };
+		DAA9D75121652E1B009697E8 /* SaveListElementsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveListElementsProtocol.swift; sourceTree = "<group>"; };
+		DAA9D753216552F9009697E8 /* NewTestQuestionHederView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTestQuestionHederView.swift; sourceTree = "<group>"; };
+		DAA9D7552166419C009697E8 /* NewListInsideHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListInsideHeaderView.swift; sourceTree = "<group>"; };
+		DAA9D7572166501A009697E8 /* ArticleListWithCaptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListWithCaptionCell.swift; sourceTree = "<group>"; };
 		DAACF04721345C45006FA934 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DAB5CB142135A5A000B436C2 /* AchievementsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsModel.swift; sourceTree = "<group>"; };
 		DAB5CB182135BA3300B436C2 /* NotesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesModel.swift; sourceTree = "<group>"; };
@@ -218,8 +230,9 @@
 				DAE6DF7C21527F25009C9CC3 /* ArticleImageCell.swift */,
 				DAE6DF7E21527FAF009C9CC3 /* ArticleImageWithCaptionCell.swift */,
 				DAE6DF7421527BB8009C9CC3 /* ArticleListCell.swift */,
-				DAE6DF7821527DD9009C9CC3 /* ArticleTextWithCaptionCell.swift */,
+				DAA9D7572166501A009697E8 /* ArticleListWithCaptionCell.swift */,
 				DAE6DF7A21527E6E009C9CC3 /* ArticleTextCell.swift */,
+				DAE6DF7821527DD9009C9CC3 /* ArticleTextWithCaptionCell.swift */,
 				DAE6DF822152DC33009C9CC3 /* ArticlesPreviewHeaderView.swift */,
 			);
 			path = Articles;
@@ -228,6 +241,7 @@
 		DA5A553A21243B3100B7153E /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				DAA9D75021652E0F009697E8 /* Protocols */,
 				DAA9D74921621D83009697E8 /* Identifiers */,
 				DAC61EEF214C3AC100FB78C6 /* Helpers */,
 				DAC61ED2214A953000FB78C6 /* Extentions */,
@@ -324,6 +338,14 @@
 			path = Identifiers;
 			sourceTree = "<group>";
 		};
+		DAA9D75021652E0F009697E8 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				DAA9D75121652E1B009697E8 /* SaveListElementsProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		DAC124E12125E17100378DA1 /* Cabinet */ = {
 			isa = PBXGroup;
 			children = (
@@ -406,8 +428,12 @@
 				DAC61ED9214BD67400FB78C6 /* NewTextInsideViewController.swift */,
 				DAC61EDB214BD69500FB78C6 /* NewImageInsideViewController.swift */,
 				DAC61EDD214BD6B700FB78C6 /* NewListInsideTableViewController.swift */,
+				DAA9D7552166419C009697E8 /* NewListInsideHeaderView.swift */,
 				DAEE517F214FD4D800449FEE /* ListElementsCell.swift */,
 				DAEE5183215027FF00449FEE /* EditListInsideViewController.swift */,
+				DAA9D74C21628BDE009697E8 /* NewTestQuestionTableViewController.swift */,
+				DAA9D74E21629411009697E8 /* NewTestQuestionCell.swift */,
+				DAA9D753216552F9009697E8 /* NewTestQuestionHederView.swift */,
 			);
 			path = New;
 			sourceTree = "<group>";
@@ -581,6 +607,7 @@
 				DAC124F12125FDED00378DA1 /* AchievementsTableViewController.swift in Sources */,
 				DAC61EE6214C1F9100FB78C6 /* DocumentSnapshot.swift in Sources */,
 				DAB5CB192135BA3300B436C2 /* NotesModel.swift in Sources */,
+				DAA9D74D21628BDE009697E8 /* NewTestQuestionTableViewController.swift in Sources */,
 				DAE6DF7D21527F25009C9CC3 /* ArticleImageCell.swift in Sources */,
 				DAC61EBC21492AF500FB78C6 /* ArticleInsideType.swift in Sources */,
 				DA9ED6042133F92900FB54FB /* CharacteristicsCellLevel1.swift in Sources */,
@@ -592,12 +619,14 @@
 				DAC124E72125E83B00378DA1 /* CabinetCell.swift in Sources */,
 				DA9ED5FB2133EA4800FB54FB /* CharacteristicsModel.swift in Sources */,
 				DAC61EDC214BD69500FB78C6 /* NewImageInsideViewController.swift in Sources */,
+				DAA9D75221652E1B009697E8 /* SaveListElementsProtocol.swift in Sources */,
 				DAC124FF2126120A00378DA1 /* DetailedNoteViewController.swift in Sources */,
 				DAC61EE2214C1AD500FB78C6 /* Result.swift in Sources */,
 				DAC61EEE214C255700FB78C6 /* AlertDialog.swift in Sources */,
 				DAC124E32125E18C00378DA1 /* CabinetTableViewController.swift in Sources */,
 				DAE6DF7B21527E6E009C9CC3 /* ArticleTextCell.swift in Sources */,
 				DAC61ECA214981C900FB78C6 /* NewCharacteristicArticleTableViewController.swift in Sources */,
+				DAA9D74F21629411009697E8 /* NewTestQuestionCell.swift in Sources */,
 				DAC61EEC214C215700FB78C6 /* QuerySnapshot.swift in Sources */,
 				DAEE5182215025AE00449FEE /* LiteralConsts.swift in Sources */,
 				DAB5CB152135A5A000B436C2 /* AchievementsModel.swift in Sources */,
@@ -610,6 +639,7 @@
 				DAC61ED8214BB69000FB78C6 /* ActivityIndicator.swift in Sources */,
 				DAC61EE8214C1FFF00FB78C6 /* JSONDecoder.swift in Sources */,
 				DAEE517C214FAAA100449FEE /* StoragePath.swift in Sources */,
+				DAA9D7582166501A009697E8 /* ArticleListWithCaptionCell.swift in Sources */,
 				DA167D0B2134300F001A9A84 /* DataController.swift in Sources */,
 				DAA9D748215EA02D009697E8 /* CharacteristicsLevel.swift in Sources */,
 				DAC61EB82149299800FB78C6 /* Article.swift in Sources */,
@@ -626,6 +656,7 @@
 				DAE6DF832152DC33009C9CC3 /* ArticlesPreviewHeaderView.swift in Sources */,
 				DA9ED5FE2133F53C00FB54FB /* CharacteristicsTableViewController.swift in Sources */,
 				DAC61EDE214BD6B700FB78C6 /* NewListInsideTableViewController.swift in Sources */,
+				DAA9D754216552F9009697E8 /* NewTestQuestionHederView.swift in Sources */,
 				DAA97B0621233DAF005AF50F /* DescriptionViewController.swift in Sources */,
 				DAB5CB1B21369A9F00B436C2 /* AboutArticlesModel.swift in Sources */,
 				DAEE5180214FD4D800449FEE /* ListElementsCell.swift in Sources */,
@@ -646,6 +677,7 @@
 				DAC61EC621495FC800FB78C6 /* CharacteristicsArticlesTableViewController.swift in Sources */,
 				DAC124EB2125F88900378DA1 /* CompetenceTableViewController.swift in Sources */,
 				DA9ED6002133F69400FB54FB /* CellIdentifiers.swift in Sources */,
+				DAA9D7562166419C009697E8 /* NewListInsideHeaderView.swift in Sources */,
 				DAC124F32125FED800378DA1 /* AchivementsCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

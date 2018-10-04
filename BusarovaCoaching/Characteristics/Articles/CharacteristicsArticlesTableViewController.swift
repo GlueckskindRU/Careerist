@@ -201,7 +201,7 @@ extension CharacteristicsArticlesTableViewController {
         for article in deletedArticles {
             activityIndicator.start()
             
-            FirebaseController.shared.getDataController().fetchArticle(with: article.id) {
+            FirebaseController.shared.getDataController().fetchArticle(with: article.id, forPreview: false) {
                 (result: Result<[ArticleInside]>) in
                 
                 activityIndicator.stop()

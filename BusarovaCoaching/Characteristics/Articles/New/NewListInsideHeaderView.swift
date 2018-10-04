@@ -1,21 +1,21 @@
 //
-//  NewCharacteristicsArticleHeaderView.swift
+//  NewListInsideHeaderView.swift
 //  BusarovaCoaching
 //
-//  Created by Yuri Ivashin on 13/09/2018.
+//  Created by Yuri Ivashin on 04/10/2018.
 //  Copyright © 2018 The Homber Team. All rights reserved.
 //
 
 import UIKit
 
-class NewCharacteristicsArticleHeaderView: UITableViewHeaderFooterView {
-    private var delegate: ArticleTitleSaveProtocol?
+class NewListInsideHeaderView: UITableViewHeaderFooterView {
+    private var delegate: ListCaptionSaveProtocol?
     
-    lazy private var articleTitleTextField: UITextField = {
+    lazy private var listCaptionTextField: UITextField = {
         let textField = UITextField()
         
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.placeholder = "Заголовок статьи. Обязательный"
+        textField.placeholder = "Заголовок списка. Необязательный"
         textField.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
         textField.layer.borderWidth = 1
         textField.layer.cornerRadius = 5
@@ -28,15 +28,12 @@ class NewCharacteristicsArticleHeaderView: UITableViewHeaderFooterView {
     private func textFieldDidChange(sender: UITextField) {
         let text = sender.text ?? ""
         
-        self.delegate?.saveArticleTitle(text)
+        self.delegate?.saveListCaption(text)
     }
     
-    func configure(with article: Article?, as delegate: ArticleTitleSaveProtocol) {
+    func configure(with caption: String, as delegate: ListCaptionSaveProtocol) {
+        self.listCaptionTextField.text = caption
         self.delegate = delegate
-        guard let article = article else {
-            return
-        }
-        self.articleTitleTextField.text = article.title
     }
     
     override init(reuseIdentifier: String?) {
@@ -53,13 +50,13 @@ class NewCharacteristicsArticleHeaderView: UITableViewHeaderFooterView {
     
     private func setupLayout() {
         contentView.backgroundColor = .white
-        contentView.addSubview(articleTitleTextField)
+        contentView.addSubview(listCaptionTextField)
         
         NSLayoutConstraint.activate([
-            articleTitleTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            articleTitleTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            contentView.trailingAnchor.constraint(equalTo: articleTitleTextField.trailingAnchor, constant: 8),
-            contentView.bottomAnchor.constraint(greaterThanOrEqualTo: articleTitleTextField.bottomAnchor, constant: 16)
+            listCaptionTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+            listCaptionTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+            contentView.trailingAnchor.constraint(equalTo: listCaptionTextField.trailingAnchor, constant: 8),
+            contentView.bottomAnchor.constraint(equalTo: listCaptionTextField.bottomAnchor, constant: 16)
             ])
     }
 }

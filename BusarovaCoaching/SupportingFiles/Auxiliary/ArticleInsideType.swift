@@ -12,4 +12,5 @@ enum ArticleInsideType: Int {
     case text = 0
     case image = 1
     case list = 2
+    case testQuestion = 100
 }

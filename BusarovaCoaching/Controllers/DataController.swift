@@ -167,7 +167,37 @@ class DataController {
         }
     }
     
-    func fetchArticle<T: Codable>(with parentID: String, completion: @escaping (Result<[T]>) -> Void) {
+    func fetchArticle(with parentID: String, forPreview: Bool, completion: @escaping (Result<[ArticleInside]>) -> Void) {
+        if forPreview {
+            fetchArticleForPreview(with: parentID, completion: completion)
+        } else {
+            fetchArticleFull(with: parentID, completion: completion)
+        }
+    }
+    
+    private func fetchArticleForPreview(with parentID: String, completion: @escaping (Result<[ArticleInside]>) -> Void) {
+        db.collection(DBTables.articlesInside.rawValue).whereField("parentID", isEqualTo: parentID).whereField("type", isLessThan: ArticleInsideType.testQuestion.rawValue).order(by: "type").getDocuments() {
+            (snap, error) in
+            
+            guard let snap = snap, !snap.isEmpty else {
+                if let error = error {
+                    completion(Result.failure(.otherError(error)))
+                } else {
+                    completion(Result.success([]))
+                }
+                return
+            }
+            
+            do {
+                let result = try snap.documentsToList(ArticleInside.self).sorted( by: { $0.sequence < $1.sequence } )
+                completion(Result.success(result))
+            } catch {
+                completion(Result.failure(.otherError(error)))
+            }
+        }
+    }
+    
+    private func fetchArticleFull(with parentID: String, completion: @escaping (Result<[ArticleInside]>) -> Void) {
         db.collection(DBTables.articlesInside.rawValue).whereField("parentID", isEqualTo: parentID).order(by: "sequence").getDocuments() {
             (snap, error) in
             
@@ -181,7 +211,7 @@ class DataController {
             }
             
             do {
-                let result = try snap.documentsToList(T.self)
+                let result = try snap.documentsToList(ArticleInside.self)
                 completion(Result.success(result))
             } catch {
                 completion(Result.failure(.otherError(error)))

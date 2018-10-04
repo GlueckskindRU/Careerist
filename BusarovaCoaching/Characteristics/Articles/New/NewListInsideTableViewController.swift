@@ -8,8 +8,8 @@
 
 import UIKit
 
-protocol SaveListElementsProtocol {
-    func saveListElements(_ elements: [String])
+protocol ListCaptionSaveProtocol {
+    func saveListCaption(_ caption: String)
 }
 
 class NewListInsideTableViewController: UITableViewController, ArticleInsideElementsProtocol {
@@ -18,7 +18,7 @@ class NewListInsideTableViewController: UITableViewController, ArticleInsideElem
     private var articleSaveDelegate: ArticleSaveDelegateProtocol?
     
     private var articleInsideID: String?
-    private var editingModeEnabled: Bool = false
+    private var listCaption: String = ""
     
     lazy private var editTextElementsBarButtonItem: UIBarButtonItem = {
         return UIBarButtonItem(title: "Изменить", style: UIBarButtonItem.Style.plain, target: self, action: #selector(editList(sender:)))
@@ -48,6 +48,7 @@ class NewListInsideTableViewController: UITableViewController, ArticleInsideElem
         self.articleSaveDelegate = delegate
         
         self.articleInsideID = articleInside?.id
+        listCaption = articleInside?.caption ?? ""
     }
     
     override func viewDidLoad() {
@@ -62,9 +63,16 @@ class NewListInsideTableViewController: UITableViewController, ArticleInsideElem
         tableView.allowsSelection = false
         tableView.allowsSelectionDuringEditing = true
         
-        tableView.isEditing = editingModeEnabled
-        
         tableView.register(ListElementsCell.self, forCellReuseIdentifier: CellIdentifiers.listElementCell.rawValue)
+        
+        let headerView = NewListInsideHeaderView()
+        headerView.configure(with: articleInside?.caption ?? "", as: self)
+        tableView.tableHeaderView = headerView
+        tableView.tableHeaderView?.frame = CGRect(x: 0,
+                                                  y: 0,
+                                                  width: self.view.frame.width,
+                                                  height: 70
+                                                    )
         
         editButtonItem.title = "Настроить"
         
@@ -216,6 +224,7 @@ extension NewListInsideTableViewController {
     }
     
     private func refreshUI() {
+        listCaption = articleInside?.caption ?? ""
         tableView.reloadData()
         if let listElements = articleInside?.listElements {
             editButtonItem.isEnabled = !listElements.isEmpty
@@ -235,11 +244,11 @@ extension NewListInsideTableViewController {
                                    parentID: articleInside?.parentID ?? "",
                                    sequence: sequence,
                                    type: .list,
-                                   caption: nil,
+                                   caption: listCaption,
                                    text: nil,
                                    imageURL: nil,
                                    imageName: nil,
-                                   numericList: numeric ?? articleInside?.numericList,
+                                   numericList: numeric ?? articleInside?.numericList ?? true,
                                    listElements: listElements
                                     )
         
@@ -266,5 +275,15 @@ extension NewListInsideTableViewController: SaveListElementsProtocol {
         articleInside = create(as: nil, elements: elements)
         refreshUI()
         saveList(withLeaving: false)
+    }
+}
+
+// MARK: - ListCaptionSaveProtocol
+extension NewListInsideTableViewController: ListCaptionSaveProtocol {
+    func saveListCaption(_ caption: String) {
+        if caption != self.listCaption {
+            self.listCaption = caption
+            isSaved = false
+        }
     }
 }

@@ -32,6 +32,7 @@ class NewTextInsideViewController: UIViewController, ArticleInsideElementsProtoc
         let textView = UITextView()
         
         textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.font = UIFont.systemFont(ofSize: 18)
         textView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
         textView.layer.borderWidth = 1
         textView.layer.cornerRadius = 5
