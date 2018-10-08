@@ -91,10 +91,22 @@ extension CharacteristicsArticlesTableViewController {
 
 // MARK: - TableView Delegate
 extension CharacteristicsArticlesTableViewController {
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {        
-        let editArticleVC = NewCharacteristicArticleTableViewController()
-        editArticleVC.configure(with: articles[indexPath.row], as: indexPath.row, parentID: parentID)
-        navigationController?.pushViewController(editArticleVC, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedElement = articles[indexPath.row]
+        
+        switch selectedElement.type {
+        case .article:
+            let editArticleVC = NewCharacteristicArticleTableViewController()
+            editArticleVC.configure(with: selectedElement, as: indexPath.row, parentID: parentID)
+            navigationController?.pushViewController(editArticleVC, animated: true)
+        case .advice:
+            let editAdviceVC = NewAdviceViewController()
+            editAdviceVC.configure(with: selectedElement, as: indexPath.row, parentID: parentID)
+            navigationController?.pushViewController(editAdviceVC, animated: true)
+        case .testQuestion:
+            print("there still no test questions in this area!")
+            return
+        }
     }
     
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
@@ -161,16 +173,40 @@ extension CharacteristicsArticlesTableViewController {
 extension CharacteristicsArticlesTableViewController {
     @objc
     private func addNewArticle(sender: UIBarButtonItem) {
-        let sequenceToPass: Int
-        if articles.isEmpty {
-            sequenceToPass = 0
-        } else {
-            sequenceToPass = articles.count
+        let sequenceToPass = articles.isEmpty ? 0 : articles.count
+
+        let menuController = UIAlertController(title: nil, message: "Выберите тип добавляемого контента:", preferredStyle: UIAlertController.Style.actionSheet)
+
+        let articleType = UIAlertAction(title: "Статья", style: .default) {
+            _ in
+            let newArticleVC = NewCharacteristicArticleTableViewController()
+            newArticleVC.configure(with: nil, as: sequenceToPass, parentID: self.parentID)
+            
+            self.navigationController?.pushViewController(newArticleVC, animated: true)
         }
-        let newArticleVC = NewCharacteristicArticleTableViewController()
-        newArticleVC.configure(with: nil, as: sequenceToPass, parentID: parentID)
         
-        navigationController?.pushViewController(newArticleVC, animated: true)
+        let adviceType = UIAlertAction(title: "Совет дня", style: .default) {
+            _ in
+            let newAdviceVC = NewAdviceViewController()
+            newAdviceVC.configure(with: nil, as: sequenceToPass, parentID: self.parentID)
+            
+            self.navigationController?.pushViewController(newAdviceVC, animated: true)
+        }
+        
+        let cancel = UIAlertAction(title: "Отменить", style: .cancel) {
+            _ in
+            print("No new content. Action is cancelled")
+        }
+        
+        menuController.addAction(articleType)
+        menuController.addAction(adviceType)
+        menuController.addAction(cancel)
+        
+        if let popoverController = menuController.popoverPresentationController {
+            popoverController.barButtonItem = sender
+        }
+        
+        present(menuController, animated: true)
     }
     
     @objc

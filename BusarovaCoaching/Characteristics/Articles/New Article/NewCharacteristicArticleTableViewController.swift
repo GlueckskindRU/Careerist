@@ -275,12 +275,7 @@ extension NewCharacteristicArticleTableViewController {
     
     @objc
     private func addElement(sender: UIBarButtonItem) {
-        let sequenceToPass: Int
-        if articleInsideElements.isEmpty {
-            sequenceToPass = 0
-        } else {
-            sequenceToPass = articleInsideElements.count
-        }
+        let sequenceToPass = articleInsideElements.isEmpty ? 0 : articleInsideElements.count
         
         let menuController = UIAlertController(title: nil, message: "Выберите тип добавляемого элемента статьи:", preferredStyle: UIAlertController.Style.actionSheet)
         
