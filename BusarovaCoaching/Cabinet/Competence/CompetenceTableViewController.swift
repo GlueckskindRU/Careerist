@@ -22,7 +22,7 @@ class CompetenceTableViewController: UITableViewController {
         
         tableView.tableFooterView = UIView()
         navigationItem.title = competence?.name
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
     }
     
     func configure(with competence: CharacteristicsModel) {

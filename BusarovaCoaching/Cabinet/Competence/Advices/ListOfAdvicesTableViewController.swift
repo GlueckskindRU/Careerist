@@ -27,7 +27,7 @@ class ListOfAdvicesTableViewController: UITableViewController {
         tableView.register(ListOfAdvicesCell.self, forCellReuseIdentifier: CellIdentifiers.listOfAdvicesCell.rawValue)
         
         navigationItem.title = competence?.name
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         
         refreshUI()
     }

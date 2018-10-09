@@ -78,7 +78,7 @@ class NewAdviceViewController: UIViewController {
         saveBarButtonItem.isEnabled = !isSaved
         navigationItem.rightBarButtonItem = saveBarButtonItem
         
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationItem.title = "Совет дня"
         
         refreshUI()

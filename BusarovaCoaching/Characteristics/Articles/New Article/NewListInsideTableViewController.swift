@@ -79,7 +79,7 @@ class NewListInsideTableViewController: UITableViewController, ArticleInsideElem
         navigationItem.rightBarButtonItems = [editButtonItem, saveBarButtonItem, editTextElementsBarButtonItem]
         saveBarButtonItem.isEnabled = !isSaved
         
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         
         refreshUI()
     }

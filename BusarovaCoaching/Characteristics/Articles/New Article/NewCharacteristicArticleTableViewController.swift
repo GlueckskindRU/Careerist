@@ -90,7 +90,7 @@ class NewCharacteristicArticleTableViewController: UITableViewController {
         editButtonItem.title = "Настроить"
         navigationItem.rightBarButtonItems = [editButtonItem, addBarButtonItem, saveBarButtonItem, previewBarButtonItem]
         
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {

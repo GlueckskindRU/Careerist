@@ -18,6 +18,7 @@ class DataController {
     }
     
 // MARK: - Characteristics
+    /// Fetches array of charachteristics depending of their level.
     func fetchCharacteristics<T: Codable>(of level: CharacteristicsLevel, completion: @escaping (Result<[T]>) -> Void) {
         db.collection(DBTables.characteristics.rawValue).whereField("level", isEqualTo: level.rawValue).order(by: "name").getDocuments() {
             (snap, error) in
@@ -39,6 +40,7 @@ class DataController {
         }
     }
     
+    /// Fetches array of childern characteristics depending on their parentID.
     func fetchChildernCharacteristicsOf<T: Codable>(_ parentID: String, completion: @escaping (Result<[T]>) -> Void) {
         db.collection(DBTables.characteristics.rawValue).whereField("parentID", isEqualTo: parentID).order(by: "name").getDocuments() {
             (snap, error) in
@@ -62,6 +64,8 @@ class DataController {
     }
     
 // MARK: - universal
+    /// Universal method to fetch array of documents of any type.
+    /// Result is sorted by the "name" field.
     func fetchData<T: Codable>(_ from: DBTables, completion: @escaping (Result<[T]>) -> Void) {
         db.collection(from.rawValue).order(by: "name").getDocuments() {
             (snap, error) in
@@ -84,6 +88,7 @@ class DataController {
         }
     }
     
+    /// Universal method to save a document of any type.
     func saveData<T: Codable>(_ element: T, with identifier: String?, in table: DBTables, completion: @escaping (Result<T>) -> Void) {
         let docReference: DocumentReference
         
@@ -132,6 +137,7 @@ class DataController {
         }
     }
     
+    /// Universal method for deletion a document of any type.
     func deleteData(with identifier: String, from table: DBTables, completion: @escaping (Result<Bool>) -> Void) {
         db.collection(table.rawValue).document(identifier).delete() {
             error in
@@ -145,6 +151,7 @@ class DataController {
     }
     
 // MARK: - articles
+    /// Fetches articles according to passed parameters: parentID and parentType
     func fetchArticles<T: Codable>(from: DBTables, by parentID: String, completion: @escaping (Result<[T]>) -> Void) {
         db.collection(DBTables.articles.rawValue).whereField("parentType", isEqualTo: from.rawValue).whereField("parentID", isEqualTo: parentID).order(by: "sequence").getDocuments() {
             (snap, error) in
@@ -167,6 +174,9 @@ class DataController {
         }
     }
     
+    /// Fetches ArticleInside according to passed parentID.
+    /// If parameter "forPreview" is true, all test questions will be skiped.
+    /// If paremeter "forPreview" is false, all related articleInside elements will be fetched.
     func fetchArticle(with parentID: String, forPreview: Bool, completion: @escaping (Result<[ArticleInside]>) -> Void) {
         if forPreview {
             fetchArticleForPreview(with: parentID, completion: completion)

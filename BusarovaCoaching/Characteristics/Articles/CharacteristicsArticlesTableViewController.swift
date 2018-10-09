@@ -51,7 +51,7 @@ class CharacteristicsArticlesTableViewController: UITableViewController {
         saveBarButtonItem.isEnabled = !isSaved
         navigationItem.rightBarButtonItems = [editButtonItem, addBarButtonItem, saveBarButtonItem]
         
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
