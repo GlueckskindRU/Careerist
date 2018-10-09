@@ -25,6 +25,7 @@ class CabinetTableViewController: UITableViewController {
         tableView.tableFooterView = UIView()
         
         navigationItem.title = "Личный кабинет"
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -34,7 +35,7 @@ class CabinetTableViewController: UITableViewController {
             return
         }
         
-        destination.configure(with: rowItems[indexPath.row].name)
+        destination.configure(with: rowItems[indexPath.row])
     }
 }
 

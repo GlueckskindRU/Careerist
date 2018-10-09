@@ -24,4 +24,6 @@ enum CellIdentifiers: String {
     case articleImageWithCaptionCell = "Article Image With Caption Cell"
     case articleListCell = "Article List Cell"
     case articleListWithCaptionCell = "Article List With Caption Cell"
+    //Advices
+    case listOfAdvicesCell = "List Of Advices Cell"
 }

@@ -10,7 +10,7 @@ import UIKit
 
 class CompetenceTableViewController: UITableViewController {
     private var captionData: [String] = []
-    private var navigationTitle: String?
+    private var competence: CharacteristicsModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,15 +21,16 @@ class CompetenceTableViewController: UITableViewController {
         tableView.delegate = self
         
         tableView.tableFooterView = UIView()
-        navigationItem.title = navigationTitle
+        navigationItem.title = competence?.name
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: nil)
     }
     
-    func configure(with title: String) {
-        self.navigationTitle = title
+    func configure(with competence: CharacteristicsModel) {
+        self.competence = competence
     }
 }
 
-
+// MARK: - TableView DataSource
 extension CompetenceTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return captionData.count
@@ -41,5 +42,20 @@ extension CompetenceTableViewController {
         cell.configure(with: captionData[indexPath.row])
         
         return cell
+    }
+}
+
+// MARK: - TableView Delegate
+extension CompetenceTableViewController {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let competence = competence else {
+            return
+        }
+        
+        if captionData[indexPath.row] == "Ваши советы дня" {
+            let listOfAdvicesVC = ListOfAdvicesTableViewController()
+            listOfAdvicesVC.configure(with: competence)
+            navigationController?.pushViewController(listOfAdvicesVC, animated: true)
+        }
     }
 }

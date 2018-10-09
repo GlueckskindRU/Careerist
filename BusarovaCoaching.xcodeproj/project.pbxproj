@@ -15,6 +15,8 @@
 		DA68CD67212312D000AE8515 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA68CD66212312D000AE8515 /* Assets.xcassets */; };
 		DA68CD6A212312D000AE8515 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA68CD68212312D000AE8515 /* LaunchScreen.storyboard */; };
 		DA81DA70216B885200D33388 /* NewAdviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA81DA6F216B885200D33388 /* NewAdviceViewController.swift */; };
+		DA81DA75216BEDB400D33388 /* ListOfAdvicesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA81DA74216BEDB400D33388 /* ListOfAdvicesTableViewController.swift */; };
+		DA81DA77216BF40800D33388 /* ListOfAdvicesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA81DA76216BF40800D33388 /* ListOfAdvicesCell.swift */; };
 		DA9ED5FB2133EA4800FB54FB /* CharacteristicsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED5FA2133EA4800FB54FB /* CharacteristicsModel.swift */; };
 		DA9ED5FE2133F53C00FB54FB /* CharacteristicsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED5FD2133F53C00FB54FB /* CharacteristicsTableViewController.swift */; };
 		DA9ED6002133F69400FB54FB /* CellIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED5FF2133F69400FB54FB /* CellIdentifiers.swift */; };
@@ -107,6 +109,8 @@
 		DA68CD69212312D000AE8515 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DA68CD6B212312D000AE8515 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA81DA6F216B885200D33388 /* NewAdviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAdviceViewController.swift; sourceTree = "<group>"; };
+		DA81DA74216BEDB400D33388 /* ListOfAdvicesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfAdvicesTableViewController.swift; sourceTree = "<group>"; };
+		DA81DA76216BF40800D33388 /* ListOfAdvicesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfAdvicesCell.swift; sourceTree = "<group>"; };
 		DA9ED5FA2133EA4800FB54FB /* CharacteristicsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicsModel.swift; sourceTree = "<group>"; };
 		DA9ED5FD2133F53C00FB54FB /* CharacteristicsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicsTableViewController.swift; sourceTree = "<group>"; };
 		DA9ED5FF2133F69400FB54FB /* CellIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellIdentifiers.swift; sourceTree = "<group>"; };
@@ -298,6 +302,15 @@
 			path = "New Advice";
 			sourceTree = "<group>";
 		};
+		DA81DA73216BE90000D33388 /* Advices */ = {
+			isa = PBXGroup;
+			children = (
+				DA81DA74216BEDB400D33388 /* ListOfAdvicesTableViewController.swift */,
+				DA81DA76216BF40800D33388 /* ListOfAdvicesCell.swift */,
+			);
+			path = Advices;
+			sourceTree = "<group>";
+		};
 		DA9ED5F92133EA3000FB54FB /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -374,6 +387,7 @@
 		DAC124EE2125FDBC00378DA1 /* Competence */ = {
 			isa = PBXGroup;
 			children = (
+				DA81DA73216BE90000D33388 /* Advices */,
 				DAC124EA2125F88900378DA1 /* CompetenceTableViewController.swift */,
 				DAC124EC2125F90500378DA1 /* CompetenceCell.swift */,
 			);
@@ -650,6 +664,7 @@
 				DAC61ED8214BB69000FB78C6 /* ActivityIndicator.swift in Sources */,
 				DA81DA70216B885200D33388 /* NewAdviceViewController.swift in Sources */,
 				DAC61EE8214C1FFF00FB78C6 /* JSONDecoder.swift in Sources */,
+				DA81DA77216BF40800D33388 /* ListOfAdvicesCell.swift in Sources */,
 				DAEE517C214FAAA100449FEE /* StoragePath.swift in Sources */,
 				DAA9D7582166501A009697E8 /* ArticleListWithCaptionCell.swift in Sources */,
 				DA167D0B2134300F001A9A84 /* DataController.swift in Sources */,
@@ -684,6 +699,7 @@
 				DAE6DF7721527C14009C9CC3 /* ArticleInsideUnwrapped.swift in Sources */,
 				DAC124ED2125F90500378DA1 /* CompetenceCell.swift in Sources */,
 				DAA97B0221233715005AF50F /* WelcomeModel.swift in Sources */,
+				DA81DA75216BEDB400D33388 /* ListOfAdvicesTableViewController.swift in Sources */,
 				DAA97B00212336C0005AF50F /* WelcomeTableViewController.swift in Sources */,
 				DAE6DF8121528EC3009C9CC3 /* ArticlesPreviewTableViewController.swift in Sources */,
 				DAC61EC621495FC800FB78C6 /* CharacteristicsArticlesTableViewController.swift in Sources */,
