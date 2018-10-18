@@ -9,6 +9,7 @@ target 'BusarovaCoaching' do
 pod 'Firebase/Core'
 pod 'Firebase/Firestore'
 pod 'Firebase/Storage'
+pod 'Firebase/Auth'
 pod 'Kingfisher', '~> 4.0'
 
 end
