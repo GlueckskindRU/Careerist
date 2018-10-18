@@ -104,6 +104,9 @@ extension CabinetTableViewController: CabinetSectionDelegateProtocol {
 
 extension CabinetTableViewController {
     private func refreshUI() {
+        let activityInficator = ActivityIndicator()
+        activityInficator.start()
+        
         initialData = CabinetModel.fetchInitialData()
         
         sectionsItems = initialData.filter { $0.level == .zero }
@@ -111,6 +114,7 @@ extension CabinetTableViewController {
         FirebaseController.shared.getDataController().fetchCharacteristics(of: CharacteristicsLevel.competences) {
             (result: Result<[CharacteristicsModel]>) in
             
+            activityInficator.stop()
             switch result {
             case .success(let competences):
                 self.rowItems = competences
