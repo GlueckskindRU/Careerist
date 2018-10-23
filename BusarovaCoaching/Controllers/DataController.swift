@@ -19,6 +19,9 @@ class DataController {
     
 // MARK: - Characteristics
     /// Fetches array of charachteristics depending of their level.
+    ///
+    /// - Parameter level: desribes the level of a Characteristic.
+    /// - Parameter completion: completion closure: (Result<[Codable]>) -> Void.
     func fetchCharacteristics<T: Codable>(of level: CharacteristicsLevel, completion: @escaping (Result<[T]>) -> Void) {
         db.collection(DBTables.characteristics.rawValue).whereField("level", isEqualTo: level.rawValue).order(by: "name").getDocuments() {
             (snap, error) in
@@ -41,6 +44,9 @@ class DataController {
     }
     
     /// Fetches array of childern characteristics depending on their parentID.
+    ///
+    /// - Parameter parentID: parents identifier of a requested characteristics
+    /// - Parameter completion: completion closure: (Result<[Codable]>) -> Void
     func fetchChildernCharacteristicsOf<T: Codable>(_ parentID: String, completion: @escaping (Result<[T]>) -> Void) {
         db.collection(DBTables.characteristics.rawValue).whereField("parentID", isEqualTo: parentID).order(by: "name").getDocuments() {
             (snap, error) in
@@ -66,6 +72,9 @@ class DataController {
 // MARK: - universal
     /// Universal method to fetch array of documents of any type.
     /// Result is sorted by the "name" field.
+    ///
+    /// - Parameter from: value of a DBTables enum, represents the firebase collection
+    /// - Parameter completion: completion closure: (Result<[Codable]>) -> Void
     func fetchData<T: Codable>(_ from: DBTables, completion: @escaping (Result<[T]>) -> Void) {
         db.collection(from.rawValue).order(by: "name").getDocuments() {
             (snap, error) in
@@ -89,6 +98,11 @@ class DataController {
     }
     
     /// Universal method to save a document of any type.
+    ///
+    /// - Parameter element: the element to save, should conform to the Codable protocol
+    /// - Parameter with: identifier of a saved element. If is unknown = nil
+    /// - Parameter in: value of a DBTables enum, represents the firebase collection where the element should be saved
+    /// - Parameter completion: completion closure: (Result < Codable > ) -> Void
     func saveData<T: Codable>(_ element: T, with identifier: String?, in table: DBTables, completion: @escaping (Result<T>) -> Void) {
         let docReference: DocumentReference
         
@@ -138,6 +152,10 @@ class DataController {
     }
     
     /// Universal method for deletion a document of any type.
+    ///
+    /// - Parameter with: identifier of a deleted document
+    /// - Parameter from: value of a DBTables enum, represents the firebase collection where the document should be deleted
+    /// - Parameter completion: completion closure: (Result < Bool > ) -> Void
     func deleteData(with identifier: String, from table: DBTables, completion: @escaping (Result<Bool>) -> Void) {
         db.collection(table.rawValue).document(identifier).delete() {
             error in
@@ -152,6 +170,10 @@ class DataController {
     
 // MARK: - articles
     /// Fetches articles according to passed parameters: parentID and parentType
+    ///
+    /// - Parameter from: value of a DBTables enum, represents the firebase collection
+    /// - Parameter by: parents identifier
+    /// - Parameter completion: completion closure: (Result<[Codable]>) -> Void
     func fetchArticles<T: Codable>(from: DBTables, by parentID: String, completion: @escaping (Result<[T]>) -> Void) {
         db.collection(DBTables.articles.rawValue).whereField("parentType", isEqualTo: from.rawValue).whereField("parentID", isEqualTo: parentID).order(by: "sequence").getDocuments() {
             (snap, error) in
@@ -175,8 +197,10 @@ class DataController {
     }
     
     /// Fetches ArticleInside according to passed parentID.
-    /// If parameter "forPreview" is true, all test questions will be skiped.
-    /// If paremeter "forPreview" is false, all related articleInside elements will be fetched.
+    ///
+    /// - Parameter with: parents identifier
+    /// - Parameter forPreview: if is **true** all test questions will be skiped. If is **false** all related articleInside elements will be fetched
+    /// - Parameter completion: completion closure: Result<[ArticleInside]>) -> Void
     func fetchArticle(with parentID: String, forPreview: Bool, completion: @escaping (Result<[ArticleInside]>) -> Void) {
         if forPreview {
             fetchArticleForPreview(with: parentID, completion: completion)
