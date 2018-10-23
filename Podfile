@@ -9,8 +9,10 @@ target 'BusarovaCoaching' do
 pod 'Firebase/Core'
 pod 'Firebase/Firestore'
 pod 'Firebase/Storage'
-pod 'FirebaseUI/Auth'
-pod 'FirebaseUI/Google'
+pod 'Firebase/Auth'
+#pod 'FirebaseUI/Auth'
+#pod 'FirebaseUI/Google'
+#pod 'FirebaseUI'
 pod 'Kingfisher', '~> 4.0'
 
 end
