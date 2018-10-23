@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Firebase
+import FirebaseFirestore
 
 extension QuerySnapshot {
     func documentsToList<T: Decodable>(_ type: T.Type) throws -> [T] {

@@ -8,8 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		557D3715C2EA4660FED5D13B /* Pods_BusarovaCoaching.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61BAA6AABAAC7B1CCC410EA2 /* Pods_BusarovaCoaching.framework */; };
+		DA0637962178BE4300A854B8 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0637952178BE4300A854B8 /* AppManager.swift */; };
 		DA167D0B2134300F001A9A84 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA167D0A2134300F001A9A84 /* DataController.swift */; };
-		DA41D1BC2178B27A001266AB /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA41D1BB2178B27A001266AB /* AuthorizationViewController.swift */; };
+		DA30394A217DFF72005EC94E /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA303949217DFF72005EC94E /* AuthorizationViewController.swift */; };
+		DA30394C217E4057005EC94E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA30394B217E4057005EC94E /* User.swift */; };
+		DA30394E217E465E005EC94E /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA30394D217E465E005EC94E /* String.swift */; };
+		DA303950217E4FE3005EC94E /* KeychainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA30394F217E4FE3005EC94E /* KeychainController.swift */; };
+		DA303954217E5C05005EC94E /* StoryboardIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA303953217E5C05005EC94E /* StoryboardIdentifiers.swift */; };
+		DA303956217F2BDB005EC94E /* UserRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA303955217F2BDB005EC94E /* UserRole.swift */; };
 		DA5A553C21243B4D00B7153E /* CheckBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5A553B21243B4D00B7153E /* CheckBoxButton.swift */; };
 		DA68CD60212312D000AE8515 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA68CD5F212312D000AE8515 /* AppDelegate.swift */; };
 		DA68CD65212312D000AE8515 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA68CD63212312D000AE8515 /* Main.storyboard */; };
@@ -101,8 +107,14 @@
 		5868065F6968F58F8DEBB8E1 /* Pods-BusarovaCoaching.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BusarovaCoaching.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BusarovaCoaching/Pods-BusarovaCoaching.debug.xcconfig"; sourceTree = "<group>"; };
 		61BAA6AABAAC7B1CCC410EA2 /* Pods_BusarovaCoaching.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BusarovaCoaching.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D348FDAB9D9C3649F079096 /* Pods-BusarovaCoaching.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BusarovaCoaching.release.xcconfig"; path = "Pods/Target Support Files/Pods-BusarovaCoaching/Pods-BusarovaCoaching.release.xcconfig"; sourceTree = "<group>"; };
+		DA0637952178BE4300A854B8 /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 		DA167D0A2134300F001A9A84 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
-		DA41D1BB2178B27A001266AB /* AuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
+		DA303949217DFF72005EC94E /* AuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
+		DA30394B217E4057005EC94E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		DA30394D217E465E005EC94E /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		DA30394F217E4FE3005EC94E /* KeychainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainController.swift; sourceTree = "<group>"; };
+		DA303953217E5C05005EC94E /* StoryboardIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardIdentifiers.swift; sourceTree = "<group>"; };
+		DA303955217F2BDB005EC94E /* UserRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRole.swift; sourceTree = "<group>"; };
 		DA5A553B21243B4D00B7153E /* CheckBoxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxButton.swift; sourceTree = "<group>"; };
 		DA68CD5C212312D000AE8515 /* ru.homber.Karierist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ru.homber.Karierist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA68CD5F212312D000AE8515 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -221,12 +233,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DA0637942178BE2B00A854B8 /* System */ = {
+			isa = PBXGroup;
+			children = (
+				DA68CD5F212312D000AE8515 /* AppDelegate.swift */,
+				DA0637952178BE4300A854B8 /* AppManager.swift */,
+			);
+			path = System;
+			sourceTree = "<group>";
+		};
 		DA167D0921342FF5001A9A84 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				DA167D0A2134300F001A9A84 /* DataController.swift */,
 				DAC0AE3521484D1D00FF9D82 /* StorageController.swift */,
 				DAC0AE37214850BC00FF9D82 /* FirebaseController.swift */,
+				DA30394F217E4FE3005EC94E /* KeychainController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -234,7 +256,7 @@
 		DA41D1BA2178B251001266AB /* Authorization */ = {
 			isa = PBXGroup;
 			children = (
-				DA41D1BB2178B27A001266AB /* AuthorizationViewController.swift */,
+				DA303949217DFF72005EC94E /* AuthorizationViewController.swift */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";
@@ -295,7 +317,7 @@
 				DAA97AFE21233655005AF50F /* About */,
 				DA41D1BA2178B251001266AB /* Authorization */,
 				DA5A553A21243B3100B7153E /* SupportingFiles */,
-				DA68CD5F212312D000AE8515 /* AppDelegate.swift */,
+				DA0637942178BE2B00A854B8 /* System */,
 				DA68CD63212312D000AE8515 /* Main.storyboard */,
 				DA68CD66212312D000AE8515 /* Assets.xcassets */,
 				DA68CD68212312D000AE8515 /* LaunchScreen.storyboard */,
@@ -332,6 +354,7 @@
 				DAC61EB72149299800FB78C6 /* Article.swift */,
 				DAC61EB921492A6000FB78C6 /* ArticleInside.swift */,
 				DAE6DF7621527C14009C9CC3 /* ArticleInsideUnwrapped.swift */,
+				DA30394B217E4057005EC94E /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -368,6 +391,7 @@
 				DA9ED60B2134176000FB54FB /* DBTables.swift */,
 				DAC0AE3321484A4B00FF9D82 /* SegueIdentifiers.swift */,
 				DAEE517B214FAAA100449FEE /* StoragePath.swift */,
+				DA303953217E5C05005EC94E /* StoryboardIdentifiers.swift */,
 			);
 			path = Identifiers;
 			sourceTree = "<group>";
@@ -440,6 +464,7 @@
 				DAA9D747215EA02D009697E8 /* CharacteristicsLevel.swift */,
 				DAC61EBB21492AF500FB78C6 /* ArticleInsideType.swift */,
 				DAA9D74A21621DA3009697E8 /* ArticleType.swift */,
+				DA303955217F2BDB005EC94E /* UserRole.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -485,6 +510,7 @@
 				DAEE5179214D857500449FEE /* UITapGestureRecognizer.swift */,
 				DAEE517D214FAD9B00449FEE /* Data.swift */,
 				DAE6DF842152DFAB009C9CC3 /* UITableView.swift */,
+				DA30394D217E465E005EC94E /* String.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -514,7 +540,6 @@
 				DA68CD59212312D000AE8515 /* Frameworks */,
 				DA68CD5A212312D000AE8515 /* Resources */,
 				899952C34D526051302AF97A /* [CP] Embed Pods Frameworks */,
-				274866FAAB530ED1057CA1B1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -575,32 +600,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		274866FAAB530ED1057CA1B1 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-BusarovaCoaching/Pods-BusarovaCoaching-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAuthUI.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseGoogleAuthUI.bundle",
-				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseAuthUI.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseGoogleAuthUI.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BusarovaCoaching/Pods-BusarovaCoaching-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		899952C34D526051302AF97A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -609,9 +608,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-BusarovaCoaching/Pods-BusarovaCoaching-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
@@ -626,9 +623,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
@@ -672,12 +667,14 @@
 			files = (
 				DAC124F62126074D00378DA1 /* DevelopmentTableViewController.swift in Sources */,
 				DAC124FD212610CB00378DA1 /* NotesCell.swift in Sources */,
+				DA30394E217E465E005EC94E /* String.swift in Sources */,
 				DAC61EDA214BD67400FB78C6 /* NewTextInsideViewController.swift in Sources */,
 				DAC124F12125FDED00378DA1 /* AchievementsTableViewController.swift in Sources */,
 				DAC61EE6214C1F9100FB78C6 /* DocumentSnapshot.swift in Sources */,
 				DAB5CB192135BA3300B436C2 /* NotesModel.swift in Sources */,
 				DAA9D74D21628BDE009697E8 /* NewTestQuestionTableViewController.swift in Sources */,
 				DAE6DF7D21527F25009C9CC3 /* ArticleImageCell.swift in Sources */,
+				DA30394A217DFF72005EC94E /* AuthorizationViewController.swift in Sources */,
 				DAC61EBC21492AF500FB78C6 /* ArticleInsideType.swift in Sources */,
 				DA9ED6042133F92900FB54FB /* CharacteristicsCellLevel1.swift in Sources */,
 				DA5A553C21243B4D00B7153E /* CheckBoxButton.swift in Sources */,
@@ -700,7 +697,6 @@
 				DAEE5182215025AE00449FEE /* LiteralConsts.swift in Sources */,
 				DAB5CB152135A5A000B436C2 /* AchievementsModel.swift in Sources */,
 				DAC61ECD21498AB300FB78C6 /* InsideCell.swift in Sources */,
-				DA41D1BC2178B27A001266AB /* AuthorizationViewController.swift in Sources */,
 				DAC61ECF214A84D300FB78C6 /* NewCharacteristicsArticleHeaderView.swift in Sources */,
 				DAE6DF852152DFAB009C9CC3 /* UITableView.swift in Sources */,
 				DAC61EEA214C209B00FB78C6 /* Dictionary.swift in Sources */,
@@ -727,6 +723,7 @@
 				DAC61EBA21492A6000FB78C6 /* ArticleInside.swift in Sources */,
 				DAE6DF832152DC33009C9CC3 /* ArticlesPreviewHeaderView.swift in Sources */,
 				DA9ED5FE2133F53C00FB54FB /* CharacteristicsTableViewController.swift in Sources */,
+				DA30394C217E4057005EC94E /* User.swift in Sources */,
 				DAC61EDE214BD6B700FB78C6 /* NewListInsideTableViewController.swift in Sources */,
 				DAA9D754216552F9009697E8 /* NewTestQuestionHederView.swift in Sources */,
 				DAA97B0621233DAF005AF50F /* DescriptionViewController.swift in Sources */,
@@ -737,16 +734,20 @@
 				DAC0AE3421484A4B00FF9D82 /* SegueIdentifiers.swift in Sources */,
 				DAEE517E214FAD9B00449FEE /* Data.swift in Sources */,
 				DAC0AE3621484D1D00FF9D82 /* StorageController.swift in Sources */,
+				DA0637962178BE4300A854B8 /* AppManager.swift in Sources */,
 				DAE6DF7921527DD9009C9CC3 /* ArticleTextWithCaptionCell.swift in Sources */,
 				DAC61EC82149604500FB78C6 /* CharacteristicsArticlesCell.swift in Sources */,
+				DA303954217E5C05005EC94E /* StoryboardIdentifiers.swift in Sources */,
 				DA9ED60A2133FCE800FB54FB /* CharacteristicsCellLevel2.swift in Sources */,
 				DAEE5184215027FF00449FEE /* EditListInsideViewController.swift in Sources */,
 				DAE6DF7721527C14009C9CC3 /* ArticleInsideUnwrapped.swift in Sources */,
 				DAC124ED2125F90500378DA1 /* CompetenceCell.swift in Sources */,
 				DAA97B0221233715005AF50F /* WelcomeModel.swift in Sources */,
+				DA303950217E4FE3005EC94E /* KeychainController.swift in Sources */,
 				DA81DA75216BEDB400D33388 /* ListOfAdvicesTableViewController.swift in Sources */,
 				DAA97B00212336C0005AF50F /* WelcomeTableViewController.swift in Sources */,
 				DAE6DF8121528EC3009C9CC3 /* ArticlesPreviewTableViewController.swift in Sources */,
+				DA303956217F2BDB005EC94E /* UserRole.swift in Sources */,
 				DAC61EC621495FC800FB78C6 /* CharacteristicsArticlesTableViewController.swift in Sources */,
 				DAC124EB2125F88900378DA1 /* CompetenceTableViewController.swift in Sources */,
 				DA9ED6002133F69400FB54FB /* CellIdentifiers.swift in Sources */,

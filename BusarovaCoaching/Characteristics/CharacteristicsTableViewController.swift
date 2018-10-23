@@ -32,6 +32,10 @@ class CharacteristicsTableViewController: UITableViewController {
         
         tableView.insetsContentViewsToSafeArea = true
         
+        tableView.register(CharacteristicsCellLevel0.self, forCellReuseIdentifier: CellIdentifiers.characteristicCellLevel0.rawValue)
+        tableView.register(CharacteristicsCellLevel1.self, forCellReuseIdentifier: CellIdentifiers.characteristicCellLevel1.rawValue)
+        tableView.register(CharacteristicsCellLevel2.self, forCellReuseIdentifier: CellIdentifiers.characteristicCellLevel2.rawValue)
+        
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapRecognizer(recognizer:)))
         tapGestureRecognizer.numberOfTapsRequired = 1
         tableView.addGestureRecognizer(tapGestureRecognizer)
@@ -92,7 +96,9 @@ extension CharacteristicsTableViewController: UIGestureRecognizerDelegate {
                     expandMenu(with: characterictic.id, at: index)
                 } else {
                     self.indexPath = indexPath
+                    if AppManager.shared.currentUserHasPermission(to: DBTables.articles, with: characterictic.id) {
                     performSegue(withIdentifier: SegueIdentifiers.characteristicsArticle.rawValue, sender: self)
+                    }
                 }
             } else {
                 if characterictic.level == .competences {

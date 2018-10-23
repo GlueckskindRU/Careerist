@@ -15,6 +15,10 @@ class DataController {
     
     init() {
         db = Firestore.firestore()
+        
+        let settings = db.settings
+        settings.areTimestampsInSnapshotsEnabled = true
+        db.settings = settings
     }
     
 // MARK: - Characteristics
@@ -90,6 +94,33 @@ class DataController {
             
             do {
                 let result = try snap.documentsToList(T.self)
+                completion(Result.success(result))
+            } catch {
+                completion(Result.failure(.otherError(error)))
+            }
+        }
+    }
+    
+    /// Universal method to fetch a document of any type.
+    ///
+    /// - Parameter identifier: identifier of a requested document
+    /// - Parameter from: value of a DBTables enum, represents the firebase collection
+    /// - Parameter completion: completion closure: (Result < Codable > ) -> Void
+    func fetchData<T: Codable>(with identifier: String, from: DBTables, completion: @escaping (Result<T>) -> Void) {
+        db.collection(from.rawValue).document(identifier).getDocument() {
+            (snap, error) in
+            
+            guard let snap = snap else {
+                if let error = error {
+                    completion(Result.failure(AppError.otherError(error)))
+                } else {
+                    completion(Result.failure(AppError.documentNotFound(identifier)))
+                }
+                return
+            }
+            
+            do {
+                let result = try snap.toDocument(T.self)
                 completion(Result.success(result))
             } catch {
                 completion(Result.failure(.otherError(error)))

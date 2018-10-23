@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Firebase
+import FirebaseFirestore
 
 extension DocumentSnapshot {
     func toDocument<T: Decodable>(_ type: T.Type) throws -> T {
