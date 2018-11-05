@@ -22,6 +22,13 @@ class CharacteristicsCellLevel2: UITableViewCell, CharacteristicsCellProtocol {
     
     func configure(with characteristics: CharacteristicsModel) {
         menuCaption.text = characteristics.name
+        if AppManager.shared.isSubscribed(to: characteristics) {
+            contentView.backgroundColor = .lightGray
+            self.accessoryType = UITableViewCell.AccessoryType.checkmark
+        } else {
+            contentView.backgroundColor = .white
+            self.accessoryType = UITableViewCell.AccessoryType.none
+        }
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

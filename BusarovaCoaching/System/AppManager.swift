@@ -83,6 +83,81 @@ class AppManager {
         }
     }
     
+    /// Indicates if the current user has been already subscribed to the requested indicator of the
+    /// characteristics competence
+    ///
+    /// - Parameter to: requested characteristic
+    /// - Returns: **true** if current user has already subscribed to requsted indicator of the characteristics competence. Also, if user has the **Admin** userrole, **true** will be always returned. **False** will be returned if not the indicator of the characteristics competence was requested, or there is no subscription to the requested indicator
+    func isSubscribed(to characteristic: CharacteristicsModel) -> Bool {
+        guard let currentUser = currentUser else {
+            return false
+        }
+        
+        switch currentUser.userRole {
+        case .admin:
+            switch characteristic.level{
+            case .indicatorsOfCompetentions:
+                return true
+            default:
+                return false
+            }
+        case .user:
+            switch characteristic.level {
+            case .indicatorsOfCompetentions:
+                return currentUser.subscribedCharacteristics.contains(characteristic.id)
+            default:
+                return false
+            }
+        }
+    }
+    
+    /// Performs the subscription or unsubscription of the current user to the requested indicator
+    /// of the characteristics competence
+    ///
+    /// - Parameter to: requested characteristic
+    /// - Parameter subscribe: indicates the action: **true** means subscription, **false** means unsubscription
+    /// - Parameter completion: completion closure (Result < Bool >) -> Void. If current user has been
+    /// already subscribed to the requested indicator **Result.success(false)** will be called.
+    func performSubscriptionAction(to characteristic: CharacteristicsModel, subscribe: Bool, completion: @escaping (Result<Bool>) -> Void) {
+        guard var currentUser = currentUser else {
+            return completion(Result.failure(AppError.notAuthorized))
+        }
+        
+        if characteristic.level != CharacteristicsLevel.indicatorsOfCompetentions {
+            return completion(Result.failure(AppError.incorrectCharacteristicLevel))
+        }
+        
+        if subscribe && isSubscribed(to: characteristic) {
+            return completion(Result.success(false))
+        }
+        
+        if !subscribe && !isSubscribed(to: characteristic) {
+            return completion(Result.success(false))
+        }
+        
+        if subscribe {
+            currentUser.subscribedCharacteristics.append(characteristic.id)
+        } else {
+            if let unsubscribedIndex = currentUser.subscribedCharacteristics.firstIndex(of: characteristic.id) {
+                currentUser.subscribedCharacteristics.remove(at: unsubscribedIndex)
+            } else {
+                return completion(Result.success(false))
+            }
+        }
+        
+        FirebaseController.shared.getDataController().saveData(currentUser, with: currentUser.id, in: DBTables.users) {
+            (result: Result<User>) in
+            
+            switch result {
+            case .success(let user):
+                self.currentUser = user
+                completion(Result.success(true))
+            case .failure(let error):
+                completion(Result.failure(error))
+            }
+        }
+    }
+    
 // MARK: - private methods
     private func configureFireBase() {
         FirebaseApp.configure()

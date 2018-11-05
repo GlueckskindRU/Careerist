@@ -15,6 +15,7 @@ struct User: Codable {
     let userRole: UserRole
     let isPaidUser: Bool
     let hasPaidTill: Date?
+    var subscribedCharacteristics: [String]
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -23,23 +24,25 @@ struct User: Codable {
         case userRole
         case isPaidUser
         case hasPaidTill
+        case subscribedCharacteristics
     }
     
     init(name: String, email: String) {
-        self.init(id: "", name: name, email: email, role: UserRole.user, isPaidUser: false, hasPaidTill: nil)
+        self.init(id: "", name: name, email: email, role: UserRole.user, isPaidUser: false, hasPaidTill: nil, subscribedCharacteristics: [])
     }
     
     init(id: String, name: String, email: String) {
-        self.init(id: id, name: name, email: email, role: UserRole.user, isPaidUser: false, hasPaidTill: nil)
+        self.init(id: id, name: name, email: email, role: UserRole.user, isPaidUser: false, hasPaidTill: nil, subscribedCharacteristics: [])
     }
     
-    init(id: String, name: String, email: String, role: UserRole, isPaidUser: Bool, hasPaidTill: Date?) {
+    init(id: String, name: String, email: String, role: UserRole, isPaidUser: Bool, hasPaidTill: Date?, subscribedCharacteristics: [String]) {
         self.id = id
         self.name = name
         self.email = email
         self.userRole = role
         self.isPaidUser = isPaidUser
         self.hasPaidTill = hasPaidTill
+        self.subscribedCharacteristics = subscribedCharacteristics
     }
     
     init(from decoder: Decoder) throws {
@@ -54,6 +57,7 @@ struct User: Codable {
         
         self.isPaidUser = try values.decode(Bool.self, forKey: .isPaidUser)
         self.hasPaidTill = try? values.decode(Date.self, forKey: .hasPaidTill)
+        self.subscribedCharacteristics = try values.decode([String].self, forKey: .subscribedCharacteristics)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -65,5 +69,6 @@ struct User: Codable {
         try container.encode(userRole.rawValue, forKey: .userRole)
         try container.encode(isPaidUser, forKey: .isPaidUser)
         try container.encode(hasPaidTill, forKey: .hasPaidTill)
+        try container.encode(subscribedCharacteristics, forKey: .subscribedCharacteristics)
     }
 }

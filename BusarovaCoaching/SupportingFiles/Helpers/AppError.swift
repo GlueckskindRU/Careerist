@@ -14,6 +14,8 @@ enum AppError: Error {
     case saveDocument(Error)
     case downloadURLWrong(URL?)
     case downloadedImageCreation(Error?)
+    case notAuthorized
+    case incorrectCharacteristicLevel
     case otherError(Error)
     
     func getError() -> String {
@@ -28,6 +30,10 @@ enum AppError: Error {
             return "Ошбка получения ссылки на закаченное изображение: \(String(describing: url))"
         case .downloadedImageCreation(let error):
             return "Ошибка формирования скаченного изображения: \(String(describing: error))"
+        case .notAuthorized:
+            return "Вы не авторизованы для совершения данного действия"
+        case .incorrectCharacteristicLevel:
+            return "Выбран некорректный уровень группировки компетенции"
         case .otherError(let error):
             return error.localizedDescription
         }

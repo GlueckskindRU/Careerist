@@ -10,6 +10,7 @@
 		557D3715C2EA4660FED5D13B /* Pods_BusarovaCoaching.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61BAA6AABAAC7B1CCC410EA2 /* Pods_BusarovaCoaching.framework */; };
 		DA0637962178BE4300A854B8 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0637952178BE4300A854B8 /* AppManager.swift */; };
 		DA167D0B2134300F001A9A84 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA167D0A2134300F001A9A84 /* DataController.swift */; };
+		DA19AA7421909A230049168A /* CharacteristicsCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA19AA7321909A230049168A /* CharacteristicsCellProtocol.swift */; };
 		DA30394A217DFF72005EC94E /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA303949217DFF72005EC94E /* AuthorizationViewController.swift */; };
 		DA30394C217E4057005EC94E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA30394B217E4057005EC94E /* User.swift */; };
 		DA30394E217E465E005EC94E /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA30394D217E465E005EC94E /* String.swift */; };
@@ -109,6 +110,7 @@
 		7D348FDAB9D9C3649F079096 /* Pods-BusarovaCoaching.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BusarovaCoaching.release.xcconfig"; path = "Pods/Target Support Files/Pods-BusarovaCoaching/Pods-BusarovaCoaching.release.xcconfig"; sourceTree = "<group>"; };
 		DA0637952178BE4300A854B8 /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 		DA167D0A2134300F001A9A84 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		DA19AA7321909A230049168A /* CharacteristicsCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicsCellProtocol.swift; sourceTree = "<group>"; };
 		DA303949217DFF72005EC94E /* AuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
 		DA30394B217E4057005EC94E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		DA30394D217E465E005EC94E /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -400,6 +402,7 @@
 			isa = PBXGroup;
 			children = (
 				DAA9D75121652E1B009697E8 /* SaveListElementsProtocol.swift */,
+				DA19AA7321909A230049168A /* CharacteristicsCellProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -697,6 +700,7 @@
 				DAEE5182215025AE00449FEE /* LiteralConsts.swift in Sources */,
 				DAB5CB152135A5A000B436C2 /* AchievementsModel.swift in Sources */,
 				DAC61ECD21498AB300FB78C6 /* InsideCell.swift in Sources */,
+				DA19AA7421909A230049168A /* CharacteristicsCellProtocol.swift in Sources */,
 				DAC61ECF214A84D300FB78C6 /* NewCharacteristicsArticleHeaderView.swift in Sources */,
 				DAE6DF852152DFAB009C9CC3 /* UITableView.swift in Sources */,
 				DAC61EEA214C209B00FB78C6 /* Dictionary.swift in Sources */,

@@ -9,10 +9,6 @@
 import UIKit
 import FirebaseFirestore
 
-protocol CharacteristicsCellProtocol {
-    func configure(with characteristics: CharacteristicsModel)
-}
-
 class CharacteristicsTableViewController: UITableViewController {
     private var characteristics: [CharacteristicsModel] = []
     private var indexPath: IndexPath?
@@ -55,6 +51,7 @@ class CharacteristicsTableViewController: UITableViewController {
     }
 }
 
+// MARK: - TableView Data Source
 extension CharacteristicsTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return characteristics.count
@@ -80,6 +77,7 @@ extension CharacteristicsTableViewController {
     }
 }
 
+// MARK: - Gesture Recognizer Delegate
 extension CharacteristicsTableViewController: UIGestureRecognizerDelegate {
     @objc
     private func tapRecognizer(recognizer: UITapGestureRecognizer) {
@@ -98,6 +96,8 @@ extension CharacteristicsTableViewController: UIGestureRecognizerDelegate {
                     self.indexPath = indexPath
                     if AppManager.shared.currentUserHasPermission(to: DBTables.articles, with: characterictic.id) {
                     performSegue(withIdentifier: SegueIdentifiers.characteristicsArticle.rawValue, sender: self)
+                    } else {
+                        indicateSubscriptionDialog(for: characterictic)
                     }
                 }
             } else {
@@ -120,6 +120,7 @@ extension CharacteristicsTableViewController: UIGestureRecognizerDelegate {
     }
 }
 
+// MARK: - Menu expanding and collansing
 extension CharacteristicsTableViewController {
     private func fetchGroupsOfCompetentions() {
         let actitivityIndicator = ActivityIndicator()
@@ -181,5 +182,60 @@ extension CharacteristicsTableViewController {
         tableView.endUpdates()
         tableView.reloadData()
         actitivityIndicator.stop()
+    }
+}
+
+// MARK: - Subscriptions & Unsubscription
+extension CharacteristicsTableViewController {
+    private func indicateSubscriptionDialog(for characteristic: CharacteristicsModel) {
+        let activityIndicator = ActivityIndicator()
+        
+        let subscribeAction: Bool
+        let message: String
+        
+        if AppManager.shared.isSubscribed(to: characteristic) {
+            subscribeAction = false
+            message = "Вы действительно хотите отписаться от выбранного индикатора: \"\(characteristic.name)\"?"
+        } else {
+            subscribeAction = true
+            message = "Вы действительно хотите подписаться на выбранный индикатор: \"\(characteristic.name)\"?"
+        }
+        
+        let dialogController = UIAlertController(title: nil, message: message, preferredStyle: UIAlertController.Style.alert)
+        
+        let yesAction = UIAlertAction(title: "Да", style: UIAlertAction.Style.default) {
+            alertAction in
+            
+            activityIndicator.start()
+            
+            AppManager.shared.performSubscriptionAction(to: characteristic, subscribe: subscribeAction) {
+                (result: Result<Bool>) in
+                
+                switch result {
+                case .success(let subscribed):
+                    DispatchQueue.main.async {
+                        activityIndicator.stop()
+                        if subscribed {
+                            self.tableView.reloadData()
+                        }
+                    }
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        activityIndicator.stop()
+                        let alertDialog = AlertDialog(title: nil, message: error.getError())
+                        alertDialog.showAlert(in: self, completion: nil)
+                    }
+                }
+            }
+        }
+        
+        let noAction = UIAlertAction(title: "Нет", style: UIAlertAction.Style.cancel, handler: nil)
+        
+        dialogController.addAction(yesAction)
+        dialogController.addAction(noAction)
+        
+        dialogController.preferredAction = yesAction
+        
+        present(dialogController, animated: true, completion: nil)
     }
 }
