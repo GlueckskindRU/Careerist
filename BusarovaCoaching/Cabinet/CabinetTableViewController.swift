@@ -91,7 +91,7 @@ extension CabinetTableViewController: CabinetSectionDelegateProtocol {
         case "Мои достижения":
             viewController = AchievementsTableViewController()
         case "График развития":
-            viewController = DevelopmentTableViewController()
+            viewController = ScheduleTableViewController()
         case "Мои записи":
             viewController = NotesTableViewController()
         default:

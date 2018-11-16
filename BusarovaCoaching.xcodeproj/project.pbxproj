@@ -11,6 +11,8 @@
 		DA0637962178BE4300A854B8 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0637952178BE4300A854B8 /* AppManager.swift */; };
 		DA167D0B2134300F001A9A84 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA167D0A2134300F001A9A84 /* DataController.swift */; };
 		DA19AA7421909A230049168A /* CharacteristicsCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA19AA7321909A230049168A /* CharacteristicsCellProtocol.swift */; };
+		DA19AA772191B4770049168A /* DayOfWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA19AA762191B4770049168A /* DayOfWeek.swift */; };
+		DA19AA792191DD320049168A /* SubscriptionArticleSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA19AA782191DD320049168A /* SubscriptionArticleSchedule.swift */; };
 		DA30394A217DFF72005EC94E /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA303949217DFF72005EC94E /* AuthorizationViewController.swift */; };
 		DA30394C217E4057005EC94E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA30394B217E4057005EC94E /* User.swift */; };
 		DA30394E217E465E005EC94E /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA30394D217E465E005EC94E /* String.swift */; };
@@ -59,8 +61,6 @@
 		DAC124ED2125F90500378DA1 /* CompetenceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124EC2125F90500378DA1 /* CompetenceCell.swift */; };
 		DAC124F12125FDED00378DA1 /* AchievementsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124F02125FDED00378DA1 /* AchievementsTableViewController.swift */; };
 		DAC124F32125FED800378DA1 /* AchivementsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124F22125FED800378DA1 /* AchivementsCell.swift */; };
-		DAC124F62126074D00378DA1 /* DevelopmentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124F52126074D00378DA1 /* DevelopmentTableViewController.swift */; };
-		DAC124F82126086B00378DA1 /* DevelopmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124F72126086B00378DA1 /* DevelopmentCell.swift */; };
 		DAC124FB21260FA000378DA1 /* NotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124FA21260FA000378DA1 /* NotesTableViewController.swift */; };
 		DAC124FD212610CB00378DA1 /* NotesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124FC212610CB00378DA1 /* NotesCell.swift */; };
 		DAC124FF2126120A00378DA1 /* DetailedNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124FE2126120A00378DA1 /* DetailedNoteViewController.swift */; };
@@ -102,6 +102,16 @@
 		DAEE5180214FD4D800449FEE /* ListElementsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE517F214FD4D800449FEE /* ListElementsCell.swift */; };
 		DAEE5182215025AE00449FEE /* LiteralConsts.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE5181215025AE00449FEE /* LiteralConsts.swift */; };
 		DAEE5184215027FF00449FEE /* EditListInsideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE5183215027FF00449FEE /* EditListInsideViewController.swift */; };
+		DAF2A47E219CA05500BC45A6 /* SubscriptionAdviceSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF2A47D219CA05500BC45A6 /* SubscriptionAdviceSchedule.swift */; };
+		DAF2A480219CA62E00BC45A6 /* ScheduleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF2A47F219CA62E00BC45A6 /* ScheduleTableViewController.swift */; };
+		DAF2A482219CA78F00BC45A6 /* AdvicesScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF2A481219CA78F00BC45A6 /* AdvicesScheduleCell.swift */; };
+		DAF2A484219CB4F000BC45A6 /* MultiSelectSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF2A483219CB4F000BC45A6 /* MultiSelectSegmentedControl.swift */; };
+		DAF2A488219CBBF700BC45A6 /* ArticlesScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF2A487219CBBF700BC45A6 /* ArticlesScheduleCell.swift */; };
+		DAF2A48A219CC0AE00BC45A6 /* ArticlesScheduleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAF2A489219CC0AE00BC45A6 /* ArticlesScheduleCell.xib */; };
+		DAF2A495219ED94200BC45A6 /* ScheduleCellDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF2A494219ED94200BC45A6 /* ScheduleCellDelegateProtocol.swift */; };
+		DAF2A49B219EF08000BC45A6 /* TimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF2A49A219EF08000BC45A6 /* TimePickerViewController.swift */; };
+		DAF2A49D219F14DD00BC45A6 /* TimeSaveDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF2A49C219F14DD00BC45A6 /* TimeSaveDelegateProtocol.swift */; };
+		DAF2A49F219F350300BC45A6 /* AdvicesScheduleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAF2A49E219F350300BC45A6 /* AdvicesScheduleCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -111,6 +121,8 @@
 		DA0637952178BE4300A854B8 /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 		DA167D0A2134300F001A9A84 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		DA19AA7321909A230049168A /* CharacteristicsCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicsCellProtocol.swift; sourceTree = "<group>"; };
+		DA19AA762191B4770049168A /* DayOfWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeek.swift; sourceTree = "<group>"; };
+		DA19AA782191DD320049168A /* SubscriptionArticleSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionArticleSchedule.swift; sourceTree = "<group>"; };
 		DA303949217DFF72005EC94E /* AuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
 		DA30394B217E4057005EC94E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		DA30394D217E465E005EC94E /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -161,8 +173,6 @@
 		DAC124EC2125F90500378DA1 /* CompetenceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetenceCell.swift; sourceTree = "<group>"; };
 		DAC124F02125FDED00378DA1 /* AchievementsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsTableViewController.swift; sourceTree = "<group>"; };
 		DAC124F22125FED800378DA1 /* AchivementsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchivementsCell.swift; sourceTree = "<group>"; };
-		DAC124F52126074D00378DA1 /* DevelopmentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentTableViewController.swift; sourceTree = "<group>"; };
-		DAC124F72126086B00378DA1 /* DevelopmentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentCell.swift; sourceTree = "<group>"; };
 		DAC124FA21260FA000378DA1 /* NotesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTableViewController.swift; sourceTree = "<group>"; };
 		DAC124FC212610CB00378DA1 /* NotesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesCell.swift; sourceTree = "<group>"; };
 		DAC124FE2126120A00378DA1 /* DetailedNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedNoteViewController.swift; sourceTree = "<group>"; };
@@ -204,6 +214,16 @@
 		DAEE517F214FD4D800449FEE /* ListElementsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListElementsCell.swift; sourceTree = "<group>"; };
 		DAEE5181215025AE00449FEE /* LiteralConsts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiteralConsts.swift; sourceTree = "<group>"; };
 		DAEE5183215027FF00449FEE /* EditListInsideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditListInsideViewController.swift; sourceTree = "<group>"; };
+		DAF2A47D219CA05500BC45A6 /* SubscriptionAdviceSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionAdviceSchedule.swift; sourceTree = "<group>"; };
+		DAF2A47F219CA62E00BC45A6 /* ScheduleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewController.swift; sourceTree = "<group>"; };
+		DAF2A481219CA78F00BC45A6 /* AdvicesScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvicesScheduleCell.swift; sourceTree = "<group>"; };
+		DAF2A483219CB4F000BC45A6 /* MultiSelectSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelectSegmentedControl.swift; sourceTree = "<group>"; };
+		DAF2A487219CBBF700BC45A6 /* ArticlesScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesScheduleCell.swift; sourceTree = "<group>"; };
+		DAF2A489219CC0AE00BC45A6 /* ArticlesScheduleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticlesScheduleCell.xib; sourceTree = "<group>"; };
+		DAF2A494219ED94200BC45A6 /* ScheduleCellDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCellDelegateProtocol.swift; sourceTree = "<group>"; };
+		DAF2A49A219EF08000BC45A6 /* TimePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerViewController.swift; sourceTree = "<group>"; };
+		DAF2A49C219F14DD00BC45A6 /* TimeSaveDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSaveDelegateProtocol.swift; sourceTree = "<group>"; };
+		DAF2A49E219F350300BC45A6 /* AdvicesScheduleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdvicesScheduleCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,6 +273,14 @@
 				DA30394F217E4FE3005EC94E /* KeychainController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		DA19AA752191B3DC0049168A /* Auxiliary */ = {
+			isa = PBXGroup;
+			children = (
+				DA19AA762191B4770049168A /* DayOfWeek.swift */,
+			);
+			path = Auxiliary;
 			sourceTree = "<group>";
 		};
 		DA41D1BA2178B251001266AB /* Authorization */ = {
@@ -349,6 +377,7 @@
 		DA9ED5F92133EA3000FB54FB /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				DA19AA752191B3DC0049168A /* Auxiliary */,
 				DA9ED5FA2133EA4800FB54FB /* CharacteristicsModel.swift */,
 				DAB5CB142135A5A000B436C2 /* AchievementsModel.swift */,
 				DAB5CB182135BA3300B436C2 /* NotesModel.swift */,
@@ -357,6 +386,8 @@
 				DAC61EB921492A6000FB78C6 /* ArticleInside.swift */,
 				DAE6DF7621527C14009C9CC3 /* ArticleInsideUnwrapped.swift */,
 				DA30394B217E4057005EC94E /* User.swift */,
+				DA19AA782191DD320049168A /* SubscriptionArticleSchedule.swift */,
+				DAF2A47D219CA05500BC45A6 /* SubscriptionAdviceSchedule.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -403,6 +434,8 @@
 			children = (
 				DAA9D75121652E1B009697E8 /* SaveListElementsProtocol.swift */,
 				DA19AA7321909A230049168A /* CharacteristicsCellProtocol.swift */,
+				DAF2A494219ED94200BC45A6 /* ScheduleCellDelegateProtocol.swift */,
+				DAF2A49C219F14DD00BC45A6 /* TimeSaveDelegateProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -411,7 +444,7 @@
 			isa = PBXGroup;
 			children = (
 				DAC124EF2125FDCD00378DA1 /* Achivements */,
-				DAC124F42126071D00378DA1 /* Development */,
+				DAC124F42126071D00378DA1 /* Schedule */,
 				DAC124EE2125FDBC00378DA1 /* Competence */,
 				DAC124F921260F8300378DA1 /* Notes */,
 				DAC124E22125E18C00378DA1 /* CabinetTableViewController.swift */,
@@ -441,13 +474,16 @@
 			path = Achivements;
 			sourceTree = "<group>";
 		};
-		DAC124F42126071D00378DA1 /* Development */ = {
+		DAC124F42126071D00378DA1 /* Schedule */ = {
 			isa = PBXGroup;
 			children = (
-				DAC124F52126074D00378DA1 /* DevelopmentTableViewController.swift */,
-				DAC124F72126086B00378DA1 /* DevelopmentCell.swift */,
+				DAF2A48B219DCBD200BC45A6 /* Xib */,
+				DAF2A47F219CA62E00BC45A6 /* ScheduleTableViewController.swift */,
+				DAF2A481219CA78F00BC45A6 /* AdvicesScheduleCell.swift */,
+				DAF2A487219CBBF700BC45A6 /* ArticlesScheduleCell.swift */,
+				DAF2A49A219EF08000BC45A6 /* TimePickerViewController.swift */,
 			);
-			path = Development;
+			path = Schedule;
 			sourceTree = "<group>";
 		};
 		DAC124F921260F8300378DA1 /* Notes */ = {
@@ -527,8 +563,18 @@
 				DAC61EE1214C1AD500FB78C6 /* Result.swift */,
 				DAC61EE3214C1B4600FB78C6 /* AppError.swift */,
 				DAC61EED214C255700FB78C6 /* AlertDialog.swift */,
+				DAF2A483219CB4F000BC45A6 /* MultiSelectSegmentedControl.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		DAF2A48B219DCBD200BC45A6 /* Xib */ = {
+			isa = PBXGroup;
+			children = (
+				DAF2A489219CC0AE00BC45A6 /* ArticlesScheduleCell.xib */,
+				DAF2A49E219F350300BC45A6 /* AdvicesScheduleCell.xib */,
+			);
+			path = Xib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -597,6 +643,8 @@
 				DAACF04821345C45006FA934 /* GoogleService-Info.plist in Resources */,
 				DA68CD65212312D000AE8515 /* Main.storyboard in Resources */,
 				DADEAB2D212458AF0042B564 /* WelcomeFooterXIB.xib in Resources */,
+				DAF2A48A219CC0AE00BC45A6 /* ArticlesScheduleCell.xib in Resources */,
+				DAF2A49F219F350300BC45A6 /* AdvicesScheduleCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -668,7 +716,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DAC124F62126074D00378DA1 /* DevelopmentTableViewController.swift in Sources */,
 				DAC124FD212610CB00378DA1 /* NotesCell.swift in Sources */,
 				DA30394E217E465E005EC94E /* String.swift in Sources */,
 				DAC61EDA214BD67400FB78C6 /* NewTextInsideViewController.swift in Sources */,
@@ -687,6 +734,7 @@
 				DAC61ED6214A969700FB78C6 /* TableFooterView.swift in Sources */,
 				DAC124E72125E83B00378DA1 /* CabinetCell.swift in Sources */,
 				DA9ED5FB2133EA4800FB54FB /* CharacteristicsModel.swift in Sources */,
+				DAF2A495219ED94200BC45A6 /* ScheduleCellDelegateProtocol.swift in Sources */,
 				DAC61EDC214BD69500FB78C6 /* NewImageInsideViewController.swift in Sources */,
 				DAA9D75221652E1B009697E8 /* SaveListElementsProtocol.swift in Sources */,
 				DAC124FF2126120A00378DA1 /* DetailedNoteViewController.swift in Sources */,
@@ -697,30 +745,35 @@
 				DAC61ECA214981C900FB78C6 /* NewCharacteristicArticleTableViewController.swift in Sources */,
 				DAA9D74F21629411009697E8 /* NewTestQuestionCell.swift in Sources */,
 				DAC61EEC214C215700FB78C6 /* QuerySnapshot.swift in Sources */,
+				DAF2A49B219EF08000BC45A6 /* TimePickerViewController.swift in Sources */,
 				DAEE5182215025AE00449FEE /* LiteralConsts.swift in Sources */,
 				DAB5CB152135A5A000B436C2 /* AchievementsModel.swift in Sources */,
 				DAC61ECD21498AB300FB78C6 /* InsideCell.swift in Sources */,
 				DA19AA7421909A230049168A /* CharacteristicsCellProtocol.swift in Sources */,
+				DAF2A482219CA78F00BC45A6 /* AdvicesScheduleCell.swift in Sources */,
 				DAC61ECF214A84D300FB78C6 /* NewCharacteristicsArticleHeaderView.swift in Sources */,
 				DAE6DF852152DFAB009C9CC3 /* UITableView.swift in Sources */,
 				DAC61EEA214C209B00FB78C6 /* Dictionary.swift in Sources */,
 				DAA97B042123396F005AF50F /* WelcomeTableCell.swift in Sources */,
 				DAE6DF7F21527FAF009C9CC3 /* ArticleImageWithCaptionCell.swift in Sources */,
+				DAF2A47E219CA05500BC45A6 /* SubscriptionAdviceSchedule.swift in Sources */,
 				DAC61ED8214BB69000FB78C6 /* ActivityIndicator.swift in Sources */,
 				DA81DA70216B885200D33388 /* NewAdviceViewController.swift in Sources */,
 				DAC61EE8214C1FFF00FB78C6 /* JSONDecoder.swift in Sources */,
 				DA81DA77216BF40800D33388 /* ListOfAdvicesCell.swift in Sources */,
 				DAEE517C214FAAA100449FEE /* StoragePath.swift in Sources */,
 				DAA9D7582166501A009697E8 /* ArticleListWithCaptionCell.swift in Sources */,
+				DAF2A488219CBBF700BC45A6 /* ArticlesScheduleCell.swift in Sources */,
 				DA167D0B2134300F001A9A84 /* DataController.swift in Sources */,
 				DAA9D748215EA02D009697E8 /* CharacteristicsLevel.swift in Sources */,
 				DAC61EB82149299800FB78C6 /* Article.swift in Sources */,
 				DAC124E92125ECC500378DA1 /* CabinetSectionView.swift in Sources */,
 				DAC0AE38214850BC00FF9D82 /* FirebaseController.swift in Sources */,
 				DA9ED6022133F7D900FB54FB /* CharacteristicsCellLevel0.swift in Sources */,
+				DAF2A49D219F14DD00BC45A6 /* TimeSaveDelegateProtocol.swift in Sources */,
 				DAEE517A214D857500449FEE /* UITapGestureRecognizer.swift in Sources */,
+				DA19AA772191B4770049168A /* DayOfWeek.swift in Sources */,
 				DAC124E52125E20500378DA1 /* CabinetModel.swift in Sources */,
-				DAC124F82126086B00378DA1 /* DevelopmentCell.swift in Sources */,
 				DAC61EE0214C196800FB78C6 /* JSONEncoder.swift in Sources */,
 				DA68CD60212312D000AE8515 /* AppDelegate.swift in Sources */,
 				DADEAB2F21246A860042B564 /* WelcomeFootterXIB.swift in Sources */,
@@ -742,13 +795,16 @@
 				DAE6DF7921527DD9009C9CC3 /* ArticleTextWithCaptionCell.swift in Sources */,
 				DAC61EC82149604500FB78C6 /* CharacteristicsArticlesCell.swift in Sources */,
 				DA303954217E5C05005EC94E /* StoryboardIdentifiers.swift in Sources */,
+				DAF2A480219CA62E00BC45A6 /* ScheduleTableViewController.swift in Sources */,
 				DA9ED60A2133FCE800FB54FB /* CharacteristicsCellLevel2.swift in Sources */,
 				DAEE5184215027FF00449FEE /* EditListInsideViewController.swift in Sources */,
 				DAE6DF7721527C14009C9CC3 /* ArticleInsideUnwrapped.swift in Sources */,
 				DAC124ED2125F90500378DA1 /* CompetenceCell.swift in Sources */,
 				DAA97B0221233715005AF50F /* WelcomeModel.swift in Sources */,
 				DA303950217E4FE3005EC94E /* KeychainController.swift in Sources */,
+				DAF2A484219CB4F000BC45A6 /* MultiSelectSegmentedControl.swift in Sources */,
 				DA81DA75216BEDB400D33388 /* ListOfAdvicesTableViewController.swift in Sources */,
+				DA19AA792191DD320049168A /* SubscriptionArticleSchedule.swift in Sources */,
 				DAA97B00212336C0005AF50F /* WelcomeTableViewController.swift in Sources */,
 				DAE6DF8121528EC3009C9CC3 /* ArticlesPreviewTableViewController.swift in Sources */,
 				DA303956217F2BDB005EC94E /* UserRole.swift in Sources */,

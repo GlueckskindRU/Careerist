@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="208" id="pkT-Nn-Bz8" customClass="ArticlesScheduleCell" customModule="ru_homber_Karierist" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="431" height="208"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pkT-Nn-Bz8" id="XnO-7A-Cay">
+                <rect key="frame" x="0.0" y="0.0" width="431" height="207.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Полезные статьи" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v2x-1n-Ihf">
+                        <rect key="frame" x="32" y="27" width="367" height="29"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="R8V-ab-rx8" customClass="MultiSelectSegmentedControl" customModule="ru_homber_Karierist" customModuleProvider="target">
+                        <rect key="frame" x="32" y="94" width="367" height="29"/>
+                        <segments>
+                            <segment title="Пн"/>
+                            <segment title="Вт"/>
+                            <segment title="Ср"/>
+                            <segment title="Чт"/>
+                            <segment title="Пт"/>
+                            <segment title="Сб"/>
+                            <segment title="Вс"/>
+                        </segments>
+                    </segmentedControl>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Время: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Hr-wm-H0C">
+                        <rect key="frame" x="32" y="134" width="66" height="27.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="74j-RJ-50P">
+                        <rect key="frame" x="110" y="134" width="46" height="27.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <state key="normal" title="00:00"/>
+                        <connections>
+                            <action selector="setupTimeButton:" destination="pkT-Nn-Bz8" eventType="touchUpInside" id="Km2-rE-4X8"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Периодичность" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3BO-yn-TlG">
+                        <rect key="frame" x="32" y="60" width="367" height="22"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вопросы для самоанализа" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ebg-XO-YBD">
+                        <rect key="frame" x="32" y="173.5" width="306" height="22"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Hjx-ce-JXj">
+                        <rect key="frame" x="350" y="169" width="51" height="31"/>
+                        <connections>
+                            <action selector="withQuestionSwitchTapped:" destination="pkT-Nn-Bz8" eventType="valueChanged" id="ABl-vc-ksK"/>
+                        </connections>
+                    </switch>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Hjx-ce-JXj" firstAttribute="leading" secondItem="ebg-XO-YBD" secondAttribute="trailing" constant="12" id="1ES-3r-264"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="3BO-yn-TlG" secondAttribute="trailing" constant="12" id="4ak-Ph-Nqf"/>
+                    <constraint firstItem="R8V-ab-rx8" firstAttribute="leading" secondItem="XnO-7A-Cay" secondAttribute="leadingMargin" constant="12" id="6qC-5z-JIv"/>
+                    <constraint firstItem="v2x-1n-Ihf" firstAttribute="top" secondItem="XnO-7A-Cay" secondAttribute="topMargin" constant="16" id="H7p-bl-S8z"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="R8V-ab-rx8" secondAttribute="trailing" constant="12" id="Hu4-5N-wLp"/>
+                    <constraint firstAttribute="bottom" secondItem="ebg-XO-YBD" secondAttribute="bottom" constant="12" id="INc-AI-zMg"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Hjx-ce-JXj" secondAttribute="trailing" constant="12" id="InC-ZC-Vbx"/>
+                    <constraint firstItem="74j-RJ-50P" firstAttribute="leading" secondItem="3Hr-wm-H0C" secondAttribute="trailing" constant="12" id="NYI-M3-tSv"/>
+                    <constraint firstItem="74j-RJ-50P" firstAttribute="top" secondItem="R8V-ab-rx8" secondAttribute="bottom" constant="12" id="R8Y-4v-Gpt"/>
+                    <constraint firstItem="3Hr-wm-H0C" firstAttribute="top" secondItem="R8V-ab-rx8" secondAttribute="bottom" constant="12" id="RFu-7g-Muy"/>
+                    <constraint firstItem="ebg-XO-YBD" firstAttribute="leading" secondItem="XnO-7A-Cay" secondAttribute="leadingMargin" constant="12" id="UCG-3N-Id4"/>
+                    <constraint firstItem="3Hr-wm-H0C" firstAttribute="bottom" secondItem="74j-RJ-50P" secondAttribute="bottom" id="Wf9-GZ-j4g"/>
+                    <constraint firstItem="3Hr-wm-H0C" firstAttribute="leading" secondItem="XnO-7A-Cay" secondAttribute="leadingMargin" constant="12" id="XPq-eU-59H"/>
+                    <constraint firstItem="Hjx-ce-JXj" firstAttribute="leading" secondItem="ebg-XO-YBD" secondAttribute="trailing" constant="12" id="alW-ny-9eG"/>
+                    <constraint firstItem="ebg-XO-YBD" firstAttribute="centerY" secondItem="Hjx-ce-JXj" secondAttribute="centerY" id="fow-ZO-fAB"/>
+                    <constraint firstItem="ebg-XO-YBD" firstAttribute="top" secondItem="3Hr-wm-H0C" secondAttribute="bottom" constant="12" id="gCa-bo-84a"/>
+                    <constraint firstItem="v2x-1n-Ihf" firstAttribute="leading" secondItem="XnO-7A-Cay" secondAttribute="leadingMargin" constant="12" id="gdD-nT-hIn"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="v2x-1n-Ihf" secondAttribute="trailing" constant="12" id="kuZ-EI-KQR"/>
+                    <constraint firstItem="R8V-ab-rx8" firstAttribute="top" secondItem="3BO-yn-TlG" secondAttribute="bottom" constant="12" id="nMh-jO-eA6"/>
+                    <constraint firstItem="3BO-yn-TlG" firstAttribute="top" secondItem="v2x-1n-Ihf" secondAttribute="bottomMargin" constant="12" id="ruZ-Li-RnU"/>
+                    <constraint firstItem="3BO-yn-TlG" firstAttribute="leading" secondItem="XnO-7A-Cay" secondAttribute="leadingMargin" constant="12" id="tGJ-Vc-xRA"/>
+                    <constraint firstItem="74j-RJ-50P" firstAttribute="leading" secondItem="3Hr-wm-H0C" secondAttribute="trailing" constant="12" id="u6Q-ys-rCF"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="frequencySegmentedControl" destination="R8V-ab-rx8" id="WTL-71-Gpb"/>
+                <outlet property="setupTimeButton" destination="74j-RJ-50P" id="G38-bq-Yy7"/>
+                <outlet property="withQuestionSwitch" destination="Hjx-ce-JXj" id="cPR-co-eJc"/>
+            </connections>
+            <point key="canvasLocation" x="56.799999999999997" y="107.94602698650675"/>
+        </tableViewCell>
+    </objects>
+</document>

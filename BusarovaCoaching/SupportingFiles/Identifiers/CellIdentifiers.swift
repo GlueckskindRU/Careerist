@@ -26,4 +26,7 @@ enum CellIdentifiers: String {
     case articleListWithCaptionCell = "Article List With Caption Cell"
     //Advices
     case listOfAdvicesCell = "List Of Advices Cell"
+    //Schedule
+    case articlesSchedule = "Articles Schedule Cell"
+    case advicesSchedule = "Advices Schedule Cell"
 }

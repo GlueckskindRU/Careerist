@@ -158,27 +158,56 @@ extension AuthorizationViewController {
                 FirebaseController.shared.getDataController().saveData(newUser, with: userData.user.uid, in: DBTables.users) {
                     userResult in
                     
-                    self.activityIndicator.stop()
                     switch userResult {
                     case .success(let user):
-                        //Внимание! Потенциально только одна запись в keychain допускается
-                        if !self.keychainController.keychainItemExists() {
-                            let keychainSaveResult = self.keychainController.save(login: enteredEmail, password: password)
+                        let articlesSchedule = SubscriptionArticleSchedule()
+                        let advicesSchedule = SubscriptionAdviceSchedule()
+                        
+                        FirebaseController.shared.getDataController().saveData(articlesSchedule, with: user.id, in: DBTables.articlesSchedule) {
+                            (result: Result<SubscriptionArticleSchedule>) in
                             
-                            if keychainSaveResult,
-                                let _ = self.keychainController.readPassword(for: enteredEmail) {
-                                (UIApplication.shared.delegate as! AppDelegate).appManager.loggedIn(as: user)
-                                if self.calledByAppManager {
-                                    (UIApplication.shared.delegate as! AppDelegate).appManager.presentInitialController()
-                                } else {
-                                    self.navigationController?.popViewController(animated: true)
+                            switch result {
+                            case .success(_):
+                                FirebaseController.shared.getDataController().saveData(advicesSchedule, with: user.id, in: DBTables.advicesSchedule) {
+                                    (result: Result<SubscriptionAdviceSchedule>) in
+                                    
+                                    switch result {
+                                    case .success(_):
+                                        //Внимание! Потенциально только одна запись в keychain допускается
+                                        if !self.keychainController.keychainItemExists() {
+                                            let keychainSaveResult = self.keychainController.save(login: enteredEmail, password: password)
+                                            self.activityIndicator.stop()
+                                            
+                                            if keychainSaveResult,
+                                                let _ = self.keychainController.readPassword(for: enteredEmail) {
+                                                (UIApplication.shared.delegate as! AppDelegate).appManager.loggedIn(as: user)
+                                                if self.calledByAppManager {
+                                                    (UIApplication.shared.delegate as! AppDelegate).appManager.presentInitialController()
+                                                } else {
+                                                    self.navigationController?.popViewController(animated: true)
+                                                }
+                                            } else {
+                                                let alertDialog = AlertDialog(title: nil, message: "Возникла ошибка с сохранением пароля в хранилище")
+                                                alertDialog.showAlert(in: self, completion: nil)
+                                            }
+                                        }
+                                    case .failure(let error):
+                                        self.activityIndicator.stop()
+                                        let alertDialog = AlertDialog(title: nil, message: error.getError())
+                                        alertDialog.showAlert(in: self, completion: nil)
+                                    }
                                 }
-                            } else {
-                                let alertDialog = AlertDialog(title: nil, message: "Возникла ошибка с сохранением пароля в хранилище")
+                            case .failure(let error):
+                                self.activityIndicator.stop()
+                                let alertDialog = AlertDialog(title: nil, message: error.getError())
                                 alertDialog.showAlert(in: self, completion: nil)
                             }
                         }
+                        
+                    
+                        
                     case .failure(let error):
+                        self.activityIndicator.stop()
                         let alertDialog = AlertDialog(title: nil, message: error.getError())
                         alertDialog.showAlert(in: self, completion: nil)
                     }

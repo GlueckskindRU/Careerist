@@ -51,6 +51,13 @@ class AppManager {
         return currentUser == nil ? false : true
     }
     
+    /// Returns the current user
+    ///
+    /// - Returns: the current user or **nil**, if user is still not logged in.
+    func getCurrentUser() -> User? {
+        return currentUser
+    }
+    
     /// Starts the initial comtroller according to the Main.storyboard
     func presentInitialController() {
         guard let appDelegate = appDelegate else {
