@@ -21,7 +21,7 @@ struct DayOfWeek: OptionSet {
     static let thursday = DayOfWeek(rawValue: 1 << 4)
     static let friday = DayOfWeek(rawValue: 1 << 8)
     static let saturday = DayOfWeek(rawValue: 1 << 16)
-    static let sunday = DayOfWeek(rawValue: 1 << 32)
+    static let sunday = DayOfWeek(rawValue: 1 << 24)
     
     var description: String {
         return "DayOfWeek = \(rawValue)"

@@ -13,12 +13,14 @@ struct SubscriptionArticleSchedule: Codable {
     let hour: Int
     let minute: Int
     let withQuestions: Bool
+    let shiftToUTC: Int
     
     enum CodingKeys: String, CodingKey {
         case frequency
         case hour
         case minute
         case withQuestions
+        case shiftToUTC
     }
     
     init() {
@@ -26,6 +28,7 @@ struct SubscriptionArticleSchedule: Codable {
         self.hour = 0
         self.minute = 0
         self.withQuestions = false
+        self.shiftToUTC = TimeZone.current.secondsFromGMT() / (60 * 60)
     }
     
     init(frequency: DayOfWeek, hour: Int, minute: Int, withQuestions: Bool) {
@@ -33,6 +36,7 @@ struct SubscriptionArticleSchedule: Codable {
         self.hour = hour
         self.minute = minute
         self.withQuestions = withQuestions
+        self.shiftToUTC = TimeZone.current.secondsFromGMT() / (60 * 60)
     }
     
     init(from decoder: Decoder) throws {
@@ -44,6 +48,7 @@ struct SubscriptionArticleSchedule: Codable {
         self.hour = try values.decode(Int.self, forKey: .hour)
         self.minute = try values.decode(Int.self, forKey: .minute)
         self.withQuestions = try values.decode(Bool.self, forKey: .withQuestions)
+        self.shiftToUTC = try values.decode(Int.self, forKey: .shiftToUTC)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -53,6 +58,7 @@ struct SubscriptionArticleSchedule: Codable {
         try container.encode(hour, forKey: .hour)
         try container.encode(minute, forKey: .minute)
         try container.encode(withQuestions, forKey: .withQuestions)
+        try container.encode(shiftToUTC, forKey: .shiftToUTC)
     }
 }
 
@@ -62,5 +68,6 @@ extension SubscriptionArticleSchedule: Equatable {
             && lhs.hour == rhs.hour
             && lhs.minute == rhs.minute
             && lhs.withQuestions == rhs.withQuestions
+            && lhs.shiftToUTC == rhs.shiftToUTC
     }
 }
