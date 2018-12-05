@@ -12,6 +12,7 @@ import FirebaseFirestore
 class CharacteristicsTableViewController: UITableViewController {
     private var characteristics: [CharacteristicsModel] = []
     private var indexPath: IndexPath?
+    private let dataService = DataService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,7 +126,8 @@ extension CharacteristicsTableViewController {
     private func fetchGroupsOfCompetentions() {
         let actitivityIndicator = ActivityIndicator()
         actitivityIndicator.start()
-        FirebaseController.shared.getDataController().fetchCharacteristics(of: CharacteristicsLevel.groupOfCompetentions) {
+        
+        dataService.fetchCharacteristics(of: CharacteristicsLevel.groupOfCompetentions) {
             (result: Result<[CharacteristicsModel]>) in
             
             actitivityIndicator.stop()
@@ -143,7 +145,8 @@ extension CharacteristicsTableViewController {
     private func expandMenu(with parentId: String, at index: Int) {
         let actitivityIndicator = ActivityIndicator()
         actitivityIndicator.start()
-        FirebaseController.shared.getDataController().fetchChildernCharacteristicsOf(parentId) {
+        
+        dataService.fetchChildernCharacteristicsOf(parentId) {
             (result: Result<[CharacteristicsModel]>) in
             
             switch result {

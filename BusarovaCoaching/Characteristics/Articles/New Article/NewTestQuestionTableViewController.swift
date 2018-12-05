@@ -15,7 +15,7 @@ protocol TestQuestionSaveProtocol {
 class NewTestQuestionTableViewController: UITableViewController, ArticleInsideElementsProtocol {
     private let separator: Character = "|"
     
-    private var articleInside: ArticleInside?
+    private var articleInside: UIArticleInside?
     private var sequence: Int?
     private var articleSaveDelegate: ArticleSaveDelegateProtocol?
     
@@ -44,7 +44,7 @@ class NewTestQuestionTableViewController: UITableViewController, ArticleInsideEl
         }
     }
     
-    func configure(with articleInside: ArticleInside?, as sequence: Int, delegate: ArticleSaveDelegateProtocol) {
+    func configure(with articleInside: UIArticleInside?, as sequence: Int, delegate: ArticleSaveDelegateProtocol) {
         self.articleInside = articleInside
         self.sequence = sequence
         self.articleSaveDelegate = delegate
@@ -212,23 +212,25 @@ extension NewTestQuestionTableViewController {
         isSaved = false
     }
     
-    private func create(correctAnswer: String?, answers: [String]?) -> ArticleInside? {
+    private func create(correctAnswer: String?, answers: [String]?) -> UIArticleInside? {
         guard let sequence = sequence else {
             return nil
         }
         
         let answersList = answers ?? articleInside?.listElements ?? []
         
-        let result = ArticleInside(id: articleInside?.id ?? "",
-                                   parentID: articleInside?.parentID ?? "",
-                                   sequence: sequence,
-                                   type: ArticleInsideType.testQuestion,
-                                   caption: correctAnswer ?? articleInside?.caption,
-                                   text: testQuestion,
-                                   imageURL: nil,
-                                   imageName: nil,
-                                   numericList: nil,
-                                   listElements: answersList
+        let result = UIArticleInside(id: articleInside?.id ?? "",
+                                     parentID: articleInside?.parentID ?? "",
+                                     sequence: sequence,
+                                     type: .testQuestion,
+                                     caption: correctAnswer ?? articleInside?.caption,
+                                     text: testQuestion,
+                                     image: nil,
+                                     imageURL: nil,
+                                     imageStorageURL: nil,
+                                     imageName: nil,
+                                     numericList: nil,
+                                     listElements: answersList
                                     )
         
         return result

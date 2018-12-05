@@ -10,7 +10,7 @@ import UIKit
 
 class EditListInsideViewController: UIViewController {
     private let newLine: Character = "\n"
-    private var articleInside: ArticleInside!
+    private var articleInside: UIArticleInside!
     private var saveDelegate: SaveListElementsProtocol!
     
     lazy private var textView: UITextView = {
@@ -27,7 +27,7 @@ class EditListInsideViewController: UIViewController {
         return textView
     }()
     
-    func configure(with articleInside: ArticleInside, delegate: SaveListElementsProtocol) {
+    func configure(with articleInside: UIArticleInside, delegate: SaveListElementsProtocol) {
         self.articleInside = articleInside
         self.saveDelegate = delegate
         textView.text = convertListIntoText()

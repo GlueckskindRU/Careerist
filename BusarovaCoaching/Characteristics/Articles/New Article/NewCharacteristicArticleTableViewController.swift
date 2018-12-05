@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ArticleSaveDelegateProtocol {
-    func saveArticle(articleInside: ArticleInside, with articleInsideID: String?)
+    func saveArticle(articleInside: UIArticleInside, with articleInsideID: String?)
 }
 
 protocol ArticleTitleSaveProtocol {
@@ -17,17 +17,19 @@ protocol ArticleTitleSaveProtocol {
 }
 
 protocol ArticleInsideElementsProtocol {
-    func configure(with articleInside: ArticleInside?, as sequence: Int, delegate: ArticleSaveDelegateProtocol)
+    func configure(with articleInside: UIArticleInside?, as sequence: Int, delegate: ArticleSaveDelegateProtocol)
 }
 
 // MARK: - class definition
 class NewCharacteristicArticleTableViewController: UITableViewController {
-    private var articleInsideElements: [ArticleInside] = []
+    private var articleInsideElements: [UIArticleInside] = []
     private var article: Article? = nil
     private var sequence: Int? = nil
     private var articleTitle = ""
     private var parentID: String?
-    private var deletedElements: Set<ArticleInside> = []
+    private var deletedElements: Set<UIArticleInside> = []
+    private var isOffline: Bool = (UIApplication.shared.delegate as! AppDelegate).appManager.isOffline
+    private let dataService = DataService()
     
     lazy private var saveBarButtonItem: UIBarButtonItem = {
         return UIBarButtonItem(title: "Сохранить", style: UIBarButtonItem.Style.plain, target: self, action: #selector(saveArticle(sender:)))
@@ -49,7 +51,7 @@ class NewCharacteristicArticleTableViewController: UITableViewController {
                 if self.isEditing {
                     saveBarButtonItem.isEnabled = false
                 } else {
-                    saveBarButtonItem.isEnabled = true
+                    saveBarButtonItem.isEnabled = true && !isOffline
                 }
             }
         }
@@ -84,8 +86,8 @@ class NewCharacteristicArticleTableViewController: UITableViewController {
                                                   height: 62
                                                     )
         
-        previewBarButtonItem.isEnabled = self.article != nil
-        saveBarButtonItem.isEnabled = !isSaved
+        previewBarButtonItem.isEnabled = (self.article != nil) && !isOffline
+        saveBarButtonItem.isEnabled = !isSaved && !isOffline
         
         editButtonItem.title = "Настроить"
         navigationItem.rightBarButtonItems = [editButtonItem, addBarButtonItem, saveBarButtonItem, previewBarButtonItem]
@@ -101,7 +103,7 @@ class NewCharacteristicArticleTableViewController: UITableViewController {
         } else {
             editButtonItem.title = "Настроить"
             if !isSaved {
-                saveBarButtonItem.isEnabled = true
+                saveBarButtonItem.isEnabled = true && !isOffline
             }
         }
     }
@@ -230,8 +232,8 @@ extension NewCharacteristicArticleTableViewController {
             return
         }
         
-        FirebaseController.shared.getDataController().fetchArticle(with: article.id, forPreview: false) {
-            (result: Result<[ArticleInside]>) in
+        dataService.fetchArticle(with: article.id, forPreview: false) {
+            (result: Result<[UIArticleInside]>) in
             
             actitivityIndicator.stop()
             switch result {
@@ -335,27 +337,29 @@ extension NewCharacteristicArticleTableViewController: ArticleTitleSaveProtocol 
 
 // MARK: - Article Save Delegate
 extension NewCharacteristicArticleTableViewController: ArticleSaveDelegateProtocol {
-    func saveArticle(articleInside: ArticleInside, with articleInsideID: String?) {
+    func saveArticle(articleInside: UIArticleInside, with articleInsideID: String?) {
         saveArticle {
             (article: Article) in
             
             let activityIndicator = ActivityIndicator()
             activityIndicator.start()
             
-            let articleInsideToSave = ArticleInside(id: articleInside.id,
-                                                    parentID: article.id,
-                                                    sequence: articleInside.sequence,
-                                                    type: articleInside.type,
-                                                    caption: articleInside.caption,
-                                                    text: articleInside.text,
-                                                    imageURL: articleInside.imageURL,
-                                                    imageName: articleInside.imageName,
-                                                    numericList: articleInside.numericList,
-                                                    listElements: articleInside.listElements
-            )
+            let articleInsideToSave = UIArticleInside(id: articleInside.id,
+                                                      parentID: article.id,
+                                                      sequence: articleInside.sequence,
+                                                      type: articleInside.type,
+                                                      caption: articleInside.caption,
+                                                      text: articleInside.text,
+                                                      image: articleInside.image,
+                                                      imageURL: articleInside.imageURL,
+                                                      imageStorageURL: articleInside.imageStorageURL,
+                                                      imageName: articleInside.imageName,
+                                                      numericList: articleInside.numeringList,
+                                                      listElements: articleInside.listElements
+                                                        )
             
-            FirebaseController.shared.getDataController().saveData(articleInsideToSave, with: articleInsideID, in: DBTables.articlesInside) {
-                newResult in
+            self.dataService.saveArticleInside(articleInsideToSave, with: articleInsideID) {
+                (newResult: Result<UIArticleInside>) in
                 
                 activityIndicator.stop()
                 switch newResult {
@@ -384,8 +388,8 @@ extension NewCharacteristicArticleTableViewController {
             for element in self.articleInsideElements {
                 activityIndicator.start()
                 
-                FirebaseController.shared.getDataController().saveData(element, with: element.id, in: DBTables.articlesInside) {
-                    result in
+                self.dataService.saveArticleInside(element, with: element.id) {
+                    (result: Result<UIArticleInside>) in
                     
                     activityIndicator.stop()
                     switch result {
@@ -408,7 +412,8 @@ extension NewCharacteristicArticleTableViewController {
         
         guard
             let parentID = parentID,
-            let sequence = sequence else {
+            let sequence = sequence,
+            let currentUser = (UIApplication.shared.delegate as! AppDelegate).appManager.getCurrentUser() else {
                 activityIndicator.stop()
                 return
         }
@@ -421,7 +426,7 @@ extension NewCharacteristicArticleTableViewController {
                                     parentType: DBTables.characteristics.rawValue,
                                     sequence: sequence,
                                     grants: 0, // To be amended
-                                    authorID: "1", // To be amended
+                                    authorID: currentUser.id,
                                     rating: 0,
                                     verified: false,
                                     type: ArticleType.article
@@ -441,8 +446,8 @@ extension NewCharacteristicArticleTableViewController {
                                     )
         }
         
-        FirebaseController.shared.getDataController().saveData(articleToSave, with: id, in: DBTables.articles) {
-            result in
+        dataService.saveArticle(articleToSave, with: id) {
+            (result: Result<Article>) in
             
             activityIndicator.stop()
             switch result {
@@ -470,8 +475,9 @@ extension NewCharacteristicArticleTableViewController {
         let activityIndicator = ActivityIndicator()
         for element in deletedElements {
             activityIndicator.start()
-            FirebaseController.shared.getDataController().deleteData(with: element.id, from: DBTables.articlesInside) {
-                result in
+            
+            dataService.deleteArticleInside(with: element.id) {
+                (result: Result<Bool>) in
                 
                 activityIndicator.stop()
                 switch result {

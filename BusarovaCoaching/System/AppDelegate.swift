@@ -7,16 +7,20 @@
 //
 
 import UIKit
+import FirebaseMessaging
+//import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
+    let notificationId = "gcm.notification.id"
     var appManager = AppManager()
+    var coreDataManager = CoreDataManager(modelName: "CoreData")
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        appManager.getStarted(with: self)
+        appManager.getStarted(with: self, application: application)
         
         return true
     }
@@ -41,6 +45,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        
+//        guard
+//            let notificationTypeInt = (userInfo[notificationId] as? NSString)?.integerValue else {
+//                return
+//        }
+//
+//        print("Received notification type = \(notificationTypeInt)")
+        print(String(describing: userInfo))
+        
+        completionHandler(UIBackgroundFetchResult.newData)
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print(error.localizedDescription)
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        Messaging.messaging().apnsToken = deviceToken
     }
 }
 

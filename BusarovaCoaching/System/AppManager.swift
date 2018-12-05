@@ -8,10 +8,19 @@
 
 import UIKit
 import Firebase
+import UserNotifications
 
 class AppManager {
     weak var appDelegate: AppDelegate?
     private var currentUser: User?
+    
+    private let keychainController = KeychainController()
+    
+    var isOffline: Bool = {
+        return !Reachability.isConnectedToNetwork()
+//        return true
+    }()
+//    var dataService = DataService()
     
     class var shared: AppManager {
         return (UIApplication.shared.delegate as! AppDelegate).appManager
@@ -22,11 +31,9 @@ class AppManager {
     /// The functions is called from the AppDelegate
     ///
     /// - Parameter with: AppDelegate
-    func getStarted(with appDelegate: AppDelegate) {
+    func getStarted(with appDelegate: AppDelegate, application: UIApplication) {
         self.appDelegate = appDelegate
-        configureFireBase()
-        
-        let keychainController = KeychainController()
+        configureFireBase(application)
         
         if keychainController.keychainItemExists() {
             let authVC = AuthorizationViewController()
@@ -42,6 +49,7 @@ class AppManager {
     func loggedIn(as user: User) {
         currentUser = user
         print("logged in as \(user)")
+        checkToken()
     }
     
     /// Indicates if the current user has been already autorized
@@ -69,6 +77,87 @@ class AppManager {
         let initialController = storyboard.instantiateViewController(withIdentifier: StoryboardIdentifiers.initialController.rawValue)
         appDelegate.window?.rootViewController = initialController
         appDelegate.window?.makeKeyAndVisible()
+    }
+    
+    /// Creates a new user after a successfull registration. Also creates neccesity records in auxiliaries tables in Firestore.
+    ///
+    /// - Parameter user: a new user to create
+    /// - Parameter login: indicated by user email as a login
+    /// - Parameter password: entered by user password
+    /// - Parameter completion: completion closure Result( < User > ) -> Void
+    func createUser(_ user: User, as login: String, with password: String, completion: @escaping (Result<User>) -> Void) {
+        guard !isOffline else {
+            return completion(Result.failure(AppError.noReachability("Осуществить регистрацию")))
+        }
+        
+        FirebaseController.shared.getDataController().saveData(user, with: user.id, in: DBTables.users) {
+            (result: Result<User>) in
+            
+            switch result {
+            case .success(let user):
+                let articlesSchedule = SubscriptionArticleSchedule()
+                let advicesSchedule = SubscriptionAdviceSchedule()
+                
+                FirebaseController.shared.getDataController().saveData(articlesSchedule, with: user.id, in: DBTables.articlesSchedule) {
+                    (result: Result<SubscriptionArticleSchedule>) in
+                    
+                    switch result {
+                    case .success(_):
+                        FirebaseController.shared.getDataController().saveData(advicesSchedule, with: user.id, in: DBTables.advicesSchedule) {
+                            (result: Result<SubscriptionAdviceSchedule>) in
+                            
+                            switch result {
+                            case .success(_):
+                                //Внимание! Потенциально только одна запись в keychain допускается
+                                if !self.keychainController.keychainItemExists() {
+                                    let keychainSaveResult = self.keychainController.save(login: login, password: password)
+                                    if keychainSaveResult,
+                                        let _ = self.keychainController.readPassword(for: login) {
+                                        completion(Result.success(user))
+                                    } else {
+                                        completion(Result.failure(AppError.keychainSave))
+                                    }
+                                }
+                            case .failure(let error):
+                                completion(Result.failure(error))
+                            }
+                        }
+                    case .failure(let error):
+                        completion(Result.failure(error))
+                    }
+                }
+            case .failure(let error):
+                completion(Result.failure(error))
+            }
+        }
+    }
+    
+    func loadUserWithId(_ userId: String, as login: String, with password: String, completion: @escaping (Result<User>) -> Void) {
+        guard !isOffline else {
+            return completion(Result.failure(AppError.noReachability("Осуществить логин")))
+        }
+        
+        FirebaseController.shared.getDataController().fetchData(with: userId, from: DBTables.users) {
+            (result: Result<User>) in
+            
+            switch result {
+            case .success(let user):
+                self.loggedIn(as: user)
+                
+                if !self.keychainController.keychainItemExists() {
+                    let keychainSaveResult = self.keychainController.save(login: login, password: password)
+                    
+                    guard keychainSaveResult,
+                        let _ = self.keychainController.readPassword(for: password) else {
+                            return completion(Result.failure(AppError.keychainSave))
+                    }
+                }
+                    
+                completion(Result.success(user))
+            case .failure(let error):
+                completion(Result.failure(error))
+            }
+        }
     }
     
     /// Indicates if the current user has grants to open the requested document
@@ -126,6 +215,10 @@ class AppManager {
     /// - Parameter completion: completion closure (Result < Bool >) -> Void. If current user has been
     /// already subscribed to the requested indicator **Result.success(false)** will be called.
     func performSubscriptionAction(to characteristic: CharacteristicsModel, subscribe: Bool, completion: @escaping (Result<Bool>) -> Void) {
+        guard !isOffline else {
+            return completion(Result.failure(AppError.noReachability("Подписаться/Отписаться")))
+        }
+        
         guard var currentUser = currentUser else {
             return completion(Result.failure(AppError.notAuthorized))
         }
@@ -166,9 +259,66 @@ class AppManager {
     }
     
 // MARK: - private methods
-    private func configureFireBase() {
+    private func configureFireBase(_ application: UIApplication) {
         FirebaseApp.configure()
         FirebaseController.shared.setDataController(DataController())
         FirebaseController.shared.setStorageController(StorageController())
+        
+        remoteNotificationRegistration(application)
+    }
+    
+    private func remoteNotificationRegistration(_ application: UIApplication) {
+        Messaging.messaging().delegate = self as? MessagingDelegate
+        
+        if #available(iOS 10.0, *) {
+            // For iOS 10 display notification (sent via APNS)
+            UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
+            
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: {_, _ in })
+        } else {
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
+        
+        application.registerForRemoteNotifications()
+    }
+    
+    private func checkToken() {
+        guard
+            let currentUser = currentUser,
+            let newToken = Messaging.messaging().fcmToken else {
+                return
+        }
+        
+        if (currentUser.fcmToken != newToken) && !isOffline {
+            updateToken(with: newToken, for: currentUser)
+        }
+    }
+    
+    private func updateToken(with newToken: String, for user: User) {
+        let newUser = User(id: user.id,
+                           name: user.name,
+                           email: user.email,
+                           role: user.userRole,
+                           isPaidUser: user.isPaidUser,
+                           hasPaidTill: user.hasPaidTill,
+                           subscribedCharacteristics: user.subscribedCharacteristics,
+                           fcmToken: newToken
+                            )
+        
+        FirebaseController.shared.getDataController().saveData(newUser, with: newUser.id, in: DBTables.users) {
+            (result: Result<User>) in
+            
+            switch result {
+            case .success(let user):
+                self.currentUser = user
+            case .failure(let error):
+                print(error.getError())
+            }
+        }
     }
 }

@@ -9,6 +9,7 @@
 import Foundation
 
 enum AppError: Error {
+    case noReachability(String)
     case fetchDocument(Error)
     case documentNotFound(String)
     case saveDocument(Error)
@@ -16,10 +17,17 @@ enum AppError: Error {
     case downloadedImageCreation(Error?)
     case notAuthorized
     case incorrectCharacteristicLevel
+    case keychainSave
     case otherError(Error)
     
     func getError() -> String {
         switch self {
+        case .noReachability(let description):
+            if description.isEmpty {
+                return "Соединение с интернетом отсутствует. Действие невозможно"
+            } else {
+                return "Соединение с интернетом отсутствует. Действие \"\(description)\" невозможно"
+            }
         case .fetchDocument(let error):
             return "Ошибка получения документа: \(error)"
         case .documentNotFound(let id):
@@ -34,6 +42,8 @@ enum AppError: Error {
             return "Вы не авторизованы для совершения данного действия"
         case .incorrectCharacteristicLevel:
             return "Выбран некорректный уровень группировки компетенции"
+        case .keychainSave:
+            return "Возникла ошибка с сохранением пароля в хранилище"
         case .otherError(let error):
             return error.localizedDescription
         }

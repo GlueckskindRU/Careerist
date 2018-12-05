@@ -9,7 +9,7 @@
 import UIKit
 
 class NewTextInsideViewController: UIViewController, ArticleInsideElementsProtocol {
-    private var articleInside: ArticleInside? = nil
+    private var articleInside: UIArticleInside? = nil
     private var isSaved: Bool = false
     private var sequence: Int? = nil
     private var articleSaveDelegate: ArticleSaveDelegateProtocol?
@@ -43,7 +43,7 @@ class NewTextInsideViewController: UIViewController, ArticleInsideElementsProtoc
         return textView
     }()
     
-    func configure(with articleInside: ArticleInside?, as sequence: Int, delegate: ArticleSaveDelegateProtocol) {
+    func configure(with articleInside: UIArticleInside?, as sequence: Int, delegate: ArticleSaveDelegateProtocol) {
         self.articleInside = articleInside
         self.sequence = sequence
         self.articleSaveDelegate = delegate
@@ -100,16 +100,18 @@ extension NewTextInsideViewController {
         
         let caption = captionTextField.text!.isEmpty ? nil : captionTextField.text!
         
-        let elementToSave = ArticleInside(id: articleInside?.id ?? "",
-                                          parentID: articleInside?.parentID ?? "",
-                                          sequence: sequence,
-                                          type: .text,
-                                          caption: caption,
-                                          text: textView.text,
-                                          imageURL: nil,
-                                          imageName: nil,
-                                          numericList: nil,
-                                          listElements: nil
+        let elementToSave = UIArticleInside(id: articleInside?.id ?? "",
+                                            parentID: articleInside?.parentID ?? "",
+                                            sequence: sequence,
+                                            type: .text,
+                                            caption: caption,
+                                            text: textView.text,
+                                            image: nil,
+                                            imageURL: nil,
+                                            imageStorageURL: nil,
+                                            imageName: nil,
+                                            numericList: nil,
+                                            listElements: nil
                                             )
         articleSaveDelegate?.saveArticle(articleInside: elementToSave, with: articleInsideID)
         navigationController?.popViewController(animated: true)

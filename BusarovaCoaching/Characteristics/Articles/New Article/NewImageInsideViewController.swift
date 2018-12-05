@@ -10,10 +10,11 @@ import UIKit
 import Kingfisher
 
 class NewImageInsideViewController: UIViewController, ArticleInsideElementsProtocol {
-    private var articleInside: ArticleInside? = nil
+    private var articleInside: UIArticleInside? = nil
     private var isSaved: Bool = false
     private var sequence: Int? = nil
     private var articleSaveDelegate: ArticleSaveDelegateProtocol?
+    private let dataService = DataService()
     
     private var imagePickerController = UIImagePickerController()
     
@@ -41,7 +42,7 @@ class NewImageInsideViewController: UIViewController, ArticleInsideElementsProto
         return imageView
     }()
     
-    func configure(with articleInside: ArticleInside?, as sequence: Int, delegate: ArticleSaveDelegateProtocol) {
+    func configure(with articleInside: UIArticleInside?, as sequence: Int, delegate: ArticleSaveDelegateProtocol) {
         self.articleInside = articleInside
         self.sequence = sequence
         self.articleSaveDelegate = delegate
@@ -50,27 +51,12 @@ class NewImageInsideViewController: UIViewController, ArticleInsideElementsProto
         
         guard
             let articleInside = articleInside,
-            let imageGSURL = articleInside.imageURL else {
-            return
+            let image = articleInside.image else {
+                return
         }
         
-        let activityIndicator = ActivityIndicator()
-        activityIndicator.start()
-        
-        FirebaseController.shared.getStorageController().getDownloadURL(for: imageGSURL) {
-            (result: Result<URL>) in
-            
-            switch result {
-            case .success(let url):
-                self.imageView.backgroundColor = UIColor.white
-                self.imageView.kf.setImage(with: url)
-                activityIndicator.stop()
-            case .failure(let error):
-                activityIndicator.stop()
-                let alertDialog = AlertDialog(title: nil, message: "\(error.getError())")
-                alertDialog.showAlert(in: self, completion: nil)
-            }
-        }
+        imageView.backgroundColor = .white
+        imageView.image = image
     }
     
     override func viewDidLoad() {
@@ -132,26 +118,38 @@ extension NewImageInsideViewController {
             imageName = articleInside!.imageName!
         }
         
-        FirebaseController.shared.getStorageController().uploadImage(image, with: imageName, to: StoragePath.characteristicsArticlesImages) {
-            result in
+        dataService.uploadImage(image, with: imageName, to: StoragePath.characteristicsArticlesImages) {
+            (result: Result<String>) in
             
             switch result {
-            case .success(let url):
+            case .success(let imageStorageURL):
                 let caption = self.captionTextField.text!.isEmpty ? nil : self.captionTextField.text!
                 
-                let elementToSave = ArticleInside(id: self.articleInside?.id ?? "",
-                                                  parentID: self.articleInside?.parentID ?? "",
-                                                  sequence: sequence,
-                                                  type: ArticleInsideType.image,
-                                                  caption: caption,
-                                                  text: nil,
-                                                  imageURL: url,
-                                                  imageName: imageName,
-                                                  numericList: nil,
-                                                  listElements: nil
-                                                    )
-                self.articleSaveDelegate?.saveArticle(articleInside: elementToSave, with: articleInsideID)
-                self.navigationController?.popViewController(animated: true)
+                self.dataService.getImageUrl(for: imageStorageURL) {
+                    (result: Result<URL>) in
+                    
+                    switch result {
+                    case .success(let imageURL):
+                        let elementToSave = UIArticleInside(id: self.articleInside?.id ?? "",
+                                                            parentID: self.articleInside?.parentID ?? "",
+                                                            sequence: sequence,
+                                                            type: ArticleInsideType.image,
+                                                            caption: caption,
+                                                            text: nil,
+                                                            image: image,
+                                                            imageURL: imageURL,
+                                                            imageStorageURL: imageStorageURL,
+                                                            imageName: imageName,
+                                                            numericList: nil,
+                                                            listElements: nil
+                        )
+                        self.articleSaveDelegate?.saveArticle(articleInside: elementToSave, with: articleInsideID)
+                        self.navigationController?.popViewController(animated: true)
+                    case .failure(let error):
+                        let alertDialog = AlertDialog(title: nil, message: error.getError())
+                        alertDialog.showAlert(in: self, completion: nil)
+                    }
+                }
             case .failure(let error):
                 let alertDialog = AlertDialog(title: nil, message: error.getError())
                 alertDialog.showAlert(in: self, completion: nil)

@@ -16,6 +16,7 @@ struct User: Codable {
     let isPaidUser: Bool
     let hasPaidTill: Date?
     var subscribedCharacteristics: [String]
+    let fcmToken: String
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -25,17 +26,18 @@ struct User: Codable {
         case isPaidUser
         case hasPaidTill
         case subscribedCharacteristics
+        case fcmToken
     }
     
     init(name: String, email: String) {
-        self.init(id: "", name: name, email: email, role: UserRole.user, isPaidUser: false, hasPaidTill: nil, subscribedCharacteristics: [])
+        self.init(id: "", name: name, email: email, role: UserRole.user, isPaidUser: false, hasPaidTill: nil, subscribedCharacteristics: [], fcmToken: "")
     }
     
     init(id: String, name: String, email: String) {
-        self.init(id: id, name: name, email: email, role: UserRole.user, isPaidUser: false, hasPaidTill: nil, subscribedCharacteristics: [])
+        self.init(id: id, name: name, email: email, role: UserRole.user, isPaidUser: false, hasPaidTill: nil, subscribedCharacteristics: [], fcmToken: "")
     }
     
-    init(id: String, name: String, email: String, role: UserRole, isPaidUser: Bool, hasPaidTill: Date?, subscribedCharacteristics: [String]) {
+    init(id: String, name: String, email: String, role: UserRole, isPaidUser: Bool, hasPaidTill: Date?, subscribedCharacteristics: [String], fcmToken: String) {
         self.id = id
         self.name = name
         self.email = email
@@ -43,6 +45,7 @@ struct User: Codable {
         self.isPaidUser = isPaidUser
         self.hasPaidTill = hasPaidTill
         self.subscribedCharacteristics = subscribedCharacteristics
+        self.fcmToken = fcmToken
     }
     
     init(from decoder: Decoder) throws {
@@ -58,6 +61,7 @@ struct User: Codable {
         self.isPaidUser = try values.decode(Bool.self, forKey: .isPaidUser)
         self.hasPaidTill = try? values.decode(Date.self, forKey: .hasPaidTill)
         self.subscribedCharacteristics = try values.decode([String].self, forKey: .subscribedCharacteristics)
+        self.fcmToken = try values.decode(String.self, forKey: .fcmToken)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -70,5 +74,6 @@ struct User: Codable {
         try container.encode(isPaidUser, forKey: .isPaidUser)
         try container.encode(hasPaidTill, forKey: .hasPaidTill)
         try container.encode(subscribedCharacteristics, forKey: .subscribedCharacteristics)
+        try container.encode(fcmToken, forKey: .fcmToken)
     }
 }

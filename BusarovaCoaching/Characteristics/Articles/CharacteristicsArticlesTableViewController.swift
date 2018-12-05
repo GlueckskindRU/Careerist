@@ -11,6 +11,8 @@ import UIKit
 class CharacteristicsArticlesTableViewController: UITableViewController {
     private var articles: [Article] = []
     private var parentID: String?
+    private let dataService = DataService()
+    private var isOffline: Bool = (UIApplication.shared.delegate as! AppDelegate).appManager.isOffline
     
     private var deletedArticles: Set<Article> = []
     
@@ -26,7 +28,7 @@ class CharacteristicsArticlesTableViewController: UITableViewController {
                 if self.isEditing {
                     saveBarButtonItem.isEnabled = false
                 } else {
-                    saveBarButtonItem.isEnabled = true
+                    saveBarButtonItem.isEnabled = true && !isOffline
                 }
             }
         }
@@ -48,7 +50,7 @@ class CharacteristicsArticlesTableViewController: UITableViewController {
         
         let addBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewArticle(sender:)))
         editButtonItem.title = "Настроить"
-        saveBarButtonItem.isEnabled = !isSaved
+        saveBarButtonItem.isEnabled = !isSaved && !isOffline
         navigationItem.rightBarButtonItems = [editButtonItem, addBarButtonItem, saveBarButtonItem]
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
@@ -141,7 +143,7 @@ extension CharacteristicsArticlesTableViewController {
 // MARK: - UI creation and refreshing
 extension CharacteristicsArticlesTableViewController {
     private func refreshUI() {
-        let footerText = "К сожалению для данного индикатора статей ещё пока нет."
+        let footerText = "К сожалению, для данного индикатора статей ещё пока нет."
         let actitivityIndicator = ActivityIndicator()
         actitivityIndicator.start()
         
@@ -151,7 +153,7 @@ extension CharacteristicsArticlesTableViewController {
             return
         }
         
-        FirebaseController.shared.getDataController().fetchArticles(from: DBTables.characteristics, by: parentID) {
+        dataService.fetchArticles(from: DBTables.characteristics, by: parentID) {
             (result: Result<[Article]>) in
             
             actitivityIndicator.stop()
@@ -160,7 +162,7 @@ extension CharacteristicsArticlesTableViewController {
                 self.articles = data
                 self.tableView.reloadData()
                 self.tableView.tableFooterView = TableFooterView.shared.create(with: footerText, in: self.view, empty: self.articles.isEmpty)
-                self.editButtonItem.isEnabled = !self.articles.isEmpty
+                self.editButtonItem.isEnabled = !self.articles.isEmpty && !(UIApplication.shared.delegate as! AppDelegate).appManager.isOffline
             case .failure(let error):
                 let alertDialog = AlertDialog(title: nil, message: error.getError())
                 alertDialog.showAlert(in: self, completion: nil)
@@ -237,8 +239,8 @@ extension CharacteristicsArticlesTableViewController {
         for article in deletedArticles {
             activityIndicator.start()
             
-            FirebaseController.shared.getDataController().fetchArticle(with: article.id, forPreview: false) {
-                (result: Result<[ArticleInside]>) in
+            dataService.fetchArticle(with: article.id, forPreview: false) {
+                (result: Result<[UIArticleInside]>) in
                 
                 activityIndicator.stop()
                 switch result {
@@ -261,7 +263,7 @@ extension CharacteristicsArticlesTableViewController {
         }
     }
     
-    private func deleteArticleInside(_ articleInsideArray: [ArticleInside]) {
+    private func deleteArticleInside(_ articleInsideArray: [UIArticleInside]) {
         guard !articleInsideArray.isEmpty else {
             return
         }
@@ -269,14 +271,12 @@ extension CharacteristicsArticlesTableViewController {
         let activityIndicator = ActivityIndicator()
         for element in articleInsideArray {
             activityIndicator.start()
-            FirebaseController.shared.getDataController().deleteData(with: element.id, from: DBTables.articlesInside) {
+            
+            dataService.deleteArticleInside(with: element.id) {
                 result in
                 
                 activityIndicator.stop()
-                if result.isFailure {
-                    guard let error = result.error else {
-                        return
-                    }
+                if result.isError, let error = result.error {
                     let alertDialog = AlertDialog(title: nil, message: error.getError())
                     alertDialog.showAlert(in: self, completion: nil)
                 }
@@ -288,7 +288,7 @@ extension CharacteristicsArticlesTableViewController {
         let activityIndicator = ActivityIndicator()
         activityIndicator.start()
         
-        FirebaseController.shared.getDataController().deleteData(with: id, from: DBTables.articles) {
+        dataService.deleteArticle(with: id) {
             result in
             
             activityIndicator.stop()
@@ -311,7 +311,7 @@ extension CharacteristicsArticlesTableViewController {
         for article in articles {
             activityIndicator.start()
             
-            FirebaseController.shared.getDataController().saveData(article, with: article.id, in: DBTables.articles) {
+            dataService.saveArticle(article, with: article.id) {
                 result in
                 
                 activityIndicator.stop()

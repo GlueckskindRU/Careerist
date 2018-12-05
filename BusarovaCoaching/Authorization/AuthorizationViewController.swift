@@ -75,21 +75,52 @@ class AuthorizationViewController: UIViewController {
         return button
     }()
     
+//    lazy private var offlineLabel: UILabel = {
+//        let label = UILabel()
+//
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.backgroundColor = .red
+//        label.textColor = .white
+//        label.textAlignment = .center
+//        label.font = UIFont.systemFont(ofSize: 32, weight: UIFont.Weight.black)
+//        label.numberOfLines = 0
+//        label.text = AppError.noReachability("Осуществить регистрацию/логин").getError()
+//
+//        return label
+//    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if keychainController.keychainItemExists() {
-            view.backgroundColor = .white
-            loginViaKeychain()
-        } else {
-            view.backgroundColor = .orange
-            setupLayout()
-        }
+//        if (UIApplication.shared.delegate as! AppDelegate).appManager.isOffline {
+//            setupOfflineLayout()
+//        } else {
+            if keychainController.keychainItemExists() {
+                view.backgroundColor = .white
+                loginViaKeychain()
+            } else {
+                view.backgroundColor = .orange
+                setupLayout()
+            }
+//        }
     }
     
     func configure() {
         self.calledByAppManager = false
     }
+    
+//    private func setupOfflineLayout() {
+//        view.backgroundColor = .red
+//
+//        view.addSubview(offlineLabel)
+//
+//        NSLayoutConstraint.activate([
+//            offlineLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            offlineLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+//            ])
+//
+//        offlineLabel.preferredMaxLayoutWidth = view.frame.width
+//    }
     
     private func setupLayout() {
         view.addSubview(emailTextField)
@@ -155,59 +186,20 @@ extension AuthorizationViewController {
                 alertDialog.showAlert(in: self, completion: nil)
             } else {
                 let newUser = User(id: userData.user.uid, name: name, email: email)
-                FirebaseController.shared.getDataController().saveData(newUser, with: userData.user.uid, in: DBTables.users) {
-                    userResult in
+                
+                (UIApplication.shared.delegate as! AppDelegate).appManager.createUser(newUser, as: enteredEmail, with: password) {
+                    (result: Result<User>) in
                     
-                    switch userResult {
+                    self.activityIndicator.stop()
+                    switch result {
                     case .success(let user):
-                        let articlesSchedule = SubscriptionArticleSchedule()
-                        let advicesSchedule = SubscriptionAdviceSchedule()
-                        
-                        FirebaseController.shared.getDataController().saveData(articlesSchedule, with: user.id, in: DBTables.articlesSchedule) {
-                            (result: Result<SubscriptionArticleSchedule>) in
-                            
-                            switch result {
-                            case .success(_):
-                                FirebaseController.shared.getDataController().saveData(advicesSchedule, with: user.id, in: DBTables.advicesSchedule) {
-                                    (result: Result<SubscriptionAdviceSchedule>) in
-                                    
-                                    switch result {
-                                    case .success(_):
-                                        //Внимание! Потенциально только одна запись в keychain допускается
-                                        if !self.keychainController.keychainItemExists() {
-                                            let keychainSaveResult = self.keychainController.save(login: enteredEmail, password: password)
-                                            self.activityIndicator.stop()
-                                            
-                                            if keychainSaveResult,
-                                                let _ = self.keychainController.readPassword(for: enteredEmail) {
-                                                (UIApplication.shared.delegate as! AppDelegate).appManager.loggedIn(as: user)
-                                                if self.calledByAppManager {
-                                                    (UIApplication.shared.delegate as! AppDelegate).appManager.presentInitialController()
-                                                } else {
-                                                    self.navigationController?.popViewController(animated: true)
-                                                }
-                                            } else {
-                                                let alertDialog = AlertDialog(title: nil, message: "Возникла ошибка с сохранением пароля в хранилище")
-                                                alertDialog.showAlert(in: self, completion: nil)
-                                            }
-                                        }
-                                    case .failure(let error):
-                                        self.activityIndicator.stop()
-                                        let alertDialog = AlertDialog(title: nil, message: error.getError())
-                                        alertDialog.showAlert(in: self, completion: nil)
-                                    }
-                                }
-                            case .failure(let error):
-                                self.activityIndicator.stop()
-                                let alertDialog = AlertDialog(title: nil, message: error.getError())
-                                alertDialog.showAlert(in: self, completion: nil)
-                            }
+                        (UIApplication.shared.delegate as! AppDelegate).appManager.loggedIn(as: user)
+                        if self.calledByAppManager {
+                            (UIApplication.shared.delegate as! AppDelegate).appManager.presentInitialController()
+                        } else {
+                            self.navigationController?.popViewController(animated: true)
                         }
-                        
-                    
-                        
                     case .failure(let error):
-                        self.activityIndicator.stop()
                         let alertDialog = AlertDialog(title: nil, message: error.getError())
                         alertDialog.showAlert(in: self, completion: nil)
                     }
@@ -238,7 +230,7 @@ extension AuthorizationViewController {
             error in
             
             self.activityIndicator.stop()
-            let message = error == nil ? "Письмо о сбросе пароля успешно отправленона на указанный адрес электронной почты" : "\(error!.localizedDescription)"
+            let message = error == nil ? "Письмо о сбросе пароля успешно отправлено на указанный адрес электронной почты" : "\(error!.localizedDescription)"
             let alertDialog = AlertDialog(title: nil, message: message)
             alertDialog.showAlert(in: self, completion: nil)
         }
@@ -312,39 +304,29 @@ extension AuthorizationViewController {
                     self.activityIndicator.start()
                 }
                 
-                FirebaseController.shared.getDataController().fetchData(with: userData.user.uid, from: DBTables.users) {
-                    (userResult: Result<User>) in
+                (UIApplication.shared.delegate as! AppDelegate).appManager.loadUserWithId(userData.user.uid, as: userName, with: password) {
+                    (result: Result<User>) in
                     
                     DispatchQueue.main.async {
                         self.activityIndicator.stop()
                     }
                     
-                    switch userResult {
-                    case .success(let user):
-                        DispatchQueue.main.async {
-                            (UIApplication.shared.delegate as! AppDelegate).appManager.loggedIn(as: user)
-                            
-                            if !self.keychainController.keychainItemExists() {
-                                let _ = self.keychainController.save(login: userName, password: password)
-                            }
+                    switch result {
+                    case .success(_):
+                        if self.calledByAppManager {
+                            (UIApplication.shared.delegate as! AppDelegate).appManager.presentInitialController()
+                        } else {
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                    case .failure(let error):
+                        let alertDialog = AlertDialog(title: nil, message: error.getError())
+                        alertDialog.showAlert(in: self, completion: {
+                            _ in
                             
                             if self.calledByAppManager {
                                 (UIApplication.shared.delegate as! AppDelegate).appManager.presentInitialController()
-                            } else {
-                                self.navigationController?.popViewController(animated: true)
                             }
-                        }
-                    case .failure(let error):
-                        DispatchQueue.main.async {
-                            let alertDialog = AlertDialog(title: nil, message: error.getError())
-                            alertDialog.showAlert(in: self, completion: {
-                                _ in
-                                
-                                if self.calledByAppManager {
-                                    (UIApplication.shared.delegate as! AppDelegate).appManager.presentInitialController()
-                                }
-                            })
-                        }
+                        })
                     }
                 }
             }

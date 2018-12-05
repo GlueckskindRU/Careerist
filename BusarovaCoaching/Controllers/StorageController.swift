@@ -61,12 +61,11 @@ class StorageController {
     }
     
     func downloadImage(with gsURL: String, completion: @escaping (Result<UIImage>) -> Void) {
-        let imageReference = storage.reference(forURL: gsURL)
-        
+        let imageRef = storage.reference(forURL: gsURL).fullPath
 //      The size should be decreased!!!!
+        let imageReference = storage.reference(withPath: imageRef)
         imageReference.getData(maxSize: 10 * 1024 * 1024) {
             (data, error) in
-            
             guard
                 let data = data,
                 let image = UIImage(data: data) else {
@@ -77,27 +76,22 @@ class StorageController {
                     }
                     return
             }
-            
             completion(Result.success(image))
         }
     }
     
     func getDownloadURL(for gsURL: String, completion: @escaping (Result<URL>) -> Void) {
-        let imageReference = storage.reference(forURL: gsURL)
-        
-        imageReference.downloadURL {
+        let storageReference = storage.reference(forURL: gsURL)
+        storageReference.downloadURL {
             (url, error) in
 
             if let error = error {
-                completion(Result.failure(.otherError(error)))
-                return
+                return completion(Result.failure(.otherError(error)))
             }
 
             guard let downloadURL = url else {
-                completion(Result.failure(.downloadURLWrong(url)))
-                return
+                return completion(Result.failure(.downloadURLWrong(url)))
             }
-
             completion(Result.success(downloadURL))
         }
     }

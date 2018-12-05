@@ -12,7 +12,8 @@ class NewAdviceViewController: UIViewController {
     private var advice: Article? = nil
     private var sequence: Int? = nil
     private var parentID: String?
-    private var adviceInside: ArticleInside?
+    private var adviceInside: UIArticleInside?
+    private let dataService = DataService()
     
     lazy private var saveBarButtonItem: UIBarButtonItem = {
         return UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(saveButtonTapped(sender:)))
@@ -139,8 +140,8 @@ extension NewAdviceViewController {
                             )
         }
         
-        FirebaseController.shared.getDataController().saveData(advice!, with: id, in: DBTables.articles) {
-            result in
+        dataService.saveArticle(advice!, with: id) {
+            (result: Result<Article>) in
             
             activityIndicator.stop()
             switch result {
@@ -166,8 +167,8 @@ extension NewAdviceViewController {
         let activityIndicator = ActivityIndicator()
         activityIndicator.start()
         
-        FirebaseController.shared.getDataController().fetchArticle(with: advice.id, forPreview: false) {
-            (result: Result<[ArticleInside]>) in
+        dataService.fetchArticle(with: advice.id, forPreview: false) {
+            (result: Result<[UIArticleInside]>) in
             
             activityIndicator.stop()
             
@@ -205,20 +206,22 @@ extension NewAdviceViewController {
         
         let adviceInsideID = adviceInside?.id ?? nil
         
-        adviceInside = ArticleInside(id: adviceInside?.id ?? "",
-                                     parentID: advice.id,
-                                     sequence: 0,
-                                     type: .text,
-                                     caption: nil,
-                                     text: text,
-                                     imageURL: nil,
-                                     imageName: nil,
-                                     numericList: nil,
-                                     listElements: nil
-                                    )
+        adviceInside  = UIArticleInside(id: adviceInside?.id ?? "",
+                                        parentID: advice.id,
+                                        sequence: 0,
+                                        type: .text,
+                                        caption: nil,
+                                        text: text,
+                                        image: nil,
+                                        imageURL: nil,
+                                        imageStorageURL: nil,
+                                        imageName: nil,
+                                        numericList: nil,
+                                        listElements: nil
+                                        )
         
-        FirebaseController.shared.getDataController().saveData(adviceInside!, with: adviceInsideID, in: DBTables.articlesInside) {
-            result in
+        dataService.saveArticleInside(adviceInside!, with: adviceInsideID) {
+            (result: Result<UIArticleInside>) in
             
             activityIndicator.stop()
             
