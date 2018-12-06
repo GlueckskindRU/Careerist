@@ -15,7 +15,6 @@ struct ArticleInside: Codable, Hashable {
     let type: ArticleInsideType
     let caption: String?
     let text: String?
-    let imageURL: URL?
     let imageStorageURL: String?
     let imageName: String?
     var numericList: Bool?
@@ -28,14 +27,13 @@ struct ArticleInside: Codable, Hashable {
         case type
         case caption
         case text
-        case imageURL
         case imageStorageURL
         case imageName
         case numericList
         case listElements
     }
     
-    init?(id: String, parentID: String, sequence: Int, type: Int, caption: String?, text: String?, imageURL: URL?, imageStorageURL: String?, imageName: String?, numericList: Bool?, listElements: [String]?) {
+    init?(id: String, parentID: String, sequence: Int, type: Int, caption: String?, text: String?, imageStorageURL: String?, imageName: String?, numericList: Bool?, listElements: [String]?) {
         self.id = id
         self.parentID = parentID
         self.sequence = sequence
@@ -45,21 +43,19 @@ struct ArticleInside: Codable, Hashable {
         self.type = articteInsideType
         self.caption = caption
         self.text = text
-        self.imageURL = imageURL
         self.imageStorageURL = imageStorageURL
         self.imageName = imageName
         self.numericList = numericList
         self.listElements = listElements
     }
     
-    init(id: String, parentID: String, sequence: Int, type: ArticleInsideType, caption: String?, text: String?, imageURL: URL?, imageStorageURL: String?, imageName: String?, numericList: Bool?, listElements: [String]?) {
+    init(id: String, parentID: String, sequence: Int, type: ArticleInsideType, caption: String?, text: String?, imageStorageURL: String?, imageName: String?, numericList: Bool?, listElements: [String]?) {
         self.id = id
         self.parentID = parentID
         self.sequence = sequence
         self.type = type
         self.caption = caption
         self.text = text
-        self.imageURL = imageURL
         self.imageStorageURL = imageStorageURL
         self.imageName = imageName
         self.numericList = numericList
@@ -76,11 +72,6 @@ struct ArticleInside: Codable, Hashable {
         self.type = ArticleInsideType(rawValue: typeInt)!
         self.caption = try? values.decode(String.self, forKey: .caption)
         self.text = try? values.decode(String.self, forKey: .text)
-        if let imageURLString = try? values.decode(String.self, forKey: .imageURL) {
-            self.imageURL = URL(string: imageURLString)
-        } else {
-            self.imageURL = nil
-        }
         self.imageStorageURL = try? values.decode(String.self, forKey: .imageStorageURL)
         self.imageName = try? values.decode(String.self, forKey: .imageName)
         self.numericList = try? values.decode(Bool.self, forKey: .numericList)
@@ -95,7 +86,6 @@ struct ArticleInside: Codable, Hashable {
         try container.encode(type.rawValue, forKey: .type)
         try container.encode(caption, forKey: .caption)
         try container.encode(text, forKey: .text)
-        try container.encode(imageURL?.absoluteString, forKey: .imageURL)
         try container.encode(imageStorageURL, forKey: .imageStorageURL)
         try container.encode(imageName, forKey: .imageName)
         try container.encode(numericList, forKey: .numericList)
@@ -111,7 +101,6 @@ extension ArticleInside: Equatable {
                 lhs.type == rhs.type &&
                 lhs.caption == rhs.caption &&
                 lhs.text == rhs.text &&
-                lhs.imageURL == rhs.imageURL &&
                 lhs.imageStorageURL == rhs.imageStorageURL &&
                 lhs.imageName == rhs.imageName &&
                 lhs.numericList == rhs.numericList &&

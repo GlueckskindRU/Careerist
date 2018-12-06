@@ -12,8 +12,7 @@ class NewAdviceViewController: UIViewController {
     private var advice: Article? = nil
     private var sequence: Int? = nil
     private var parentID: String?
-    private var adviceInside: UIArticleInside?
-    private let dataService = DataService()
+    private var adviceInside: ArticleInside?
     
     lazy private var saveBarButtonItem: UIBarButtonItem = {
         return UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(saveButtonTapped(sender:)))
@@ -94,7 +93,8 @@ extension NewAdviceViewController {
         
         guard
             let sequence = sequence,
-            let parentID = parentID else {
+            let parentID = parentID,
+            let currentUser = (UIApplication.shared.delegate as! AppDelegate).appManager.getCurrentUser() else {
             return
         }
         
@@ -120,7 +120,7 @@ extension NewAdviceViewController {
                              parentType: DBTables.characteristics.rawValue,
                              sequence: sequence,
                              grants: 0, // to be amended
-                             authorID: "1", // to be amended
+                             authorID: currentUser.id,
                              rating: 0,
                              verified: false,
                              type: ArticleType.advice
@@ -140,7 +140,7 @@ extension NewAdviceViewController {
                             )
         }
         
-        dataService.saveArticle(advice!, with: id) {
+        FirebaseController.shared.getDataController().saveData(advice!, with: id, in: DBTables.articles) {
             (result: Result<Article>) in
             
             activityIndicator.stop()
@@ -167,8 +167,8 @@ extension NewAdviceViewController {
         let activityIndicator = ActivityIndicator()
         activityIndicator.start()
         
-        dataService.fetchArticle(with: advice.id, forPreview: false) {
-            (result: Result<[UIArticleInside]>) in
+        FirebaseController.shared.getDataController().fetchArticle(with: advice.id, forPreview: false) {
+            (result: Result<[ArticleInside]>) in
             
             activityIndicator.stop()
             
@@ -205,23 +205,21 @@ extension NewAdviceViewController {
         activityIndicator.start()
         
         let adviceInsideID = adviceInside?.id ?? nil
+
+        adviceInside = ArticleInside(id: adviceInside?.id ?? "",
+                                     parentID: advice.id,
+                                     sequence: 0,
+                                     type: ArticleInsideType.text,
+                                     caption: nil,
+                                     text: text,
+                                     imageStorageURL: nil,
+                                     imageName: nil,
+                                     numericList: nil,
+                                     listElements: nil
+                                    )
         
-        adviceInside  = UIArticleInside(id: adviceInside?.id ?? "",
-                                        parentID: advice.id,
-                                        sequence: 0,
-                                        type: .text,
-                                        caption: nil,
-                                        text: text,
-                                        image: nil,
-                                        imageURL: nil,
-                                        imageStorageURL: nil,
-                                        imageName: nil,
-                                        numericList: nil,
-                                        listElements: nil
-                                        )
-        
-        dataService.saveArticleInside(adviceInside!, with: adviceInsideID) {
-            (result: Result<UIArticleInside>) in
+        FirebaseController.shared.getDataController().saveData(adviceInside!, with: adviceInsideID, in: DBTables.articlesInside) {
+            (result: Result<ArticleInside>) in
             
             activityIndicator.stop()
             

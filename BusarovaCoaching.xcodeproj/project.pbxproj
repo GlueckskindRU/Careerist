@@ -19,22 +19,17 @@
 		DA303950217E4FE3005EC94E /* KeychainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA30394F217E4FE3005EC94E /* KeychainController.swift */; };
 		DA303954217E5C05005EC94E /* StoryboardIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA303953217E5C05005EC94E /* StoryboardIdentifiers.swift */; };
 		DA303956217F2BDB005EC94E /* UserRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA303955217F2BDB005EC94E /* UserRole.swift */; };
-		DA3CF97F21A9460F0056610B /* TransformArticleInsideOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3CF97E21A9460F0056610B /* TransformArticleInsideOperation.swift */; };
-		DA3CF98121A9489F0056610B /* CoreDataArticleInside.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3CF98021A9489F0056610B /* CoreDataArticleInside.swift */; };
-		DA3CF98321A9B46E0056610B /* UIArticleInside.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3CF98221A9B46E0056610B /* UIArticleInside.swift */; };
 		DA3E25E121AEE82E00CBF1B2 /* NSManagedObjectContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3E25E021AEE82E00CBF1B2 /* NSManagedObjectContext.swift */; };
 		DA5A553C21243B4D00B7153E /* CheckBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5A553B21243B4D00B7153E /* CheckBoxButton.swift */; };
 		DA68CD60212312D000AE8515 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA68CD5F212312D000AE8515 /* AppDelegate.swift */; };
 		DA68CD65212312D000AE8515 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA68CD63212312D000AE8515 /* Main.storyboard */; };
 		DA68CD67212312D000AE8515 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA68CD66212312D000AE8515 /* Assets.xcassets */; };
 		DA68CD6A212312D000AE8515 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA68CD68212312D000AE8515 /* LaunchScreen.storyboard */; };
+		DA6E5BD421B92BB6003CBB2B /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DA6E5BD221B92BB6003CBB2B /* CoreData.xcdatamodeld */; };
 		DA81DA70216B885200D33388 /* NewAdviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA81DA6F216B885200D33388 /* NewAdviceViewController.swift */; };
 		DA81DA75216BEDB400D33388 /* ListOfAdvicesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA81DA74216BEDB400D33388 /* ListOfAdvicesTableViewController.swift */; };
 		DA81DA77216BF40800D33388 /* ListOfAdvicesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA81DA76216BF40800D33388 /* ListOfAdvicesCell.swift */; };
 		DA98A3E021A5E61E007ED40D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA98A3DF21A5E61E007ED40D /* CoreDataManager.swift */; };
-		DA98A3E421A5E739007ED40D /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DA98A3E221A5E739007ED40D /* CoreData.xcdatamodeld */; };
-		DA98A3E621A5EE90007ED40D /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA98A3E521A5EE90007ED40D /* Reachability.swift */; };
-		DA98A3E821A6B879007ED40D /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA98A3E721A6B879007ED40D /* DataService.swift */; };
 		DA98A3EA21A6BC2D007ED40D /* DispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA98A3E921A6BC2D007ED40D /* DispatchQueue.swift */; };
 		DA98A3EC21A6BC41007ED40D /* QualityOfService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA98A3EB21A6BC41007ED40D /* QualityOfService.swift */; };
 		DA98A3EF21A6BC68007ED40D /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA98A3EE21A6BC68007ED40D /* AsyncOperation.swift */; };
@@ -142,9 +137,6 @@
 		DA30394F217E4FE3005EC94E /* KeychainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainController.swift; sourceTree = "<group>"; };
 		DA303953217E5C05005EC94E /* StoryboardIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardIdentifiers.swift; sourceTree = "<group>"; };
 		DA303955217F2BDB005EC94E /* UserRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRole.swift; sourceTree = "<group>"; };
-		DA3CF97E21A9460F0056610B /* TransformArticleInsideOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformArticleInsideOperation.swift; sourceTree = "<group>"; };
-		DA3CF98021A9489F0056610B /* CoreDataArticleInside.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataArticleInside.swift; sourceTree = "<group>"; };
-		DA3CF98221A9B46E0056610B /* UIArticleInside.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIArticleInside.swift; sourceTree = "<group>"; };
 		DA3E25E021AEE82E00CBF1B2 /* NSManagedObjectContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSManagedObjectContext.swift; sourceTree = "<group>"; };
 		DA5A553B21243B4D00B7153E /* CheckBoxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxButton.swift; sourceTree = "<group>"; };
 		DA68CD5C212312D000AE8515 /* ru.homber.Karierist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ru.homber.Karierist.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,14 +145,12 @@
 		DA68CD66212312D000AE8515 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA68CD69212312D000AE8515 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DA68CD6B212312D000AE8515 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA6E5BD321B92BB6003CBB2B /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
 		DA81DA6F216B885200D33388 /* NewAdviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAdviceViewController.swift; sourceTree = "<group>"; };
 		DA81DA74216BEDB400D33388 /* ListOfAdvicesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfAdvicesTableViewController.swift; sourceTree = "<group>"; };
 		DA81DA76216BF40800D33388 /* ListOfAdvicesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfAdvicesCell.swift; sourceTree = "<group>"; };
 		DA98A3DE21A2E984007ED40D /* ru.homber.Karierist.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ru.homber.Karierist.entitlements; sourceTree = "<group>"; };
 		DA98A3DF21A5E61E007ED40D /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		DA98A3E321A5E739007ED40D /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
-		DA98A3E521A5EE90007ED40D /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
-		DA98A3E721A6B879007ED40D /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		DA98A3E921A6BC2D007ED40D /* DispatchQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueue.swift; sourceTree = "<group>"; };
 		DA98A3EB21A6BC41007ED40D /* QualityOfService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QualityOfService.swift; sourceTree = "<group>"; };
 		DA98A3EE21A6BC68007ED40D /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
@@ -299,7 +289,6 @@
 				DAC0AE37214850BC00FF9D82 /* FirebaseController.swift */,
 				DA30394F217E4FE3005EC94E /* KeychainController.swift */,
 				DA98A3DF21A5E61E007ED40D /* CoreDataManager.swift */,
-				DA98A3E721A6B879007ED40D /* DataService.swift */,
 				DACCC4E821B6CE3700854B26 /* NetworkingController.swift */,
 			);
 			path = Controllers;
@@ -309,8 +298,6 @@
 			isa = PBXGroup;
 			children = (
 				DA19AA762191B4770049168A /* DayOfWeek.swift */,
-				DA3CF98021A9489F0056610B /* CoreDataArticleInside.swift */,
-				DA3CF98221A9B46E0056610B /* UIArticleInside.swift */,
 			);
 			path = Auxiliary;
 			sourceTree = "<group>";
@@ -411,7 +398,7 @@
 		DA98A3E121A5E71F007ED40D /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				DA98A3E221A5E739007ED40D /* CoreData.xcdatamodeld */,
+				DA6E5BD221B92BB6003CBB2B /* CoreData.xcdatamodeld */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -421,7 +408,6 @@
 			children = (
 				DA98A3EE21A6BC68007ED40D /* AsyncOperation.swift */,
 				DA98A3F021A6BC83007ED40D /* BaseOperation.swift */,
-				DA3CF97E21A9460F0056610B /* TransformArticleInsideOperation.swift */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
@@ -620,7 +606,6 @@
 				DAC61EE3214C1B4600FB78C6 /* AppError.swift */,
 				DAC61EED214C255700FB78C6 /* AlertDialog.swift */,
 				DAF2A483219CB4F000BC45A6 /* MultiSelectSegmentedControl.swift */,
-				DA98A3E521A5EE90007ED40D /* Reachability.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -812,7 +797,6 @@
 				DA5A553C21243B4D00B7153E /* CheckBoxButton.swift in Sources */,
 				DAA9D74B21621DA3009697E8 /* ArticleType.swift in Sources */,
 				DA9ED60C2134176000FB54FB /* DBTables.swift in Sources */,
-				DA3CF98321A9B46E0056610B /* UIArticleInside.swift in Sources */,
 				DA98A3EF21A6BC68007ED40D /* AsyncOperation.swift in Sources */,
 				DAC61EE4214C1B4600FB78C6 /* AppError.swift in Sources */,
 				DAC61ED6214A969700FB78C6 /* TableFooterView.swift in Sources */,
@@ -849,7 +833,6 @@
 				DA81DA77216BF40800D33388 /* ListOfAdvicesCell.swift in Sources */,
 				DAEE517C214FAAA100449FEE /* StoragePath.swift in Sources */,
 				DAA9D7582166501A009697E8 /* ArticleListWithCaptionCell.swift in Sources */,
-				DA98A3E421A5E739007ED40D /* CoreData.xcdatamodeld in Sources */,
 				DAF2A488219CBBF700BC45A6 /* ArticlesScheduleCell.swift in Sources */,
 				DA167D0B2134300F001A9A84 /* DataController.swift in Sources */,
 				DAA9D748215EA02D009697E8 /* CharacteristicsLevel.swift in Sources */,
@@ -862,6 +845,7 @@
 				DA19AA772191B4770049168A /* DayOfWeek.swift in Sources */,
 				DAC124E52125E20500378DA1 /* CabinetModel.swift in Sources */,
 				DAC61EE0214C196800FB78C6 /* JSONEncoder.swift in Sources */,
+				DA6E5BD421B92BB6003CBB2B /* CoreData.xcdatamodeld in Sources */,
 				DA68CD60212312D000AE8515 /* AppDelegate.swift in Sources */,
 				DADEAB2F21246A860042B564 /* WelcomeFootterXIB.swift in Sources */,
 				DAC61EBA21492A6000FB78C6 /* ArticleInside.swift in Sources */,
@@ -869,7 +853,6 @@
 				DA3E25E121AEE82E00CBF1B2 /* NSManagedObjectContext.swift in Sources */,
 				DA9ED5FE2133F53C00FB54FB /* CharacteristicsTableViewController.swift in Sources */,
 				DA30394C217E4057005EC94E /* User.swift in Sources */,
-				DA98A3E821A6B879007ED40D /* DataService.swift in Sources */,
 				DAC61EDE214BD6B700FB78C6 /* NewListInsideTableViewController.swift in Sources */,
 				DAA9D754216552F9009697E8 /* NewTestQuestionHederView.swift in Sources */,
 				DAA97B0621233DAF005AF50F /* DescriptionViewController.swift in Sources */,
@@ -894,19 +877,16 @@
 				DAA97B0221233715005AF50F /* WelcomeModel.swift in Sources */,
 				DA303950217E4FE3005EC94E /* KeychainController.swift in Sources */,
 				DAF2A484219CB4F000BC45A6 /* MultiSelectSegmentedControl.swift in Sources */,
-				DA3CF98121A9489F0056610B /* CoreDataArticleInside.swift in Sources */,
 				DA81DA75216BEDB400D33388 /* ListOfAdvicesTableViewController.swift in Sources */,
 				DA19AA792191DD320049168A /* SubscriptionArticleSchedule.swift in Sources */,
 				DAA97B00212336C0005AF50F /* WelcomeTableViewController.swift in Sources */,
 				DAE6DF8121528EC3009C9CC3 /* ArticlesPreviewTableViewController.swift in Sources */,
-				DA3CF97F21A9460F0056610B /* TransformArticleInsideOperation.swift in Sources */,
 				DA303956217F2BDB005EC94E /* UserRole.swift in Sources */,
 				DAC61EC621495FC800FB78C6 /* CharacteristicsArticlesTableViewController.swift in Sources */,
 				DA98A3F121A6BC83007ED40D /* BaseOperation.swift in Sources */,
 				DAC124EB2125F88900378DA1 /* CompetenceTableViewController.swift in Sources */,
 				DA9ED6002133F69400FB54FB /* CellIdentifiers.swift in Sources */,
 				DAA9D7562166419C009697E8 /* NewListInsideHeaderView.swift in Sources */,
-				DA98A3E621A5EE90007ED40D /* Reachability.swift in Sources */,
 				DAC124F32125FED800378DA1 /* AchivementsCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1113,12 +1093,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		DA98A3E221A5E739007ED40D /* CoreData.xcdatamodeld */ = {
+		DA6E5BD221B92BB6003CBB2B /* CoreData.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				DA98A3E321A5E739007ED40D /* CoreData.xcdatamodel */,
+				DA6E5BD321B92BB6003CBB2B /* CoreData.xcdatamodel */,
 			);
-			currentVersion = DA98A3E321A5E739007ED40D /* CoreData.xcdatamodel */;
+			currentVersion = DA6E5BD321B92BB6003CBB2B /* CoreData.xcdatamodel */;
 			path = CoreData.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

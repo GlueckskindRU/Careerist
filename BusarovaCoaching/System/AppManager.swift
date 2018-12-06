@@ -16,12 +16,6 @@ class AppManager {
     
     private let keychainController = KeychainController()
     
-    var isOffline: Bool = {
-        return !Reachability.isConnectedToNetwork()
-//        return true
-    }()
-//    var dataService = DataService()
-    
     class var shared: AppManager {
         return (UIApplication.shared.delegate as! AppDelegate).appManager
     }
@@ -86,10 +80,6 @@ class AppManager {
     /// - Parameter password: entered by user password
     /// - Parameter completion: completion closure Result( < User > ) -> Void
     func createUser(_ user: User, as login: String, with password: String, completion: @escaping (Result<User>) -> Void) {
-        guard !isOffline else {
-            return completion(Result.failure(AppError.noReachability("Осуществить регистрацию")))
-        }
-        
         FirebaseController.shared.getDataController().saveData(user, with: user.id, in: DBTables.users) {
             (result: Result<User>) in
             
@@ -133,10 +123,6 @@ class AppManager {
     }
     
     func loadUserWithId(_ userId: String, as login: String, with password: String, completion: @escaping (Result<User>) -> Void) {
-        guard !isOffline else {
-            return completion(Result.failure(AppError.noReachability("Осуществить логин")))
-        }
-        
         FirebaseController.shared.getDataController().fetchData(with: userId, from: DBTables.users) {
             (result: Result<User>) in
             
@@ -215,10 +201,6 @@ class AppManager {
     /// - Parameter completion: completion closure (Result < Bool >) -> Void. If current user has been
     /// already subscribed to the requested indicator **Result.success(false)** will be called.
     func performSubscriptionAction(to characteristic: CharacteristicsModel, subscribe: Bool, completion: @escaping (Result<Bool>) -> Void) {
-        guard !isOffline else {
-            return completion(Result.failure(AppError.noReachability("Подписаться/Отписаться")))
-        }
-        
         guard var currentUser = currentUser else {
             return completion(Result.failure(AppError.notAuthorized))
         }
@@ -294,7 +276,7 @@ class AppManager {
                 return
         }
         
-        if (currentUser.fcmToken != newToken) && !isOffline {
+        if currentUser.fcmToken != newToken {
             updateToken(with: newToken, for: currentUser)
         }
     }

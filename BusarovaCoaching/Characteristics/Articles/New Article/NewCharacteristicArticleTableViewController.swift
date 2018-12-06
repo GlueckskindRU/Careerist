@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ArticleSaveDelegateProtocol {
-    func saveArticle(articleInside: UIArticleInside, with articleInsideID: String?)
+    func saveArticle(articleInside: ArticleInside, with articleInsideID: String?)
 }
 
 protocol ArticleTitleSaveProtocol {
@@ -17,19 +17,17 @@ protocol ArticleTitleSaveProtocol {
 }
 
 protocol ArticleInsideElementsProtocol {
-    func configure(with articleInside: UIArticleInside?, as sequence: Int, delegate: ArticleSaveDelegateProtocol)
+    func configure(with articleInside: ArticleInside?, as sequence: Int, delegate: ArticleSaveDelegateProtocol)
 }
 
 // MARK: - class definition
 class NewCharacteristicArticleTableViewController: UITableViewController {
-    private var articleInsideElements: [UIArticleInside] = []
+    private var articleInsideElements: [ArticleInside] = []
     private var article: Article? = nil
     private var sequence: Int? = nil
     private var articleTitle = ""
     private var parentID: String?
-    private var deletedElements: Set<UIArticleInside> = []
-    private var isOffline: Bool = (UIApplication.shared.delegate as! AppDelegate).appManager.isOffline
-    private let dataService = DataService()
+    private var deletedElements: Set<ArticleInside> = []
     
     lazy private var saveBarButtonItem: UIBarButtonItem = {
         return UIBarButtonItem(title: "Сохранить", style: UIBarButtonItem.Style.plain, target: self, action: #selector(saveArticle(sender:)))
@@ -51,7 +49,7 @@ class NewCharacteristicArticleTableViewController: UITableViewController {
                 if self.isEditing {
                     saveBarButtonItem.isEnabled = false
                 } else {
-                    saveBarButtonItem.isEnabled = true && !isOffline
+                    saveBarButtonItem.isEnabled = true
                 }
             }
         }
@@ -86,8 +84,8 @@ class NewCharacteristicArticleTableViewController: UITableViewController {
                                                   height: 62
                                                     )
         
-        previewBarButtonItem.isEnabled = (self.article != nil) && !isOffline
-        saveBarButtonItem.isEnabled = !isSaved && !isOffline
+        previewBarButtonItem.isEnabled = (self.article != nil)
+        saveBarButtonItem.isEnabled = !isSaved
         
         editButtonItem.title = "Настроить"
         navigationItem.rightBarButtonItems = [editButtonItem, addBarButtonItem, saveBarButtonItem, previewBarButtonItem]
@@ -103,7 +101,7 @@ class NewCharacteristicArticleTableViewController: UITableViewController {
         } else {
             editButtonItem.title = "Настроить"
             if !isSaved {
-                saveBarButtonItem.isEnabled = true && !isOffline
+                saveBarButtonItem.isEnabled = true
             }
         }
     }
@@ -231,9 +229,9 @@ extension NewCharacteristicArticleTableViewController {
             actitivityIndicator.stop()
             return
         }
-        
-        dataService.fetchArticle(with: article.id, forPreview: false) {
-            (result: Result<[UIArticleInside]>) in
+
+        FirebaseController.shared.getDataController().fetchArticle(with: article.id, forPreview: false) {
+            (result: Result<[ArticleInside]>) in
             
             actitivityIndicator.stop()
             switch result {
@@ -337,29 +335,27 @@ extension NewCharacteristicArticleTableViewController: ArticleTitleSaveProtocol 
 
 // MARK: - Article Save Delegate
 extension NewCharacteristicArticleTableViewController: ArticleSaveDelegateProtocol {
-    func saveArticle(articleInside: UIArticleInside, with articleInsideID: String?) {
+    func saveArticle(articleInside: ArticleInside, with articleInsideID: String?) {
         saveArticle {
             (article: Article) in
             
             let activityIndicator = ActivityIndicator()
             activityIndicator.start()
             
-            let articleInsideToSave = UIArticleInside(id: articleInside.id,
-                                                      parentID: article.id,
-                                                      sequence: articleInside.sequence,
-                                                      type: articleInside.type,
-                                                      caption: articleInside.caption,
-                                                      text: articleInside.text,
-                                                      image: articleInside.image,
-                                                      imageURL: articleInside.imageURL,
-                                                      imageStorageURL: articleInside.imageStorageURL,
-                                                      imageName: articleInside.imageName,
-                                                      numericList: articleInside.numeringList,
-                                                      listElements: articleInside.listElements
-                                                        )
+            let articleInsideToSave = ArticleInside(id: articleInside.id,
+                                                    parentID: article.id,
+                                                    sequence: articleInside.sequence,
+                                                    type: articleInside.type,
+                                                    caption: articleInside.caption,
+                                                    text: articleInside.text,
+                                                    imageStorageURL: articleInside.imageStorageURL,
+                                                    imageName: articleInside.imageName,
+                                                    numericList: articleInside.numericList,
+                                                    listElements: articleInside.listElements
+                                                    )
             
-            self.dataService.saveArticleInside(articleInsideToSave, with: articleInsideID) {
-                (newResult: Result<UIArticleInside>) in
+            FirebaseController.shared.getDataController().saveData(articleInsideToSave, with: articleInsideID, in: DBTables.articlesInside) {
+                (newResult: Result<ArticleInside>) in
                 
                 activityIndicator.stop()
                 switch newResult {
@@ -388,8 +384,8 @@ extension NewCharacteristicArticleTableViewController {
             for element in self.articleInsideElements {
                 activityIndicator.start()
                 
-                self.dataService.saveArticleInside(element, with: element.id) {
-                    (result: Result<UIArticleInside>) in
+                FirebaseController.shared.getDataController().saveData(element, with: element.id, in: DBTables.articlesInside) {
+                    (result: Result<ArticleInside>) in
                     
                     activityIndicator.stop()
                     switch result {
@@ -446,7 +442,7 @@ extension NewCharacteristicArticleTableViewController {
                                     )
         }
         
-        dataService.saveArticle(articleToSave, with: id) {
+        FirebaseController.shared.getDataController().saveData(articleToSave, with: id, in: DBTables.articles) {
             (result: Result<Article>) in
             
             activityIndicator.stop()
@@ -476,7 +472,7 @@ extension NewCharacteristicArticleTableViewController {
         for element in deletedElements {
             activityIndicator.start()
             
-            dataService.deleteArticleInside(with: element.id) {
+            FirebaseController.shared.getDataController().deleteData(with: element.id, from: DBTables.articlesInside) {
                 (result: Result<Bool>) in
                 
                 activityIndicator.stop()

@@ -1,42 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18B75" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="CDArticle" representedClassName=".CDArticle" syncable="YES" codeGenerationType="class">
-        <attribute name="id" attributeType="String" syncable="YES"/>
-        <attribute name="parentID" attributeType="String" syncable="YES"/>
-        <attribute name="parentType" attributeType="String" syncable="YES"/>
-        <attribute name="sequence" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="title" attributeType="String" syncable="YES"/>
-        <attribute name="type" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-    </entity>
-    <entity name="CDArticleInside" representedClassName=".CDArticleInside" syncable="YES" codeGenerationType="class">
-        <attribute name="caption" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="id" attributeType="String" syncable="YES"/>
-        <attribute name="image" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <attribute name="imageName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="imageStorageURL" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="numericList" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="parentID" attributeType="String" syncable="YES"/>
-        <attribute name="sequence" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="type" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-    </entity>
-    <entity name="CDArticleInsideLists" representedClassName=".CDArticleInsideLists" syncable="YES" codeGenerationType="class">
-        <attribute name="element" attributeType="String" syncable="YES"/>
-        <attribute name="parentID" attributeType="String" syncable="YES"/>
-        <attribute name="sequence" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-    </entity>
-    <entity name="CDCharacteristic" representedClassName=".CDCharacteristic" syncable="YES" codeGenerationType="class">
-        <attribute name="collapsed" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="id" attributeType="String" syncable="YES"/>
-        <attribute name="level" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="name" attributeType="String" syncable="YES"/>
-        <attribute name="parentID" attributeType="String" syncable="YES"/>
-    </entity>
-    <elements>
-        <element name="CDArticle" positionX="-63" positionY="-18" width="128" height="135"/>
-        <element name="CDArticleInside" positionX="214.6171875" positionY="5.51953125" width="128" height="210"/>
-        <element name="CDArticleInsideLists" positionX="90" positionY="90" width="128" height="90"/>
-        <element name="CDCharacteristic" positionX="99" positionY="90" width="128" height="120"/>
-    </elements>
+    <elements/>
 </model>

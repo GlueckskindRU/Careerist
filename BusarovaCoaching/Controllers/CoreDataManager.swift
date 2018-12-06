@@ -63,23 +63,9 @@ class CoreDataManager {
         }
     }
     
-//    func createObject<T: NSManagedObject>(from entity: T.Type) -> T {
-////        let context = getContext()
-////        let context = backgroundContext
-//
-////        return NSEntityDescription.insertNewObject(forEntityName: String(describing: entity), into: context) as! T
-//        return NSEntityDescription.insertNewObject(forEntityName: String(describing: entity), into: backgroundContext) as! T
-//    }
-    
     func createObject<T: NSManagedObject>(from entity: T.Type, into context: NSManagedObjectContext) -> T {
         return NSEntityDescription.insertNewObject(forEntityName: String(describing: entity), into: context) as! T
     }
-    
-//    func delete(_ object: NSManagedObject) {
-//        let context = getContext()
-//        context.delete(object)
-//        save(context: context)
-//    }
     
     func delete(_ object: NSManagedObject, in context: NSManagedObjectContext, withSaving: Bool) {
         context.delete(object)
@@ -87,23 +73,6 @@ class CoreDataManager {
             save(context: context)
         }
     }
-    
-//    func getEntity<T: NSManagedObject>(with id: String) -> T {
-//        let idPredicate = NSPredicate(format: "id == '\(id)'")
-//        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [idPredicate])
-//        
-//        let resultArray = fetchData(for: T.self, predicate: compoundPredicate)
-//        let result: T
-//        
-//        if resultArray.isEmpty {
-////            result = createObject(from: T.self)
-//            result = createObject(from: T.self, into: backgroundContext)
-//        } else {
-//            result = resultArray.first!
-//        }
-//        
-//        return result
-//    }
     
     func getEntity<T: NSManagedObject>(with id: String, in context: NSManagedObjectContext) -> T {
         let idPredicate = NSPredicate(format: "id == '\(id)'")

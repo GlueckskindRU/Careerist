@@ -11,7 +11,6 @@ import UIKit
 class ArticlesPreviewTableViewController: UITableViewController {
     private var article: Article?
     private var articlesElements: [ArticleInsideUnwrapped] = []
-    private let dataService = DataService()
     
     func configure(with article: Article) {
         self.article = article
@@ -110,8 +109,8 @@ extension ArticlesPreviewTableViewController {
         let activityIndicator = ActivityIndicator()
         activityIndicator.start()
         
-        dataService.fetchArticle(with: article.id, forPreview: true) {
-            (result: Result<[UIArticleInside]>) in
+        FirebaseController.shared.getDataController().fetchArticle(with: article.id, forPreview: true) {
+            (result: Result<[ArticleInside]>) in
             
             activityIndicator.stop()
             switch result {
@@ -126,8 +125,17 @@ extension ArticlesPreviewTableViewController {
                 for index in articleInsideArray.indices {
                     switch articleInsideArray[index].type {
                     case .image:
-                        if let elementUnwrapped = self.unwrapImage(articleInsideArray[index]) {
-                            self.articlesElements[index] = elementUnwrapped
+                        self.unwrapImage(articleInsideArray[index]) {
+                            (result: Result<ArticleInsideUnwrapped>) in
+                            
+                            switch result {
+                            case .success(let imageElementUnwrapped):
+                                self.articlesElements[index] = imageElementUnwrapped
+                                self.tableView.reloadData()
+                            case .failure(let error):
+                                let alertDialog = AlertDialog(title: nil, message: error.getError())
+                                alertDialog.showAlert(in: self, completion: nil)
+                            }
                         }
                     case .list:
                         if let elementUnwrapped = self.unwrapList(articleInsideArray[index]) {
@@ -149,7 +157,7 @@ extension ArticlesPreviewTableViewController {
         }
     }
     
-    private func unwrapText(_ articleInside: UIArticleInside) -> ArticleInsideUnwrapped? {
+    private func unwrapText(_ articleInside: ArticleInside) -> ArticleInsideUnwrapped? {
         guard let text = articleInside.text else {
             return nil
         }
@@ -170,11 +178,14 @@ extension ArticlesPreviewTableViewController {
         
         return result
     }
-    
-    private func unwrapImage(_ articleInside: UIArticleInside) -> ArticleInsideUnwrapped? {
-        guard let image = articleInside.image else {
-            return nil
+
+    private func unwrapImage(_ articleInside: ArticleInside, completion: @escaping (Result<ArticleInsideUnwrapped>) -> Void) {
+        guard let imageStorageURL = articleInside.imageStorageURL else {
+            return
         }
+        
+        let activityIndicator = ActivityIndicator()
+        activityIndicator.start()
         
         let caption: String?
         if articleInside.caption == nil {
@@ -183,20 +194,29 @@ extension ArticlesPreviewTableViewController {
             caption = articleInside.caption!
         }
         
-        let result = ArticleInsideUnwrapped(type: ArticleInsideType.image,
-                                            caption: caption,
-                                            text: nil,
-                                            image: image,
-                                            listElements: nil
-        )
-        
-        return result
+        FirebaseController.shared.getStorageController().downloadImage(with: imageStorageURL) {
+            (result: Result<UIImage>) in
+            
+            activityIndicator.stop()
+            switch result {
+            case .success(let image):
+                let result = ArticleInsideUnwrapped(type: ArticleInsideType.image,
+                                                    caption: caption,
+                                                    text: nil,
+                                                    image: image,
+                                                    listElements: nil
+                                                    )
+                completion(Result.success(result))
+            case .failure(let error):
+                completion(Result.failure(error))
+            }
+        }
     }
     
-    private func unwrapList(_ articleInside: UIArticleInside) -> ArticleInsideUnwrapped? {
+    private func unwrapList(_ articleInside: ArticleInside) -> ArticleInsideUnwrapped? {
         guard
             let listElements = articleInside.listElements,
-            let isNumeric = articleInside.numeringList else {
+            let isNumeric = articleInside.numericList else {
                 return nil
         }
         

@@ -75,26 +75,8 @@ class AuthorizationViewController: UIViewController {
         return button
     }()
     
-//    lazy private var offlineLabel: UILabel = {
-//        let label = UILabel()
-//
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.backgroundColor = .red
-//        label.textColor = .white
-//        label.textAlignment = .center
-//        label.font = UIFont.systemFont(ofSize: 32, weight: UIFont.Weight.black)
-//        label.numberOfLines = 0
-//        label.text = AppError.noReachability("Осуществить регистрацию/логин").getError()
-//
-//        return label
-//    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        if (UIApplication.shared.delegate as! AppDelegate).appManager.isOffline {
-//            setupOfflineLayout()
-//        } else {
             if keychainController.keychainItemExists() {
                 view.backgroundColor = .white
                 loginViaKeychain()
@@ -102,25 +84,11 @@ class AuthorizationViewController: UIViewController {
                 view.backgroundColor = .orange
                 setupLayout()
             }
-//        }
     }
     
     func configure() {
         self.calledByAppManager = false
     }
-    
-//    private func setupOfflineLayout() {
-//        view.backgroundColor = .red
-//
-//        view.addSubview(offlineLabel)
-//
-//        NSLayoutConstraint.activate([
-//            offlineLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            offlineLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-//            ])
-//
-//        offlineLabel.preferredMaxLayoutWidth = view.frame.width
-//    }
     
     private func setupLayout() {
         view.addSubview(emailTextField)

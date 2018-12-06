@@ -13,7 +13,7 @@ protocol ListCaptionSaveProtocol {
 }
 
 class NewListInsideTableViewController: UITableViewController, ArticleInsideElementsProtocol {
-    private var articleInside: UIArticleInside?
+    private var articleInside: ArticleInside?
     private var sequence: Int?
     private var articleSaveDelegate: ArticleSaveDelegateProtocol?
     
@@ -42,7 +42,7 @@ class NewListInsideTableViewController: UITableViewController, ArticleInsideElem
         }
     }
     
-    func configure(with articleInside: UIArticleInside?, as sequence: Int, delegate: ArticleSaveDelegateProtocol) {
+    func configure(with articleInside: ArticleInside?, as sequence: Int, delegate: ArticleSaveDelegateProtocol) {
         self.articleInside = articleInside
         self.sequence = sequence
         self.articleSaveDelegate = delegate
@@ -119,7 +119,7 @@ extension NewListInsideTableViewController {
             return cell
         }
         
-        let bulletSign = elementToPass.numeringList! ? "\(indexPath.row + 1)" : LiteralConsts.nonNumericListBullet.rawValue
+        let bulletSign = elementToPass.numericList! ? "\(indexPath.row + 1)" : LiteralConsts.nonNumericListBullet.rawValue
         
         cell.configure(with: elementToPass.listElements![indexPath.row], bullet: bulletSign)
         
@@ -156,7 +156,7 @@ extension NewListInsideTableViewController {
         if articleInside == nil {
             listTypeControl.selectedSegmentIndex = 0
         } else {
-            listTypeControl.selectedSegmentIndex = articleInside!.numeringList! ? 0 : 1
+            listTypeControl.selectedSegmentIndex = articleInside!.numericList! ? 0 : 1
         }
         
         return view
@@ -233,25 +233,23 @@ extension NewListInsideTableViewController {
         }
     }
     
-    private func create(as numeric: Bool?, elements: [String]?) -> UIArticleInside? {
+    private func create(as numeric: Bool?, elements: [String]?) -> ArticleInside? {
         guard let sequence = sequence else {
             return nil
         }
         
         let listElements = elements ?? articleInside?.listElements ?? []
 
-        let result = UIArticleInside(id: articleInside?.id ?? "",
-                                     parentID: articleInside?.parentID ?? "",
-                                     sequence: sequence,
-                                     type: .list,
-                                     caption: listCaption,
-                                     text: nil,
-                                     image: nil,
-                                     imageURL: nil,
-                                     imageStorageURL: nil,
-                                     imageName: nil,
-                                     numericList: numeric ?? articleInside?.numeringList ?? true,
-                                     listElements: listElements
+        let result = ArticleInside(id: articleInside?.id ?? "",
+                                   parentID: articleInside?.parentID ?? "",
+                                   sequence: sequence,
+                                   type: ArticleInsideType.list,
+                                   caption: listCaption,
+                                   text: nil,
+                                   imageStorageURL: nil,
+                                   imageName: nil,
+                                   numericList: numeric ?? articleInside?.numericList ?? true,
+                                   listElements: listElements
                                     )
         
         return result
