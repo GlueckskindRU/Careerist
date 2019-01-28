@@ -19,8 +19,14 @@ class CabinetCell: UITableViewCell {
         return label
     }()
     
-    func configure(with menuCaption: String) {
-        self.menuCaption.text = menuCaption
+    func configure(with subscribedCompetence: CompetenceWithReadingStatus) {
+        self.menuCaption.text = subscribedCompetence.competences.name
+        
+        if subscribedCompetence.hasNewAdvice || subscribedCompetence.hasNewArticle {
+            self.menuCaption.textColor = .red
+        } else {
+            self.menuCaption.textColor = .black
+        }
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

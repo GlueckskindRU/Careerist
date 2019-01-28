@@ -16,8 +16,13 @@ class TableFooterView {
     func create(with text: String, in view: UIView, empty: Bool) -> UIView {
         if empty {
             let height = view.frame.size.height / 2
-            let width = view.frame.size.width - 20
-            let frame = CGRect(origin: CGPoint(x: 10, y: height / 3), size: CGSize(width: width, height: height))
+            let width = view.frame.size.width - 35
+            let frame = CGRect(origin: CGPoint(x: 10,
+                                               y: height / 3),
+                               size: CGSize(width: width,
+                                            height: height)
+                                )
+            
             let view = UIView(frame: frame)
             
             let label = UILabel(frame: frame)

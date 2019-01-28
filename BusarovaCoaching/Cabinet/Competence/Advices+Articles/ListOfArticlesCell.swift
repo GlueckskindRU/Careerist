@@ -1,14 +1,14 @@
 //
-//  ListOfAdvicesCell.swift
+//  ListOfArticlesCell.swift
 //  BusarovaCoaching
 //
-//  Created by Yuri Ivashin on 08/10/2018.
+//  Created by Yuri Ivashin on 06/12/2018.
 //  Copyright © 2018 The Homber Team. All rights reserved.
 //
 
 import UIKit
 
-class ListOfAdvicesCell: UITableViewCell {
+class ListOfArticlesCell: UITableViewCell {
     lazy private var titleLabel: UILabel = {
         let label = UILabel()
         
@@ -20,8 +20,28 @@ class ListOfAdvicesCell: UITableViewCell {
         return label
     }()
     
-    func configure(with advice: Article, as sequance: Int) {
-        titleLabel.text = advice.title.isEmpty ? "Совет дня № \(sequance)" : advice.title
+    func configure(with asset: ReceivedAsset, as sequance: Int) {
+        titleLabel.text = asset.asset.title.isEmpty ? "Статья № \(sequance)" : asset.asset.title
+        if !asset.wasRead {
+            contentView.backgroundColor = UIColor.lightGray
+            titleLabel.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.medium)
+        } else {
+            contentView.backgroundColor = UIColor.white
+        }
+        
+        if asset.hasQuestions {
+            if asset.wasRead && asset.passed {
+                titleLabel.textColor = .green
+            } else {
+                titleLabel.textColor = .red
+            }
+        } else {
+            if !asset.wasRead  {
+                titleLabel.textColor = .red
+            } else {
+                titleLabel.textColor = .black
+            }
+        }
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

@@ -203,8 +203,6 @@ extension ScheduleTableViewController: ScheduleCellDelegateProtocol {
             }
             
             advicesSchedule = newSchedule
-        default:
-            return
         }
     }
     
@@ -241,8 +239,6 @@ extension ScheduleTableViewController: ScheduleCellDelegateProtocol {
             advicesTimePickerVC.modalTransitionStyle = .crossDissolve
             advicesTimePickerVC.modalPresentationStyle = .overCurrentContext
             present(advicesTimePickerVC, animated: true, completion: nil)
-        default:
-            return
         }
     }
     
@@ -290,8 +286,6 @@ extension ScheduleTableViewController: TimeSaveDelegateProtocol {
             }
             
             articlesSchedule = newSchedule
-        default:
-            return
         }
         
         tableView.reloadData()

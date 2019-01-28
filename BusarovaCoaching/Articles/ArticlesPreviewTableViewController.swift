@@ -11,9 +11,15 @@ import UIKit
 class ArticlesPreviewTableViewController: UITableViewController {
     private var article: Article?
     private var articlesElements: [ArticleInsideUnwrapped] = []
+    private var hasQuestions: Bool = false
     
-    func configure(with article: Article) {
+    lazy private var answerToQuestionsBarButton: UIBarButtonItem = {
+        return UIBarButtonItem(title: "Ответить на вопросы", style: UIBarButtonItem.Style.plain, target: self, action: #selector(answerQuestionsButtonTapped(_:)))
+    }()
+    
+    func configure(with article: Article, hasQuestions: Bool = false) {
         self.article = article
+        self.hasQuestions = hasQuestions
     }
     
     override func viewDidLoad() {
@@ -40,7 +46,13 @@ class ArticlesPreviewTableViewController: UITableViewController {
         headerView.configure(with: article?.title)
         tableView.setAndLayoutTableHeaderView(header: headerView)
         
+        if hasQuestions {
+            navigationItem.rightBarButtonItem = answerToQuestionsBarButton
+        }
+        
         refreshUI()
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
     }
 }
 
@@ -101,6 +113,46 @@ extension ArticlesPreviewTableViewController {
 
 // MARK: - auxiliary functions
 extension ArticlesPreviewTableViewController {
+    @objc
+    private func answerQuestionsButtonTapped(_ sender: UIBarButtonItem) {
+        guard let article = article else {
+            return
+        }
+        
+        let activityIndicator = ActivityIndicator()
+        activityIndicator.start()
+        
+        FirebaseController.shared.getDataController().fetchData(with: article.parentID, from: DBTables.characteristics) {
+            (result: Result<CharacteristicsModel>) in
+            
+            switch result {
+            case .success(let indicator):
+                FirebaseController.shared.getDataController().fetchData(with: indicator.parentID, from: DBTables.characteristics) {
+                    (resultedCompetence: Result<CharacteristicsModel>) in
+                    
+                    switch resultedCompetence {
+                    case .success(let competence):
+                        let answerQuestionVC = AnswerQuestionsTableViewController()
+                        answerQuestionVC.configure(with: article.id, as: 0, totalPoints: competence.totalPoints, competenceId: competence.id)
+                        activityIndicator.stop()
+                        self.navigationController?.pushViewController(answerQuestionVC, animated: true)
+                    case .failure(let error):
+                        activityIndicator.stop()
+                        self.showErrorMessage(error)
+                    }
+                }
+            case .failure(let error):
+                activityIndicator.stop()
+                self.showErrorMessage(error)
+            }
+        }
+    }
+    
+    private func showErrorMessage(_ error: AppError) {
+        let alertDialog = AlertDialog(title: nil, message: error.getError())
+        alertDialog.showAlert(in: self, completion: nil)
+    }
+    
     private func refreshUI() {
         guard let article = article else {
             return

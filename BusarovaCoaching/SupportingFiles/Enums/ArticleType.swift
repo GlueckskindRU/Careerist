@@ -10,6 +10,5 @@ import Foundation
 
 enum ArticleType: Int {
     case article = 0
-    case testQuestion = 1
     case advice = 2
 }

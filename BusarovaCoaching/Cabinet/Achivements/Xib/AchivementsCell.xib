@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="181" id="TyW-oC-Ak1" customClass="AchivementsCell" customModule="ru_homber_Karierist" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="427" height="181"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TyW-oC-Ak1" id="Z0f-9L-STc">
+                <rect key="frame" x="0.0" y="0.0" width="427" height="180.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cYB-a8-6cV" customClass="ProgressView" customModule="ru_homber_Karierist" customModuleProvider="target">
+                        <rect key="frame" x="28" y="74.5" width="32" height="32"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="32" id="6vz-kl-Flk"/>
+                            <constraint firstAttribute="width" constant="32" id="VVs-Dt-KL8"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LNE-jI-sk4">
+                        <rect key="frame" x="76" y="19" width="323" height="143"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="cYB-a8-6cV" firstAttribute="leading" secondItem="Z0f-9L-STc" secondAttribute="leadingMargin" constant="8" id="2aO-r7-TJs"/>
+                    <constraint firstItem="LNE-jI-sk4" firstAttribute="top" secondItem="Z0f-9L-STc" secondAttribute="topMargin" constant="8" id="CcH-sE-PBy"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="LNE-jI-sk4" secondAttribute="trailing" constant="8" id="YMY-wc-GQa"/>
+                    <constraint firstItem="LNE-jI-sk4" firstAttribute="leading" secondItem="cYB-a8-6cV" secondAttribute="trailing" constant="16" id="gq7-La-qdT"/>
+                    <constraint firstItem="cYB-a8-6cV" firstAttribute="centerY" secondItem="LNE-jI-sk4" secondAttribute="centerY" id="mOr-U1-YoX"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="LNE-jI-sk4" secondAttribute="bottom" constant="8" id="nFY-rv-afA"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="achievementNameLabel" destination="LNE-jI-sk4" id="Gbq-zn-MLa"/>
+                <outlet property="progressView" destination="cYB-a8-6cV" id="9Uc-tl-FcS"/>
+            </connections>
+            <point key="canvasLocation" x="-40.799999999999997" y="217.24137931034485"/>
+        </tableViewCell>
+    </objects>
+</document>

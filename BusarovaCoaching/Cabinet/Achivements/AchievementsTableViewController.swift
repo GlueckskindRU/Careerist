@@ -9,7 +9,7 @@
 import UIKit
 
 class AchievementsTableViewController: UITableViewController {
-    private var achivementsData: [AchievementsModel] = []
+    private var achievementsData: [Achievements] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,45 +17,67 @@ class AchievementsTableViewController: UITableViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        tableView.register(AchivementsCell.self, forCellReuseIdentifier: "Achievement Cell")
-        tableView.tableFooterView = UIView()
+        tableView.register(UINib(nibName: String(describing: AchivementsCell.self), bundle: nil), forCellReuseIdentifier: CellIdentifiers.achievementsCell.rawValue)
         
         navigationItem.title = "Мои достижения"
         
-        let activityIndicator = ActivityIndicator()
-        activityIndicator.start()
-        FirebaseController.shared.getDataController().fetchData(DBTables.achivements) {
-            (result: Result<[AchievementsModel]>) in
-            
-            activityIndicator.stop()
-            switch result {
-            case .success(let achivements):
-                self.achivementsData = achivements
-                self.tableView.reloadData()
-            case .failure(let error):
-                let alertDialog = AlertDialog(title: nil, message: error.getError())
-                alertDialog.showAlert(in: self, completion: nil)
-            }
-        }
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 44
+        tableView.allowsSelection = false
+        
+        fetchAchievements()
     }
 }
 
+// MARK: - TableView DataSource
 extension AchievementsTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return achivementsData.count
+        return achievementsData.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Achievement Cell", for: indexPath) as! AchivementsCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.achievementsCell.rawValue, for: indexPath) as! AchivementsCell
         
-        cell.configure(with: achivementsData[indexPath.row])
+        cell.configure(with: achievementsData[indexPath.row])
         
         return cell
     }
 }
 
 extension AchievementsTableViewController {
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+    private func fetchAchievements() {
+        let noAchievementsMessage = "Здесь будут отображены Ваши достижения в ответах на тестовые вопросы по компетенциям, на которые Вы подписаны."
+        guard
+            let currentUser = (UIApplication.shared.delegate as! AppDelegate).appManager.getCurrentUser() else {
+                self.tableView.tableFooterView = TableFooterView.shared.create(with: noAchievementsMessage, in: self.view, empty: self.achievementsData.isEmpty)
+                self.tableView.reloadData()
+                return
+        }
+        
+        let currentRating = currentUser.rating
+        let activityIndicator = ActivityIndicator()
+        
+        for rating in currentRating {
+            activityIndicator.start()
+            FirebaseController.shared.getDataController().fetchData(with: rating.competenceID, from: DBTables.characteristics) {
+                (result: Result<CharacteristicsModel>) in
+                
+                if result.isSuccess, let competence = result.value {
+                    let newAchievement = Achievements(competenceID: rating.competenceID,
+                                                      competenceName: competence.name,
+                                                      maxProgress: rating.totalPoints,
+                                                      currentProgress: rating.earnedPoints
+                                                        )
+                    
+                    self.achievementsData.append(newAchievement)
+                    self.tableView.tableFooterView = TableFooterView.shared.create(with: noAchievementsMessage, in: self.view, empty: self.achievementsData.isEmpty)
+                    self.tableView.reloadData()
+                    activityIndicator.stop()
+                }
+            }
+        }
+        
+        self.tableView.tableFooterView = TableFooterView.shared.create(with: noAchievementsMessage, in: self.view, empty: self.achievementsData.isEmpty)
+        self.tableView.reloadData()
     }
 }

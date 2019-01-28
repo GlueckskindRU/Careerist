@@ -8,12 +8,13 @@
 
 import Foundation
 
-struct CharacteristicsModel: Codable {
+struct CharacteristicsModel: Codable, Hashable {
     let id: String
     let name: String
     let parentID: String
     var collapsed: Bool
     let level: CharacteristicsLevel
+    var totalPoints: Int
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -21,6 +22,7 @@ struct CharacteristicsModel: Codable {
         case parentID
         case collapsed
         case level
+        case totalPoints
     }
     
     init(id: String, name: String, parentID: String, level: CharacteristicsLevel) {
@@ -29,6 +31,7 @@ struct CharacteristicsModel: Codable {
         self.parentID = parentID
         self.level = level
         self.collapsed = true
+        self.totalPoints = 0
     }
     
     init(from decoder: Decoder) throws {
@@ -38,6 +41,7 @@ struct CharacteristicsModel: Codable {
         self.name = try values.decode(String.self, forKey: .name)
         self.parentID = try values.decode(String.self, forKey: .parentID)
         self.collapsed = try values.decode(Bool.self, forKey: .collapsed)
+        self.totalPoints = try values.decode(Int.self, forKey: .totalPoints)
         
         let levelInt = try values.decode(Int.self, forKey: .level)
         self.level = CharacteristicsLevel(rawValue: levelInt)!
@@ -51,5 +55,6 @@ struct CharacteristicsModel: Codable {
         try container.encode(parentID, forKey: .parentID)
         try container.encode(collapsed, forKey: .collapsed)
         try container.encode(level.rawValue, forKey: .level)
+        try container.encode(totalPoints, forKey: .totalPoints)
     }
 }

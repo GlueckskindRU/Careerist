@@ -103,9 +103,6 @@ extension CharacteristicsArticlesTableViewController {
             let editAdviceVC = NewAdviceViewController()
             editAdviceVC.configure(with: selectedElement, as: indexPath.row, parentID: parentID)
             navigationController?.pushViewController(editAdviceVC, animated: true)
-        case .testQuestion:
-            print("there still no test questions in this area!")
-            return
         }
     }
     

@@ -49,13 +49,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
-//        guard
-//            let notificationTypeInt = (userInfo[notificationId] as? NSString)?.integerValue else {
-//                return
-//        }
-//
-//        print("Received notification type = \(notificationTypeInt)")
         print(String(describing: userInfo))
+        guard
+            let updateType = (userInfo["updateType"] as? NSString)?.uppercased,
+            let informationType = (userInfo["informationType"] as? NSString)?.uppercased else {
+                return
+        }
+        
+        let notificationController = NotificationsController()
+        notificationController.processWithReceivedUserInfo(updateType: updateType, informationType: informationType)
         
         completionHandler(UIBackgroundFetchResult.newData)
     }

@@ -19,8 +19,14 @@ class CompetenceCell: UITableViewCell {
         return label
     }()
     
-    func configure(with caption: String) {
+    func configure(with caption: String, and hasNewElements: Bool) {
         cellCaption.text = caption
+        
+        if hasNewElements {
+            cellCaption.textColor = .red
+        } else {
+            cellCaption.textColor = .black
+        }
         
         contentView.addSubview(cellCaption)
     }

@@ -168,25 +168,29 @@ class AppManager {
     /// Indicates if the current user has been already subscribed to the requested indicator of the
     /// characteristics competence
     ///
-    /// - Parameter to: requested characteristic
+    /// - Parameter to: requested indicator of a competence
     /// - Returns: **true** if current user has already subscribed to requsted indicator of the characteristics competence. Also, if user has the **Admin** userrole, **true** will be always returned. **False** will be returned if not the indicator of the characteristics competence was requested, or there is no subscription to the requested indicator
-    func isSubscribed(to characteristic: CharacteristicsModel) -> Bool {
+    func isSubscribed(to indicator: CharacteristicsModel) -> Bool {
         guard let currentUser = currentUser else {
             return false
         }
         
         switch currentUser.userRole {
         case .admin:
-            switch characteristic.level{
+            switch indicator.level{
             case .indicatorsOfCompetentions:
                 return true
             default:
                 return false
             }
         case .user:
-            switch characteristic.level {
+            switch indicator.level {
             case .indicatorsOfCompetentions:
-                return currentUser.subscribedCharacteristics.contains(characteristic.id)
+                if let setOfIndicators = currentUser.subscribedCharacteristics[indicator.parentID] {
+                    return setOfIndicators.contains(indicator.id)
+                } else {
+                    return false
+                }
             default:
                 return false
             }
@@ -196,34 +200,39 @@ class AppManager {
     /// Performs the subscription or unsubscription of the current user to the requested indicator
     /// of the characteristics competence
     ///
-    /// - Parameter to: requested characteristic
+    /// - Parameter to: requested indicator
     /// - Parameter subscribe: indicates the action: **true** means subscription, **false** means unsubscription
     /// - Parameter completion: completion closure (Result < Bool >) -> Void. If current user has been
     /// already subscribed to the requested indicator **Result.success(false)** will be called.
-    func performSubscriptionAction(to characteristic: CharacteristicsModel, subscribe: Bool, completion: @escaping (Result<Bool>) -> Void) {
+    func performSubscriptionAction(to indicator: CharacteristicsModel, subscribe: Bool, completion: @escaping (Result<Bool>) -> Void) {
         guard var currentUser = currentUser else {
             return completion(Result.failure(AppError.notAuthorized))
         }
         
-        if characteristic.level != CharacteristicsLevel.indicatorsOfCompetentions {
+        if indicator.level != CharacteristicsLevel.indicatorsOfCompetentions {
             return completion(Result.failure(AppError.incorrectCharacteristicLevel))
         }
         
-        if subscribe && isSubscribed(to: characteristic) {
+        if subscribe && isSubscribed(to: indicator) {
             return completion(Result.success(false))
         }
         
-        if !subscribe && !isSubscribed(to: characteristic) {
+        if !subscribe && !isSubscribed(to: indicator) {
             return completion(Result.success(false))
         }
         
         if subscribe {
-            currentUser.subscribedCharacteristics.append(characteristic.id)
-        } else {
-            if let unsubscribedIndex = currentUser.subscribedCharacteristics.firstIndex(of: characteristic.id) {
-                currentUser.subscribedCharacteristics.remove(at: unsubscribedIndex)
+            if var setOfIndicators = currentUser.subscribedCharacteristics[indicator.parentID] {
+                setOfIndicators.insert(indicator.id)
+                currentUser.subscribedCharacteristics[indicator.parentID] = setOfIndicators
             } else {
-                return completion(Result.success(false))
+                let setOfIndicators: Set<String> = [indicator.id]
+                currentUser.subscribedCharacteristics[indicator.parentID] = setOfIndicators
+            }
+        } else {
+            if var setOfIndicator = currentUser.subscribedCharacteristics[indicator.parentID] {
+                setOfIndicator.remove(indicator.id)
+                currentUser.subscribedCharacteristics[indicator.parentID] = setOfIndicator
             }
         }
         
@@ -289,7 +298,8 @@ class AppManager {
                            isPaidUser: user.isPaidUser,
                            hasPaidTill: user.hasPaidTill,
                            subscribedCharacteristics: user.subscribedCharacteristics,
-                           fcmToken: newToken
+                           fcmToken: newToken,
+                           rating: user.rating
                             )
         
         FirebaseController.shared.getDataController().saveData(newUser, with: newUser.id, in: DBTables.users) {

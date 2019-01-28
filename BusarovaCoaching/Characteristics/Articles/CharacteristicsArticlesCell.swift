@@ -40,9 +40,6 @@ class CharacteristicsArticlesCell: UITableViewCell {
         case .advice:
             articleTypeLabel.text = "Совет дня"
             articleTitleLabel.text = "Совет дня без заголовка"
-        case .testQuestion:
-            articleTypeLabel.text = "Тестовый вопрос"
-            articleTitleLabel.text = "Тестовый вопрос без заголовка"
         }
         
         articleTypeLabel.sizeToFit()

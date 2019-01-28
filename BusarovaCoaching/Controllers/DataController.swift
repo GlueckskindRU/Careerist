@@ -204,8 +204,8 @@ class DataController {
     ///
     /// - Parameter from: value of a DBTables enum, represents the firebase collection
     /// - Parameter by: parents identifier
-    /// - Parameter completion: completion closure: (Result<[Codable]>) -> Void
-    func fetchArticles<T: Codable>(from: DBTables, by parentID: String, completion: @escaping (Result<[T]>) -> Void) {
+    /// - Parameter completion: completion closure: (Result<[Article]>) -> Void
+    func fetchArticles(from: DBTables, by parentID: String, completion: @escaping (Result<[Article]>) -> Void) {
         db.collection(DBTables.articles.rawValue).whereField("parentType", isEqualTo: from.rawValue).whereField("parentID", isEqualTo: parentID).order(by: "sequence").getDocuments() {
             (snap, error) in
             
@@ -219,7 +219,35 @@ class DataController {
             }
             
             do {
-                let result = try snap.documentsToList(T.self)
+                let result = try snap.documentsToList(Article.self)
+                completion(Result.success(result))
+            } catch {
+                completion(Result.failure(.otherError(error)))
+            }
+        }
+    }
+    
+    /// Fetches articles according to passed parameters: parentID, parentType and ArticleType: article/advice/testQuestion
+    ///
+    /// - Parameter from: value of a DBTables enum, represents the firebase collection
+    /// - Parameter by: parents identifier
+    /// - Parameter as: type of requested assets: article or advice or testQuestion
+    /// - Parameter completion: completion closure: (Result<[Article]>) -> Void
+    func fetchArticles(from: DBTables, by parentID: String, as type: ArticleType, completion: @escaping (Result<[Article]>) -> Void) {
+        db.collection(DBTables.articles.rawValue).whereField("parentType", isEqualTo: from.rawValue).whereField("parentID", isEqualTo: parentID).whereField("type", isEqualTo: type.rawValue).order(by: "sequence").getDocuments() {
+            (snap, error) in
+            
+            guard let snap = snap, !snap.isEmpty else {
+                if let error = error {
+                    completion(Result.failure(.otherError(error)))
+                } else {
+                    completion(Result.success([]))
+                }
+                return
+            }
+            
+            do {
+                let result = try snap.documentsToList(Article.self)
                 completion(Result.success(result))
             } catch {
                 completion(Result.failure(.otherError(error)))
