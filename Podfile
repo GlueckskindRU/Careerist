@@ -15,5 +15,6 @@ pod 'Firebase/Messaging'
 #pod 'FirebaseUI/Google'
 #pod 'FirebaseUI'
 pod 'Kingfisher', '~> 4.0'
+pod "YoutubePlayer-in-WKWebView", "~> 0.2.0"
 
 end
