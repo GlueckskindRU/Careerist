@@ -13,6 +13,11 @@ class CharacteristicsTableViewController: UITableViewController {
     private var characteristics: [CharacteristicsModel] = []
     private var indexPath: IndexPath?
     
+    lazy private var logInBarButtonItem: UIBarButtonItem = {
+        let icon = UIImage(named: Assets.login.rawValue)
+        return UIBarButtonItem(image: icon, style: UIBarButtonItem.Style.plain, target: self, action: #selector(logInTapped(sender:)))
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,6 +43,13 @@ class CharacteristicsTableViewController: UITableViewController {
         tapGestureRecognizer.delegate = self
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        navigationItem.rightBarButtonItem = logInBarButtonItem
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        logInBarButtonItem.isEnabled = !AppManager.shared.isAuhorized()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -48,6 +60,13 @@ class CharacteristicsTableViewController: UITableViewController {
         }
         
         destination.configure(with: characteristics[indexPath.row].id)
+    }
+    
+    @objc
+    private func logInTapped(sender: UIBarButtonItem) {
+        let authVC = AuthorizationViewController()
+        authVC.configure()
+        navigationController?.pushViewController(authVC, animated: true)
     }
 }
 
@@ -190,6 +209,12 @@ extension CharacteristicsTableViewController {
 // MARK: - Subscriptions & Unsubscription
 extension CharacteristicsTableViewController {
     private func indicateSubscriptionDialog(for characteristic: CharacteristicsModel) {
+        guard AppManager.shared.isAuhorized() else {
+            let error = AppError.notAuthorized
+            let alertDialog = AlertDialog(title: nil, message: error.getError())
+            return alertDialog.showAlert(in: self, completion: nil)
+        }
+        
         let activityIndicator = ActivityIndicator()
         
         let subscribeAction: Bool

@@ -11,9 +11,9 @@ import UIKit
 class WelcomeTableViewController: UITableViewController {
     private var articles: [AboutArticlesModel] = []
     
-    lazy private var logInBarButtonItem: UIBarButtonItem = {
-        return UIBarButtonItem(title: "Войти", style: .plain, target: self, action: #selector(logInTapped(sender:)))
-    }()
+//    lazy private var logInBarButtonItem: UIBarButtonItem = {
+//        return UIBarButtonItem(title: "Войти", style: .plain, target: self, action: #selector(logInTapped(sender:)))
+//    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,15 +46,15 @@ class WelcomeTableViewController: UITableViewController {
             }
         }
         
-        navigationItem.rightBarButtonItem = logInBarButtonItem
+//        navigationItem.rightBarButtonItem = logInBarButtonItem
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        logInBarButtonItem.isEnabled = !AppManager.shared.isAuhorized()
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//        logInBarButtonItem.isEnabled = !AppManager.shared.isAuhorized()
+//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard
@@ -66,12 +66,12 @@ class WelcomeTableViewController: UITableViewController {
         destination.configure(with: articles[indexPath.row])
     }
     
-    @objc
-    private func logInTapped(sender: UIBarButtonItem) {
-        let authVC = AuthorizationViewController()
-        authVC.configure()
-        navigationController?.pushViewController(authVC, animated: true)
-    }
+//    @objc
+//    private func logInTapped(sender: UIBarButtonItem) {
+//        let authVC = AuthorizationViewController()
+//        authVC.configure()
+//        navigationController?.pushViewController(authVC, animated: true)
+//    }
 }
 
 // MARK: - TableView DataSource

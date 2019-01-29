@@ -39,7 +39,7 @@ enum AppError: Error {
         case .downloadedImageCreation(let error):
             return "Ошибка формирования скаченного изображения: \(String(describing: error))"
         case .notAuthorized:
-            return "Вы не авторизованы для совершения данного действия"
+            return "Для подписки нужна регистрация.\nДля этого нажмите кнопку с человечком в правом верхнем углу."
         case .incorrectCharacteristicLevel:
             return "Выбран некорректный уровень группировки компетенции"
         case .keychainSave:

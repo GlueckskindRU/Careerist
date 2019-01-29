@@ -10,4 +10,5 @@ import Foundation
 
 enum Assets: String {
     case backArrow = "backArrow"
+    case login = "cabinet"
 }
