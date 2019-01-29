@@ -268,11 +268,11 @@
             </objects>
             <point key="canvasLocation" x="5812" y="561"/>
         </scene>
-        <!--Основное меню-->
+        <!--Подписки-->
         <scene sceneID="OJw-x7-nki">
             <objects>
                 <navigationController id="kQR-xd-gnd" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Основное меню" image="mainMenu" id="3Q9-TI-LJb"/>
+                    <tabBarItem key="tabBarItem" title="Подписки" image="mainMenu" id="3Q9-TI-LJb"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SWz-Ri-Irs">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
