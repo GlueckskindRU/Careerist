@@ -8,12 +8,19 @@
 
 import UIKit
 
+typealias optionalVoid = (() -> Void)?
+
 class ScheduleTableViewController: UITableViewController {
     private var articlesSchedule: SubscriptionArticleSchedule?
     private var advicesSchedule: SubscriptionAdviceSchedule?
     
     lazy private var saveBarButtonItem: UIBarButtonItem = {
-        return UIBarButtonItem(title: "Сохранить", style: UIBarButtonItem.Style.plain, target: self, action: #selector(saveData(sender:)))
+        return UIBarButtonItem(title: "Сохранить", style: UIBarButtonItem.Style.plain, target: self, action: #selector(saveButtonTapped(sender:)))
+    }()
+    
+    lazy private var customBackBarButton: UIBarButtonItem = {
+        let backArrow = UIImage(named: Assets.backArrow.rawValue)
+        return UIBarButtonItem(image: backArrow, style: UIBarButtonItem.Style.plain, target: self, action: #selector(back(sender:)))
     }()
     
     private var isSaved: Bool = true {
@@ -46,6 +53,9 @@ class ScheduleTableViewController: UITableViewController {
         navigationItem.title = "График развития"
         navigationItem.rightBarButtonItem = saveBarButtonItem
         saveBarButtonItem.isEnabled = AppManager.shared.isAuhorized() && !isSaved
+        
+        navigationItem.hidesBackButton = true
+        navigationItem.leftBarButtonItem = customBackBarButton
         
         fetchData()
     }
@@ -131,7 +141,11 @@ extension ScheduleTableViewController {
     }
     
     @objc
-    private func saveData(sender: UIBarButtonItem) {
+    private func saveButtonTapped(sender: UIBarButtonItem) {
+        saveData(completion: nil)
+    }
+    
+    private func saveData(completion: optionalVoid) {
         guard
         let articlesSchedule = articlesSchedule,
         let advicesSchedule = advicesSchedule,
@@ -150,17 +164,21 @@ extension ScheduleTableViewController {
                 FirebaseController.shared.getDataController().saveData(advicesSchedule, with: currentUser.id, in: DBTables.advicesSchedule) {
                     (result: Result<SubscriptionAdviceSchedule>) in
                     
+                    activityIndicator.stop()
+                    
                     switch result {
                     case .success(_):
                         DispatchQueue.main.async {
                             self.isSaved = true
-                            activityIndicator.stop()
-                            let alertDialog = AlertDialog(title: nil, message: "Ваш график развития успешно сохранён!")
-                            alertDialog.showAlert(in: self, completion: nil)
+                            guard let completion = completion else {
+                                let alertDialog = AlertDialog(title: nil, message: "Ваш график развития успешно сохранён!")
+                                return alertDialog.showAlert(in: self, completion: nil)
+                            }
+
+                            completion()
                         }
-                    case .failure(let error):
+                    case .failure(let error):                    
                         DispatchQueue.main.async {
-                            activityIndicator.stop()
                             let alertDialog = AlertDialog(title: nil, message: error.getError())
                             alertDialog.showAlert(in: self, completion: nil)
                         }
@@ -174,6 +192,37 @@ extension ScheduleTableViewController {
                 }
             }
         }
+    }
+    
+    @objc
+    private func back(sender: UIBarButtonItem) {
+        if isSaved {
+            _ = navigationController?.popViewController(animated: true)
+        } else {
+            showQuitingAlertDialog {
+                _ = self.navigationController?.popViewController(animated: true)
+            }
+        }
+    }
+    
+    private func showQuitingAlertDialog(quitingCompletion: @escaping () -> Void) {
+        let alertController = UIAlertController(title: nil, message: "Сохранить изменения?", preferredStyle: UIAlertController.Style.alert)
+        
+        let saveAction = UIAlertAction(title: "Да", style: UIAlertAction.Style.default) {
+            _ in
+            self.saveData(completion: quitingCompletion)
+        }
+        
+        let quitWithoutSavingAction = UIAlertAction(title: "Нет", style: UIAlertAction.Style.cancel) {
+            _ in
+            quitingCompletion()
+        }
+        
+        alertController.addAction(saveAction)
+        alertController.addAction(quitWithoutSavingAction)
+        alertController.preferredAction = saveAction
+        
+        present(alertController, animated: true, completion: nil)
     }
 }
 

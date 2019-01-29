@@ -60,6 +60,7 @@
 		DA9ED6042133F92900FB54FB /* CharacteristicsCellLevel1.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED6032133F92900FB54FB /* CharacteristicsCellLevel1.swift */; };
 		DA9ED60A2133FCE800FB54FB /* CharacteristicsCellLevel2.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED6092133FCE800FB54FB /* CharacteristicsCellLevel2.swift */; };
 		DA9ED60C2134176000FB54FB /* DBTables.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9ED60B2134176000FB54FB /* DBTables.swift */; };
+		DAA140C522004A74009221B2 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA140C422004A74009221B2 /* Assets.swift */; };
 		DAA97B00212336C0005AF50F /* WelcomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA97AFF212336C0005AF50F /* WelcomeTableViewController.swift */; };
 		DAA97B0221233715005AF50F /* WelcomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA97B0121233715005AF50F /* WelcomeModel.swift */; };
 		DAA97B042123396F005AF50F /* WelcomeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA97B032123396F005AF50F /* WelcomeTableCell.swift */; };
@@ -200,6 +201,7 @@
 		DA9ED6032133F92900FB54FB /* CharacteristicsCellLevel1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicsCellLevel1.swift; sourceTree = "<group>"; };
 		DA9ED6092133FCE800FB54FB /* CharacteristicsCellLevel2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicsCellLevel2.swift; sourceTree = "<group>"; };
 		DA9ED60B2134176000FB54FB /* DBTables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBTables.swift; sourceTree = "<group>"; };
+		DAA140C422004A74009221B2 /* Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		DAA97AFF212336C0005AF50F /* WelcomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeTableViewController.swift; sourceTree = "<group>"; };
 		DAA97B0121233715005AF50F /* WelcomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeModel.swift; sourceTree = "<group>"; };
 		DAA97B032123396F005AF50F /* WelcomeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeTableCell.swift; sourceTree = "<group>"; };
@@ -637,6 +639,7 @@
 				DAA9D74A21621DA3009697E8 /* ArticleType.swift */,
 				DA303955217F2BDB005EC94E /* UserRole.swift */,
 				DAD0D1FB21CE521100891C19 /* SubscriptionInformationType.swift */,
+				DAA140C422004A74009221B2 /* Assets.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -963,6 +966,7 @@
 				DA30394C217E4057005EC94E /* User.swift in Sources */,
 				DAC61EDE214BD6B700FB78C6 /* NewListInsideTableViewController.swift in Sources */,
 				DAA9D754216552F9009697E8 /* NewTestQuestionHederView.swift in Sources */,
+				DAA140C522004A74009221B2 /* Assets.swift in Sources */,
 				DA98E95B21EFB17B00B11858 /* CAShapeLayer.swift in Sources */,
 				DAD0D1FC21CE521100891C19 /* SubscriptionInformationType.swift in Sources */,
 				DAA97B0621233DAF005AF50F /* DescriptionViewController.swift in Sources */,
