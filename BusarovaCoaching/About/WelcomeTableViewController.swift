@@ -26,7 +26,9 @@ class WelcomeTableViewController: UITableViewController {
         tableView.isScrollEnabled = false
         tableView.separatorStyle = .none
         
-        tableView.tableFooterView = UINib(nibName: "WelcomeFooterXIB", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
+        let footerView = UINib(nibName: String(describing: WelcomeFootterXIB.self), bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! WelcomeFootterXIB
+        footerView.setup()
+        tableView.tableFooterView = footerView
         
         let activityIndicator = ActivityIndicator()
         activityIndicator.start()

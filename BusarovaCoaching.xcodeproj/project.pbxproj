@@ -113,7 +113,7 @@
 		DAC61EEE214C255700FB78C6 /* AlertDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC61EED214C255700FB78C6 /* AlertDialog.swift */; };
 		DACCC4E921B6CE3700854B26 /* NetworkingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACCC4E821B6CE3700854B26 /* NetworkingController.swift */; };
 		DAD0D1FC21CE521100891C19 /* SubscriptionInformationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD0D1FB21CE521100891C19 /* SubscriptionInformationType.swift */; };
-		DADEAB2D212458AF0042B564 /* WelcomeFooterXIB.xib in Resources */ = {isa = PBXBuildFile; fileRef = DADEAB2C212458AF0042B564 /* WelcomeFooterXIB.xib */; };
+		DADEAB2D212458AF0042B564 /* WelcomeFootterXIB.xib in Resources */ = {isa = PBXBuildFile; fileRef = DADEAB2C212458AF0042B564 /* WelcomeFootterXIB.xib */; };
 		DADEAB2F21246A860042B564 /* WelcomeFootterXIB.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADEAB2E21246A860042B564 /* WelcomeFootterXIB.swift */; };
 		DAE6DF7521527BB8009C9CC3 /* ArticleListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE6DF7421527BB8009C9CC3 /* ArticleListCell.swift */; };
 		DAE6DF7721527C14009C9CC3 /* ArticleInsideUnwrapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE6DF7621527C14009C9CC3 /* ArticleInsideUnwrapped.swift */; };
@@ -254,7 +254,7 @@
 		DAC61EED214C255700FB78C6 /* AlertDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDialog.swift; sourceTree = "<group>"; };
 		DACCC4E821B6CE3700854B26 /* NetworkingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingController.swift; sourceTree = "<group>"; };
 		DAD0D1FB21CE521100891C19 /* SubscriptionInformationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionInformationType.swift; sourceTree = "<group>"; };
-		DADEAB2C212458AF0042B564 /* WelcomeFooterXIB.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeFooterXIB.xib; sourceTree = "<group>"; };
+		DADEAB2C212458AF0042B564 /* WelcomeFootterXIB.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeFootterXIB.xib; sourceTree = "<group>"; };
 		DADEAB2E21246A860042B564 /* WelcomeFootterXIB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeFootterXIB.swift; sourceTree = "<group>"; };
 		DAE6DF7421527BB8009C9CC3 /* ArticleListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListCell.swift; sourceTree = "<group>"; };
 		DAE6DF7621527C14009C9CC3 /* ArticleInsideUnwrapped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleInsideUnwrapped.swift; sourceTree = "<group>"; };
@@ -543,7 +543,7 @@
 				DAA97B0121233715005AF50F /* WelcomeModel.swift */,
 				DAA97B032123396F005AF50F /* WelcomeTableCell.swift */,
 				DAA97B0521233DAF005AF50F /* DescriptionViewController.swift */,
-				DADEAB2C212458AF0042B564 /* WelcomeFooterXIB.xib */,
+				DADEAB2C212458AF0042B564 /* WelcomeFootterXIB.xib */,
 				DADEAB2E21246A860042B564 /* WelcomeFootterXIB.swift */,
 			);
 			path = About;
@@ -731,7 +731,6 @@
 				DA68CD59212312D000AE8515 /* Frameworks */,
 				DA68CD5A212312D000AE8515 /* Resources */,
 				899952C34D526051302AF97A /* [CP] Embed Pods Frameworks */,
-				F2CB9BF8A40B8A85324DCF37 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -796,7 +795,7 @@
 				DA68CD65212312D000AE8515 /* Main.storyboard in Resources */,
 				DA2AF07B21EA17C800FCF72B /* SubmitAnswersView.xib in Resources */,
 				DA27E24021ECB6A300C74A8F /* QuestionView.xib in Resources */,
-				DADEAB2D212458AF0042B564 /* WelcomeFooterXIB.xib in Resources */,
+				DADEAB2D212458AF0042B564 /* WelcomeFootterXIB.xib in Resources */,
 				DAF2A48A219CC0AE00BC45A6 /* ArticlesScheduleCell.xib in Resources */,
 				DAF2A49F219F350300BC45A6 /* AdvicesScheduleCell.xib in Resources */,
 			);
@@ -812,11 +811,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-BusarovaCoaching/Pods-BusarovaCoaching-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/YoutubePlayer-in-WKWebView/YoutubePlayer_in_WKWebView.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -824,11 +824,12 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YoutubePlayer_in_WKWebView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
@@ -855,28 +856,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F2CB9BF8A40B8A85324DCF37 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-BusarovaCoaching/Pods-BusarovaCoaching-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseFirestore/gRPCCertificates.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/gRPCCertificates.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BusarovaCoaching/Pods-BusarovaCoaching-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

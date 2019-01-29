@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WelcomeFootterXIB" customModule="ru_homber_Karierist" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="WelcomeFootterXIB" customModule="ru_homber_Karierist" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkBoxMarked" translatesAutoresizingMaskIntoConstraints="NO" id="dWp-QU-8Sp">
+                    <rect key="frame" x="8" y="132" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="b8g-CP-7hQ"/>
+                        <constraint firstAttribute="width" constant="20" id="i8o-lw-Lte"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Больше не показывать" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qwZ-rb-nWF">
+                    <rect key="frame" x="28" y="132" width="339" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KlI-g0-b3S" customClass="WKYTPlayerView">
+                    <rect key="frame" x="8" y="8" width="180.5" height="104"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="KlI-g0-b3S" secondAttribute="height" multiplier="172:99" id="QdS-9Y-UaK"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w7W-cF-uj9" customClass="WKYTPlayerView">
+                    <rect key="frame" x="196.5" y="8" width="170.5" height="104"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="w7W-cF-uj9" secondAttribute="height" multiplier="167:102" id="25h-iY-v4h"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="qwZ-rb-nWF" secondAttribute="trailing" constant="8" id="1Qy-Tg-BJO"/>
+                <constraint firstItem="dWp-QU-8Sp" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="8" id="5LM-9E-0ih"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="w7W-cF-uj9" secondAttribute="trailing" constant="8" id="6HS-OH-rPl"/>
+                <constraint firstItem="KlI-g0-b3S" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="8" id="BCS-vX-i4r"/>
+                <constraint firstItem="KlI-g0-b3S" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="8" id="FDb-JA-wUM"/>
+                <constraint firstItem="qwZ-rb-nWF" firstAttribute="leading" secondItem="dWp-QU-8Sp" secondAttribute="trailing" id="LWx-DT-qBm"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="dWp-QU-8Sp" secondAttribute="bottom" constant="8" id="NUm-7d-2UR"/>
+                <constraint firstItem="dWp-QU-8Sp" firstAttribute="centerY" secondItem="qwZ-rb-nWF" secondAttribute="centerY" id="Ndv-Pk-aOA"/>
+                <constraint firstItem="w7W-cF-uj9" firstAttribute="leading" secondItem="KlI-g0-b3S" secondAttribute="trailing" constant="8" id="aLl-0R-R86"/>
+                <constraint firstItem="KlI-g0-b3S" firstAttribute="bottom" secondItem="w7W-cF-uj9" secondAttribute="bottom" id="nXD-Wt-11x"/>
+                <constraint firstItem="w7W-cF-uj9" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="8" id="oQ0-iT-gcr"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="leftPlayerView" destination="KlI-g0-b3S" id="yov-IP-9pZ"/>
+                <outlet property="rightPlayerView" destination="w7W-cF-uj9" id="4N9-ba-Z25"/>
+            </connections>
+            <point key="canvasLocation" x="20" y="-204.19790104947529"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="checkBoxMarked" width="36" height="36"/>
+    </resources>
+</document>
