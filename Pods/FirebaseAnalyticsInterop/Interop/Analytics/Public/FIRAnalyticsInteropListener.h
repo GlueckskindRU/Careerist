@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 Google
+ * Copyright 2019 Google
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,11 @@
  * limitations under the License.
  */
 
-#import <Foundation/Foundation.h>
+/// Handles events and messages from Analytics.
+@protocol FIRAnalyticsInteropListener <NSObject>
 
-NS_ASSUME_NONNULL_BEGIN
-
-@interface FSTExistenceFilter : NSObject
-
-+ (instancetype)filterWithCount:(int32_t)count;
-
-- (instancetype)init __attribute__((unavailable("Use a static constructor")));
-
-@property(nonatomic, assign, readonly) int32_t count;
+/// Triggers when an Analytics event happens for the registered origin with
+/// `FIRAnalyticsInterop`s `registerAnalyticsListener:withOrigin:`.
+- (void)messageTriggered:(NSString *)name parameters:(NSDictionary *)parameters;
 
 @end
-
-NS_ASSUME_NONNULL_END
