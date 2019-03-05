@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "242ABBB4DDEB256F462898C48BCEA7E0"
-               BlueprintName = "YoutubePlayer-in-WKWebView"
+               BlueprintIdentifier = "2EEE50523524A7F1F401B7A809C8C26D"
+               BlueprintName = "YoutubePlayerView"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "YoutubePlayer-in-WKWebView.framework">
+               BuildableName = "YoutubePlayerView.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
