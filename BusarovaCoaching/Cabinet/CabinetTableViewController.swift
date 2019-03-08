@@ -34,7 +34,19 @@ class CabinetTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        refreshUI()
+        guard let currentUser = (UIApplication.shared.delegate as! AppDelegate).appManager.getCurrentUser() else {
+            self.refreshUI()
+            return
+        }
+        
+        let queue = DispatchQueue(label: "CabinetTableViewController.refreshNotificationsQueue", qos: .userInitiated)
+        
+        let notificationController = NotificationsController(coreDataManager: coreDataManager, currentUser: currentUser, queue: queue)
+        notificationController.fetchAllWaitingPushes {
+            DispatchQueue.main.async {
+                self.refreshUI()
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -118,16 +130,17 @@ extension CabinetTableViewController: CabinetSectionDelegateProtocol {
 }
 
 extension CabinetTableViewController {
-    private func refreshUI() {
+    func refreshUI() {
         initialData = CabinetModel.fetchInitialData()
         
         sectionsItems = initialData.filter { $0.level == .zero }
         
+        subscribedCompetenceList = []
+        tableView.reloadData()
+        
         guard let currentUser = (UIApplication.shared.delegate as! AppDelegate).appManager.getCurrentUser() else {
             return
         }
-        
-        subscribedCompetenceList = []
         
         let activityIndicator = ActivityIndicator()
         activityIndicator.start()

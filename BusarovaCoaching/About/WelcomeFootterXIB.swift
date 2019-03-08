@@ -7,11 +7,11 @@
 //
 
 import UIKit
-import YoutubePlayer_in_WKWebView
+import YoutubePlayerView
 
 class WelcomeFootterXIB: UIView {
-    @IBOutlet weak var leftPlayerView: WKYTPlayerView!
-    @IBOutlet weak var rightPlayerView: WKYTPlayerView!
+    @IBOutlet weak var leftPlayerView: YoutubePlayerView!
+    @IBOutlet weak var rightPlayerView: YoutubePlayerView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,7 +24,9 @@ class WelcomeFootterXIB: UIView {
     func setup() {
         let leftVideoID = "BtqNG7AVXN0" //Как быть убедительным: аргументация и контраргументация. Наталья Бусарова | Courson | Курсон
         let rightVideoID = "g4eZ0LzjZ5I" //Мастер-класс Натальи Бусаровой
-        leftPlayerView.load(withVideoId: leftVideoID)
-        rightPlayerView.load(withVideoId: rightVideoID)
+//        leftPlayerView.load(withVideoId: leftVideoID)
+//        rightPlayerView.load(withVideoId: rightVideoID)
+        leftPlayerView.loadWithVideoId(leftVideoID)
+        rightPlayerView.loadWithVideoId(rightVideoID)
     }
 }

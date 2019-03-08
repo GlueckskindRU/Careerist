@@ -209,9 +209,8 @@ extension AnswerQuestionsTableViewController {
         questionAlreadyPassed = true
         
         var newDetails: Set<PassedQuestions.Details> = [PassedQuestions.Details(questionID: questionID, passed: true, snoozedTill: nil)]
-        var oldRating = PassedQuestions(competenceID: "", earnedPoints: 0, totalPoints: 0, details: [])
+        var oldRating: PassedQuestions?
         var newRating = PassedQuestions(competenceID: competenceId, earnedPoints: answersOptions.count, totalPoints: totalPoints, details: newDetails)
-        var ratingExists = false
         
         let userRatings = currentUser.rating
         
@@ -220,24 +219,38 @@ extension AnswerQuestionsTableViewController {
                 oldRating = rating
                 newDetails = getUpdatedDetails(currentDetails: rating.details, passed: true, snoozedTime: nil)
                 newRating = PassedQuestions(competenceID: competenceId, earnedPoints: rating.earnedPoints + answersOptions.count, totalPoints: totalPoints, details: newDetails)
-                ratingExists = true
+                break
             }
-            break
         }
         
-        if ratingExists {
+        if let oldRating = oldRating {
             currentUser.rating.remove(oldRating)
-            currentUser.rating.insert(newRating)
-        } else {
-            currentUser.rating.insert(newRating)
         }
+        
+        currentUser.rating.insert(newRating)
         
         saveInFireBase(currentUser: currentUser, title: "Отлично!", message: "Вы правильно ответили на этот вопрос!")
     }
     
     private func addSnoozedTime() {
         let today = Date()
-        let dateComponents = DateComponents(calendar: Calendar.current, timeZone: nil, era: nil, year: nil, month: nil, day: 1, hour: nil, minute: nil, second: nil, nanosecond: nil, weekday: nil, weekdayOrdinal: nil, quarter: nil, weekOfMonth: nil, weekOfYear: nil, yearForWeekOfYear: nil)
+        let dateComponents = DateComponents(calendar: Calendar.current,
+                                            timeZone: nil,
+                                            era: nil,
+                                            year: nil,
+                                            month: nil,
+                                            day: 1,
+                                            hour: nil,
+                                            minute: nil,
+                                            second: nil,
+                                            nanosecond: nil,
+                                            weekday: nil,
+                                            weekdayOrdinal: nil,
+                                            quarter: nil,
+                                            weekOfMonth: nil,
+                                            weekOfYear: nil,
+                                            yearForWeekOfYear: nil
+                                            )
         
         guard
             var currentUser = (UIApplication.shared.delegate as! AppDelegate).appManager.getCurrentUser(),
@@ -252,9 +265,8 @@ extension AnswerQuestionsTableViewController {
         self.snozzedTime = tomorrow
         
         var newDetails: Set<PassedQuestions.Details> = [PassedQuestions.Details(questionID: questionID, passed: false, snoozedTill: tomorrow)]
-        var oldRating = PassedQuestions(competenceID: "", earnedPoints: 0, totalPoints: 0, details: [])
+        var oldRating: PassedQuestions?
         var newRating = PassedQuestions(competenceID: competenceId, earnedPoints: 0, totalPoints: totalPoints, details: newDetails)
-        var ratingExists = false
         
         let userRatings = currentUser.rating
         
@@ -263,17 +275,15 @@ extension AnswerQuestionsTableViewController {
                 oldRating = rating
                 newDetails = getUpdatedDetails(currentDetails: rating.details, passed: false, snoozedTime: tomorrow)
                 newRating = PassedQuestions(competenceID: competenceId, earnedPoints: rating.earnedPoints, totalPoints: totalPoints, details: newDetails)
-                ratingExists = true
+                break
             }
-            break
         }
         
-        if ratingExists {
+        if let oldRating = oldRating {
             currentUser.rating.remove(oldRating)
-            currentUser.rating.insert(newRating)
-        } else {
-            currentUser.rating.insert(newRating)
         }
+        
+        currentUser.rating.insert(newRating)
         
         saveInFireBase(currentUser: currentUser, title: "Неправильно!", message: "Увы, Вы не правильно ответили. Повторно ответить на данный вопрос Вы сможете только через 24 часа.")
     }
@@ -283,23 +293,20 @@ extension AnswerQuestionsTableViewController {
         let questionID = questionsInsideArray[sequence].id
         
         let updatedDetail = PassedQuestions.Details(questionID: questionID, passed: passed, snoozedTill: snoozedTime)
-        var oldDetail = PassedQuestions.Details(questionID: "", passed: false, snoozedTill: nil)
-        var detailExists = false
+        var oldDetail: PassedQuestions.Details?
         
         for question in currentDetails {
             if question.questionID == questionID {
                 oldDetail = question
-                detailExists = true
+                break
             }
-            break
         }
         
-        if detailExists {
+        if let oldDetail = oldDetail {
             returningValue.remove(oldDetail)
-            returningValue.insert(updatedDetail)
-        } else {
-            returningValue.insert(updatedDetail)
         }
+        
+        returningValue.insert(updatedDetail)
         
         return returningValue
     }
@@ -309,16 +316,14 @@ extension AnswerQuestionsTableViewController {
             (result: Result<User>) in
             
             self.activityIndicator.stop()
-            switch result {
-            case .success(let user):
+
+            if let user = result.value {
                 (UIApplication.shared.delegate as! AppDelegate).appManager.loggedIn(as: user)
                 self.tableView.reloadData()
-                let alertDialog = AlertDialog(title: title, message: message)
-                alertDialog.showAlert(in: self, completion: nil)
-            case .failure(let error):
-                let alertDialog = AlertDialog(title: nil, message: error.getError())
-                alertDialog.showAlert(in: self, completion: nil)
             }
+            
+            let alertDialog = AlertDialog(title: title, message: message)
+            alertDialog.showAlert(in: self, completion: nil)
         }
     }
 }

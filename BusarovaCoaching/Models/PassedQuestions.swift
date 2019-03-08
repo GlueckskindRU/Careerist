@@ -12,7 +12,7 @@ struct PassedQuestions: Codable, Hashable {
     let competenceID: String
     let earnedPoints: Int
     let totalPoints: Int
-    let details: Set<Details>
+    var details: Set<Details>
     
     struct Details: Codable, Hashable {
         let questionID: String

@@ -15,10 +15,15 @@ class ListOfReceivedArticlesAndAdvices: UITableViewController {
     private var listOfReceivedAssets: [ReceivedAsset] = []
     private var assetType: ArticleType?
     private let activityIndicator = ActivityIndicator()
+    private var currentUser: User?
 
     let coreDataManager = (UIApplication.shared.delegate as! AppDelegate).coreDataManager
     var receivedArticlePushes: [CDReceivedArticles] = []
     var receivedAdvicesPushes: [CDReceivedAdvices] = []
+    
+    let dispatchGroup = DispatchGroup()
+    let queue = DispatchQueue(label: "ListOfReceivedArticlesAndAdvices.fetchSortedData", qos: .userInitiated)
+    var updatedPassedQuestionsDetails: Set<PassedQuestions.Details> = []
     
     func configure(with competence: CharacteristicsModel, as type: ArticleType) {
         self.competence = competence
@@ -46,6 +51,8 @@ class ListOfReceivedArticlesAndAdvices: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        currentUser = (UIApplication.shared.delegate as! AppDelegate).appManager.getCurrentUser()
         
         refreshUI()
     }
@@ -183,14 +190,8 @@ extension ListOfReceivedArticlesAndAdvices {
             footerText = "Вы ещё не получали ни одной статьи по выбранной компетенции"
         }
         
-        let reloadingCompletion: () -> Void = {
-            self.tableView.reloadData()
-            self.tableView.tableFooterView = TableFooterView.shared.create(with: footerText, in: self.view, empty: self.listOfReceivedAssets.isEmpty)
-            self.activityIndicator.stop()
-        }
-        
         guard
-            let currentUser = (UIApplication.shared.delegate as! AppDelegate).appManager.getCurrentUser(),
+            let currentUser = currentUser,
             let subscribedIndicators = currentUser.subscribedCharacteristics[competence.id] else {
             tableView.reloadData()
             tableView.tableFooterView = TableFooterView.shared.create(with: footerText, in: self.view, empty: self.listOfReceivedAssets.isEmpty)
@@ -212,7 +213,8 @@ extension ListOfReceivedArticlesAndAdvices {
             
             for i in 0..<subscribedReceivedArticlesIDsPushes.count {
                 activityIndicator.start()
-                fetchAsset(with: String(describing: subscribedReceivedArticlesIDsPushes[i]), as: type, having: i, for: currentUser, completion: reloadingCompletion)
+                dispatchGroup.enter()
+                fetchAsset(with: String(describing: subscribedReceivedArticlesIDsPushes[i]), as: type, having: i, for: currentUser, competenceId: competence.id)
             }
             
         case .advice:
@@ -229,7 +231,68 @@ extension ListOfReceivedArticlesAndAdvices {
             
             for i in 0..<subscribedReceivedAdvicesIDsPushes.count {
                 activityIndicator.start()
-                fetchAsset(with: String(describing: subscribedReceivedAdvicesIDsPushes[i]), as: type, having: i, for: currentUser, completion: reloadingCompletion)
+                dispatchGroup.enter()
+                fetchAsset(with: String(describing: subscribedReceivedAdvicesIDsPushes[i]), as: type, having: i, for: currentUser, competenceId: competence.id)
+            }
+        }
+        
+        dispatchGroup.notify(queue: self.queue) {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                self.tableView.tableFooterView = TableFooterView.shared.create(with: footerText, in: self.view, empty: self.listOfReceivedAssets.isEmpty)
+            }
+            
+            var updatedUser = currentUser
+            if let existingRatingForCompetence = currentUser.rating.filter( { $0.competenceID == competence.id } ).first {
+                var existingDetails = existingRatingForCompetence.details
+                
+                if !self.updatedPassedQuestionsDetails.isEmpty {
+                    let setOfExistingQuestionIDs = Set(existingDetails.map { $0.questionID } )
+                    
+                    for questionID in setOfExistingQuestionIDs {
+                        if
+                            let updatedQuestionDetail = self.updatedPassedQuestionsDetails.filter( { $0.questionID == questionID } ).first,
+                            let existingQuestionDetail = existingDetails.filter( { $0.questionID == questionID } ).first {
+                            existingDetails.remove(existingQuestionDetail)
+                            existingDetails.insert(updatedQuestionDetail)
+                            self.updatedPassedQuestionsDetails.remove(updatedQuestionDetail)
+                        }
+                    }
+                }
+                
+                if !self.updatedPassedQuestionsDetails.isEmpty {
+                    for updatedDetail in self.updatedPassedQuestionsDetails {
+                        existingDetails.insert(updatedDetail)
+                    }
+                }
+                
+                let updatedRatingOfCompetence = PassedQuestions(competenceID: competence.id,
+                                                                earnedPoints: existingRatingForCompetence.earnedPoints,
+                                                                totalPoints: existingRatingForCompetence.totalPoints,
+                                                                details: existingDetails
+                                                                )
+                updatedUser.rating.remove(existingRatingForCompetence)
+                updatedUser.rating.insert(updatedRatingOfCompetence)
+            } else {
+                let newPassedQuestions = PassedQuestions(competenceID: competence.id,
+                                                         earnedPoints: 0,
+                                                         totalPoints: competence.totalPoints,
+                                                         details: self.updatedPassedQuestionsDetails
+                                                        )
+                updatedUser.rating.insert(newPassedQuestions)
+            }
+            
+            FirebaseController.shared.getDataController().saveData(updatedUser, with: updatedUser.id, in: DBTables.users) {
+                (result: Result<User>) in
+
+                if let user = result.value {
+                    (UIApplication.shared.delegate as! AppDelegate).appManager.loggedIn(as: user)
+                    self.currentUser = user
+                }
+                
+                DispatchQueue.main.async {
+                    self.activityIndicator.stop()
+                }
             }
         }
     }
@@ -252,7 +315,7 @@ extension ListOfReceivedArticlesAndAdvices {
         listOfReceivedAssets = Array(repeating: dummyValue, count: length)
     }
     
-    private func fetchAsset(with id: String, as type: ArticleType, having position: Int, for currentUser: User, completion: @escaping () -> Void) {
+    private func fetchAsset(with id: String, as type: ArticleType, having position: Int, for currentUser: User, competenceId: String) {
         FirebaseController.shared.getDataController().fetchData(with: id, from: DBTables.articles) {
             (assetResult: Result<Article>) in
             
@@ -261,7 +324,7 @@ extension ListOfReceivedArticlesAndAdvices {
                 switch type {
                 case .advice:
                     self.listOfReceivedAssets[position] = ReceivedAsset(asset, self.getAdvicePushReadingStatus(for: asset.id), false, false)
-                    return completion()
+                    self.dispatchGroup.leave()
                 case .article:
                     FirebaseController.shared.getDataController().fetchArticle(with: asset.id, forPreview: false) {
                         (articleInsideResult: Result<[ArticleInside]>) in
@@ -275,30 +338,49 @@ extension ListOfReceivedArticlesAndAdvices {
                             if questionSet.isEmpty {
                                 passed = false
                             } else {
-                                let ratings = currentUser.rating
-                                
-                                for rating in ratings {
-                                    for questionDetail in rating.details {
-                                        if questionSet.contains(questionDetail.questionID) {
-                                            if !questionDetail.passed {
-                                                passed = false
-                                            }
-                                            break
-                                        }
+                                for questionID in questionSet {
+                                    let questionPassed = self.hasPassedQuestion(with: questionID, for: competenceId, user: currentUser)
+                                    let newQuestionDetail = PassedQuestions.Details(questionID: questionID,
+                                                                                    passed: questionPassed,
+                                                                                    snoozedTill: nil
+                                                                                    )
+                                    
+                                    self.updatedPassedQuestionsDetails.insert(newQuestionDetail)
+                                    
+                                    if !questionPassed {
+                                        passed = false
                                     }
                                 }
                             }
                             
                             self.listOfReceivedAssets[position] = ReceivedAsset(asset, self.getArticlePushReadingStatus(for: asset.id), self.getArticlePushQuestionsStatus(for: asset.id), passed)
-                            return completion()
+                            self.dispatchGroup.leave()
                         case .failure(let error):
+                            self.dispatchGroup.leave()
                             return self.showAlert(with: error)
                         }
                     }
                 }
             case .failure(let error):
+                self.dispatchGroup.leave()
                 return self.showAlert(with: error)
             }
         }
+    }
+    
+    private func hasPassedQuestion(with questionID: String, for competenceID: String, user: User) -> Bool {
+        var result: Bool
+        
+        if let ratingForCompetence = user.rating.filter( { $0.competenceID == competenceID } ).first {
+            if let questionDetails = ratingForCompetence.details.filter( { $0.questionID == questionID } ).first {
+                result = questionDetails.passed
+            } else {
+                result = false
+            }
+        } else {
+            result = false
+        }
+        
+        return result
     }
 }

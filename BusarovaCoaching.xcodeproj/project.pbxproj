@@ -26,6 +26,7 @@
 		DA303950217E4FE3005EC94E /* KeychainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA30394F217E4FE3005EC94E /* KeychainController.swift */; };
 		DA303954217E5C05005EC94E /* StoryboardIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA303953217E5C05005EC94E /* StoryboardIdentifiers.swift */; };
 		DA303956217F2BDB005EC94E /* UserRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA303955217F2BDB005EC94E /* UserRole.swift */; };
+		DA358646222168BB0057405C /* TabsSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA358645222168BB0057405C /* TabsSequence.swift */; };
 		DA3E25E121AEE82E00CBF1B2 /* NSManagedObjectContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3E25E021AEE82E00CBF1B2 /* NSManagedObjectContext.swift */; };
 		DA5A553C21243B4D00B7153E /* CheckBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5A553B21243B4D00B7153E /* CheckBoxButton.swift */; };
 		DA68CD60212312D000AE8515 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA68CD5F212312D000AE8515 /* AppDelegate.swift */; };
@@ -164,6 +165,7 @@
 		DA30394F217E4FE3005EC94E /* KeychainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainController.swift; sourceTree = "<group>"; };
 		DA303953217E5C05005EC94E /* StoryboardIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardIdentifiers.swift; sourceTree = "<group>"; };
 		DA303955217F2BDB005EC94E /* UserRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRole.swift; sourceTree = "<group>"; };
+		DA358645222168BB0057405C /* TabsSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsSequence.swift; sourceTree = "<group>"; };
 		DA3E25E021AEE82E00CBF1B2 /* NSManagedObjectContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSManagedObjectContext.swift; sourceTree = "<group>"; };
 		DA5A553B21243B4D00B7153E /* CheckBoxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxButton.swift; sourceTree = "<group>"; };
 		DA68CD5C212312D000AE8515 /* ru.homber.Karierist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ru.homber.Karierist.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -640,6 +642,7 @@
 				DA303955217F2BDB005EC94E /* UserRole.swift */,
 				DAD0D1FB21CE521100891C19 /* SubscriptionInformationType.swift */,
 				DAA140C422004A74009221B2 /* Assets.swift */,
+				DA358645222168BB0057405C /* TabsSequence.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -816,7 +819,7 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/YoutubePlayer-in-WKWebView/YoutubePlayer_in_WKWebView.framework",
+				"${BUILT_PRODUCTS_DIR}/YoutubePlayerView/YoutubePlayerView.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -829,7 +832,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YoutubePlayer_in_WKWebView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YoutubePlayerView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
@@ -936,6 +939,7 @@
 				DAC61EE0214C196800FB78C6 /* JSONEncoder.swift in Sources */,
 				DA6E5BD421B92BB6003CBB2B /* CoreData.xcdatamodeld in Sources */,
 				DA68CD60212312D000AE8515 /* AppDelegate.swift in Sources */,
+				DA358646222168BB0057405C /* TabsSequence.swift in Sources */,
 				DADEAB2F21246A860042B564 /* WelcomeFootterXIB.swift in Sources */,
 				DAC61EBA21492A6000FB78C6 /* ArticleInside.swift in Sources */,
 				DAE6DF832152DC33009C9CC3 /* ArticlesPreviewHeaderView.swift in Sources */,

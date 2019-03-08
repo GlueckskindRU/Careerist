@@ -161,7 +161,16 @@ class AppManager {
         case .admin:
             return true
         case .user:
-            return false
+            switch table {
+            case .articles:
+                guard let ratingForCompetence = currentUser.rating.filter( { $0.competenceID == parentID } ).first else {
+                    return false
+                }
+                
+                return ratingForCompetence.earnedPoints == ratingForCompetence.totalPoints
+            default:
+                return false
+            }
         }
     }
     
@@ -264,7 +273,7 @@ class AppManager {
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
             UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
-            
+
             let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
             UNUserNotificationCenter.current().requestAuthorization(
                 options: authOptions,
@@ -274,7 +283,7 @@ class AppManager {
                 UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
             application.registerUserNotificationSettings(settings)
         }
-        
+
         application.registerForRemoteNotifications()
     }
     

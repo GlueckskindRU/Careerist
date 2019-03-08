@@ -9,164 +9,107 @@
 import UIKit
 
 class NotificationsController {
+    typealias EmptyVoid = () -> Void
     private let coreDataManager: CoreDataManager
-    private let currentUser: User?
+    private let currentUser: User
+    private let queue: DispatchQueue
+    
     private let activityIndicator = ActivityIndicator()
+    private let dispatchGroup = DispatchGroup()
     
-    init() {
-        self.coreDataManager = (UIApplication.shared.delegate as! AppDelegate).coreDataManager
-        self.currentUser = (UIApplication.shared.delegate as! AppDelegate).appManager.getCurrentUser()
+    init(coreDataManager: CoreDataManager, currentUser: User, queue: DispatchQueue) {
+        self.coreDataManager = coreDataManager
+        self.currentUser = currentUser
+        self.queue = queue
     }
     
-    func processWithReceivedUserInfo(updateType: String, informationType: String) {
-        guard let currentUser = currentUser else {
-            return
-        }
-        
-        DispatchQueue.main.async {
-            self.activityIndicator.start()
-        }
-        if updateType == "SUBSCRIPTION" {
-            switch informationType {
-            case SubscriptionInformationType.articles.rawValue:
-                print("We receive articles subscription")
-                getUsersSettings(for: currentUser)
-            case SubscriptionInformationType.advices.rawValue:
-                print("We receive ADVICES subscription")
-                fetchWaitingAdvicePushes(for: currentUser)
-            default:
-                DispatchQueue.main.async {
-                    self.activityIndicator.stop()
-                }
-                return
-            }
-        }
-    }
-    
-    private func getUsersSettings(for currentUser: User) {
+    func fetchAllWaitingPushes(completion: @escaping EmptyVoid) {
         FirebaseController.shared.getDataController().fetchData(with: currentUser.id, from: DBTables.articlesSchedule) {
-            (result: Result<SubscriptionArticleSchedule>) in
-            
-            if result.isSuccess, let schedule = result.value {
-                self.fetchWaitingArticlePushes(for: currentUser, questionsAreIncluded: schedule.withQuestions)
+            (scheduleResult: Result<SubscriptionArticleSchedule>) in
+
+            var withQuestion: Bool = false
+            if let schedule = scheduleResult.value {
+                withQuestion = schedule.withQuestions
+            }
+            self.fetchArticlePushes(questionsAreIncluded: withQuestion)
+            self.fetchAdvicePushes()
+
+            self.dispatchGroup.notify(queue: self.queue) {
+                completion()
             }
         }
     }
     
-    private func fetchWaitingArticlePushes(for currentUser: User, questionsAreIncluded: Bool) {
+    private func fetchArticlePushes(questionsAreIncluded: Bool) {
+        dispatchGroup.enter()
         FirebaseController.shared.getDataController().fetchData(with: currentUser.id, from: DBTables.waitingArticlePushes) {
-            (waitingPushResult: Result<WaitingArticlePushes>) in
-            
-            if waitingPushResult.isSuccess, let waitingArticlePush = waitingPushResult.value {
-                FirebaseController.shared.getDataController().fetchData(with: currentUser.id, from: DBTables.sentArticlePushes) {
-                    (sentPushResult: Result<SentArticlePushes>) in
-                    
-                    var actualSentPushes: SentArticlePushes
-                    
-                    switch sentPushResult {
-                    case .success(let existingSentPush):
-                        actualSentPushes = existingSentPush
-                    case .failure(_):
-                        actualSentPushes = SentArticlePushes(id: currentUser.id)
+            (articlesPushingResult: Result<WaitingArticlePushes>) in
+
+            if let articlesPush = articlesPushingResult.value {
+                let pushedArticleIDs = articlesPush.articles.map { $0 }
+                
+                guard !pushedArticleIDs.isEmpty else {
+                    self.dispatchGroup.leave()
+                    return
+                }
+                
+                let storedPushesIDs = self.fetchStoredArticleIDs()
+
+                for articleID in pushedArticleIDs {
+                    if !storedPushesIDs.contains(articleID) {
+                        self.dispatchGroup.enter()
+                        self.fetchAndSaveArticle(with: articleID, questionsAreIncluded: questionsAreIncluded)
                     }
+                }
+
+                self.dispatchGroup.leave()
+            } else {
+                print("Fetching an entity from the waitingArticlePushes table returned an error: \(String(describing: articlesPushingResult.error))")
+                self.dispatchGroup.leave()
+            }
+        }
+    }
+    
+    private func fetchStoredArticleIDs() -> Set<String> {
+        let storedData = coreDataManager.fetchData(for: CDReceivedArticles.self)
+        
+        var result: Set<String> = []
+        
+        for element in storedData {
+            if let id = element.id {
+                result.insert(id)
+            }
+        }
+
+        return result
+    }
+    
+    private func fetchAndSaveArticle(with id: String, questionsAreIncluded: Bool) {
+        FirebaseController.shared.getDataController().fetchData(with: id, from: DBTables.articles) {
+            (articleResult: Result<Article>) in
+
+            if let article = articleResult.value {
+                FirebaseController.shared.getDataController().fetchArticle(with: id, forPreview: false) {
+                    (articleInsideResult: Result<[ArticleInside]>) in
+
+                    let hasQuestions: Bool
                     
-                    for articleID in waitingArticlePush.articles {
-                        FirebaseController.shared.getDataController().fetchData(with: articleID, from: DBTables.articles) {
-                            (articleResult: Result<Article>) in
-                            
-                            if articleResult.isSuccess, let article = articleResult.value {
-                                FirebaseController.shared.getDataController().fetchArticle(with: articleID, forPreview: false) {
-                                    (articlesInsideResult: Result<[ArticleInside]>) in
-                                    
-                                    let hasQuestions: Bool
-                                    
-                                    if questionsAreIncluded {
-                                        switch articlesInsideResult {
-                                        case .success(let articleInsideArray):
-                                            let questions = articleInsideArray.filter { $0.type == ArticleInsideType.testQuestion }
-                                            hasQuestions = !questions.isEmpty
-                                        case .failure(_):
-                                            hasQuestions = false
-                                        }
-                                    } else {
-                                        hasQuestions = false
-                                    }
-                                    
-                                    self.saveReceivedArticlePushInCoreData(article, hasQuestions: hasQuestions)
-                                    actualSentPushes.articles.insert(articleID)
-                                    
-                                    FirebaseController.shared.getDataController().saveData(actualSentPushes, with: currentUser.id, in: DBTables.sentArticlePushes) {
-                                        (result: Result<SentArticlePushes>) in
-                                        
-                                        // do nothing here
-                                    }
-                                }
-                            }
+                    if questionsAreIncluded {
+                        switch articleInsideResult {
+                        case .success(let articleInsideArray):
+                            let questions = articleInsideArray.filter { $0.type == ArticleInsideType.testQuestion }
+                            hasQuestions = !questions.isEmpty
+                        case .failure(_):
+                            hasQuestions = false
                         }
+                    } else {
+                        hasQuestions = false
                     }
                     
-                    let emptyWaitingArticlePush = WaitingArticlePushes(id: currentUser.id)
-                    FirebaseController.shared.getDataController().saveData(emptyWaitingArticlePush, with: currentUser.id, in: DBTables.waitingArticlePushes) {
-                        (result: Result<WaitingArticlePushes>) in
-                        
-                        // do nothing here
-                    }
+                    self.saveReceivedArticlePushInCoreData(article, hasQuestions: hasQuestions)
                 }
             } else {
-                print("Fetching an entity from the waitingArticlePushes table returned an error: \(String(describing: waitingPushResult.error))")
-            }
-            
-            DispatchQueue.main.async {
-                self.activityIndicator.stop()
-            }
-        }
-    }
-    
-    private func fetchWaitingAdvicePushes(for currentUser: User) {
-        FirebaseController.shared.getDataController().fetchData(with: currentUser.id, from: DBTables.waitingAdvicePushes) {
-            (waitingPushResult: Result<WaitingAdvicePushes>) in
-            print("waitingPushResult = <\(waitingPushResult)>")
-            if waitingPushResult.isSuccess, let waitingAdvicePush = waitingPushResult.value {
-                FirebaseController.shared.getDataController().fetchData(with: currentUser.id, from: DBTables.sentAdvicePushes) {
-                    (sentPushResult: Result<SentAdvicePushes>) in
-                    print("sentPushResult = <\(sentPushResult)>")
-                    var actualSentPushes: SentAdvicePushes
-                    
-                    switch sentPushResult {
-                    case .success(let existingSentPush):
-                        actualSentPushes = existingSentPush
-                    case .failure(_):
-                        actualSentPushes = SentAdvicePushes(id: currentUser.id)
-                    }
-                    
-                    for adviceID in waitingAdvicePush.advices {
-                        FirebaseController.shared.getDataController().fetchData(with: adviceID, from: DBTables.articles) {
-                            (adviceResult: Result<Article>) in
-                            print("adviceResult = <\(adviceResult)>")
-                            if adviceResult.isSuccess, let advice = adviceResult.value {
-                                self.saveReceivedAdvicePushInCoreData(advice)
-                                actualSentPushes.advices.insert(adviceID)
-                            }
-                            
-                            FirebaseController.shared.getDataController().saveData(actualSentPushes, with: currentUser.id, in: DBTables.sentAdvicePushes) {
-                                (result: Result<SentAdvicePushes>) in
-                                
-                                // do nothing here
-                            }
-                        }
-                    }
-                    
-                    let emptyWaitingAdvicePush = WaitingAdvicePushes(id: currentUser.id)
-                    FirebaseController.shared.getDataController().saveData(emptyWaitingAdvicePush, with: currentUser.id, in: DBTables.waitingAdvicePushes) {
-                        (result: Result<WaitingAdvicePushes>) in
-                        
-                        // do nothing here
-                    }
-                }
-            }
-            
-            DispatchQueue.main.async {
-                self.activityIndicator.stop()
+                print("Fetching an entity with id <\(id)> from the article (for article type) table returned an error: \(String(describing: articleResult.error))")
             }
         }
     }
@@ -182,6 +125,64 @@ class NotificationsController {
         newReceivedArticlePush.receivedTime = Date()
         
         coreDataManager.save(context: context)
+        
+        dispatchGroup.leave()
+    }
+    
+    private func fetchAdvicePushes() {
+        dispatchGroup.enter()
+        FirebaseController.shared.getDataController().fetchData(with: currentUser.id, from: DBTables.waitingAdvicePushes) {
+            (advicesPushingResult: Result<WaitingAdvicePushes>) in
+            
+            if let advicesPush = advicesPushingResult.value {
+                let pushedAdviceIDs = advicesPush.advices.map { $0 }
+                
+                guard !pushedAdviceIDs.isEmpty else {
+                    self.dispatchGroup.leave()
+                    return
+                }
+                
+                let storedPushesIDs = self.fetchStoredAdviceIDs()
+                
+                for adviceID in pushedAdviceIDs {
+                    if !storedPushesIDs.contains(adviceID) {
+                        self.dispatchGroup.enter()
+                        self.fetchAndSaveAdvice(with: adviceID)
+                    }
+                }
+                
+                self.dispatchGroup.leave()
+            } else {
+                print("Fetching an entity from the waitingAdvicePushes table returned an error: \(String(describing: advicesPushingResult.error))")
+                self.dispatchGroup.leave()
+            }
+        }
+    }
+    
+    private func fetchStoredAdviceIDs() -> Set<String> {
+        let storedData = coreDataManager.fetchData(for: CDReceivedAdvices.self)
+        
+        var result: Set<String> = []
+        
+        for element in storedData {
+            if let id = element.id {
+                result.insert(id)
+            }
+        }
+        
+        return result
+    }
+    
+    private func fetchAndSaveAdvice(with id: String) {
+        FirebaseController.shared.getDataController().fetchData(with: id, from: DBTables.articles) {
+            (adviceResult: Result<Article>) in
+            
+            if let advice = adviceResult.value {
+                self.saveReceivedAdvicePushInCoreData(advice)
+            } else {
+                print("Fetching an entity with id <\(id)> from the article (for advice type) table returned an error: \(String(describing: adviceResult.error))")
+            }
+        }
     }
     
     private func saveReceivedAdvicePushInCoreData(_ advice: Article) {
@@ -194,5 +195,7 @@ class NotificationsController {
         newReceivedAdvicePush.receivedTime = Date()
         
         coreDataManager.save(context: context)
+        
+        dispatchGroup.leave()
     }
 }

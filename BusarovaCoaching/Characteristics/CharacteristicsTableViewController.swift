@@ -113,7 +113,7 @@ extension CharacteristicsTableViewController: UIGestureRecognizerDelegate {
                     expandMenu(with: characterictic.id, at: index)
                 } else {
                     self.indexPath = indexPath
-                    if AppManager.shared.currentUserHasPermission(to: DBTables.articles, with: characterictic.id) {
+                    if AppManager.shared.currentUserHasPermission(to: DBTables.articles, with: characterictic.parentID) {
                     performSegue(withIdentifier: SegueIdentifiers.characteristicsArticle.rawValue, sender: self)
                     } else {
                         indicateSubscriptionDialog(for: characterictic)

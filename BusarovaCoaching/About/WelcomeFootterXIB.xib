@@ -29,14 +29,14 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KlI-g0-b3S" customClass="WKYTPlayerView">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KlI-g0-b3S" customClass="YoutubePlayerView" customModule="YoutubePlayerView">
                     <rect key="frame" x="8" y="8" width="180.5" height="104"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="KlI-g0-b3S" secondAttribute="height" multiplier="172:99" id="QdS-9Y-UaK"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w7W-cF-uj9" customClass="WKYTPlayerView">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w7W-cF-uj9" customClass="YoutubePlayerView" customModule="YoutubePlayerView">
                     <rect key="frame" x="196.5" y="8" width="170.5" height="104"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>

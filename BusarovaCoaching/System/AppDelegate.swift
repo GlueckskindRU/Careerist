@@ -49,15 +49,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
-        print(String(describing: userInfo))
+//        print(String(describing: userInfo))
+//        guard
+//            let updateType = (userInfo["updateType"] as? NSString)?.uppercased,
+//            let informationType = (userInfo["informationType"] as? NSString)?.uppercased,
+//             else {
+//                return
+//        }
+        
         guard
-            let updateType = (userInfo["updateType"] as? NSString)?.uppercased,
-            let informationType = (userInfo["informationType"] as? NSString)?.uppercased else {
+            let currentUser = appManager.getCurrentUser(),
+            let initialTabBarController = window?.rootViewController as? UITabBarController,
+            let cabinetNavigationController = initialTabBarController.viewControllers?[TabsSequence.cabinet.rawValue] as? UINavigationController else {
                 return
         }
         
-        let notificationController = NotificationsController()
-        notificationController.processWithReceivedUserInfo(updateType: updateType, informationType: informationType)
+        let queue = DispatchQueue(label: "AppDelegate.refreshNotificationQueue", qos: .userInitiated)
+        
+        let notificationController = NotificationsController(coreDataManager: coreDataManager, currentUser: currentUser, queue: queue)
+
+        notificationController.fetchAllWaitingPushes {
+            DispatchQueue.main.async {
+                initialTabBarController.selectedIndex = TabsSequence.cabinet.rawValue
+                cabinetNavigationController.popViewController(animated: true)
+            }
+        }
         
         completionHandler(UIBackgroundFetchResult.newData)
     }
