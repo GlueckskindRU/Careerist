@@ -184,7 +184,7 @@
 		DA6E5BE721B9AC72003CBB2B /* ListOfArticlesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfArticlesCell.swift; sourceTree = "<group>"; };
 		DA81DA6F216B885200D33388 /* NewAdviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAdviceViewController.swift; sourceTree = "<group>"; };
 		DA81DA76216BF40800D33388 /* ListOfAdvicesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfAdvicesCell.swift; sourceTree = "<group>"; };
-		DA98A3DE21A2E984007ED40D /* ru.homber.Karierist.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ru.homber.Karierist.entitlements; sourceTree = "<group>"; };
+		DA98A3DE21A2E984007ED40D /* ru.busarova.Karierist.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ru.busarova.Karierist.entitlements; sourceTree = "<group>"; };
 		DA98A3DF21A5E61E007ED40D /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		DA98A3E921A6BC2D007ED40D /* DispatchQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueue.swift; sourceTree = "<group>"; };
 		DA98A3EB21A6BC41007ED40D /* QualityOfService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QualityOfService.swift; sourceTree = "<group>"; };
@@ -424,7 +424,7 @@
 		DA68CD5E212312D000AE8515 /* BusarovaCoaching */ = {
 			isa = PBXGroup;
 			children = (
-				DA98A3DE21A2E984007ED40D /* ru.homber.Karierist.entitlements */,
+				DA98A3DE21A2E984007ED40D /* ru.busarova.Karierist.entitlements */,
 				DA167D0921342FF5001A9A84 /* Controllers */,
 				DA4E7323215121BA00CBA453 /* Articles */,
 				DA9ED5FC2133F51B00FB54FB /* Characteristics */,
@@ -1135,16 +1135,16 @@
 			baseConfigurationReference = 5868065F6968F58F8DEBB8E1 /* Pods-BusarovaCoaching.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = BusarovaCoaching/ru.homber.Karierist.entitlements;
+				CODE_SIGN_ENTITLEMENTS = BusarovaCoaching/ru.busarova.Karierist.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3BEPD83256;
+				DEVELOPMENT_TEAM = PQM64KYY4H;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = BusarovaCoaching/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ru.homber.Karierist;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.busarova.Karierist2;
 				PRODUCT_NAME = ru.homber.Karierist;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1156,16 +1156,16 @@
 			baseConfigurationReference = 7D348FDAB9D9C3649F079096 /* Pods-BusarovaCoaching.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = BusarovaCoaching/ru.homber.Karierist.entitlements;
+				CODE_SIGN_ENTITLEMENTS = BusarovaCoaching/ru.busarova.Karierist.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3BEPD83256;
+				DEVELOPMENT_TEAM = PQM64KYY4H;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = BusarovaCoaching/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ru.homber.Karierist;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.busarova.Karierist2;
 				PRODUCT_NAME = ru.homber.Karierist;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;

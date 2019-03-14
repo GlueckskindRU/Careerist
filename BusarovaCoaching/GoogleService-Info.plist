@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>209595805880-3k42rmr9dsui82j9afrre1t8op4s72gl.apps.googleusercontent.com</string>
+	<string>209595805880-97261f4lfdahj27k4p3vu9mrj7n7e6mc.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.209595805880-3k42rmr9dsui82j9afrre1t8op4s72gl</string>
+	<string>com.googleusercontent.apps.209595805880-97261f4lfdahj27k4p3vu9mrj7n7e6mc</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDt4xwxWbdeFYMBhOnjUAbPPqDRs4ehhkk</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,7 +17,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>ru.homber.Karierist</string>
+	<string>ru.busarova.Karierist2</string>
 	<key>PROJECT_ID</key>
 	<string>busarova-coaching</string>
 	<key>STORAGE_BUCKET</key>
@@ -27,13 +27,13 @@
 	<key>IS_ANALYTICS_ENABLED</key>
 	<false></false>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true></true>
+	<false></false>
 	<key>IS_GCM_ENABLED</key>
 	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:209595805880:ios:250cc2276d8e56e6</string>
+	<string>1:209595805880:ios:c738a543f101a1d7</string>
 	<key>DATABASE_URL</key>
 	<string>https://busarova-coaching.firebaseio.com</string>
 </dict>
