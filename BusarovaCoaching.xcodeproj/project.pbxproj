@@ -28,6 +28,8 @@
 		DA303956217F2BDB005EC94E /* UserRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA303955217F2BDB005EC94E /* UserRole.swift */; };
 		DA358646222168BB0057405C /* TabsSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA358645222168BB0057405C /* TabsSequence.swift */; };
 		DA3E25E121AEE82E00CBF1B2 /* NSManagedObjectContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3E25E021AEE82E00CBF1B2 /* NSManagedObjectContext.swift */; };
+		DA52AC6C22425DA20014C52D /* NotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA52AC6B22425DA20014C52D /* NotesTableViewController.swift */; };
+		DA52AC6E22425E7D0014C52D /* NotesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA52AC6D22425E7D0014C52D /* NotesCell.swift */; };
 		DA5A553C21243B4D00B7153E /* CheckBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5A553B21243B4D00B7153E /* CheckBoxButton.swift */; };
 		DA68CD60212312D000AE8515 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA68CD5F212312D000AE8515 /* AppDelegate.swift */; };
 		DA68CD65212312D000AE8515 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA68CD63212312D000AE8515 /* Main.storyboard */; };
@@ -88,8 +90,8 @@
 		DAC124ED2125F90500378DA1 /* CompetenceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124EC2125F90500378DA1 /* CompetenceCell.swift */; };
 		DAC124F12125FDED00378DA1 /* AchievementsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124F02125FDED00378DA1 /* AchievementsTableViewController.swift */; };
 		DAC124F32125FED800378DA1 /* AchivementsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124F22125FED800378DA1 /* AchivementsCell.swift */; };
-		DAC124FB21260FA000378DA1 /* NotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124FA21260FA000378DA1 /* NotesTableViewController.swift */; };
-		DAC124FD212610CB00378DA1 /* NotesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124FC212610CB00378DA1 /* NotesCell.swift */; };
+		DAC124FB21260FA000378DA1 /* OldNotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124FA21260FA000378DA1 /* OldNotesTableViewController.swift */; };
+		DAC124FD212610CB00378DA1 /* OldNotesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124FC212610CB00378DA1 /* OldNotesCell.swift */; };
 		DAC124FF2126120A00378DA1 /* DetailedNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC124FE2126120A00378DA1 /* DetailedNoteViewController.swift */; };
 		DAC61EB82149299800FB78C6 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC61EB72149299800FB78C6 /* Article.swift */; };
 		DAC61EBA21492A6000FB78C6 /* ArticleInside.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC61EB921492A6000FB78C6 /* ArticleInside.swift */; };
@@ -141,6 +143,8 @@
 		DAF2A49B219EF08000BC45A6 /* TimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF2A49A219EF08000BC45A6 /* TimePickerViewController.swift */; };
 		DAF2A49D219F14DD00BC45A6 /* TimeSaveDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF2A49C219F14DD00BC45A6 /* TimeSaveDelegateProtocol.swift */; };
 		DAF2A49F219F350300BC45A6 /* AdvicesScheduleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAF2A49E219F350300BC45A6 /* AdvicesScheduleCell.xib */; };
+		DAF89021223FD17E00399782 /* ArticleNotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF89020223FD17E00399782 /* ArticleNotes.swift */; };
+		DAF89024223FF7BB00399782 /* ArticleNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF89023223FF7BB00399782 /* ArticleNoteViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -167,8 +171,10 @@
 		DA303955217F2BDB005EC94E /* UserRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRole.swift; sourceTree = "<group>"; };
 		DA358645222168BB0057405C /* TabsSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsSequence.swift; sourceTree = "<group>"; };
 		DA3E25E021AEE82E00CBF1B2 /* NSManagedObjectContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSManagedObjectContext.swift; sourceTree = "<group>"; };
+		DA52AC6B22425DA20014C52D /* NotesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTableViewController.swift; sourceTree = "<group>"; };
+		DA52AC6D22425E7D0014C52D /* NotesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesCell.swift; sourceTree = "<group>"; };
 		DA5A553B21243B4D00B7153E /* CheckBoxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxButton.swift; sourceTree = "<group>"; };
-		DA68CD5C212312D000AE8515 /* ru.homber.Karierist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ru.homber.Karierist.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA68CD5C212312D000AE8515 /* ru.busarova.Karierist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ru.busarova.Karierist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA68CD5F212312D000AE8515 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA68CD64212312D000AE8515 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DA68CD66212312D000AE8515 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -230,8 +236,8 @@
 		DAC124EC2125F90500378DA1 /* CompetenceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetenceCell.swift; sourceTree = "<group>"; };
 		DAC124F02125FDED00378DA1 /* AchievementsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsTableViewController.swift; sourceTree = "<group>"; };
 		DAC124F22125FED800378DA1 /* AchivementsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchivementsCell.swift; sourceTree = "<group>"; };
-		DAC124FA21260FA000378DA1 /* NotesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTableViewController.swift; sourceTree = "<group>"; };
-		DAC124FC212610CB00378DA1 /* NotesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesCell.swift; sourceTree = "<group>"; };
+		DAC124FA21260FA000378DA1 /* OldNotesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldNotesTableViewController.swift; sourceTree = "<group>"; };
+		DAC124FC212610CB00378DA1 /* OldNotesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldNotesCell.swift; sourceTree = "<group>"; };
 		DAC124FE2126120A00378DA1 /* DetailedNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedNoteViewController.swift; sourceTree = "<group>"; };
 		DAC61EB72149299800FB78C6 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		DAC61EB921492A6000FB78C6 /* ArticleInside.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleInside.swift; sourceTree = "<group>"; };
@@ -283,6 +289,8 @@
 		DAF2A49A219EF08000BC45A6 /* TimePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerViewController.swift; sourceTree = "<group>"; };
 		DAF2A49C219F14DD00BC45A6 /* TimeSaveDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSaveDelegateProtocol.swift; sourceTree = "<group>"; };
 		DAF2A49E219F350300BC45A6 /* AdvicesScheduleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdvicesScheduleCell.xib; sourceTree = "<group>"; };
+		DAF89020223FD17E00399782 /* ArticleNotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleNotes.swift; sourceTree = "<group>"; };
+		DAF89023223FF7BB00399782 /* ArticleNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleNoteViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -377,6 +385,7 @@
 		DA4E7323215121BA00CBA453 /* Articles */ = {
 			isa = PBXGroup;
 			children = (
+				DAF89022223FF76700399782 /* Notes */,
 				DA2AF07121E7996500FCF72B /* AnswerQuestions */,
 				DAE6DF8021528EC3009C9CC3 /* ArticlesPreviewTableViewController.swift */,
 				DAE6DF7C21527F25009C9CC3 /* ArticleImageCell.swift */,
@@ -416,7 +425,7 @@
 		DA68CD5D212312D000AE8515 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DA68CD5C212312D000AE8515 /* ru.homber.Karierist.app */,
+				DA68CD5C212312D000AE8515 /* ru.busarova.Karierist.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -431,6 +440,7 @@
 				DA9ED5F92133EA3000FB54FB /* Models */,
 				DAC124E12125E17100378DA1 /* Cabinet */,
 				DAA97AFE21233655005AF50F /* About */,
+				DAF890252242585E00399782 /* Notes */,
 				DA41D1BA2178B251001266AB /* Authorization */,
 				DA5A553A21243B3100B7153E /* SupportingFiles */,
 				DA0637942178BE2B00A854B8 /* System */,
@@ -522,6 +532,7 @@
 				DAF2A47D219CA05500BC45A6 /* SubscriptionAdviceSchedule.swift */,
 				DA27E24121ECFC0C00C74A8F /* PassedQuestions.swift */,
 				DA98E96121EFB47600B11858 /* Achievements.swift */,
+				DAF89020223FD17E00399782 /* ArticleNotes.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -624,9 +635,9 @@
 		DAC124F921260F8300378DA1 /* Notes */ = {
 			isa = PBXGroup;
 			children = (
-				DAC124FA21260FA000378DA1 /* NotesTableViewController.swift */,
+				DAC124FA21260FA000378DA1 /* OldNotesTableViewController.swift */,
 				DAC124FE2126120A00378DA1 /* DetailedNoteViewController.swift */,
-				DAC124FC212610CB00378DA1 /* NotesCell.swift */,
+				DAC124FC212610CB00378DA1 /* OldNotesCell.swift */,
 			);
 			path = Notes;
 			sourceTree = "<group>";
@@ -722,6 +733,23 @@
 			path = Xib;
 			sourceTree = "<group>";
 		};
+		DAF89022223FF76700399782 /* Notes */ = {
+			isa = PBXGroup;
+			children = (
+				DAF89023223FF7BB00399782 /* ArticleNoteViewController.swift */,
+			);
+			path = Notes;
+			sourceTree = "<group>";
+		};
+		DAF890252242585E00399782 /* Notes */ = {
+			isa = PBXGroup;
+			children = (
+				DA52AC6B22425DA20014C52D /* NotesTableViewController.swift */,
+				DA52AC6D22425E7D0014C52D /* NotesCell.swift */,
+			);
+			path = Notes;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -741,7 +769,7 @@
 			);
 			name = BusarovaCoaching;
 			productName = BusarovaCoaching;
-			productReference = DA68CD5C212312D000AE8515 /* ru.homber.Karierist.app */;
+			productReference = DA68CD5C212312D000AE8515 /* ru.busarova.Karierist.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -868,7 +896,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DAC124FD212610CB00378DA1 /* NotesCell.swift in Sources */,
+				DAC124FD212610CB00378DA1 /* OldNotesCell.swift in Sources */,
 				DA30394E217E465E005EC94E /* String.swift in Sources */,
 				DAC61EDA214BD67400FB78C6 /* NewTextInsideViewController.swift in Sources */,
 				DAC124F12125FDED00378DA1 /* AchievementsTableViewController.swift in Sources */,
@@ -904,12 +932,14 @@
 				DAEE5182215025AE00449FEE /* LiteralConsts.swift in Sources */,
 				DAC61ECD21498AB300FB78C6 /* InsideCell.swift in Sources */,
 				DA19AA7421909A230049168A /* CharacteristicsCellProtocol.swift in Sources */,
+				DA52AC6E22425E7D0014C52D /* NotesCell.swift in Sources */,
 				DAF2A482219CA78F00BC45A6 /* AdvicesScheduleCell.swift in Sources */,
 				DAC61ECF214A84D300FB78C6 /* NewCharacteristicsArticleHeaderView.swift in Sources */,
 				DAE6DF852152DFAB009C9CC3 /* UITableView.swift in Sources */,
 				DA2AF07521E7A21B00FCF72B /* AnswersCell.swift in Sources */,
 				DAC61EEA214C209B00FB78C6 /* Dictionary.swift in Sources */,
 				DAA97B042123396F005AF50F /* WelcomeTableCell.swift in Sources */,
+				DAF89021223FD17E00399782 /* ArticleNotes.swift in Sources */,
 				DAE6DF7F21527FAF009C9CC3 /* ArticleImageWithCaptionCell.swift in Sources */,
 				DACCC4E921B6CE3700854B26 /* NetworkingController.swift in Sources */,
 				DA98E95E21EFB20C00B11858 /* ProgressShapeLayer.swift in Sources */,
@@ -942,6 +972,7 @@
 				DA358646222168BB0057405C /* TabsSequence.swift in Sources */,
 				DADEAB2F21246A860042B564 /* WelcomeFootterXIB.swift in Sources */,
 				DAC61EBA21492A6000FB78C6 /* ArticleInside.swift in Sources */,
+				DAF89024223FF7BB00399782 /* ArticleNoteViewController.swift in Sources */,
 				DAE6DF832152DC33009C9CC3 /* ArticlesPreviewHeaderView.swift in Sources */,
 				DA3E25E121AEE82E00CBF1B2 /* NSManagedObjectContext.swift in Sources */,
 				DA9ED5FE2133F53C00FB54FB /* CharacteristicsTableViewController.swift in Sources */,
@@ -949,6 +980,7 @@
 				DA30394C217E4057005EC94E /* User.swift in Sources */,
 				DAC61EDE214BD6B700FB78C6 /* NewListInsideTableViewController.swift in Sources */,
 				DAA9D754216552F9009697E8 /* NewTestQuestionHederView.swift in Sources */,
+				DA52AC6C22425DA20014C52D /* NotesTableViewController.swift in Sources */,
 				DAA140C522004A74009221B2 /* Assets.swift in Sources */,
 				DA98E95B21EFB17B00B11858 /* CAShapeLayer.swift in Sources */,
 				DAD0D1FC21CE521100891C19 /* SubscriptionInformationType.swift in Sources */,
@@ -957,7 +989,7 @@
 				DA6E5BE321B99CFC003CBB2B /* WaitingArticlePushes.swift in Sources */,
 				DAB5CB1B21369A9F00B436C2 /* AboutArticlesModel.swift in Sources */,
 				DAEE5180214FD4D800449FEE /* ListElementsCell.swift in Sources */,
-				DAC124FB21260FA000378DA1 /* NotesTableViewController.swift in Sources */,
+				DAC124FB21260FA000378DA1 /* OldNotesTableViewController.swift in Sources */,
 				DAE6DF7521527BB8009C9CC3 /* ArticleListCell.swift in Sources */,
 				DAC0AE3421484A4B00FF9D82 /* SegueIdentifiers.swift in Sources */,
 				DAEE517E214FAD9B00449FEE /* Data.swift in Sources */,
@@ -1145,7 +1177,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ru.busarova.Karierist2;
-				PRODUCT_NAME = ru.homber.Karierist;
+				PRODUCT_NAME = ru.busarova.Karierist;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1166,7 +1198,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ru.busarova.Karierist2;
-				PRODUCT_NAME = ru.homber.Karierist;
+				PRODUCT_NAME = ru.busarova.Karierist;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

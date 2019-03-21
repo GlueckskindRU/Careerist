@@ -134,4 +134,49 @@ class KeychainController: NSObject {
             return status == noErr
         }
     }
+    
+    func readAllItems() -> [String: String]? {
+        var query = getQuery()
+        query[kSecMatchLimit as String] = kSecMatchLimitAll
+        query[kSecReturnData as String] = kCFBooleanTrue
+        query[kSecReturnAttributes as String] = kCFBooleanTrue
+        
+        var queryResult: AnyObject?
+        let status = SecItemCopyMatching(query as CFDictionary, UnsafeMutablePointer(&queryResult))
+        
+        if status != noErr {
+            return nil
+        }
+        
+        guard let items = queryResult as? [[String: AnyObject]] else {
+            return nil
+        }
+        
+        var passwordItems = [String: String]()
+        
+        for (index, item) in items.enumerated() {
+            guard
+                let passwordData = item[kSecValueData as String] as? Data,
+                let password = String(data: passwordData, encoding: .utf8) else {
+                    continue
+            }
+            
+            if let account = item[kSecAttrAccount as String] as? String {
+                passwordItems[account] = password
+                continue
+            }
+            
+            let accoount = "empty account \(index)"
+            passwordItems[accoount] = password
+        }
+        
+        return passwordItems
+    }
+    
+    func deletePassword(account: String?) -> Bool {
+        let item = getQuery(login: account)
+        let status = SecItemDelete(item as CFDictionary)
+        
+        return status == noErr
+    }
 }

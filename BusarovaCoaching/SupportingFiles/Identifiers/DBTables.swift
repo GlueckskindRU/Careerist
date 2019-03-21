@@ -23,4 +23,5 @@ enum DBTables: String {
     case sentAdvicePushes = "sentAdvicePushes"
     case sentArticlePushes = "sentArticlePushes"
     case sentQuestionPushes = "sentQuestionPushes"
+    case articleNotes = "articleNotes"
 }

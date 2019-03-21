@@ -17,7 +17,7 @@ class OldNotesTableViewController: UITableViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        tableView.register(NotesCell.self, forCellReuseIdentifier: "Notes Cell")
+        tableView.register(OldNotesCell.self, forCellReuseIdentifier: "Notes Cell")
         tableView.tableFooterView = UIView()
         
         tableView.rowHeight = UITableView.automaticDimension
@@ -44,13 +44,13 @@ class OldNotesTableViewController: UITableViewController {
     }
 }
 
-extension NotesTableViewController {
+extension OldNotesTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return notesData.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Notes Cell", for: indexPath) as! NotesCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Notes Cell", for: indexPath) as! OldNotesCell
         
         cell.configure(with: notesData[indexPath.row])
         
@@ -58,7 +58,7 @@ extension NotesTableViewController {
     }
 }
 
-extension NotesTableViewController {
+extension OldNotesTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let destination = DetailedNoteViewController()
         

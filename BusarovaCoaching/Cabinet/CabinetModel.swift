@@ -34,7 +34,7 @@ struct CabinetModel {
 //            CabinetModel(level: .one, name: "Компетенция 3", hasChildern: false),
 //            CabinetModel(level: .one, name: "Компетенция 4", hasChildern: false),
 //            CabinetModel(level: .one, name: "Компетенция 5", hasChildern: false),
-            CabinetModel(level: .zero, name: "Мои записи", hasChildern: false)
+//            CabinetModel(level: .zero, name: "Мои записи", hasChildern: false)
         ]
         
         return result

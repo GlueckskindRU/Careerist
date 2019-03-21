@@ -34,4 +34,6 @@ enum CellIdentifiers: String {
     case answersOptionCell = "Answer Cell"
     //Achievements
     case achievementsCell = "Achievement Cell"
+    //Notes
+    case notesCell = "Notes Cell"
 }

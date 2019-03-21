@@ -59,7 +59,7 @@ class CharacteristicsTableViewController: UITableViewController {
                 return
         }
         
-        destination.configure(with: characteristics[indexPath.row].id)
+        destination.configure(with: characteristics[indexPath.row].id, competenceID: characteristics[indexPath.row].parentID)
     }
     
     @objc

@@ -27,6 +27,7 @@ class NewCharacteristicArticleTableViewController: UITableViewController {
     private var sequence: Int? = nil
     private var articleTitle = ""
     private var parentID: String?
+    private var competenceID: String?
     private var deletedElements: Set<ArticleInside> = []
     
     lazy private var saveBarButtonItem: UIBarButtonItem = {
@@ -55,10 +56,11 @@ class NewCharacteristicArticleTableViewController: UITableViewController {
         }
     }
     
-    func configure(with article: Article?, as sequence: Int, parentID: String?) {
+    func configure(with article: Article?, as sequence: Int, parentID: String?, competenceID: String?) {
         self.article = article
         self.sequence = sequence
         self.parentID = parentID
+        self.competenceID = competenceID
     }
     
     override func viewDidLoad() {
@@ -409,36 +411,39 @@ extension NewCharacteristicArticleTableViewController {
         guard
             let parentID = parentID,
             let sequence = sequence,
+            let competenceID = competenceID,
             let currentUser = (UIApplication.shared.delegate as! AppDelegate).appManager.getCurrentUser() else {
                 activityIndicator.stop()
                 return
         }
         
-        if article == nil {
+        if let article = article {
+            id = article.id
+            articleToSave = Article(id: article.id,
+                                    title: self.articleTitle,
+                                    parentID: parentID,
+                                    parentType: article.parentType,
+                                    sequence: sequence,
+                                    grants: article.grants,
+                                    authorID: article.authorID,
+                                    rating: article.rating,
+                                    verified: article.verified,
+                                    type: ArticleType.article,
+                                    competenceID: article.competenceID
+                                    )
+        } else {
             id = nil
             articleToSave = Article(id: "",
                                     title: self.articleTitle,
                                     parentID: parentID,
                                     parentType: DBTables.characteristics.rawValue,
                                     sequence: sequence,
-                                    grants: 0, // To be amended
+                                    grants: 0, // to be amended
                                     authorID: currentUser.id,
                                     rating: 0,
                                     verified: false,
-                                    type: ArticleType.article
-                                    )
-        } else {
-            id = article!.id
-            articleToSave = Article(id: id!,
-                                    title: self.articleTitle,
-                                    parentID: parentID,
-                                    parentType: article!.parentType,
-                                    sequence: sequence,
-                                    grants: article!.grants,
-                                    authorID: article!.authorID,
-                                    rating: article!.rating,
-                                    verified: article!.verified,
-                                    type: ArticleType.article
+                                    type: ArticleType.article,
+                                    competenceID: competenceID
                                     )
         }
         

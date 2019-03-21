@@ -23,6 +23,7 @@ class AuthorizationViewController: UIViewController {
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.textAlignment = .center
         textField.autocapitalizationType = UITextAutocapitalizationType.none
+        textField.keyboardType = UIKeyboardType.emailAddress
         
         return textField
     }()

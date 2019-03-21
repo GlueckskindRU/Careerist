@@ -17,6 +17,10 @@ class ArticlesPreviewTableViewController: UITableViewController {
         return UIBarButtonItem(title: "Ответить на вопросы", style: UIBarButtonItem.Style.plain, target: self, action: #selector(answerQuestionsButtonTapped(_:)))
     }()
     
+    lazy private var openNoteBarButton: UIBarButtonItem = {
+        return UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.compose, target: self, action: #selector(openNotesButtonTapped(_:)))
+    }()
+    
     func configure(with article: Article, hasQuestions: Bool = false) {
         self.article = article
         self.hasQuestions = hasQuestions
@@ -47,7 +51,9 @@ class ArticlesPreviewTableViewController: UITableViewController {
         tableView.setAndLayoutTableHeaderView(header: headerView)
         
         if hasQuestions {
-            navigationItem.rightBarButtonItem = answerToQuestionsBarButton
+            navigationItem.rightBarButtonItems = [openNoteBarButton, answerToQuestionsBarButton]
+        } else {
+            navigationItem.rightBarButtonItem = openNoteBarButton
         }
         
         refreshUI()
@@ -146,6 +152,17 @@ extension ArticlesPreviewTableViewController {
                 self.showErrorMessage(error)
             }
         }
+    }
+    
+    @objc
+    private func openNotesButtonTapped(_ sender: UIBarButtonItem) {
+        guard let article = article else {
+            return
+        }
+        
+        let noteVC = ArticleNoteViewController()
+        noteVC.configure(with: article.id, title: article.title, showArticle: false)
+        navigationController?.pushViewController(noteVC, animated: true)
     }
     
     private func showErrorMessage(_ error: AppError) {

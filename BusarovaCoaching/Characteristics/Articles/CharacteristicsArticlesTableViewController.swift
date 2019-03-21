@@ -11,6 +11,7 @@ import UIKit
 class CharacteristicsArticlesTableViewController: UITableViewController {
     private var articles: [Article] = []
     private var parentID: String?
+    private var competenceID: String?
 
     private var deletedArticles: Set<Article> = []
     
@@ -32,8 +33,9 @@ class CharacteristicsArticlesTableViewController: UITableViewController {
         }
     }
     
-    func configure(with parentID: String) {
+    func configure(with parentID: String, competenceID: String) {
         self.parentID = parentID
+        self.competenceID = competenceID
     }
     
     override func viewDidLoad() {
@@ -97,11 +99,11 @@ extension CharacteristicsArticlesTableViewController {
         switch selectedElement.type {
         case .article:
             let editArticleVC = NewCharacteristicArticleTableViewController()
-            editArticleVC.configure(with: selectedElement, as: indexPath.row, parentID: parentID)
+            editArticleVC.configure(with: selectedElement, as: indexPath.row, parentID: parentID, competenceID: selectedElement.competenceID)
             navigationController?.pushViewController(editArticleVC, animated: true)
         case .advice:
             let editAdviceVC = NewAdviceViewController()
-            editAdviceVC.configure(with: selectedElement, as: indexPath.row, parentID: parentID)
+            editAdviceVC.configure(with: selectedElement, as: indexPath.row, parentID: parentID, competenceID: selectedElement.competenceID)
             navigationController?.pushViewController(editAdviceVC, animated: true)
         }
     }
@@ -177,7 +179,7 @@ extension CharacteristicsArticlesTableViewController {
         let articleType = UIAlertAction(title: "Статья", style: .default) {
             _ in
             let newArticleVC = NewCharacteristicArticleTableViewController()
-            newArticleVC.configure(with: nil, as: sequenceToPass, parentID: self.parentID)
+            newArticleVC.configure(with: nil, as: sequenceToPass, parentID: self.parentID, competenceID: self.competenceID)
             
             self.navigationController?.pushViewController(newArticleVC, animated: true)
         }
@@ -185,7 +187,7 @@ extension CharacteristicsArticlesTableViewController {
         let adviceType = UIAlertAction(title: "Совет дня", style: .default) {
             _ in
             let newAdviceVC = NewAdviceViewController()
-            newAdviceVC.configure(with: nil, as: sequenceToPass, parentID: self.parentID)
+            newAdviceVC.configure(with: nil, as: sequenceToPass, parentID: self.parentID, competenceID: self.competenceID)
             
             self.navigationController?.pushViewController(newAdviceVC, animated: true)
         }

@@ -12,6 +12,7 @@ class NewAdviceViewController: UIViewController {
     private var advice: Article? = nil
     private var sequence: Int? = nil
     private var parentID: String?
+    private var competenceID: String?
     private var adviceInside: ArticleInside?
     
     lazy private var saveBarButtonItem: UIBarButtonItem = {
@@ -55,10 +56,11 @@ class NewAdviceViewController: UIViewController {
         }
     }
     
-    func configure(with advice: Article?, as sequence: Int, parentID: String?) {
+    func configure(with advice: Article?, as sequence: Int, parentID: String?, competenceID: String?) {
         self.advice = advice
         self.sequence = sequence
         self.parentID = parentID
+        self.competenceID = competenceID
         
         guard let advice = advice else {
             self.adviceInside = nil
@@ -90,10 +92,12 @@ extension NewAdviceViewController {
     @objc
     private func saveButtonTapped(sender: UIBarButtonItem) {
         let id: String?
+        let adviceToSave: Article
         
         guard
             let sequence = sequence,
             let parentID = parentID,
+            let competenceID = competenceID,
             let currentUser = (UIApplication.shared.delegate as! AppDelegate).appManager.getCurrentUser() else {
             return
         }
@@ -112,35 +116,37 @@ extension NewAdviceViewController {
         let activityIndicator = ActivityIndicator()
         activityIndicator.start()
         
-        if advice == nil {
-            id = nil
-            advice = Article(id: "",
-                             title: title,
-                             parentID: parentID,
-                             parentType: DBTables.characteristics.rawValue,
-                             sequence: sequence,
-                             grants: 0, // to be amended
-                             authorID: currentUser.id,
-                             rating: 0,
-                             verified: false,
-                             type: ArticleType.advice
-                            )
+        if let advice = advice {
+            id = advice.id
+            adviceToSave = Article(id: advice.id,
+                                   title: title,
+                                   parentID: parentID,
+                                   parentType: advice.parentType,
+                                   sequence: sequence,
+                                   grants: advice.grants,
+                                   authorID: advice.authorID,
+                                   rating: advice.rating,
+                                   verified: advice.verified,
+                                   type: ArticleType.advice,
+                                   competenceID: advice.competenceID
+                                    )
         } else {
-            id = advice!.id
-            advice = Article(id: id!,
-                             title: title,
-                             parentID: parentID,
-                             parentType: advice!.parentType,
-                             sequence: sequence,
-                             grants: advice!.grants,
-                             authorID: advice!.authorID,
-                             rating: advice!.rating,
-                             verified: advice!.verified,
-                             type: ArticleType.advice
-                            )
+            id = nil
+            adviceToSave = Article(id: "",
+                                   title: title,
+                                   parentID: parentID,
+                                   parentType: DBTables.characteristics.rawValue,
+                                   sequence: sequence,
+                                   grants: 0, // to be amended
+                                   authorID: currentUser.id,
+                                   rating: 0,
+                                   verified: false,
+                                   type: ArticleType.advice,
+                                   competenceID: competenceID
+                                    )
         }
         
-        FirebaseController.shared.getDataController().saveData(advice!, with: id, in: DBTables.articles) {
+        FirebaseController.shared.getDataController().saveData(adviceToSave, with: id, in: DBTables.articles) {
             (result: Result<Article>) in
             
             activityIndicator.stop()

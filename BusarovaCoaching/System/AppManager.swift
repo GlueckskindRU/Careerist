@@ -29,6 +29,8 @@ class AppManager {
         self.appDelegate = appDelegate
         configureFireBase(application)
         
+        clearCredentials(performClearing: true)
+        
         if keychainController.keychainItemExists() {
             let authVC = AuthorizationViewController()
             appDelegate.window = UIWindow()
@@ -134,7 +136,7 @@ class AppManager {
                     let keychainSaveResult = self.keychainController.save(login: login, password: password)
                     
                     guard keychainSaveResult,
-                        let _ = self.keychainController.readPassword(for: password) else {
+                        let _ = self.keychainController.readPassword(for: login) else {
                             return completion(Result.failure(AppError.keychainSave))
                     }
                 }
@@ -319,6 +321,28 @@ class AppManager {
                 self.currentUser = user
             case .failure(let error):
                 print(error.getError())
+            }
+        }
+    }
+    
+    private func clearCredentials(performClearing: Bool) {
+        let coreDataManager = (UIApplication.shared.delegate as! AppDelegate).coreDataManager
+        
+        let storedArticles = coreDataManager.fetchData(for: CDReceivedArticles.self)
+        let storedAdvices = coreDataManager.fetchData(for: CDReceivedAdvices.self)
+        
+        if storedArticles.isEmpty && storedAdvices.isEmpty && performClearing {
+            let keychainController = KeychainController()
+            
+            let foo = keychainController.readAllItems()
+            print("stored credentials = \(String(describing: foo))")
+            
+            if let storedCredentials = keychainController.readAllItems() {
+                for (account, _) in storedCredentials {
+                    print("Trying to delete account: <\(account)>")
+                    let result = keychainController.deletePassword(account: account)
+                    print("result = \(result)")
+                }
             }
         }
     }

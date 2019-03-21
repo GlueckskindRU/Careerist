@@ -307,7 +307,8 @@ extension ListOfReceivedArticlesAndAdvices {
                                    authorID: "",
                                    rating: 0,
                                    verified: false,
-                                   type: type
+                                   type: type,
+                                   competenceID: ""
                                     )
         
         let dummyValue = ReceivedAsset(dummyArticle, false, false, false)

@@ -19,6 +19,7 @@ struct Article: Codable, Hashable {
     let rating: Int
     let verified: Bool
     let type: ArticleType
+    let competenceID: String
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -31,9 +32,10 @@ struct Article: Codable, Hashable {
         case rating
         case verified
         case type
+        case competenceID
     }
     
-    init(id: String, title: String, parentID: String, parentType: String, sequence: Int, grants: Int, authorID: String, rating: Int, verified: Bool, type: ArticleType) {
+    init(id: String, title: String, parentID: String, parentType: String, sequence: Int, grants: Int, authorID: String, rating: Int, verified: Bool, type: ArticleType, competenceID: String) {
         self.id = id
         self.title = title
         self.parentID = parentID
@@ -44,6 +46,7 @@ struct Article: Codable, Hashable {
         self.rating = rating
         self.verified = verified
         self.type = type
+        self.competenceID = competenceID
     }
     
     init(from decoder: Decoder) throws {
@@ -58,9 +61,14 @@ struct Article: Codable, Hashable {
         self.authorID = try values.decode(String.self, forKey: .authorID)
         self.rating = try values.decode(Int.self, forKey: .rating)
         self.verified = try values.decode(Bool.self, forKey: .verified)
+        self.competenceID = try values.decode(String.self, forKey: .competenceID)
         
         let typeInt = try values.decode(Int.self, forKey: .type)
-        self.type = ArticleType(rawValue: typeInt)!
+        if let type = ArticleType(rawValue: typeInt) {
+            self.type = type
+        } else {
+            self.type = .article
+        }
     }
     
     func encode(to encoder: Encoder) throws {
@@ -75,5 +83,6 @@ struct Article: Codable, Hashable {
         try container.encode(rating, forKey: .rating)
         try container.encode(verified, forKey: .verified)
         try container.encode(type.rawValue, forKey: .type)
+        try container.encode(competenceID, forKey: .competenceID)
     }
 }
