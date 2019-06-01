@@ -69,7 +69,7 @@ extension CabinetTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let sectionName = sectionsItems[section].name
         
-        if let sectionIndex = initialData.index(where: { $0.name == sectionName }) {
+        if let sectionIndex = initialData.firstIndex(where: { $0.name == sectionName }) {
             if initialData[sectionIndex].hasChildern {
                 return subscribedCompetenceList.count
             } else {

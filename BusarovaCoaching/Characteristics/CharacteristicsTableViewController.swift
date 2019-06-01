@@ -127,7 +127,7 @@ extension CharacteristicsTableViewController: UIGestureRecognizerDelegate {
                     let levelOneItems = characteristics.filter { $0.parentID == characterictic.id }
                     
                     for item in levelOneItems {
-                        if let itemIndex = characteristics.index(where: { $0.id == item.id }) {
+                        if let itemIndex = characteristics.firstIndex(where: { $0.id == item.id }) {
                             collapseMenu(with: item.id, at: itemIndex)
                         }
                     }

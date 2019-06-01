@@ -784,7 +784,7 @@
 				TargetAttributes = {
 					DA68CD5B212312D000AE8515 = {
 						CreatedOnToolsVersion = 9.4.1;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1178,7 +1178,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ru.busarova.Karierist2;
 				PRODUCT_NAME = ru.busarova.Karierist;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1199,7 +1199,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ru.busarova.Karierist2;
 				PRODUCT_NAME = ru.busarova.Karierist;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
