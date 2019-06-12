@@ -67,13 +67,6 @@ class NotesTableViewController: UITableViewController {
         
         fetchNotes()
     }
-    
-    @objc
-    private func logInTapped(sender: UIBarButtonItem) {
-        let authVC = AuthorizationViewController()
-        authVC.configure()
-        navigationController?.pushViewController(authVC, animated: true)
-    }
 }
 
 // MARK: - UITableView DataSource

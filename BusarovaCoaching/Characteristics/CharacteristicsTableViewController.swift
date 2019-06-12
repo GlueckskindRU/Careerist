@@ -12,6 +12,11 @@ import FirebaseFirestore
 class CharacteristicsTableViewController: UITableViewController {
     private var characteristics: [CharacteristicsModel] = []
     
+    lazy private var logInBarButtonItem: UIBarButtonItem = {
+        let icon = UIImage(named: Assets.login.rawValue)
+        return UIBarButtonItem(image: icon, style: UIBarButtonItem.Style.plain, target: self, action: #selector(logInTapped(sender:)))
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,6 +41,16 @@ class CharacteristicsTableViewController: UITableViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationItem.title = "Подписки"
         navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if (UIApplication.shared.delegate as! AppDelegate).appManager.isAuhorized() {
+            navigationItem.rightBarButtonItem = nil
+        } else {
+            navigationItem.rightBarButtonItem = logInBarButtonItem
+        }
     }
 }
 

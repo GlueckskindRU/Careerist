@@ -13,6 +13,11 @@ class IndicatorsTableViewController: UITableViewController {
     private var groupOfCompetencies: CharacteristicsModel?
     private var competence: CharacteristicsModel?
     
+    lazy private var logInBarButtonItem: UIBarButtonItem = {
+        let icon = UIImage(named: Assets.login.rawValue)
+        return UIBarButtonItem(image: icon, style: UIBarButtonItem.Style.plain, target: self, action: #selector(logInTapped(sender:)))
+    }()
+    
     lazy private var customBackButton: UIBarButtonItem = {
         return UIBarButtonItem(image: UIImage(named: Assets.backArrow.rawValue),
                                style: UIBarButtonItem.Style.plain,
@@ -61,6 +66,13 @@ class IndicatorsTableViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        if (UIApplication.shared.delegate as! AppDelegate).appManager.isAuhorized() {
+            navigationItem.rightBarButtonItem = nil
+        } else {
+            navigationItem.rightBarButtonItem = logInBarButtonItem
+        }
+        
         setupNavigationMultilineTitle()
         tableView.reloadData()
     }

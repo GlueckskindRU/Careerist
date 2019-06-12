@@ -29,7 +29,7 @@ class AppManager {
         self.appDelegate = appDelegate
         configureFireBase(application)
         
-        clearCredentials(performClearing: false) // to suppress automatic log out
+        clearCredentials(performClearing: false) // to suppress automatic log out run it with false parameter only!
         
         if keychainController.keychainItemExists() {
             let authVC = AuthorizationViewController()

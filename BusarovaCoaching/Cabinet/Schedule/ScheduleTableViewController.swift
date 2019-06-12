@@ -14,6 +14,11 @@ class ScheduleTableViewController: UITableViewController {
     private var articlesSchedule: SubscriptionArticleSchedule?
     private var advicesSchedule: SubscriptionAdviceSchedule?
     
+    lazy private var logInBarButtonItem: UIBarButtonItem = {
+        let icon = UIImage(named: Assets.login.rawValue)
+        return UIBarButtonItem(image: icon, style: UIBarButtonItem.Style.plain, target: self, action: #selector(logInTapped(sender:)))
+    }()
+    
     lazy private var saveBarButtonItem: UIBarButtonItem = {
         return UIBarButtonItem(title: "Сохранить", style: UIBarButtonItem.Style.plain, target: self, action: #selector(saveButtonTapped(sender:)))
     }()
@@ -54,7 +59,7 @@ class ScheduleTableViewController: UITableViewController {
         tableView.tableFooterView = UIView()
         
         navigationItem.title = "График развития"
-        navigationItem.rightBarButtonItem = saveBarButtonItem
+        navigationItem.rightBarButtonItems = [saveBarButtonItem]
         saveBarButtonItem.isEnabled = AppManager.shared.isAuhorized() && !isSaved
         
         navigationItem.hidesBackButton = true
@@ -72,6 +77,11 @@ class ScheduleTableViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        if !(UIApplication.shared.delegate as! AppDelegate).appManager.isAuhorized() {
+            navigationItem.rightBarButtonItems?.insert(logInBarButtonItem, at: 0)
+        }
+        
         setupNavigationMultilineTitle()
         tableView.reloadData()
     }

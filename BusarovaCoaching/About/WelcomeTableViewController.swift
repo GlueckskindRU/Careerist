@@ -54,13 +54,6 @@ class WelcomeTableViewController: UITableViewController {
 
         logInBarButtonItem.isEnabled = !AppManager.shared.isAuhorized()
     }
-    
-    @objc
-    private func logInTapped(sender: UIBarButtonItem) {
-        let authVC = AuthorizationViewController()
-        authVC.configure()
-        navigationController?.pushViewController(authVC, animated: true)
-    }
 }
 
 // MARK: - TableView DataSource

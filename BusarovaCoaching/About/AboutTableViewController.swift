@@ -12,6 +12,11 @@ class AboutTableViewController: UITableViewController {
     private var articlesTitles: [String] = WelcomeModel.menuItems
     private let cellIdentifier = "Menu Box Cell"
     
+    lazy private var logInBarButtonItem: UIBarButtonItem = {
+        let icon = UIImage(named: Assets.login.rawValue)
+        return UIBarButtonItem(image: icon, style: UIBarButtonItem.Style.plain, target: self, action: #selector(logInTapped(sender:)))
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,6 +48,13 @@ class AboutTableViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        if (UIApplication.shared.delegate as! AppDelegate).appManager.isAuhorized() {
+            navigationItem.rightBarButtonItem = nil
+        } else {
+            navigationItem.rightBarButtonItem = logInBarButtonItem
+        }
+        
         setupNavigationMultilineTitle()
         tableView.reloadData()
     }

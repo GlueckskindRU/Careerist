@@ -34,4 +34,11 @@ extension UIViewController {
     func customBackButtonTapped(_ sender: UIBarButtonItem) {
         _ = navigationController?.popViewController(animated: true)
     }
+    
+    @objc
+    func logInTapped(sender: UIBarButtonItem) {
+        let authVC = AuthorizationViewController()
+        authVC.configure()
+        navigationController?.pushViewController(authVC, animated: true)
+    }
 }
