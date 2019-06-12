@@ -18,7 +18,7 @@ class AchivementsCell: UITableViewCell {
         progressView.minimumProgress = achievement.minProgress
         progressView.maximumProgress = achievement.maxProgress
         progressView.currentProgress = achievement.currentProgress
-        progressView.progressedColor = UIColor.orange
+        progressView.progressedColor = UIColor(named: "cabinetTintColor") ?? .green
         progressView.unprogressedColor = UIColor.lightGray
     }
 }

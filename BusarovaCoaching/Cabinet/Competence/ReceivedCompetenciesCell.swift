@@ -1,14 +1,14 @@
 //
-//  ListOfAdvicesCell.swift
+//  ReceivedCompetenciesCell.swift
 //  BusarovaCoaching
 //
-//  Created by Yuri Ivashin on 08/10/2018.
-//  Copyright © 2018 The Homber Team. All rights reserved.
+//  Created by Yuri Ivashin on 11/06/2019.
+//  Copyright © 2019 The Homber Team. All rights reserved.
 //
 
 import UIKit
 
-class ListOfAdvicesCell: UITableViewCell {
+class ReceivedCompetenciesCell: UITableViewCell {
     private let cornerRadius: CGFloat = 8
     
     lazy private var smallBoxView: UIView = {
@@ -44,7 +44,7 @@ class ListOfAdvicesCell: UITableViewCell {
         return imageView
     }()
     
-    lazy private var captionLabel: UILabel = {
+    lazy private var competenceNameLabel: UILabel = {
         let label = UILabel()
         
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -56,10 +56,10 @@ class ListOfAdvicesCell: UITableViewCell {
         return label
     }()
     
-    func configure(with asset: ReceivedAsset, as sequence: Int) {
-        captionLabel.text = asset.asset.title.isEmpty ? "Совет дня № \(sequence)" : asset.asset.title
+    func configure(for competence: CompetenceWithReadingStatus) {
+        competenceNameLabel.text = competence.competences.name
         
-        if !asset.wasRead {
+        if (competence.hasNewAdvice || competence.hasNewArticle) {
             arrowImageView.isHidden = true
             markImageView.isHidden = false
         } else {
@@ -82,7 +82,7 @@ class ListOfAdvicesCell: UITableViewCell {
     
     private func setupLayout() {
         contentView.addSubview(smallBoxView)
-        smallBoxView.addSubview(captionLabel)
+        smallBoxView.addSubview(competenceNameLabel)
         smallBoxView.addSubview(arrowImageView)
         smallBoxView.addSubview(markImageView)
         
@@ -100,12 +100,12 @@ class ListOfAdvicesCell: UITableViewCell {
             smallBoxView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: trailingMargin),
             smallBoxView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: bottomMargin),
             
-            captionLabel.topAnchor.constraint(equalTo: smallBoxView.topAnchor, constant: topMargin * 2),
-            captionLabel.leadingAnchor.constraint(equalTo: smallBoxView.leadingAnchor, constant: leadingMargin),
-            captionLabel.trailingAnchor.constraint(equalTo: arrowImageView.leadingAnchor, constant: extraTrailingMargin),
-            captionLabel.trailingAnchor.constraint(equalTo: markImageView.leadingAnchor, constant: trailingMargin),
-            captionLabel.bottomAnchor.constraint(equalTo: smallBoxView.bottomAnchor, constant: bottomMargin * 2),
-            captionLabel.centerYAnchor.constraint(equalTo: smallBoxView.centerYAnchor),
+            competenceNameLabel.topAnchor.constraint(equalTo: smallBoxView.topAnchor, constant: topMargin * 2),
+            competenceNameLabel.leadingAnchor.constraint(equalTo: smallBoxView.leadingAnchor, constant: leadingMargin),
+            competenceNameLabel.trailingAnchor.constraint(equalTo: arrowImageView.leadingAnchor, constant: extraTrailingMargin),
+            competenceNameLabel.trailingAnchor.constraint(equalTo: markImageView.leadingAnchor, constant: trailingMargin),
+            competenceNameLabel.bottomAnchor.constraint(equalTo: smallBoxView.bottomAnchor, constant: bottomMargin * 2),
+            competenceNameLabel.centerYAnchor.constraint(equalTo: smallBoxView.centerYAnchor),
             
             arrowImageView.trailingAnchor.constraint(equalTo: smallBoxView.trailingAnchor, constant: extraTrailingMargin),
             arrowImageView.centerYAnchor.constraint(equalTo: smallBoxView.centerYAnchor),

@@ -1,21 +1,20 @@
 //
-//  NotesCell.swift
+//  CompetenciesCell.swift
 //  BusarovaCoaching
 //
-//  Created by Yuri Ivashin on 20/03/2019.
+//  Created by Yuri Ivashin on 04/06/2019.
 //  Copyright © 2019 The Homber Team. All rights reserved.
 //
 
 import UIKit
 
-class NotesCell: UITableViewCell {
+class CompetenciesCell: UITableViewCell {
     private let cornerRadius: CGFloat = 8
     
     lazy private var smallBoxView: UIView = {
         let view = UIView()
         
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(named: "notesTintColor")
         let shadowColor = UIColor(named: "boxesShadow")
         view.layer.shadowColor = shadowColor?.cgColor
         view.layer.shadowOpacity = 1
@@ -35,7 +34,7 @@ class NotesCell: UITableViewCell {
         return imageView
     }()
     
-    lazy private var articleTitleLabel: UILabel = {
+    lazy private var competenceNameLabel: UILabel = {
         let label = UILabel()
         
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -47,8 +46,9 @@ class NotesCell: UITableViewCell {
         return label
     }()
     
-    func configure(with name: String) {
-        articleTitleLabel.text = name
+    func configure(with name: String, bgColor: UIColor) {
+        smallBoxView.backgroundColor = bgColor
+        competenceNameLabel.text = name
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -65,7 +65,7 @@ class NotesCell: UITableViewCell {
     
     private func setupLayout() {
         contentView.addSubview(smallBoxView)
-        smallBoxView.addSubview(articleTitleLabel)
+        smallBoxView.addSubview(competenceNameLabel)
         smallBoxView.addSubview(arrowImageView)
         
         let leadingMargin: CGFloat = 16
@@ -80,11 +80,11 @@ class NotesCell: UITableViewCell {
             smallBoxView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: trailingMargin),
             smallBoxView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: bottomMargin),
             
-            articleTitleLabel.topAnchor.constraint(equalTo: smallBoxView.topAnchor, constant: topMargin * 2),
-            articleTitleLabel.leadingAnchor.constraint(equalTo: smallBoxView.leadingAnchor, constant: leadingMargin),
-            articleTitleLabel.trailingAnchor.constraint(equalTo: arrowImageView.leadingAnchor, constant: trailingMargin),
-            articleTitleLabel.bottomAnchor.constraint(equalTo: smallBoxView.bottomAnchor, constant: bottomMargin * 2),
-            articleTitleLabel.centerYAnchor.constraint(equalTo: smallBoxView.centerYAnchor),
+            competenceNameLabel.topAnchor.constraint(equalTo: smallBoxView.topAnchor, constant: topMargin * 2),
+            competenceNameLabel.leadingAnchor.constraint(equalTo: smallBoxView.leadingAnchor, constant: leadingMargin),
+            competenceNameLabel.trailingAnchor.constraint(equalTo: arrowImageView.leadingAnchor, constant: trailingMargin),
+            competenceNameLabel.bottomAnchor.constraint(equalTo: smallBoxView.bottomAnchor, constant: bottomMargin * 2),
+            competenceNameLabel.centerYAnchor.constraint(equalTo: smallBoxView.centerYAnchor),
             
             arrowImageView.trailingAnchor.constraint(equalTo: smallBoxView.trailingAnchor, constant: trailingMargin),
             arrowImageView.centerYAnchor.constraint(equalTo: smallBoxView.centerYAnchor),

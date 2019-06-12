@@ -20,6 +20,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        if #available(iOS 11.0, *) {
+            if let initialTabBarController = window?.rootViewController as? UITabBarController {
+                for controller in initialTabBarController.viewControllers ?? [UINavigationController()] {
+                    if let navController = controller as? UINavigationController {
+                        navController.navigationBar.prefersLargeTitles = true
+                    }
+                }
+            }
+            
+            UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 30, weight: UIFont.Weight.heavy)]
+        }
+        
         appManager.getStarted(with: self, application: application)
         
         return true

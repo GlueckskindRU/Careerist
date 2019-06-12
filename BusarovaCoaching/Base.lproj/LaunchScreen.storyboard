@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y0i-ap-jJQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y0i-ap-jJQ">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,13 +19,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nzO-dv-T1U">
-                                <rect key="frame" x="0.0" y="863" width="453" height="83"/>
+                                <rect key="frame" x="0.0" y="779" width="414" height="83"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
-                                    <tabBarItem title="Основное меню" image="mainMenu" id="yJj-Rc-y17"/>
-                                    <tabBarItem title="Личный кабинет" image="cabinet" id="WUk-DG-LOF"/>
-                                    <tabBarItem title="Заметки" image="notes" id="H5C-8P-jK2"/>
-                                    <tabBarItem title="О приложении" image="About" id="Pvu-d7-bx5"/>
+                                    <tabBarItem title="" image="mainMenu" id="yJj-Rc-y17"/>
+                                    <tabBarItem title="" image="cabinet" id="WUk-DG-LOF"/>
+                                    <tabBarItem title="" image="notes" id="H5C-8P-jK2"/>
+                                    <tabBarItem title="" image="About" id="Pvu-d7-bx5"/>
                                 </items>
                             </tabBar>
                         </subviews>
@@ -44,9 +44,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="About" width="30" height="30"/>
-        <image name="cabinet" width="30" height="30"/>
-        <image name="mainMenu" width="30" height="30"/>
-        <image name="notes" width="30" height="30"/>
+        <image name="About" width="21" height="20"/>
+        <image name="cabinet" width="20" height="21"/>
+        <image name="mainMenu" width="16" height="23"/>
+        <image name="notes" width="21" height="22"/>
     </resources>
 </document>

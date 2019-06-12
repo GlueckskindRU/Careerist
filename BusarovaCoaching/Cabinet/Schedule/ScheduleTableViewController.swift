@@ -17,10 +17,13 @@ class ScheduleTableViewController: UITableViewController {
     lazy private var saveBarButtonItem: UIBarButtonItem = {
         return UIBarButtonItem(title: "Сохранить", style: UIBarButtonItem.Style.plain, target: self, action: #selector(saveButtonTapped(sender:)))
     }()
-    
-    lazy private var customBackBarButton: UIBarButtonItem = {
-        let backArrow = UIImage(named: Assets.backArrow.rawValue)
-        return UIBarButtonItem(image: backArrow, style: UIBarButtonItem.Style.plain, target: self, action: #selector(back(sender:)))
+
+    lazy private var customBackButton: UIBarButtonItem = {
+        return UIBarButtonItem(image: UIImage(named: Assets.backArrow.rawValue),
+                               style: UIBarButtonItem.Style.plain,
+                               target: self,
+                               action: #selector(back(sender:))
+        )
     }()
     
     private var isSaved: Bool = true {
@@ -55,9 +58,22 @@ class ScheduleTableViewController: UITableViewController {
         saveBarButtonItem.isEnabled = AppManager.shared.isAuhorized() && !isSaved
         
         navigationItem.hidesBackButton = true
-        navigationItem.leftBarButtonItem = customBackBarButton
+        navigationItem.leftBarButtonItem = customBackButton
+        
+        if let tintColor = UIColor(named: "cabinetTintColor") {
+            navigationController?.navigationBar.largeTitleTextAttributes = [
+                NSAttributedString.Key.foregroundColor: tintColor,
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 30, weight: UIFont.Weight.heavy)
+            ]
+        }
         
         fetchData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupNavigationMultilineTitle()
+        tableView.reloadData()
     }
 }
 

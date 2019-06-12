@@ -16,7 +16,16 @@ class ListOfReceivedArticlesAndAdvices: UITableViewController {
     private var assetType: ArticleType?
     private let activityIndicator = ActivityIndicator()
     private var currentUser: User?
+    private var headerText: String = ""
 
+    lazy private var customBackButton: UIBarButtonItem = {
+        return UIBarButtonItem(image: UIImage(named: Assets.backArrow.rawValue),
+                               style: UIBarButtonItem.Style.plain,
+                               target: self,
+                               action: #selector(customBackButtonTapped(_:))
+        )
+    }()
+    
     let coreDataManager = (UIApplication.shared.delegate as! AppDelegate).coreDataManager
     var receivedArticlePushes: [CDReceivedArticles] = []
     var receivedAdvicesPushes: [CDReceivedAdvices] = []
@@ -32,6 +41,13 @@ class ListOfReceivedArticlesAndAdvices: UITableViewController {
         let sortDescriptor = NSSortDescriptor(key: "receivedTime", ascending: false)
         receivedArticlePushes = coreDataManager.fetchData(for: CDReceivedArticles.self, predicate: nil, sortDescriptor: sortDescriptor)
         receivedAdvicesPushes = coreDataManager.fetchData(for: CDReceivedAdvices.self, predicate: nil, sortDescriptor: sortDescriptor)
+        
+        switch type {
+        case .advice:
+            headerText = "Непрочитанные советы дня отмечаются восклицательным знаком"
+        case .article:
+            headerText = "Непрочитанные статьи и статьи, по которым не пройдены все вопросы, отмечаются восклицательным знаком"
+        }
     }
     
     override func viewDidLoad() {
@@ -42,17 +58,39 @@ class ListOfReceivedArticlesAndAdvices: UITableViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.allowsSelection = false
+        tableView.separatorStyle = .none
+        
         tableView.register(ListOfAdvicesCell.self, forCellReuseIdentifier: CellIdentifiers.listOfAdvicesCell.rawValue)
         tableView.register(ListOfArticlesCell.self, forCellReuseIdentifier: CellIdentifiers.listOfArticlesCell.rawValue)
         
+        tableView.tableFooterView = UIView()
+        let headerView = HeaderViewWithInfoText()
+        headerView.configure(infoText: headerText)
+        tableView.setAndLayoutTableHeaderView(header: headerView)
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapRecognizer(recognizer:)))
+        tapGestureRecognizer.numberOfTapsRequired = 1
+        tableView.addGestureRecognizer(tapGestureRecognizer)
+        tapGestureRecognizer.delegate = self
+        
         navigationItem.title = competence?.name
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        navigationItem.hidesBackButton = false
+        navigationItem.leftBarButtonItem = customBackButton
+        
+        if let tintColor = UIColor(named: "cabinetTintColor") {
+            navigationController?.navigationBar.largeTitleTextAttributes = [
+                NSAttributedString.Key.foregroundColor: tintColor,
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 30, weight: UIFont.Weight.heavy)
+            ]
+        }
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         currentUser = (UIApplication.shared.delegate as! AppDelegate).appManager.getCurrentUser()
+        setupNavigationMultilineTitle()
         
         refreshUI()
     }
@@ -85,15 +123,24 @@ extension ListOfReceivedArticlesAndAdvices {
     }
 }
 
-// MARK: - TableView Delegate
-extension ListOfReceivedArticlesAndAdvices {
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let previewVC = ArticlesPreviewTableViewController()
-        previewVC.configure(with: listOfReceivedAssets[indexPath.row].asset, hasQuestions: listOfReceivedAssets[indexPath.row].hasQuestions)
+// MARK: - Gesture Tap Recognizer
+extension ListOfReceivedArticlesAndAdvices: UIGestureRecognizerDelegate {
+    @objc
+    private func tapRecognizer(recognizer: UITapGestureRecognizer) {
+        if recognizer.state == .ended {
+            guard let indexPath = tableView.indexPathForRow(at: recognizer.location(in: tableView)) else {
+                return
+            }
             
-        listOfReceivedAssets[indexPath.row].wasRead = true
-        saveReadingMark(for: listOfReceivedAssets[indexPath.row].asset.id)
-        navigationController?.pushViewController(previewVC, animated: true)
+            let previewVC = ArticlesPreviewTableViewController()
+            previewVC.configure(with: listOfReceivedAssets[indexPath.row].asset,
+                                hasQuestions: listOfReceivedAssets[indexPath.row].hasQuestions
+                                )
+            
+            listOfReceivedAssets[indexPath.row].wasRead = true
+            saveReadingMark(for: listOfReceivedAssets[indexPath.row].asset.id)
+            navigationController?.pushViewController(previewVC, animated: true)
+        }
     }
 }
 

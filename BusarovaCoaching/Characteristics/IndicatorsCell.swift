@@ -1,21 +1,20 @@
 //
-//  ListOfAdvicesCell.swift
+//  IndicatorsCell.swift
 //  BusarovaCoaching
 //
-//  Created by Yuri Ivashin on 08/10/2018.
-//  Copyright © 2018 The Homber Team. All rights reserved.
+//  Created by Yuri Ivashin on 06/06/2019.
+//  Copyright © 2019 The Homber Team. All rights reserved.
 //
 
 import UIKit
 
-class ListOfAdvicesCell: UITableViewCell {
+class IndicatorsCell: UITableViewCell {
     private let cornerRadius: CGFloat = 8
     
     lazy private var smallBoxView: UIView = {
         let view = UIView()
         
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(named: "cabinetTintColor")
         let shadowColor = UIColor(named: "boxesShadow")
         view.layer.shadowColor = shadowColor?.cgColor
         view.layer.shadowOpacity = 1
@@ -35,16 +34,16 @@ class ListOfAdvicesCell: UITableViewCell {
         return imageView
     }()
     
-    lazy private var markImageView: UIImageView = {
+    lazy private var checkImageView: UIImageView = {
         let imageView = UIImageView()
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: Assets.exclamationMark.rawValue)
+        imageView.image = UIImage(named: Assets.check.rawValue)
         
         return imageView
     }()
     
-    lazy private var captionLabel: UILabel = {
+    lazy private var indicatorNameLabel: UILabel = {
         let label = UILabel()
         
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -56,15 +55,16 @@ class ListOfAdvicesCell: UITableViewCell {
         return label
     }()
     
-    func configure(with asset: ReceivedAsset, as sequence: Int) {
-        captionLabel.text = asset.asset.title.isEmpty ? "Совет дня № \(sequence)" : asset.asset.title
-        
-        if !asset.wasRead {
+    func configure(with indicator: CharacteristicsModel, bgColor: UIColor) {
+        smallBoxView.backgroundColor = bgColor
+        indicatorNameLabel.text = indicator.name
+
+        if AppManager.shared.isSubscribed(to: indicator) {
             arrowImageView.isHidden = true
-            markImageView.isHidden = false
+            checkImageView.isHidden = false
         } else {
             arrowImageView.isHidden = false
-            markImageView.isHidden = true
+            checkImageView.isHidden = true
         }
     }
     
@@ -82,17 +82,15 @@ class ListOfAdvicesCell: UITableViewCell {
     
     private func setupLayout() {
         contentView.addSubview(smallBoxView)
-        smallBoxView.addSubview(captionLabel)
+        smallBoxView.addSubview(indicatorNameLabel)
         smallBoxView.addSubview(arrowImageView)
-        smallBoxView.addSubview(markImageView)
+        smallBoxView.addSubview(checkImageView)
         
         let leadingMargin: CGFloat = 16
         let topMargin: CGFloat = 8
         let trailingMargin: CGFloat = -16
-        let extraTrailingMargin: CGFloat = -22
+        let extraTrailingMargin: CGFloat = -28
         let bottomMargin: CGFloat = -8
-        let arrowSize: CGFloat = 12
-        let markSize: CGFloat = 24
         
         NSLayoutConstraint.activate([
             smallBoxView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: topMargin),
@@ -100,24 +98,24 @@ class ListOfAdvicesCell: UITableViewCell {
             smallBoxView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: trailingMargin),
             smallBoxView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: bottomMargin),
             
-            captionLabel.topAnchor.constraint(equalTo: smallBoxView.topAnchor, constant: topMargin * 2),
-            captionLabel.leadingAnchor.constraint(equalTo: smallBoxView.leadingAnchor, constant: leadingMargin),
-            captionLabel.trailingAnchor.constraint(equalTo: arrowImageView.leadingAnchor, constant: extraTrailingMargin),
-            captionLabel.trailingAnchor.constraint(equalTo: markImageView.leadingAnchor, constant: trailingMargin),
-            captionLabel.bottomAnchor.constraint(equalTo: smallBoxView.bottomAnchor, constant: bottomMargin * 2),
-            captionLabel.centerYAnchor.constraint(equalTo: smallBoxView.centerYAnchor),
+            indicatorNameLabel.topAnchor.constraint(equalTo: smallBoxView.topAnchor, constant: topMargin * 2),
+            indicatorNameLabel.leadingAnchor.constraint(equalTo: smallBoxView.leadingAnchor, constant: leadingMargin),
+            indicatorNameLabel.trailingAnchor.constraint(equalTo: arrowImageView.leadingAnchor, constant: extraTrailingMargin),
+            indicatorNameLabel.trailingAnchor.constraint(equalTo: checkImageView.leadingAnchor, constant: trailingMargin),
+            indicatorNameLabel.bottomAnchor.constraint(equalTo: smallBoxView.bottomAnchor, constant: bottomMargin * 2),
+            indicatorNameLabel.centerYAnchor.constraint(equalTo: smallBoxView.centerYAnchor),
             
-            arrowImageView.trailingAnchor.constraint(equalTo: smallBoxView.trailingAnchor, constant: extraTrailingMargin),
+            arrowImageView.trailingAnchor.constraint(equalTo: smallBoxView.trailingAnchor, constant: trailingMargin),
             arrowImageView.centerYAnchor.constraint(equalTo: smallBoxView.centerYAnchor),
             
-            markImageView.trailingAnchor.constraint(equalTo: smallBoxView.trailingAnchor, constant: trailingMargin),
-            markImageView.centerYAnchor.constraint(equalTo: smallBoxView.centerYAnchor),
+            checkImageView.trailingAnchor.constraint(equalTo: smallBoxView.trailingAnchor, constant: trailingMargin),
+            checkImageView.centerYAnchor.constraint(equalTo: smallBoxView.centerYAnchor),
             
-            arrowImageView.heightAnchor.constraint(equalToConstant: arrowSize),
-            arrowImageView.widthAnchor.constraint(equalToConstant: arrowSize),
+            arrowImageView.heightAnchor.constraint(equalToConstant: 12),
+            arrowImageView.widthAnchor.constraint(equalToConstant: 12),
             
-            markImageView.heightAnchor.constraint(equalToConstant: markSize),
-            markImageView.widthAnchor.constraint(equalToConstant: markSize),
+            checkImageView.heightAnchor.constraint(equalToConstant: 24),
+            checkImageView.widthAnchor.constraint(equalToConstant: 24),
             ])
     }
 }

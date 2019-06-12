@@ -51,7 +51,7 @@ class TimePickerViewController: UIViewController {
         
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Установить", for: UIControl.State.normal)
-        button.setTitleColor(self.view.tintColor, for: UIControl.State.normal)
+        button.setTitleColor(UIColor(named: "systemTint"), for: UIControl.State.normal)
         button.addTarget(self, action: #selector(setupTimeButtonTapped(_:)), for: UIControl.Event.touchUpInside)
         
         return button

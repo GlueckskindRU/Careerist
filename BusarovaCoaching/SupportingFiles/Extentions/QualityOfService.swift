@@ -22,6 +22,8 @@ extension QualityOfService {
             return .utility
         case .default:
             return .default
+        @unknown default:
+            return .default
         }
     }
     

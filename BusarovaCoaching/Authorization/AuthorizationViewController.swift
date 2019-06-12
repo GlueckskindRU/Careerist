@@ -82,7 +82,9 @@ class AuthorizationViewController: UIViewController {
                 view.backgroundColor = .white
                 loginViaKeychain()
             } else {
-                view.backgroundColor = .orange
+                let colorOne = UIColor(red: 229/255, green: 165/255, blue: 61/255, alpha: 1)
+                let colorTwo = UIColor(red: 239/255, green: 119/255, blue: 84/255, alpha: 1)
+                view.setGradientBackground(colorOne: colorOne, colorTwo: colorTwo)
                 setupLayout()
             }
     }

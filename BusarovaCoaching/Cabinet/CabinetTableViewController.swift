@@ -9,9 +9,6 @@
 import UIKit
 import CoreData
 
-typealias CompetenceWithReadingStatus = (competences: CharacteristicsModel, subscribedIndicators: Set<String>, hasNewArticle: Bool, hasNewAdvice: Bool)
-typealias IndicatorsDictionary = [String: Set<CharacteristicsModel>]
-
 class CabinetTableViewController: UITableViewController {
     private var sectionsItems: [CabinetModel] = []
     private var subscribedCompetenceList: [CompetenceWithReadingStatus] = []
@@ -24,108 +21,88 @@ class CabinetTableViewController: UITableViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.allowsSelection = false
+        tableView.separatorStyle = .none
         
         tableView.tableFooterView = UIView()
         
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapRecognizer(recognizer:)))
+        tapGestureRecognizer.numberOfTapsRequired = 1
+        tableView.addGestureRecognizer(tapGestureRecognizer)
+        tapGestureRecognizer.delegate = self
+        
+        let headerView = HeaderViewWithInfoText()
+        headerView.configure(infoText: "\r\n")
+        tableView.setAndLayoutTableHeaderView(header: headerView)
+        
         navigationItem.title = "Личный кабинет"
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupNavigationMultilineTitle()
+        refreshUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        guard let currentUser = (UIApplication.shared.delegate as! AppDelegate).appManager.getCurrentUser() else {
-            self.refreshUI()
-            return
-        }
+        setupNavigationMultilineTitle()
         
-        let queue = DispatchQueue(label: "CabinetTableViewController.refreshNotificationsQueue", qos: .userInitiated)
-        
-        let notificationController = NotificationsController(coreDataManager: coreDataManager, currentUser: currentUser, queue: queue)
-        notificationController.fetchAllWaitingPushes {
-            DispatchQueue.main.async {
-                self.refreshUI()
-            }
-        }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard
-            let destination = segue.destination as? CompetenceTableViewController,
-            let indexPath = tableView.indexPathForSelectedRow else {
-            return
-        }
-        
-        destination.configure(with: subscribedCompetenceList[indexPath.row])
+        navigationController?.navigationBar.largeTitleTextAttributes = [
+            NSAttributedString.Key.foregroundColor: UIColor.black,
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 30, weight: UIFont.Weight.heavy)
+        ]
     }
 }
 
 // MARK: - TableView DataSource
 extension CabinetTableViewController {
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sectionsItems.count
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sectionName = sectionsItems[section].name
-        
-        if let sectionIndex = initialData.firstIndex(where: { $0.name == sectionName }) {
-            if initialData[sectionIndex].hasChildern {
-                return subscribedCompetenceList.count
-            } else {
-                return 0
-            }
-        } else {
-            return 0
-        }
-    }
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cabinet Cell", for: indexPath) as! CabinetCell
+        guard
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Cabinet Cell", for: indexPath) as? CabinetCell
+            else {
+                return UITableViewCell()
+        }
         
-        cell.configure(with: subscribedCompetenceList[indexPath.row])
+        cell.configure(with: sectionsItems[indexPath.row].name)
         
         return cell
     }
 }
 
-// MARK: - TableView Delegate
-extension CabinetTableViewController {
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = CabinetSectionView()
-        view.configure(with: sectionsItems[section].name, as: self)
-        
-        return view
-    }
-}
-
-// MARK: - CabinetSection Delegate Protocol
-extension CabinetTableViewController: CabinetSectionDelegateProtocol {
-    func pushViewController(with title: String) {
-        let activeSection = sectionsItems.first { $0.name == title }
-        guard let selectedSection = activeSection else {
-            return
-        }
-        let viewController:  UIViewController
-        
-        switch selectedSection.name {
-        case "Мои достижения":
-            viewController = AchievementsTableViewController()
-        case "График развития":
-            viewController = ScheduleTableViewController()
-        case "Мои записи":
-            viewController = NotesTableViewController()
-        case "Мои компетенции":
-            if subscribedCompetenceList.isEmpty {
-                let alertDialog = AlertDialog(title: nil, message: "Здесь будут отображены компетенции, на которые вы можете подписаться на вкладке \'Основное меню\'")
-                alertDialog.showAlert(in: self, completion: nil)
+// MARK: - Gesture Tap Recognizer
+extension CabinetTableViewController: UIGestureRecognizerDelegate {
+    @objc
+    private func tapRecognizer(recognizer: UITapGestureRecognizer) {
+        if recognizer.state == .ended {
+            guard let indexPath = tableView.indexPathForRow(at: recognizer.location(in: tableView)) else {
+                return
             }
-            return
-        default:
-            return
+            
+            let viewController: UIViewController
+            
+            switch sectionsItems[indexPath.row].name {
+            case "Мои достижения":
+                viewController = AchievementsTableViewController()
+            case "График развития":
+                viewController = ScheduleTableViewController()
+            case "Мои записи":
+                viewController = NotesTableViewController()
+            case "Мои компетенции":
+                viewController = ReceivedCompetenciesTableViewController()
+            default:
+                return
+            }
+            
+            navigationController?.pushViewController(viewController, animated: true)
         }
-        
-        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
@@ -134,83 +111,7 @@ extension CabinetTableViewController {
         initialData = CabinetModel.fetchInitialData()
         
         sectionsItems = initialData.filter { $0.level == .zero }
-        
-        subscribedCompetenceList = []
+
         tableView.reloadData()
-        
-        guard let currentUser = (UIApplication.shared.delegate as! AppDelegate).appManager.getCurrentUser() else {
-            return
-        }
-        
-        let activityIndicator = ActivityIndicator()
-        activityIndicator.start()
-        
-        var setOfSubscribedCompetenciesIDs: Set<String> = []
-        for (competenceID, _) in currentUser.subscribedCharacteristics {
-            setOfSubscribedCompetenciesIDs.insert(competenceID)
-        }
-        
-        FirebaseController.shared.getDataController().fetchCharacteristics(of: CharacteristicsLevel.competences) {
-            (allCompetenciesResult: Result<[CharacteristicsModel]>) in
-            
-            switch allCompetenciesResult {
-            case .success(let allCompetencies):
-                let subscribedCompetenciesArray = allCompetencies.filter { setOfSubscribedCompetenciesIDs.contains($0.id) }
-                
-                for competence in subscribedCompetenciesArray {
-                    if let subscribedIndicatorsIDs = currentUser.subscribedCharacteristics[competence.id] {
-                        self.fillCompetenceList(for: competence, indicatorIDs: subscribedIndicatorsIDs)
-                    }
-                }
-                
-                self.tableView.reloadData()
-                activityIndicator.stop()
-            case .failure(let error):
-                activityIndicator.stop()
-                let alertDialog = AlertDialog(title: nil, message: error.getError())
-                alertDialog.showAlert(in: self, completion: nil)
-            }
-        }
-    }
-    
-    private func fillCompetenceList(for competence: CharacteristicsModel, indicatorIDs: Set<String>) {
-        let newArticlesStatusArray = indicatorIDs.map { hasNewArticle(under: $0) }
-        let newArticleStatus = newArticlesStatusArray.contains(true)
-        
-        let newAdvicesStatusArray = indicatorIDs.map { hasNewAdvice(under: $0) }
-        let newAdviceStatus = newAdvicesStatusArray.contains(true)
-        
-        let newSubscribedCompetence = CompetenceWithReadingStatus(competence, indicatorIDs, newArticleStatus, newAdviceStatus)
-        self.subscribedCompetenceList.append(newSubscribedCompetence)
-    }
-    
-    private func hasNewArticle(under indicatorID: String) -> Bool {
-        let predicate = NSPredicate(format: "parentID CONTAINS[cd] '\(indicatorID)'")
-        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate])
-        
-        let articles = coreDataManager.fetchData(for: CDReceivedArticles.self, predicate: compoundPredicate, sortDescriptor: nil)
-        
-        for article in articles {
-            if !article.wasRead {
-                return true
-            }
-        }
-        
-        return false
-    }
-    
-    private func hasNewAdvice(under indicatorID: String) -> Bool {
-        let predicate = NSPredicate(format: "parentID CONTAINS[cd] '\(indicatorID)'")
-        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate])
-        
-        let advices = coreDataManager.fetchData(for: CDReceivedAdvices.self, predicate: compoundPredicate, sortDescriptor: nil)
-        
-        for advice in advices {
-            if !advice.wasRead {
-                return true
-            }
-        }
-        
-        return false
     }
 }

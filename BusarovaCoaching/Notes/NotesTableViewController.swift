@@ -24,17 +24,40 @@ class NotesTableViewController: UITableViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.allowsSelection = false
+        tableView.separatorStyle = .none
         
         tableView.register(NotesCell.self, forCellReuseIdentifier: CellIdentifiers.notesCell.rawValue)
         
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
         
+        tableView.tableFooterView = UIView()
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapRecognizer(recognizer:)))
+        tapGestureRecognizer.numberOfTapsRequired = 1
+        tableView.addGestureRecognizer(tapGestureRecognizer)
+        tapGestureRecognizer.delegate = self
+        
         navigationItem.title = "Заметки к статьям"
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        setupNavigationMultilineTitle()
+        
+        navigationController?.navigationBar.largeTitleTextAttributes = [
+            NSAttributedString.Key.foregroundColor: UIColor.black,
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 30, weight: UIFont.Weight.heavy)
+        ]
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupNavigationMultilineTitle()
         
         if (UIApplication.shared.delegate as! AppDelegate).appManager.isAuhorized() {
             navigationItem.rightBarButtonItem = nil
@@ -73,21 +96,32 @@ extension NotesTableViewController {
     }
 }
 
-// MARK: - UITableView Delegate
-extension NotesTableViewController {
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let articleID = articleIDsArray[indexPath.row]
-        
-        guard
-            let data = notesData[articleID],
-            let articleTitle = data["title"] else {
+// MARK: - Gesture Tap Recognizer
+extension NotesTableViewController: UIGestureRecognizerDelegate {
+    @objc
+    private func tapRecognizer(recognizer: UITapGestureRecognizer) {
+        if recognizer.state == .ended {
+            guard
+                let indexPath = tableView.indexPathForRow(at: recognizer.location(in: tableView)) else {
                 return
+            }
+            
+            let articleID = articleIDsArray[indexPath.row]
+            
+            guard
+                let data = notesData[articleID],
+                let articleTitle = data["title"]
+                else {
+                    return
+            }
+            
+            let destinationVC = ArticleNoteViewController()
+            destinationVC.configure(with: articleID,
+                                    title: articleTitle,
+                                    showArticle: true
+                                    )
+            navigationController?.pushViewController(destinationVC, animated: true)
         }
-        
-        let destinationVC = ArticleNoteViewController()
-        destinationVC.configure(with: articleID, title: articleTitle, showArticle: true)
-        
-        navigationController?.pushViewController(destinationVC, animated: true)
     }
 }
 

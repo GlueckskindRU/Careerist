@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DescriptionViewController: UIViewController {
+class _DescriptionViewController: UIViewController {
     lazy private var titleView: UILabel = {
         let label = UILabel()
         

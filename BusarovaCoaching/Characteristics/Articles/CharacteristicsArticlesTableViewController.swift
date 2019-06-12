@@ -47,6 +47,7 @@ class CharacteristicsArticlesTableViewController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
         
+        tableView.register(CharacteristicsArticlesCell.self, forCellReuseIdentifier: CellIdentifiers.characteristicArticleCell.rawValue)
         
         let addBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewArticle(sender:)))
         editButtonItem.title = "Настроить"

@@ -15,6 +15,7 @@ protocol SubmitedAnswersProcessingProtocol {
 class AnswerQuestionsTableViewController: UITableViewController {
     private var articleID: String = ""
     private var competenceId: String = ""
+    private var article: Article?
     private var questionsInsideArray: [ArticleInside] = []
     private var answersOptions: [String] = []
     private var activityIndicator = ActivityIndicator()
@@ -27,15 +28,31 @@ class AnswerQuestionsTableViewController: UITableViewController {
     private var questionAlreadyPassed = false
     private var snozzedTime: Date = Date()
     
+    lazy private var customBackButton: UIBarButtonItem = {
+        return UIBarButtonItem(image: UIImage(named: Assets.backArrow.rawValue),
+                               style: UIBarButtonItem.Style.plain,
+                               target: self,
+                               action: #selector(customBackButtonTapped(_:))
+        )
+    }()
+    
     lazy private var showNextQuestionBarButtonItem: UIBarButtonItem = {
         return UIBarButtonItem(title: "Следующий вопрос", style: .plain, target: self, action: #selector(showNextQuestionButtonTapped(_:)))
     }()
     
-    func configure(with articleID: String, as sequence: Int, totalPoints: Int, competenceId: String) {
+    lazy private var backToArticleBarButton: UIBarButtonItem = {
+        return UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.reply,
+                               target: self,
+                               action: #selector(goBackToArticleButtonTapped(_:))
+                                )
+    }()
+    
+    func configure(with articleID: String, as sequence: Int, totalPoints: Int, competenceId: String, article: Article) {
         self.articleID = articleID
         self.sequence = sequence
         self.totalPoints = totalPoints
         self.competenceId = competenceId
+        self.article = article
     }
     
     override func viewDidLoad() {
@@ -49,18 +66,35 @@ class AnswerQuestionsTableViewController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
         tableView.separatorStyle = .none
-
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        
+        navigationItem.hidesBackButton = true
+        navigationItem.leftBarButtonItem = customBackButton
+        navigationItem.rightBarButtonItems = [backToArticleBarButton]
         
         fetchQuestions()
         
         tableView.tableFooterView = UIView()
+        
+        navigationItem.title = article?.title
     }
     
     override  func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         tableView.allowsMultipleSelection = self.correctAnswers.count > 1
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if let tintColor = UIColor(named: "cabinetTintColor") {
+            navigationController?.navigationBar.largeTitleTextAttributes = [
+                NSAttributedString.Key.foregroundColor: tintColor,
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 30, weight: UIFont.Weight.heavy)
+            ]
+        }
+        
+        setupNavigationMultilineTitle()
         tableView.reloadData()
     }
 }
@@ -159,7 +193,7 @@ extension AnswerQuestionsTableViewController {
                 }
                 
                 if self.questionsInsideArray.count > 1 {
-                    self.navigationItem.rightBarButtonItem = self.showNextQuestionBarButtonItem
+                    self.navigationItem.rightBarButtonItems?.insert(self.showNextQuestionBarButtonItem, at: 0)
                 }
                 
                 if self.questionsInsideArray.count == self.sequence + 1 {
@@ -190,11 +224,30 @@ extension AnswerQuestionsTableViewController {
     
     @objc
     private func showNextQuestionButtonTapped(_ sender: UIBarButtonItem) {
+        guard let article = article else {
+            return
+        }
+        
         let nextQuestionVC = AnswerQuestionsTableViewController()
         
-        nextQuestionVC.configure(with: articleID, as: sequence + 1, totalPoints: totalPoints, competenceId: competenceId)
+        nextQuestionVC.configure(with: articleID, as: sequence + 1, totalPoints: totalPoints, competenceId: competenceId, article: article)
         
         navigationController?.pushViewController(nextQuestionVC, animated: true)
+    }
+    
+    @objc
+    private func goBackToArticleButtonTapped(_ sender: UIBarButtonItem) {
+        guard let count = navigationController?.viewControllers.count else {
+            return
+        }
+        
+        let index = count - sequence - 2
+        
+        guard let destinationVC = navigationController?.viewControllers[index] else {
+            return
+        }
+        
+        navigationController?.popToViewController(destinationVC, animated: true)
     }
     
     private func updateUserWithProgress() {

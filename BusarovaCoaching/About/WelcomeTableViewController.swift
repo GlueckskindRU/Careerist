@@ -11,9 +11,9 @@ import UIKit
 class WelcomeTableViewController: UITableViewController {
     private var articles: [AboutArticlesModel] = []
     
-//    lazy private var logInBarButtonItem: UIBarButtonItem = {
-//        return UIBarButtonItem(title: "Войти", style: .plain, target: self, action: #selector(logInTapped(sender:)))
-//    }()
+    lazy private var logInBarButtonItem: UIBarButtonItem = {
+        return UIBarButtonItem(title: "Войти", style: .plain, target: self, action: #selector(logInTapped(sender:)))
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +24,6 @@ class WelcomeTableViewController: UITableViewController {
         tableView.showsVerticalScrollIndicator = false
         tableView.showsHorizontalScrollIndicator = false
         tableView.isScrollEnabled = false
-        tableView.separatorStyle = .none
         
         let footerView = UINib(nibName: String(describing: WelcomeFootterXIB.self), bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! WelcomeFootterXIB
         footerView.setup()
@@ -34,7 +33,7 @@ class WelcomeTableViewController: UITableViewController {
         activityIndicator.start()
         FirebaseController.shared.getDataController().fetchData(DBTables.aboutArticles) {
             (result: Result<[AboutArticlesModel]>) in
-            
+
             activityIndicator.stop()
             switch result {
             case .success(let articles):
@@ -46,32 +45,22 @@ class WelcomeTableViewController: UITableViewController {
             }
         }
         
-//        navigationItem.rightBarButtonItem = logInBarButtonItem
+        navigationItem.rightBarButtonItem = logInBarButtonItem
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//
-//        logInBarButtonItem.isEnabled = !AppManager.shared.isAuhorized()
-//    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard
-        let destination = segue.destination as? DescriptionViewController,
-        let indexPath = tableView.indexPathForSelectedRow else {
-            return
-        }
-        
-        destination.configure(with: articles[indexPath.row])
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        logInBarButtonItem.isEnabled = !AppManager.shared.isAuhorized()
     }
     
-//    @objc
-//    private func logInTapped(sender: UIBarButtonItem) {
-//        let authVC = AuthorizationViewController()
-//        authVC.configure()
-//        navigationController?.pushViewController(authVC, animated: true)
-//    }
+    @objc
+    private func logInTapped(sender: UIBarButtonItem) {
+        let authVC = AuthorizationViewController()
+        authVC.configure()
+        navigationController?.pushViewController(authVC, animated: true)
+    }
 }
 
 // MARK: - TableView DataSource
@@ -82,9 +71,9 @@ extension WelcomeTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MenuItem Cell", for: indexPath) as! WelcomeTableCell
-        
+
         cell.configure(with: articles[indexPath.row])
-        
+
         return cell
     }
 }
@@ -93,10 +82,10 @@ extension WelcomeTableViewController {
 extension WelcomeTableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 75.0
-//        return UITableViewAutomaticDimension
     }
     
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
 }
+

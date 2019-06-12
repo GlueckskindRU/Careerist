@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="208" id="pkT-Nn-Bz8" customClass="ArticlesScheduleCell" customModule="ru_homber_Karierist" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="208" id="pkT-Nn-Bz8" customClass="ArticlesScheduleCell" customModule="ru_busarova_Karierist" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="431" height="208"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pkT-Nn-Bz8" id="XnO-7A-Cay">
@@ -24,7 +25,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="R8V-ab-rx8" customClass="MultiSelectSegmentedControl" customModule="ru_homber_Karierist" customModuleProvider="target">
+                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="R8V-ab-rx8" customClass="MultiSelectSegmentedControl" customModule="ru_busarova_Karierist" customModuleProvider="target">
                         <rect key="frame" x="32" y="94" width="367" height="29"/>
                         <segments>
                             <segment title="Пн"/>
@@ -35,6 +36,7 @@
                             <segment title="Сб"/>
                             <segment title="Вс"/>
                         </segments>
+                        <color key="tintColor" name="cabinetTintColor"/>
                     </segmentedControl>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Время: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Hr-wm-H0C">
                         <rect key="frame" x="32" y="134" width="66" height="27.5"/>
@@ -45,7 +47,9 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="74j-RJ-50P">
                         <rect key="frame" x="110" y="134" width="46" height="27.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <state key="normal" title="00:00"/>
+                        <state key="normal" title="00:00">
+                            <color key="titleColor" name="cabinetTintColor"/>
+                        </state>
                         <connections>
                             <action selector="setupTimeButton:" destination="pkT-Nn-Bz8" eventType="touchUpInside" id="Km2-rE-4X8"/>
                         </connections>
@@ -91,7 +95,6 @@
                     <constraint firstItem="R8V-ab-rx8" firstAttribute="top" secondItem="3BO-yn-TlG" secondAttribute="bottom" constant="12" id="nMh-jO-eA6"/>
                     <constraint firstItem="3BO-yn-TlG" firstAttribute="top" secondItem="v2x-1n-Ihf" secondAttribute="bottomMargin" constant="12" id="ruZ-Li-RnU"/>
                     <constraint firstItem="3BO-yn-TlG" firstAttribute="leading" secondItem="XnO-7A-Cay" secondAttribute="leadingMargin" constant="12" id="tGJ-Vc-xRA"/>
-                    <constraint firstItem="74j-RJ-50P" firstAttribute="leading" secondItem="3Hr-wm-H0C" secondAttribute="trailing" constant="12" id="u6Q-ys-rCF"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -102,4 +105,9 @@
             <point key="canvasLocation" x="56.799999999999997" y="107.94602698650675"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <namedColor name="cabinetTintColor">
+            <color red="0.098039215686274508" green="0.66274509803921566" blue="0.36470588235294116" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

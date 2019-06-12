@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="165" id="csY-nm-5W6" customClass="VideoCell" customModule="ru_busarova_Karierist" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="418" height="165"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="csY-nm-5W6" id="GeU-91-tB3">
+                <rect key="frame" x="0.0" y="0.0" width="418" height="164.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oRn-2D-oYM" customClass="YoutubePlayerView" customModule="YoutubePlayerView">
+                        <rect key="frame" x="8" y="4" width="402" height="156.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="oRn-2D-oYM" secondAttribute="height" multiplier="16:9" id="Knp-Vn-Q8s"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="oRn-2D-oYM" firstAttribute="leading" secondItem="GeU-91-tB3" secondAttribute="leading" constant="20" id="5nq-41-aih"/>
+                    <constraint firstAttribute="trailing" secondItem="oRn-2D-oYM" secondAttribute="trailing" constant="20" id="c3Q-Ll-4FF"/>
+                    <constraint firstAttribute="bottom" secondItem="oRn-2D-oYM" secondAttribute="bottom" constant="4" id="dhK-Gf-E5w"/>
+                    <constraint firstItem="oRn-2D-oYM" firstAttribute="top" secondItem="GeU-91-tB3" secondAttribute="top" constant="4" id="xpN-nF-l2W"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="videoView" destination="oRn-2D-oYM" id="O2R-ah-f0q"/>
+            </connections>
+            <point key="canvasLocation" x="131.8840579710145" y="75.334821428571431"/>
+        </tableViewCell>
+    </objects>
+</document>

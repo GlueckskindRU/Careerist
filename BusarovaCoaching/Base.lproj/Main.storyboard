@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mfJ-QZ-Xtb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mfJ-QZ-Xtb">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +13,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="ujo-wW-laq">
             <objects>
-                <tabBarController storyboardIdentifier="InitialController" id="mfJ-QZ-Xtb" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="InitialController" id="mfJ-QZ-Xtb" customClass="TabBarController" customModule="ru_busarova_Karierist" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="pEJ-0a-ICZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -30,11 +30,11 @@
             </objects>
             <point key="canvasLocation" x="-466" y="913"/>
         </scene>
-        <!--Заметки-->
+        <!--Navigation Controller-->
         <scene sceneID="8I3-AK-8XH">
             <objects>
                 <navigationController id="sGV-bH-Iw5" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Заметки" image="notes" id="6cH-Mf-5A2"/>
+                    <tabBarItem key="tabBarItem" title="" image="notes" id="6cH-Mf-5A2"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="beI-mZ-SsC">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -76,28 +76,28 @@
             </objects>
             <point key="canvasLocation" x="1312" y="1360"/>
         </scene>
-        <!--О приложении-->
+        <!--Navigation Controller-->
         <scene sceneID="ET4-rg-XAb">
             <objects>
                 <navigationController id="PRt-gc-gnv" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="О приложении" image="About" id="ZM3-kC-Omh"/>
+                    <tabBarItem key="tabBarItem" title="" image="About" id="ZM3-kC-Omh"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="xWn-RP-bzB">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="uWA-PT-RCR" kind="relationship" relationship="rootViewController" id="Z6X-Jj-Hec"/>
+                        <segue destination="2gk-0y-B0w" kind="relationship" relationship="rootViewController" id="CPG-6c-iaL"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ndl-Ih-CGh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="380" y="2086"/>
         </scene>
-        <!--Личный кабинет-->
+        <!--Navigation Controller-->
         <scene sceneID="egH-j7-wpQ">
             <objects>
                 <navigationController id="Wrt-xS-hs7" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Личный кабинет" image="cabinet" id="nv1-OY-x3K"/>
+                    <tabBarItem key="tabBarItem" title="" image="cabinet" id="nv1-OY-x3K"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="oTA-gM-502">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -126,9 +126,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="onJ-Q5-Xew" kind="show" identifier="Show competence detail" id="kc7-qV-79E"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -142,98 +139,11 @@
             </objects>
             <point key="canvasLocation" x="1313" y="561"/>
         </scene>
-        <!--List Of Received Articles And Advices-->
-        <scene sceneID="Juc-Yu-CVC">
-            <objects>
-                <tableViewController id="hID-cW-j4R" customClass="ListOfReceivedArticlesAndAdvices" customModule="ru_busarova_Karierist" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="FOF-g1-1td">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="SoS-5q-tOJ">
-                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SoS-5q-tOJ" id="tFU-aH-PkW">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="hID-cW-j4R" id="J6o-pb-9VD"/>
-                            <outlet property="delegate" destination="hID-cW-j4R" id="Tad-9K-lah"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XZq-Rb-M6R" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3099" y="561"/>
-        </scene>
-        <!--Competence Table View Controller-->
-        <scene sceneID="Fte-IO-oQH">
-            <objects>
-                <tableViewController id="onJ-Q5-Xew" customClass="CompetenceTableViewController" customModule="ru_busarova_Karierist" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Qag-uU-5a8">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Competence Cell" id="1pe-GE-YB8" customClass="CompetenceCell" customModule="ru_busarova_Karierist" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1pe-GE-YB8" id="y8f-t7-eF7">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="hID-cW-j4R" kind="show" identifier="Show Subscribed Elements" id="l6q-Q4-Yab"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="onJ-Q5-Xew" id="GCl-rb-c4J"/>
-                            <outlet property="delegate" destination="onJ-Q5-Xew" id="K32-12-w9D"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CUk-Pa-YtJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2201" y="561"/>
-        </scene>
-        <!--Characteristics Articles Table View Controller-->
-        <scene sceneID="yrX-zb-igD">
-            <objects>
-                <tableViewController id="TIe-jx-Isi" customClass="CharacteristicsArticlesTableViewController" customModule="ru_busarova_Karierist" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="1JX-bn-uXU">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Characteristics Article Cell" id="5rl-Dw-4Gt" customClass="CharacteristicsArticlesCell" customModule="ru_busarova_Karierist" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5rl-Dw-4Gt" id="FVU-Ga-7Hy">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="TIe-jx-Isi" id="vPD-He-m4Q"/>
-                            <outlet property="delegate" destination="TIe-jx-Isi" id="HGa-lz-jov"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="d91-WR-91g" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2201" y="-224"/>
-        </scene>
-        <!--Подписки-->
+        <!--Navigation Controller-->
         <scene sceneID="OJw-x7-nki">
             <objects>
                 <navigationController id="kQR-xd-gnd" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Подписки" image="mainMenu" id="3Q9-TI-LJb"/>
+                    <tabBarItem key="tabBarItem" title="" image="mainMenu" id="3Q9-TI-LJb"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SWz-Ri-Irs">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -255,29 +165,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Characteristic Cell Level 0" id="rDr-Xw-klW" customClass="CharacteristicsCellLevel0" customModule="ru_busarova_Karierist" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Characteristic Cell" id="3Ds-aT-cbd">
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rDr-Xw-klW" id="53h-ve-83P">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="TIe-jx-Isi" kind="show" identifier="Characteristics Article" trigger="accessoryAction" id="2is-vn-J89"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Characteristic Cell Level 1" id="asE-GJ-o9i" customClass="CharacteristicsCellLevel1" customModule="ru_busarova_Karierist" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="72" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="asE-GJ-o9i" id="PAl-Ek-ky6">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Characteristic Cell Level 2" id="gke-tS-YaK" customClass="CharacteristicsCellLevel2" customModule="ru_busarova_Karierist" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="116" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gke-tS-YaK" id="2kM-A4-o7g">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3Ds-aT-cbd" id="5YK-xl-aAF">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
@@ -293,6 +184,35 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zKi-Ic-Pxz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1313" y="-224"/>
+        </scene>
+        <!--About Table View Controller-->
+        <scene sceneID="nEg-e0-n1J">
+            <objects>
+                <tableViewController id="2gk-0y-B0w" customClass="AboutTableViewController" customModule="ru_busarova_Karierist" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="IZz-tj-H4E">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="p4Q-bg-HlP">
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="p4Q-bg-HlP" id="mq4-2T-rdv">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="2gk-0y-B0w" id="8M0-ID-Ue1"/>
+                            <outlet property="delegate" destination="2gk-0y-B0w" id="DI7-3T-iy8"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="iMd-Xk-za3"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IRA-YP-eHB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1312" y="2085"/>
         </scene>
         <!--Welcome Table View Controller-->
         <scene sceneID="GFx-MX-fK4">
@@ -343,7 +263,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V5o-sM-Hr8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1263" y="2086"/>
+            <point key="canvasLocation" x="2187" y="2085"/>
         </scene>
         <!--Description View Controller-->
         <scene sceneID="kJP-Ip-1zR">
@@ -358,13 +278,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0MF-DT-eHb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2119" y="2086"/>
+            <point key="canvasLocation" x="3043" y="2085"/>
         </scene>
     </scenes>
     <resources>
-        <image name="About" width="30" height="30"/>
-        <image name="cabinet" width="30" height="30"/>
-        <image name="mainMenu" width="30" height="30"/>
-        <image name="notes" width="30" height="30"/>
+        <image name="About" width="21" height="20"/>
+        <image name="cabinet" width="20" height="21"/>
+        <image name="mainMenu" width="16" height="23"/>
+        <image name="notes" width="21" height="22"/>
     </resources>
+    <color key="tintColor" name="systemTint"/>
 </document>

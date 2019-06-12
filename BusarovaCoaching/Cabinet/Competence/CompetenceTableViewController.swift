@@ -13,6 +13,14 @@ class CompetenceTableViewController: UITableViewController {
     private var competence: CompetenceWithReadingStatus?
     private var coreDataManager = (UIApplication.shared.delegate as! AppDelegate).coreDataManager
     
+    lazy private var customBackButton: UIBarButtonItem = {
+        return UIBarButtonItem(image: UIImage(named: Assets.backArrow.rawValue),
+                               style: UIBarButtonItem.Style.plain,
+                               target: self,
+                               action: #selector(customBackButtonTapped(_:))
+        )
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,42 +28,44 @@ class CompetenceTableViewController: UITableViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.allowsSelection = false
+        tableView.separatorStyle = .none
+        
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 44
+        
+        tableView.register(CompetenceCell.self, forCellReuseIdentifier: CellIdentifiers.completenceCell.rawValue)
         
         tableView.tableFooterView = UIView()
+        let headerView = HeaderViewWithInfoText()
+        headerView.configure(infoText: "Непрочитанные статьи или советы дня отмечаются восклицательным знаком")
+        tableView.setAndLayoutTableHeaderView(header: headerView)
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapRecognizer(recognizer:)))
+        tapGestureRecognizer.numberOfTapsRequired = 1
+        tableView.addGestureRecognizer(tapGestureRecognizer)
+        tapGestureRecognizer.delegate = self
+        
         navigationItem.title = competence?.competences.name
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        navigationItem.hidesBackButton = false
+        navigationItem.leftBarButtonItem = customBackButton
+        
+        if let tintColor = UIColor(named: "cabinetTintColor") {
+            navigationController?.navigationBar.largeTitleTextAttributes = [
+                NSAttributedString.Key.foregroundColor: tintColor,
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 30, weight: UIFont.Weight.heavy)
+            ]
+        }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupNavigationMultilineTitle()
         refreshReadingStatuses()
     }
     
     func configure(with competence: CompetenceWithReadingStatus) {
         self.competence = competence
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard
-            let competence = competence,
-            let destination = segue.destination as? ListOfReceivedArticlesAndAdvices,
-            let indexPath = tableView.indexPathForSelectedRow else {
-                return
-        }
-        
-        let assetType: ArticleType
-        
-        switch captionData[indexPath.row] {
-        case "Ваши советы дня":
-            assetType = ArticleType.advice
-        case "Ваши статьи":
-            assetType = ArticleType.article
-        default:
-            return
-        }
-        
-        destination.configure(with: competence.competences, as: assetType)
     }
 }
 
@@ -66,11 +76,12 @@ extension CompetenceTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let competence = competence else {
+        guard
+            let competence = competence,
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.completenceCell.rawValue, for: indexPath) as? CompetenceCell
+            else {
             return UITableViewCell()
         }
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Competence Cell", for: indexPath) as! CompetenceCell
         
         switch captionData[indexPath.row] {
         case "Ваши советы дня":
@@ -130,5 +141,35 @@ extension CompetenceTableViewController {
         }
         
         return false
+    }
+}
+
+// MARK: - Gesture Tap Recognizer
+extension CompetenceTableViewController: UIGestureRecognizerDelegate {
+    @objc
+    private func tapRecognizer(recognizer: UITapGestureRecognizer) {
+        if recognizer.state == .ended {
+            guard
+                let competence = competence,
+                let indexPath = tableView.indexPathForRow(at: recognizer.location(in: tableView))
+                else {
+                return
+            }
+            
+            let assetType: ArticleType
+            
+            switch captionData[indexPath.row] {
+            case "Ваши советы дня":
+                assetType = ArticleType.advice
+            case "Ваши статьи":
+                assetType = ArticleType.article
+            default:
+                return
+            }
+            
+            let destinationVC = ListOfReceivedArticlesAndAdvices()
+            destinationVC.configure(with: competence.competences, as: assetType)
+            navigationController?.pushViewController(destinationVC, animated: true)
+        }
     }
 }

@@ -54,7 +54,7 @@ class ArticleNoteViewController: UIViewController {
         button.addTarget(self, action: #selector(showArticleButtonTapped(_:)), for: UIControl.Event.touchUpInside)
         button.setTitleColor(.white, for: UIControl.State.normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.medium)
-        button.backgroundColor = .orange
+        button.backgroundColor = UIColor(named: "notesTintColor")
         button.layer.cornerRadius = 8
         
         return button
@@ -88,13 +88,27 @@ class ArticleNoteViewController: UIViewController {
         receivedArticlePushes = coreDataManager.fetchData(for: CDReceivedArticles.self, predicate: nil, sortDescriptor: sortDescriptor)
         
         fetchNote(for: currentUser, with: articleID)
-        navigationItem.title = articleTitle
         navigationItem.rightBarButtonItems = [saveNoteButton, deleteNoteButton]
         
         navigationItem.hidesBackButton = true
         navigationItem.leftBarButtonItem = customBackBarButton
         
+        navigationItem.title = articleTitle
+        
         saveNoteButton.isEnabled = !isSaved
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if let tintColor = UIColor(named: "notesTintColor") {
+            navigationController?.navigationBar.largeTitleTextAttributes = [
+                NSAttributedString.Key.foregroundColor: tintColor,
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 30, weight: UIFont.Weight.heavy)
+            ]
+        }
+        
+        setupNavigationMultilineTitle()
         setupLayout()
     }
 }
@@ -103,21 +117,26 @@ class ArticleNoteViewController: UIViewController {
 extension ArticleNoteViewController {
     private func setupLayout() {
         view.addSubview(noteTextView)
-        view.addSubview(showArticleButton)
         
         NSLayoutConstraint.activate([
             noteTextView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
             noteTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            noteTextView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            noteTextView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -32),
             view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: noteTextView.trailingAnchor, constant: 16),
-            
-            showArticleButton.topAnchor.constraint(equalTo: noteTextView.bottomAnchor, constant: 16),
-            showArticleButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: showArticleButton.trailingAnchor, constant: 16),
-            showArticleButton.heightAnchor.constraint(equalToConstant: 48),
             ])
         
         noteTextView.becomeFirstResponder()
+        
+        if showArticlePossibility {
+            view.addSubview(showArticleButton)
+            
+            NSLayoutConstraint.activate([
+                showArticleButton.topAnchor.constraint(equalTo: noteTextView.bottomAnchor, constant: 16),
+                showArticleButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+                view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: showArticleButton.trailingAnchor, constant: 16),
+                showArticleButton.heightAnchor.constraint(equalToConstant: 48),
+                ])
+        }
     }
     
     private func fetchNote(for currentUser: User, with articleID: String) {
@@ -285,10 +304,10 @@ extension ArticleNoteViewController {
         guard let article = article else {
             return
         }
-        
+
         let articleVC = ArticlesPreviewTableViewController()
         articleVC.configure(with: article, hasQuestions: getArticlePushQuestionsStatus(for: article.id))
-        
+
         navigationController?.pushViewController(articleVC, animated: true)
     }
     

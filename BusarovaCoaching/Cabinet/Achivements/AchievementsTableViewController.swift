@@ -11,20 +11,48 @@ import UIKit
 class AchievementsTableViewController: UITableViewController {
     private var achievementsData: [Achievements] = []
     
+    lazy private var customBackButton: UIBarButtonItem = {
+        return UIBarButtonItem(image: UIImage(named: Assets.backArrow.rawValue),
+                               style: UIBarButtonItem.Style.plain,
+                               target: self,
+                               action: #selector(customBackButtonTapped(_:))
+        )
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.dataSource = self
         tableView.delegate = self
-        
-        tableView.register(UINib(nibName: String(describing: AchivementsCell.self), bundle: nil), forCellReuseIdentifier: CellIdentifiers.achievementsCell.rawValue)
-        
-        navigationItem.title = "Мои достижения"
+        tableView.allowsSelection = false
+        tableView.separatorStyle = .none
         
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
-        tableView.allowsSelection = false
         
+        tableView.register(UINib(nibName: String(describing: AchivementsCell.self), bundle: nil), forCellReuseIdentifier: CellIdentifiers.achievementsCell.rawValue)
+        
+        tableView.tableFooterView = UIView()
+        let headerView = HeaderViewWithInfoText()
+        headerView.configure(infoText: "\r\n")
+        tableView.setAndLayoutTableHeaderView(header: headerView)
+        
+        navigationItem.hidesBackButton = true
+        navigationItem.leftBarButtonItem = customBackButton
+        
+        navigationItem.title = "Мои достижения"
+        
+        if let tintColor = UIColor(named: "cabinetTintColor") {
+            navigationController?.navigationBar.largeTitleTextAttributes = [
+                NSAttributedString.Key.foregroundColor: tintColor,
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 30, weight: UIFont.Weight.heavy)
+            ]
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupNavigationMultilineTitle()
         fetchAchievements()
     }
 }
@@ -54,6 +82,7 @@ extension AchievementsTableViewController {
                 return
         }
         
+        achievementsData = []
         let currentRating = currentUser.rating
         let activityIndicator = ActivityIndicator()
         

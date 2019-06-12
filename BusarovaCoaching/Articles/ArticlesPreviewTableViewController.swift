@@ -21,6 +21,14 @@ class ArticlesPreviewTableViewController: UITableViewController {
         return UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.compose, target: self, action: #selector(openNotesButtonTapped(_:)))
     }()
     
+    lazy private var customBackButton: UIBarButtonItem = {
+        return UIBarButtonItem(image: UIImage(named: Assets.backArrow.rawValue),
+                               style: UIBarButtonItem.Style.plain,
+                               target: self,
+                               action: #selector(customBackButtonTapped(_:))
+        )
+    }()
+    
     func configure(with article: Article, hasQuestions: Bool = false) {
         self.article = article
         self.hasQuestions = hasQuestions
@@ -46,9 +54,7 @@ class ArticlesPreviewTableViewController: UITableViewController {
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
         
-        let headerView = ArticlesPreviewHeaderView()
-        headerView.configure(with: article?.title)
-        tableView.setAndLayoutTableHeaderView(header: headerView)
+        tableView.tableFooterView = UIView()
         
         if hasQuestions {
             navigationItem.rightBarButtonItems = [openNoteBarButton, answerToQuestionsBarButton]
@@ -56,9 +62,24 @@ class ArticlesPreviewTableViewController: UITableViewController {
             navigationItem.rightBarButtonItem = openNoteBarButton
         }
         
-        refreshUI()
+        navigationItem.hidesBackButton = true
+        navigationItem.leftBarButtonItem = customBackButton
         
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        navigationItem.title = article?.title
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if let tintColor = UIColor(named: "cabinetTintColor") {
+            navigationController?.navigationBar.largeTitleTextAttributes = [
+                NSAttributedString.Key.foregroundColor: tintColor,
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 30, weight: UIFont.Weight.heavy)
+            ]
+        }
+        
+        setupNavigationMultilineTitle()
+        refreshUI()
     }
 }
 
@@ -139,7 +160,7 @@ extension ArticlesPreviewTableViewController {
                     switch resultedCompetence {
                     case .success(let competence):
                         let answerQuestionVC = AnswerQuestionsTableViewController()
-                        answerQuestionVC.configure(with: article.id, as: 0, totalPoints: competence.totalPoints, competenceId: competence.id)
+                        answerQuestionVC.configure(with: article.id, as: 0, totalPoints: competence.totalPoints, competenceId: competence.id, article: article)
                         activityIndicator.stop()
                         self.navigationController?.pushViewController(answerQuestionVC, animated: true)
                     case .failure(let error):

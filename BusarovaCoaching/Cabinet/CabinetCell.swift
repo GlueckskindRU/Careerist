@@ -9,24 +9,38 @@
 import UIKit
 
 class CabinetCell: UITableViewCell {
-    lazy private var menuCaption: UILabel = {
+    lazy private var boxImageView: UIImageView = {
+        let imageView = UIImageView()
+        
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = UIImage(named: Assets.cabinetBox.rawValue)
+        
+        return imageView
+    }()
+    
+    lazy private var captionLabel: UILabel = {
         let label = UILabel()
         
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.thin)
+        label.textColor = .white
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         label.numberOfLines = 0
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
         
         return label
     }()
     
-    func configure(with subscribedCompetence: CompetenceWithReadingStatus) {
-        self.menuCaption.text = subscribedCompetence.competences.name
+    lazy private var arrowImageView: UIImageView = {
+        let imageView = UIImageView()
         
-        if subscribedCompetence.hasNewAdvice || subscribedCompetence.hasNewArticle {
-            self.menuCaption.textColor = .red
-        } else {
-            self.menuCaption.textColor = .black
-        }
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = UIImage(named: Assets.whiteArrow.rawValue)
+        
+        return imageView
+    }()
+    
+    func configure(with caption: String) {
+        captionLabel.text = caption
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -42,15 +56,26 @@ class CabinetCell: UITableViewCell {
     }
     
     private func setupLayout() {
-        contentView.addSubview(self.menuCaption)
+        contentView.addSubview(boxImageView)
+        boxImageView.addSubview(captionLabel)
+        boxImageView.addSubview(arrowImageView)
         
         NSLayoutConstraint.activate([
-            menuCaption.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
-            menuCaption.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            contentView.trailingAnchor.constraint(equalTo: menuCaption.trailingAnchor, constant: 4),
-            contentView.bottomAnchor.constraint(equalTo: menuCaption.bottomAnchor, constant: 4)
+            boxImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
+            boxImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
+            boxImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
+            boxImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
+            
+            captionLabel.topAnchor.constraint(equalTo: boxImageView.topAnchor, constant: 8),
+            captionLabel.leadingAnchor.constraint(equalTo: boxImageView.leadingAnchor, constant: 36),
+            captionLabel.trailingAnchor.constraint(equalTo: arrowImageView.leadingAnchor, constant: -8),
+            captionLabel.bottomAnchor.constraint(equalTo: boxImageView.bottomAnchor, constant: -8),
+            captionLabel.centerYAnchor.constraint(equalTo: boxImageView.centerYAnchor),
+            
+            arrowImageView.trailingAnchor.constraint(equalTo: boxImageView.trailingAnchor, constant: -36),
+            arrowImageView.centerYAnchor.constraint(equalTo: boxImageView.centerYAnchor),
+            arrowImageView.heightAnchor.constraint(equalToConstant: 12),
+            arrowImageView.widthAnchor.constraint(equalToConstant: 12),
             ])
-        
-        menuCaption.sizeToFit()
     }
 }
