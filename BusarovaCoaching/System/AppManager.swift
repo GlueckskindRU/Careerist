@@ -30,6 +30,7 @@ class AppManager {
         configureFireBase(application)
         
         clearCredentials(performClearing: false) // to suppress automatic log out run it with false parameter only!
+        checkIfAppWasAlreadyRan()
         
         if keychainController.keychainItemExists() {
             let authVC = AuthorizationViewController()
@@ -344,6 +345,23 @@ class AppManager {
                     print("result = \(result)")
                 }
             }
+        }
+    }
+    
+    private func checkIfAppWasAlreadyRan() {
+        if !UserDefaults.standard.bool(forKey: "WasAlreadyRan") {
+            guard
+                let appDelegate = appDelegate,
+                let tabBarController = appDelegate.window?.rootViewController as? UITabBarController,
+                let lastTabBar = tabBarController.viewControllers?.count,
+                let aboutNavigationController = tabBarController.viewControllers?.last as? UINavigationController else {
+                    return
+            }
+            
+            UserDefaults.standard.set(true, forKey: "WasAlreadyRan")
+            
+            aboutNavigationController.popViewController(animated: true)
+            tabBarController.selectedIndex = lastTabBar - 1
         }
     }
 }
