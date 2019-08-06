@@ -9,7 +9,7 @@
 import UIKit
 
 extension UITableView {
-//set the tableHeaderView so that the required height can be determined, update the header's frame and set it again
+    ///Set the tableHeaderView so that the required height can be determined, update the header's frame and set it again
     func setAndLayoutTableHeaderView(header: UIView) {
         self.tableHeaderView = header
         header.setNeedsLayout()

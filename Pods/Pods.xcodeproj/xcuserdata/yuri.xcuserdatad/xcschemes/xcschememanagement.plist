@@ -69,7 +69,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>gRPC-C++-gRPCCertificates.xcscheme</key>
+		<key>gRPC-C++-gRPCCertificates-Cpp.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

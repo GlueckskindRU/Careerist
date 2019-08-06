@@ -294,7 +294,7 @@ class LimboResolution {
  * reads are performed before any writes. Transactions must be performed while online.
  */
 - (void)transactionWithRetries:(int)retries
-                   workerQueue:(AsyncQueue *)workerQueue
+                   workerQueue:(const std::shared_ptr<AsyncQueue> &)workerQueue
                 updateCallback:(core::TransactionUpdateCallback)updateCallback
                 resultCallback:(core::TransactionResultCallback)resultCallback {
   workerQueue->VerifyIsCurrentQueue();
@@ -315,13 +315,9 @@ class LimboResolution {
               resultCallback(std::move(maybe_result));
               return;
             }
-
             // TODO(b/35201829): Only retry on real transaction failures.
             if (retries == 0) {
-              Status wrappedError =
-                  Status(FirestoreErrorCode::FailedPrecondition, "Transaction failed all retries.")
-                      .CausedBy(std::move(status));
-              resultCallback(std::move(wrappedError));
+              resultCallback(std::move(status));
               return;
             }
             workerQueue->VerifyIsCurrentQueue();
